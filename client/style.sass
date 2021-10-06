@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta+Vaani:wght@200;300;400;500;600;700;800&display=swap')
+
+$lg: 1200px
+$md: 992px
+$sm: 768px
+$xs: 576px
+/* FONTS */
+
+.fontSizeXs
+  font-size: 13px !important
+  @media screen and (max-width: $lg)
+    font-size: 13px !important
+  @media screen and (max-width: $md)
+    font-size: 13px !important
+  @media screen and (max-width: $sm)
+    font-size: 12px !important
+  @media screen and (max-width: $xs)
+    font-size: 12px !important
+
+.fontSizeSm
+  font-size: 17px !important
+  @media screen and (max-width: $lg)
+    font-size: 17px !important
+  @media screen and (max-width: $md)
+    font-size: 16px !important
+  @media screen and (max-width: $sm)
+    font-size: 16px !important
+  @media screen and (max-width: $xs)
+    font-size: 16px !important
+
+.fontSizeMd
+  font-size: 22px !important
+  @media screen and (max-width: $lg)
+    font-size: 21px !important
+  @media screen and (max-width: $md)
+    font-size: 21px !important
+  @media screen and (max-width: $sm)
+    font-size: 20px !important
+  @media screen and (max-width: $xs)
+    font-size: 20px !important
+
+.fontSizeLg
+  font-size: 30px !important
+  @media screen and (max-width: $lg)
+    font-size: 28px !important
+  @media screen and (max-width: $md)
+    font-size: 25px !important
+  @media screen and (max-width: $sm)
+    font-size: 24px !important
+  @media screen and (max-width: $xs)
+    font-size: 24px !important
+
+.fontSizeXl
+  font-size: 40px !important
+  @media screen and (max-width: $lg)
+    font-size: 36px !important
+  @media screen and (max-width: $md)
+    font-size: 35px !important
+  @media screen and (max-width: $sm)
+    font-size: 32px !important
+  @media screen and (max-width: $xs)
+    font-size: 28px !important
+
+.fontSizeXxl
+  font-size: 46px !important
+  @media screen and (max-width: $lg)
+    font-size: 43px !important
+  @media screen and (max-width: $md)
+    font-size: 41px !important
+  @media screen and (max-width: $sm)
+    font-size: 38px !important
+  @media screen and (max-width: $xs)
+    font-size: 34px !important
+
+
+body
+  font-family: 'Mukta Vaani', sans-serif
+
+.ant-layout
+  background: white
+
+.ant-layout-header
+  height: 64px
+  color: white
+  line-height: 64px
+  background: white
+  padding: 0
+
+.header
+  position: fixed
+  z-index: 100
+  width: 100%
+
+.footer-link-col
+  margin-top: 2vh
+  margin-bottom: 2vh
+
+.footer-link
+  color: gray
+  font-family: 'Mukta Vaani', sans-serif
+  font-weight: 300
+  cursor: pointer
+
+  &:hover
+    color: black
+    text-decoration: underline
+
+.headerMenu >
+  .ant-menu-item-open, .ant-menu-item-selected, .ant-menu-item:hover
+    color: black !important
+
+.ant-menu-horizontal
+  >
+    .ant-menu-item a:hover, .ant-menu-item-selected a
+      color: black !important
+
+  &:not(.ant-menu-dark) >
+    .ant-menu-item-active, .ant-menu-item:hover
+      color: black !important
+
+.headerMenu >
+  .ant-menu-submenu-active .menu-dropdown-icon, .ant-menu-submenu-open .menu-dropdown-icon, .ant-menu-submenu-selected .menu-dropdown-icon, .ant-menu-submenu:hover .menu-dropdown-icon
+    -webkit-transform: rotate(90deg) !important
+    transform: rotate(90deg) !important
+
+.ant-menu-horizontal:not(.ant-menu-dark) >
+  .ant-menu-item-active, .ant-menu-item-open, .ant-menu-item-selected, .ant-menu-item:hover, .ant-menu-submenu-active, .ant-menu-submenu-open, .ant-menu-submenu-selected, .ant-menu-submenu:hover
+    border-bottom: 2px solid #ffc752 !important
+
+.dropdown:hover
+  border-bottom: 2px solid #ffc752 !important
+
+.ant-menu-item a:hover
+  color: #ffc752 !important
+
+.ant-menu-horizontal:not(.ant-menu-dark) >
+  .ant-menu-submenu, .ant-menu-item
+    margin-top: -3px
