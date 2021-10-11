@@ -28,17 +28,17 @@ export default function App({ Component, pageProps }) {
                 <title>DPMB</title>
             </Head>
             <Layout>
-                <Navigator {...pageProps} pathname={router.pathname} style={{ background: 'white'}}/>
+                {/* <Navigator {...pageProps} pathname={router.pathname} style={{ background: 'white'}}/> */}
 
-                <Content style={{ padding: '0 0', marginTop: 64, background: 'white'}}>
+                <Content style={{ padding: '0 0',/* marginTop: 64,*/ background: 'white'}}>
                     <div style={{paddingTop: 0, minHeight: 380 }}>
                         <Component {...pageProps} />
                     </div>
                 </Content>
 
-                <Footer style={{textAlign: 'center',  backgroundColor: 'white'}}>
+                {/* <Footer style={{textAlign: 'center',  backgroundColor: 'white'}}>
                     <Basement {...pageProps} pathname={router.pathname}/>
-                </Footer>
+                </Footer> */}
             </Layout>
         </Provider>
   ) }

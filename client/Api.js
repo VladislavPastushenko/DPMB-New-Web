@@ -17,9 +17,9 @@ export default class Api {
                 url: this.baseUrl + url,
                 validateStatus: false,
                 method: method,
-                headers: {
+                /*headers: {
                     'Authorization': 'Bearer ' + token,
-                },
+                },*/
                 json: true,
                 data: data,
                 withCredentials: true,
@@ -33,9 +33,10 @@ export default class Api {
 
     getToken() {
         return new Promise((resolve) => {
-                this.generateToken().then(token =>  {
-                    resolve(token);
-                });
+                //this.generateToken().then(token =>  {
+                    //resolve(token);
+                //});
+                resolve(123);
         });
     }
 

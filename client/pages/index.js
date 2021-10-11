@@ -3,56 +3,16 @@ import React from "react";
 import {connect} from "react-redux";
 import Head from 'next/head';
 import Api from "./../Api";
-import {LoadingOutlined} from '@ant-design/icons';
+import {Col, Row} from 'antd'
+
+import Navigator from "../components/Navigator/Navigator";
+
+import styles from './styles/index.module.scss'
+
+
 
 const api = new Api;
 
-
-
-class OurEl extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            condition: 'loading'
-        }
-    }
-
-    componentDidMount = () => {
-        setTimeout(() => {
-            this.setState({condition: 'loaded'})
-        },
-        3000
-        )
-    }
-
-
-    render() {
-
-        if (this.state.condition !== 'loading')
-        return (
-            <div align='center' style={{background: 'white'}}>
-                {this.props.name ?
-                    <span>
-                        My name is {this.props.name}
-                    </span>
-                :
-                    <span>
-                        Name unset
-                    </span>
-                }
-            </div>
-        )
-        else {
-            return (
-                <div align='center'>
-                    <LoadingOutlined/>
-                </div>
-            )
-        }
-
-    }
-
-}
 
 class IndexPage extends React.Component {
 
@@ -63,13 +23,28 @@ class IndexPage extends React.Component {
     }
     render() {
         return (
-            <div align='center' style={{background: 'white'}}>
+            <div>
+                {/* Meta Tags */}
                 <Head>
                     <title>DPMB | Index</title>
                     <meta name='description' content='Bla'/>
                 </Head>
+                <div className={styles.background}>
+                    {/* Main Part */}
+                    <div className={styles.overlay}/>
+                    {/* Header */}
+                    <Navigator style={{ background: 'white'}}/>
 
-                <OurEl />
+                    <div className={styles.mainHeaderBlock}>
+                        <h1 className={styles.mainHeader}>
+                            Dopravní podnik města Brna
+                        </h1>
+                        <h2 className={styles.mainSubHeader}>
+                            Jezdíme pro vás
+                        </h2>
+                    </div>
+
+                </div>
             </div>
 
 
@@ -77,6 +52,7 @@ class IndexPage extends React.Component {
     }
 
 }
+
 
 
 const mapStateToProps = state => {
