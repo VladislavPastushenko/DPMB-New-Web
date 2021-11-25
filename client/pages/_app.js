@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }) {
     const router = useRouter();
     useEffect(() => {
         const api = new Api
-      });
+    });
     return (
         <Provider store={store}>
             <Head>
