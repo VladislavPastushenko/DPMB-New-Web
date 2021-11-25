@@ -6,6 +6,9 @@ const routes = (route) => {
         res.send(`Api server in running (${new Date()})`);
     });
 
+    route.get('/isServerRunning', (req, res) => {
+        res.status(200).send(true);
+    });
 
     route.route('/users')
         .get(UsersController.getAll)
