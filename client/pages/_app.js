@@ -5,23 +5,44 @@ import { useStore } from '../store/makeStore'
 import {Layout} from "antd";
 import Navigator from "../components/Navigator/Navigator";
 import Basement from "../components/Basement/Basement";
+import Footer from "../components/Footer/Footer"
 
 import 'antd/dist/antd.min.css';
 import '../style.sass';
 import Head from "next/head";
 
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 
 import Api from "../Api"
 
-const {Header, Content, Footer} = Layout;
+//import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap-theme.min.css';
+
+const {Header, Content} = Layout;
 
 export default function App({ Component, pageProps }) {
     const store = useStore(pageProps.initialReduxState)
     const router = useRouter();
     useEffect(() => {
         const api = new Api
-      });
+        
+        fetch(api.baseUrl + '/isServerRunning')
+        .then(result => {
+            
+            if ((window.location.pathname === '/server-error')) {
+                router.back(); 
+            }
+        })
+        .catch(error => {
+            console.log(error);
+
+            if (window.location.pathname !== '/server-error') {   
+                router.push('/server-error')
+            }
+        })        
+    });
+    
+    
     return (
         <Provider store={store}>
             <Head>
@@ -34,6 +55,8 @@ export default function App({ Component, pageProps }) {
                     <div style={{paddingTop: 0, minHeight: 380 }}>
                         <Component {...pageProps} />
                     </div>
+
+                    <div id="container"/>
                 </Content>
 
                 {/* <Footer style={{textAlign: 'center',  backgroundColor: 'white'}}>
@@ -41,4 +64,4 @@ export default function App({ Component, pageProps }) {
                 </Footer> */}
             </Layout>
         </Provider>
-  ) }
+    ) } 
