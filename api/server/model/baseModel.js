@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 export default class BaseModel {
 
     constructor({orm, modelName, tableName, options = {}}) {
@@ -37,6 +38,13 @@ export default class BaseModel {
         let by = {};
         by[col] = value;
         return new this.model(by).fetchAll();
+    }
+
+    createHash(str, alg) {
+        console.log(str)
+        let hash = crypto.createHash(alg);
+        hash.update(str);
+        return hash.digest('hex');
     }
 
 }

@@ -3,7 +3,6 @@ import React from "react";
 import {connect} from "react-redux";
 import Head from 'next/head';
 import Api from "./../Api";
-import {Col, Row} from 'antd'
 
 import Navigator from "../components/Navigator/Navigator";
 import styles from './styles/index.module.scss'
