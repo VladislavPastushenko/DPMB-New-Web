@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }) {
                 <title>DPMB</title>
             </Head>
             <Layout>
-                {window.location.pathname !== '/' &&
+                {router.pathname !== '/' &&
                 <Header>
                     <Navigator {...pageProps} pathname={router.pathname} style={{ background: 'white'}}/>
                 </Header>}

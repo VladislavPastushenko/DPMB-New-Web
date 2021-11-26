@@ -162,7 +162,7 @@ class RegistrationForm extends React.Component {
       >
         <Input />
       </Form.Item>
-      
+
       <Form.Item
         name="agreement"
         valuePropName="checked"

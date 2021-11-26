@@ -20,8 +20,8 @@ class UserVerifyPage extends React.Component {
                     console.log('verified')
                     window.localStorage.setItem('authToken', this.props.authToken)
                 },
-                () => {
-                    console.log('unverified')
+                (err) => {
+                    console.log('err', err)
                 }
             );
         }
@@ -40,7 +40,6 @@ class UserVerifyPage extends React.Component {
             <Result
                 status="success"
                 title="User is successfully verified and activated."
-                extra={<Button type="primary" onClick={this.redirectToSignUp}>Continue to finish sign up</Button>}
             />
         )
     }
@@ -74,15 +73,14 @@ class UserVerifyPage extends React.Component {
                 </Head>
 
                 <Row style={{justifyContent: 'center', marginTop: 20}}>
-                    <Col xxl={8} xl={10} lg={12} md={14} span={24} style={{boxShadow: '0 1rem 3rem rgba(0,0,0,0.175)'}}>
-                        <Card
-                            title={<h1 className={styles.headerStyle}>User verification</h1>}
-                            type={'inner'}
-                        >
+                    <Col xxl={8} xl={10} lg={12} md={14} span={24}>
+                        <div>
+                            <p className='fontSizeMd' align='center'>User verification</p>
+
                             <div>
                                 {this.props.returnedState == 'OK' ? this.returnStateSuccess(this.props) : this.returnStateFail(this.props)}
                             </div>
-                        </Card>
+                        </div>
                     </Col>
                 </Row>
             </div>
@@ -92,7 +90,7 @@ class UserVerifyPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        returnedState: state.users.response,
+        returnedState: state.users.res,
         errors: {
             users: state.users.error,
         }
