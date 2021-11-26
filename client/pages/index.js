@@ -5,8 +5,7 @@ import Api from "./../Api";
 
 import Navigator from "../components/Navigator/Navigator";
 import styles from './styles/index.module.scss'
-import CookieConsent from "react-cookie-consent";
-import Footer from "../components/Footer/Footer";
+
 
 const api = new Api;
 
@@ -39,7 +38,6 @@ class IndexPage extends React.Component {
                             Jezdíme pro vás
                         </h2>
                     </div>
-                    <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
                 </div>
             </div>
 

@@ -92,12 +92,10 @@ class normalLoginForm extends React.Component {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-  
           <a className="login-form-forgot" href="">
             Forgot password
           </a>
         </Form.Item>
-  
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
