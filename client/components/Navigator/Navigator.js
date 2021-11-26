@@ -18,9 +18,9 @@ const menuItems = [
 
 const menu = (
     <Menu>
-        {menuItems.map(el => {
+        {menuItems.map((el, index) => {
             return (
-                <Menu.Item>
+                <Menu.Item key={index}>
                     <Link href={el.link}>
                         <a className={styles.mobileMenuItem}>
                             {el.name}

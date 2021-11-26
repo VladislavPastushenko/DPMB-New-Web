@@ -5,6 +5,9 @@ import styles from './styles/login.module.sass'
 import { Form, Input, Button, Checkbox } from "antd";
 import {connect} from "react-redux";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { login } from "../store/users/actions";
+
+
 const formItemLayout = {
     labelCol: {
       xs: {
@@ -36,11 +39,16 @@ const formItemLayout = {
     },
   };
 
-const normalLoginForm = () => {
-    const [form] = Form.useForm();
-    const onFinish = (values) => {
+class normalLoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+    onFinish = (values) => {
       console.log('Received values of form: ', values);
     };
+    render() {
     return (
       <Form
         {...formItemLayout}
@@ -49,27 +57,28 @@ const normalLoginForm = () => {
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
+        onFinish={this.onFinish}
       >
         <Form.Item
           {...tailFormItemLayout}
-          name="username"
+          name="name"
           rules={[
             {
               required: true,
-              message: 'Please input your Username!',
+              message: 'Please input your E-mail',
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="E-mail" />
         </Form.Item>
+
         <Form.Item
           {...tailFormItemLayout}
           name="password"
           rules={[
             {
               required: true,
-              message: 'Please input your Password!',
+              message: 'Please input your Password',
             },
           ]}
         >
@@ -96,5 +105,12 @@ const normalLoginForm = () => {
       </Form>
     );
   };
+}
 
-export default normalLoginForm;
+const mapStateToProps = state => {
+  return {
+      users: state.users.res,
+  }
+}
+export default connect(mapStateToProps, {login
+}) (normalLoginForm);

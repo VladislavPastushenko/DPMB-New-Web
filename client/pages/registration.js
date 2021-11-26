@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-
 import ReactDOM from "react-dom";
 import 'antd/dist/antd.min.css';
 import styles from './styles/registration.module.sass'
@@ -8,9 +7,10 @@ import { signup } from "../store/users/actions";
 import {
     Form,
     Input,
-    Select,
     Checkbox,
     Button,
+    Modal,
+    Result,
   } from 'antd';
  
 const formItemLayout = {
@@ -47,8 +47,25 @@ const tailFormItemLayout = {
 class RegistrationForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      isModalVisible: false,
+      success: false,
+      errorStatus: false
+    }
   }
+
+  showModal = () => {
+    setIsModalVisible(true);
+  };
+  
+  handleOk = () => {
+    setIsModalVisible(false);
+  };
+  
+  handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  
 
   onFinish = (values) => {
     values.full_name = values.name + " " + values.surname
@@ -60,16 +77,18 @@ class RegistrationForm extends React.Component {
 
     this.props.signup(values).then(
       (res) => {
+        this.setState({success: true})
         console.log(this.props.res)
         console.log(res)
       },
       (err) => {
+        this.setState({errorStatus: true})
         console.log(err)
-      },
-
+      }
     )
   };
   render() {
+  if (!this.state.success && !this.state.errorStatus) {
   return (
     <Form
       {...formItemLayout}
@@ -81,6 +100,7 @@ class RegistrationForm extends React.Component {
       <Form.Item
         name="email"
         label="E-mail"
+        tooltip="After registration, a confirmation mail will be sent to your email"
         rules={[
           {
             type: 'email',
@@ -98,11 +118,37 @@ class RegistrationForm extends React.Component {
       <Form.Item
         name="password"
         label="Password"
+        tooltip="The password must be at least 8 characters long and must have a large letter, a small letter and a number"
         rules={[
           {
             required: true,
             message: 'Please input your password!',
           },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              var smallLetters = "qwertyuiopasdfghjklzxcvbnm";
+              var bigLetters = "QWERTYUIOPLKJHGFDSAZXCVBNM";
+              var digits = "0123456789";
+              var isSmall = false;
+              var isBig = false;
+              var isDigit = false; 
+
+              for (var i = 0; i < value.length; i++) {
+                if (!isSmall && smallLetters.indexOf(value[i]) != -1) isSmall = true;
+                else if (!isBig && bigLetters.indexOf(value[i]) != -1) isBig = true;
+                else if (!isDigit && digits.indexOf(value[i]) != -1) isDigit = true;
+              } 
+              
+              if (value.length < 8) {
+                return Promise.reject(new Error('The password must be at least 8 characters long'));
+              }
+              if (isSmall === true && isBig === true && isDigit === true) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('Your password must have a large letter, a small letter and a number'));
+            },
+          }),
+         
         ]}
         hasFeedback
       >
@@ -123,8 +169,7 @@ class RegistrationForm extends React.Component {
             validator(_, value) {
               if (!value || getFieldValue('password') === value) {
                 return Promise.resolve();
-              }
-
+              } 
               return Promise.reject(new Error('The two passwords that you entered do not match!'));
             },
           }),
@@ -136,7 +181,6 @@ class RegistrationForm extends React.Component {
       <Form.Item
         name="name"
         label="Name"
-        tooltip="Your name"
         rules={[
           {
             required: false,
@@ -151,7 +195,6 @@ class RegistrationForm extends React.Component {
       <Form.Item
         name="surname"
         label="Surname"
-        tooltip="Your surname"
         rules={[
           {
             required: false,
@@ -175,16 +218,50 @@ class RegistrationForm extends React.Component {
         {...tailFormItemLayout}
       >
         <Checkbox>
-          I have read the <a href="">agreement</a>
+          I have read the <a onClick={() => this.setState({ isModalVisible: true})}>agreement</a>
         </Checkbox>
+        
       </Form.Item>
+        <Modal title="Privacy Policy" visible={this.state.isModalVisible} footer={[
+          <Button key="submit" type="primary" onClick={() => this.setState({ isModalVisible: false})}>
+            OK
+          </Button>
+        ]}>
+            <p>This is a 30-point project!</p>
+          </Modal>
+      
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register
         </Button>
       </Form.Item>
     </Form>
-  );
+  );} else if (this.state.errorStatus) {
+    return (
+      <Result
+      status="error"
+      title="Something went wrong!"
+      extra={[
+        <Button type="primary" key="try" onClick={() => this.setState({ errorStatus: false})}>
+          Try again
+        </Button>,
+    ]}
+    ></Result>
+    );
+  } else {
+    return (
+      <Result
+        status="success"
+        title="Your registration was successful!"
+        subTitle="A confirmation email has been sent to your email address"
+        extra={[
+        <Button type="primary" key="console">
+          Main Page
+        </Button>,
+        ]}
+      />
+      );
+  }
   }
 };
 
