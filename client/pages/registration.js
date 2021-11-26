@@ -1,7 +1,10 @@
 import React, {useState} from "react";
+import {connect} from "react-redux";
+
 import ReactDOM from "react-dom";
 import 'antd/dist/antd.min.css';
 import styles from './styles/registration.module.sass'
+import { signup } from "../store/users/actions";
 import {
     Form,
     Input,
@@ -41,19 +44,38 @@ const tailFormItemLayout = {
   },
 };
 
-const RegistrationForm = () => {
-  const [form] = Form.useForm();
+class RegistrationForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
-  const onFinish = (values) => {
+  onFinish = (values) => {
+    values.full_name = values.name + " " + values.surname
+    delete values.name
+    delete values.surname
+    delete values.agreement
+    delete values.confirm
     console.log('Received values of form: ', values);
-  };
 
+    this.props.signup(values).then(
+      (res) => {
+        console.log(this.props.res)
+        console.log(res)
+      },
+      (err) => {
+        console.log(err)
+      },
+
+    )
+  };
+  render() {
   return (
     <Form
       {...formItemLayout}
-      form={form}
+      encType='application/x-www-form-urlencoded'
       name="register"
-      onFinish={onFinish}
+      onFinish={this.onFinish}
       scrollToFirstError
     >
       <Form.Item
@@ -163,6 +185,13 @@ const RegistrationForm = () => {
       </Form.Item>
     </Form>
   );
+  }
 };
 
-export default RegistrationForm;
+const mapStateToProps = state => {
+  return {
+      users: state.users.res,
+  }
+}
+export default connect(mapStateToProps, {signup
+}) (RegistrationForm);

@@ -28,7 +28,7 @@
     "swig-email-templates": "^6.0.0"
   },
   "devDependencies": {
-    "jest": "^25.1.0"
+    "jest": "^27.2.5"
   },
   "nodemonConfig": {
     "exec": "npm run dev",
