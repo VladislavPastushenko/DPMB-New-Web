@@ -69,7 +69,9 @@ export function verifyUser(authToken) {
     return async (dispatch) => {
         return new Promise((resolve, reject) => {
             try {
+            console.log('SENDING NEW STATUS')
             api.call({url: '/users/verify/'+authToken, method: 'GET'}).then(res =>  {
+                console.log('RECEIVED', res)
                 if (res === 'OK') {
                     dispatch({type: VERIFY_USER_SUCCESS, res: res});
                     resolve(res);

@@ -12,7 +12,6 @@ import {
     Checkbox,
     Button,
   } from 'antd';
- 
 const formItemLayout = {
   labelCol: {
     xs: {

@@ -13,11 +13,18 @@ const routes = (route) => {
     route.route('/users')
         .get(UsersController.getAll)
 
+    route.route('/users/customers')
+        .get(UsersController.getCustomers)
+
+    route.route('/users/personnel')
+        .get(UsersController.getPersonnel)
+
     route.route('/users/sign-up')
         .post(UsersController.signup)
 
     route.route('/users/:id')
         .get(UsersController.getById)
+        .post(UsersController.editById)
 
     route.route('/users/verify/:authToken')
         .get(UsersController.verify)

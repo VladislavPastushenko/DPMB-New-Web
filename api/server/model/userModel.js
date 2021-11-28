@@ -1,6 +1,18 @@
 import BaseModel from './baseModel';
 
 export default class UserModel extends BaseModel {
+    getAll(params = {}) {
+        return this.model.query(function(qb) {
+            qb.select('users.*')
+            if(params.role)
+                qb.where('role', params.role)
+            if(params.limit)
+                qb.limit(params.limit)
+            qb.groupBy('users.id')
+        })
+        .fetchAll({});
+    }
+
     register(data) {
         data.password = this.createHash(data.password,'sha1');
         data.auth_token = this.createHash(Date.now().toString(), 'sha1');

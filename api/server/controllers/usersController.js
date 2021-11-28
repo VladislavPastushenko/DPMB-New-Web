@@ -6,13 +6,115 @@ const config = dotenv.config();
 class UsersController {
 
     static getAll(req, res, next) {
-        return new Orm().getOrm().userModel.getAll()
-            .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
+        return new Orm().getOrm().userModel
+        .getUserByAuthToken(req.session.loggedToken)
+            .then((row, err) => {
+
+                let user = row.toJSON();
+                if (user.role === 'admin') {
+                    return new Orm().getOrm().userModel.getAll(req.query)
+                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
+                }
+                else {
+                    res.status(403).send("User doesn't have rights to access this route");
+                }
+            })
+            .catch((err) => {
+                if (err.message == "EmptyResponse") {
+                    res.status(404).send("User not found");
+                }
+            });
+    }
+
+    static getCustomers(req, res, next) {
+        return new Orm().getOrm().userModel
+        .getUserByAuthToken(req.session.loggedToken)
+            .then((row, err) => {
+
+                let user = row.toJSON();
+                if (user.role === 'admin' || user.role === 'personnel' || user.role === 'carrier') {
+                    return new Orm().getOrm().userModel.getAll({limit: req.query.limit, role: 'user'})
+                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
+                }
+                else {
+                    res.status(403).send("User doesn't have rights to access this route");
+                }
+            })
+            .catch((err) => {
+                if (err.message == "EmptyResponse") {
+                    res.status(404).send("User not found");
+                }
+            });
+    }
+
+    static getPersonnel(req, res, next) {
+        return new Orm().getOrm().userModel
+        .getUserByAuthToken(req.session.loggedToken)
+            .then((row, err) => {
+
+                let user = row.toJSON();
+                if (user.role === 'admin' || user.role === 'carrier') {
+                    return new Orm().getOrm().userModel.getAll({limit: req.query.limit, role: 'personnel'})
+                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
+                }
+                else {
+                    res.status(403).send("User doesn't have rights to access this route");
+                }
+            })
+            .catch((err) => {
+                if (err.message == "EmptyResponse") {
+                    res.status(404).send("User not found");
+                }
+            });
     }
 
     static getById(req, res, next) {
         return new Orm().getOrm().userModel
             .getById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
+    }
+
+
+    static editById(req, res, next) {
+        if(req.session.loggedToken) {
+            return new Orm().getOrm().userModel
+                .getUserByAuthToken(req.session.loggedToken)
+                .then((row, err) => {
+                    let loggedUser = row.toJSON();
+                    return new Orm().getOrm().userModel
+                        .getById(res.query.id)
+                        .then((row, err) => {
+                            let user = row.toJSON();
+                            req.body.id = user.id;
+                            if (
+                                (loggedUser.role === 'admin') ||
+                                (loggedUser.role === 'carrier' && user.role === 'personnel') ||
+                                ((loggedUser.role === 'personnel' || loggedUser.role === 'carrier') && user.role === 'user') ||
+                                (loggedUser.id === user.id || user.is_active === 1)
+                            ) {
+                                return new Orm().getOrm().userModel
+                                    .update(req.body)
+                                    .then((row) => {
+                                        let updUser = row.toJSON();
+                                        res.status(200).send('OK');
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                        res.status(500).send(err);
+                                    });
+                            } else {
+                                res.status(403).send("User doesn't have rights edit this user");
+                            }
+
+                        })
+                        .catch(err => {
+                            if(err.message == "EmptyResponse") {
+                                res.status(404).send("User not found");
+                            }
+                        })
+                });
+        } else {
+            res.status(403).send('User not logged in');
+        }
     }
 
 
@@ -58,11 +160,13 @@ class UsersController {
 
 
     static verify(req, res, next) {
+        console.log('req.params.authToken', req.params.authToken)
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {
                 if(row.toJSON().is_active == 1) {
-                    res.status(410).send('User is already verified and active');
+                    console.log(row.toJSON())
+                    res.status(200).send('User is already verified and active');
                 } else {
                     return new Orm().getOrm().userModel
                         .activateUserById(row.toJSON().id)

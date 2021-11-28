@@ -40,6 +40,10 @@ export default class BaseModel {
         return new this.model(by).fetchAll();
     }
 
+    removeById(id) {
+        this.model.where({'id': id}).destroy();
+    }
+
     createHash(str, alg) {
         console.log(str)
         let hash = crypto.createHash(alg);
