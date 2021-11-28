@@ -77,12 +77,16 @@ const routes = (route) => {
         .get(TripsController.getAll)
         .post(TripsController.create)
 
+    route.route('/trip/:id')
+        .get(TripsController.getById)
+
     route.route('/trips/:from_id/:to_id')
         .get(TripsController.getByFromToIds)
 
     // ROUTE ITEMS
     route.route('/route-items')
-        .get(RouteItemsController.createMultiple)
+        .get(RouteItemsController.getAll)
+        .post(RouteItemsController.createMultiple)
 
     // CARRIERS
     route.route('/carrier')
