@@ -54,16 +54,14 @@ export default function App({ Component, pageProps }) {
                 <Content style={{ padding: '0 0',/* marginTop: 64,*/ background: 'white'}}>
                     <div style={{paddingTop: 0, minHeight: 380 }}>
                         <Component {...pageProps} />
-                    </div>
-
-                    <div id="container"/>
+                    </div>  
                 </Content>
 
                 <Footer style={{textAlign: 'center',  backgroundColor: 'white', padding: 0}}>
                     <Basement {...pageProps} pathname={router.pathname}/>
                 </Footer>
                 <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
-
+                
             </Layout>
         </Provider>
     ) }

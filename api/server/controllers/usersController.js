@@ -207,8 +207,9 @@ class UsersController {
             .getUserForLogin(req.body)
             .then((row, err) => {
                 if(row) {
-                    var user = row.toJSON();
-                    req.session.loggedToken = user.auth_token;
+                    console.log('user ' + row.toJSON().email + ' is logged in' )
+                    req.session.loggedToken = row.toJSON().auth_token;
+                    res.status(200).send(row.toJSON().auth_token)
                 }
             }).catch((err) => {
                 if(err.message == "EmptyResponse") {
