@@ -3,17 +3,36 @@ import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./tripList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
-import { DeleteOutline } from "@material-ui/icons";
-import { tripRows } from "../../../pages/dummyData";
 import { ResponsiveContainer } from "recharts";
 import { InputNumber } from 'antd'
+import { fetchTrips } from "../../../store/trips/actions";
+import { LoadingOutlined } from '@ant-design/icons'
 
-export default class ReservationList extends React.Component {
+
+class TripList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: tripRows
+            data: [],
         };
+
+        let query = this.props.loggedUser.carrier_id && ("carrier_id=" + this.props.loggedUser.carrier_id)
+
+        this.props.fetchTrips(query).then(
+          (res) => {
+            console.log(res)
+            this.setState({data: res})
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+  
+        );
+    }
+
+    getVal(params) {
+      //console.log(params.value.name)
+      return params.value.name;
     }
 
     handleDelete = (id) => {
@@ -23,40 +42,41 @@ export default class ReservationList extends React.Component {
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         
-        { field: "from", headerName: "From", width: 255, align: "left",},
+        { field: "name", headerName: "From - To", width: 210, align: "left",},
         
         {
-            field: "to",
-            headerName: "To",
-            width: 255,
+            field: "carrier",
+            headerName: "Carrier",
+            width: 170,
             align: "left",
+            valueGetter: this.getVal,
         },
         {
-            field: "provider",
-            headerName: "Provider",
-            width: 190,
-            align: "left",
-        },
-        {
-          field: "starttime",
+          field: "start_time",
           headerName: "Start",
-          width: 120,
+          width: 220,
           align: "left",
         },
         {
-          field: "finishtime",
+          field: "end_time",
           headerName: "Finish",
-          width: 120,
+          width: 220,
           align: "left",
         },
         {
-          field: "seats",
+          field: "capacity",
           headerName: "Seats",
           width: 120,
           align: "left",
         },
         {
-          field: "action",
+          field: "status",
+          headerName: "Status",
+          width: 120,
+          align: "left",
+        },
+        {
+          field: "delay",
           headerName: "Delay",
           width: 120,
           renderCell: (params) => {
@@ -70,6 +90,7 @@ export default class ReservationList extends React.Component {
         },
       ];
     render() {
+      if (this.state.data.length > 0) {
         return (
             
             <div className={styles.stopList}>
@@ -88,5 +109,29 @@ export default class ReservationList extends React.Component {
               </ResponsiveContainer>
             </div>
         );
+        } else {
+          return (
+            
+            <div className={styles.stopList}>
+              <div className={styles.stopsTitleContainer}>
+                    <h1 className="userTitle">Trips List</h1>
+                    <button className={styles.transportAddButton} onClick={() => {this.props.changeLocation('newroute')}}>Create</button>
+              </div>  
+              <ResponsiveContainer width="100%">
+                <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
+                    <LoadingOutlined/>
+                </div>
+              </ResponsiveContainer>
+            </div>
+        );
+        }
     }
 }
+
+const mapStateToProps = state => {
+  return {
+      users: state.users.res,
+  }
+}
+export default connect(mapStateToProps, {fetchTrips
+}) (TripList);

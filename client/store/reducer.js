@@ -3,7 +3,7 @@ import posts from "./posts/reducers";
 import users from "./users/reducers";
 import cities from "./cities/reducers";
 import stops from "./stops/reducers";
-import carriers from "./carriers/reducers";
+import carrier from "./carriers/reducers";
 import trips from "./trips/reducers";
 
 
@@ -12,6 +12,6 @@ export default combineReducers({
     users,
     cities,
     stops,
-    carriers,
+    carrier,
     trips,
 })

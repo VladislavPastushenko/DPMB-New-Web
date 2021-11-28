@@ -79,7 +79,7 @@ class Dashboard extends React.Component {
                                     {this.state.location === 'stopList' && <StopList changeLocation={this.changeLocation}/>} 
                                     {this.state.location === 'newstop' && <AddNewStop/>} 
                                     {this.state.location === 'reservationList' && <ReservationList/>} 
-                                    {this.state.location === 'tripList' && <TripList changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'tripList' && <TripList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'carrierList' && <CarrierList changeLocation={this.changeLocation}/>} 
                                     {this.state.location === 'newcarrier' && <AddNewCarrier/>} 
                                     {this.state.location === 'citiesList' && <CitiesList changeLocation={this.changeLocation}/>} 

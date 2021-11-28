@@ -3,7 +3,7 @@ import {
     FETCH_CARRIERS_FAILED,
 } from "./actions";
 
-function carriers(state = {
+function carrier(state = {
     carriers: [],
 }, action) {
     switch (action.type) {
@@ -16,4 +16,4 @@ function carriers(state = {
     }
 }
 
-export default carriers
+export default carrier
