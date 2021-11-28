@@ -14,6 +14,17 @@ export default class RouteItemModel extends BaseModel {
         })
     }
 
+    getAll(){
+        return this.model.query(function(qb) {
+            qb.select('route_items.*')
+        }).fetchAll({
+            withRelated: [{
+                'stop': function(qb) {},
+                'trip': function(qb) {},
+            }]
+        });
+    }
+
     getById(id){
         return this.model.query(function(qb) {
             qb.where('route_items.id', id)

@@ -3,7 +3,7 @@ import Orm from "../model/orm";
 class TripsController {
 
     static getAll(req, res, next) {
-        return new Orm().getOrm().tripModel.getAll()
+        return new Orm().getOrm().tripModel.getAll(req)
             .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
     }
 

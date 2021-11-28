@@ -8,6 +8,9 @@ export default class TripModel extends BaseModel {
             routeItems() {
                 return this.hasMany('RouteItem', 'trip_id')
             },
+            stop() {
+                return this.belongsTo('Stop', "route_item:stop_id", "id");
+            },
             carrier() {
                 return this.belongsTo('Carrier', "carrier_id", "id");
             },
@@ -16,9 +19,16 @@ export default class TripModel extends BaseModel {
     }
 
 
-    getAll() {
+    getAll(req) {
         return this.model.query(function(qb) {
             qb.select('trips.*')
+
+            if (req.query.status) {
+                qb.where('trips.status', req.query.status)
+            }
+            if (req.query.carrier_id) {
+                qb.where('trips.carrier_id)', req.query.carrier_id)
+            }
         }).fetchAll({
             withRelated: [{
                 'carrier': function(qb) {},
@@ -35,6 +45,7 @@ export default class TripModel extends BaseModel {
             withRelated: [{
                 'carrier': function(qb) {},
                 'routeItems': function(qb) {},
+                'stop': function(qb) {},
             }]
         });
     }
