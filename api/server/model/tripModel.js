@@ -27,7 +27,7 @@ export default class TripModel extends BaseModel {
                 qb.where('trips.status', req.query.status)
             }
             if (req.query.carrier_id) {
-                qb.where('trips.carrier_id)', req.query.carrier_id)
+                qb.where('trips.carrier_id', req.query.carrier_id)
             }
         }).fetchAll({
             withRelated: [{
