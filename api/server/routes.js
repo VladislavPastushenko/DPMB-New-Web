@@ -2,6 +2,8 @@ import UsersController from "./controllers/usersController";
 import PostsController from "./controllers/postsController";
 import CitiesController from "./controllers/citiesController";
 import StopsController from "./controllers/stopsController";
+import TripsController from "./controllers/tripsController";
+import RouteItemsController from "./controllers/routeItemsController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -68,6 +70,18 @@ const routes = (route) => {
     route.route('/stops/get-by-city-id/:id')
         .get(StopsController.getByCityId)
 
+
+    // TRIPS
+    route.route('/trips')
+        .get(TripsController.getAll)
+        .post(TripsController.create)
+
+    route.route('/trips/:from_id/:to_id')
+        .get(TripsController.getByFromToIds)
+
+    // ROUTE ITEMS
+    route.route('/route-items')
+        .get(RouteItemsController.createMultiple)
 
     // POSTS
     route.route('/posts')

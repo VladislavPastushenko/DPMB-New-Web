@@ -18,6 +18,12 @@ export default class BaseModel {
         return new this.model().save({...data});
     }
 
+    createMultiple(data) {
+        return this.model
+            .collection(data)
+            .invokeThen('save')
+    }
+
 
     getAll() {
         return new this.model().fetchAll();

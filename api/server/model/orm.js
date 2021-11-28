@@ -3,6 +3,8 @@ import PostModel from "./postModel";
 import UserModel from "./userModel";
 import CityModel from "./cityModel";
 import StopModel from "./stopModel";
+import TripModel from "./tripModel";
+import RouteItemModel from "./routeItemModel";
 
 export default class Orm {
 
@@ -21,12 +23,16 @@ export default class Orm {
         const userModel = new UserModel({orm: orm, modelName: 'User', tableName: 'users', options: {} })
         const cityModel = new CityModel({orm: orm, modelName: 'City', tableName: 'cities', options: {} })
         const stopModel = new StopModel({orm: orm, modelName: 'Stop', tableName: 'stops', options: {} })
+        const tripModel = new TripModel({orm: orm, modelName: 'Trip', tableName: 'trips', options: {} })
+        const routeItemModel = new RouteItemModel({orm: orm, modelName: 'RouteItem', tableName: 'route_items', options: {} })
 
         this._orm = {
             postModel: postModel,
             userModel: userModel,
             cityModel: cityModel,
             stopModel: stopModel,
+            tripModel: tripModel,
+            routeItemModel: routeItemModel
         };
 
     }
