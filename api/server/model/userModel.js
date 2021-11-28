@@ -20,7 +20,7 @@ export default class UserModel extends BaseModel {
     getUserForLogin(data) {
         data.password = this.createHash(data.password, 'sha1');
         return this.model.query(function(qb) {
-            qb.select('id','auth_token','is_active')
+            qb.select('*')
             qb.where('email', data.email);
             qb.where('password', data.password);
             qb.where('is_active', 1);

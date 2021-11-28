@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import 'antd/dist/antd.min.css';
 import styles from './styles/login.module.sass'
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, message } from "antd";
 import {connect} from "react-redux";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { login } from "../store/users/actions";
+import { loginUser } from "../store/users/actions";
+import Router from 'next/router'
 
 
 const formItemLayout = {
@@ -42,11 +43,31 @@ const formItemLayout = {
 class normalLoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      errMsg: null
+    }
   }
 
     onFinish = (values) => {
-      console.log('Received values of form: ', values);
+      delete values.remember
+
+      this.props.loginUser(values).then(
+        (res) => {
+          console.log(res)
+          message.success(
+            {
+              content: 'You were successfully logged in',
+              duration: 3,
+              onClose: () => {Router.push('/')}
+            }
+          )
+        },
+        (err) => {
+          this.setState({errMsg: err})
+        }
+
+      )
+
     };
     render() {
     return (
@@ -61,7 +82,7 @@ class normalLoginForm extends React.Component {
       >
         <Form.Item
           {...tailFormItemLayout}
-          name="name"
+          name="email"
           rules={[
             {
               required: true,
@@ -88,6 +109,8 @@ class normalLoginForm extends React.Component {
             placeholder="Password"
           />
         </Form.Item>
+        {this.state.errMsg &&
+          <p className='fontSizeSm' align='center' style={{color: 'red', fontWeight: '300'}}> {this.state.errMsg} </p>}
         <Form.Item {...tailFormItemLayout}>
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
@@ -112,5 +135,5 @@ const mapStateToProps = state => {
       users: state.users.res,
   }
 }
-export default connect(mapStateToProps, {login
+export default connect(mapStateToProps, {loginUser
 }) (normalLoginForm);

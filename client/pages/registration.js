@@ -68,7 +68,17 @@ class RegistrationForm extends React.Component {
   
 
   onFinish = (values) => {
-    values.full_name = values.name + " " + values.surname
+    if (values.name === undefined) {
+      values.name = null
+    }
+    if (values.surname === undefined) {
+      values.surname = null
+    }
+    if (values.name === null && values.surname === null) {
+      values.full_name = null
+    } else {
+      values.full_name = values.name + " " + values.surname
+    }
     delete values.name
     delete values.surname
     delete values.agreement
@@ -222,7 +232,7 @@ class RegistrationForm extends React.Component {
         </Checkbox>
         
       </Form.Item>
-        <Modal title="Privacy Policy" visible={this.state.isModalVisible} footer={[
+        <Modal title="Privacy Policy" visible={this.state.isModalVisible} onCancel={() => this.setState({ isModalVisible: false})}footer={[
           <Button key="submit" type="primary" onClick={() => this.setState({ isModalVisible: false})}>
             OK
           </Button>
