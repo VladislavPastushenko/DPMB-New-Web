@@ -1,27 +1,22 @@
 import Orm from "../model/orm";
 
-class TripsController {
+class CarriersController {
 
     static getAll(req, res, next) {
-        return new Orm().getOrm().tripModel.getAll()
+        return new Orm().getOrm().carrierModel.getAll()
             .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
     }
 
     static getById(req, res, next) {
-        return new Orm().getOrm().tripModel
+        return new Orm().getOrm().carrierModel
             .getById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
     }
 
-    static getByFromToIds(req, res, next) {
-        return new Orm().getOrm().tripModel.getByFromToIds(req.params.from_id, req.params.to_id)
-            .then((row, err) => (err) ? err.toJSON():  res.send(row) );
-    }
-
     static create(req, res, next) {
-        return new Orm().getOrm().tripModel
+        return new Orm().getOrm().carrierModel
             .create(req.body).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
     }
 
 }
 
-export default TripsController;
+export default CarriersController;

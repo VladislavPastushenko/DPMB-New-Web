@@ -1,6 +1,16 @@
 import BaseModel from './baseModel';
 
 export default class UserModel extends BaseModel {
+    constructor({orm, modelName, tableName, options = {}}) {
+        super({orm, modelName, tableName, options});
+
+        this.model = this.model.extend({
+            carrier() {
+                return this.belongsTo('Carrier', "carrier_id", "id");
+            },
+
+        });
+    }
     getAll(params = {}) {
         return this.model.query(function(qb) {
             qb.select('users.*')
@@ -10,7 +20,11 @@ export default class UserModel extends BaseModel {
                 qb.limit(params.limit)
             qb.groupBy('users.id')
         })
-        .fetchAll({});
+        .fetchAll({
+            withRelated: [{
+                'carrier': function(qb) {},
+            }]
+        });
     }
 
     register(data) {
@@ -25,7 +39,9 @@ export default class UserModel extends BaseModel {
             qb.select('*');
             qb.where('auth_token', authToken);
         }).fetch({
-            withRelated: [{}]
+            withRelated: [{
+                'carrier': function(qb) {},
+            }]
         });
     }
 

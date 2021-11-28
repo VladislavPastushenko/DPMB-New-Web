@@ -8,9 +8,36 @@ export default class TripModel extends BaseModel {
             routeItems() {
                 return this.hasMany('RouteItem', 'trip_id')
             },
+            carrier() {
+                return this.belongsTo('Carrier', "carrier_id", "id");
+            },
+
         });
     }
 
+
+    getAll() {
+        return this.model.query(function(qb) {
+            qb.select('trips.*')
+        }).fetchAll({
+            withRelated: [{
+                'carrier': function(qb) {},
+                'routeItems': function(qb) {},
+            }]
+        });
+    }
+
+
+    getById(id){
+        return this.model.query(function(qb) {
+            qb.where('trips.id', id)
+        }).fetch({
+            withRelated: [{
+                'carrier': function(qb) {},
+                'routeItems': function(qb) {},
+            }]
+        });
+    }
 
     getByFromToIds(from_id, to_id){
         return this.model.query(function(qb) {

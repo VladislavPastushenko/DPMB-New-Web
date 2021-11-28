@@ -5,6 +5,7 @@ import CityModel from "./cityModel";
 import StopModel from "./stopModel";
 import TripModel from "./tripModel";
 import RouteItemModel from "./routeItemModel";
+import CarrierModel from "./carrierModel";
 
 export default class Orm {
 
@@ -25,6 +26,7 @@ export default class Orm {
         const stopModel = new StopModel({orm: orm, modelName: 'Stop', tableName: 'stops', options: {} })
         const tripModel = new TripModel({orm: orm, modelName: 'Trip', tableName: 'trips', options: {} })
         const routeItemModel = new RouteItemModel({orm: orm, modelName: 'RouteItem', tableName: 'route_items', options: {} })
+        const carrierModel = new CarrierModel({orm: orm, modelName: 'Carrier', tableName: 'carriers', options: {} })
 
         this._orm = {
             postModel: postModel,
@@ -32,7 +34,8 @@ export default class Orm {
             cityModel: cityModel,
             stopModel: stopModel,
             tripModel: tripModel,
-            routeItemModel: routeItemModel
+            routeItemModel: routeItemModel,
+            carrierModel: carrierModel
         };
 
     }

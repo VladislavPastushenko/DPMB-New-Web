@@ -4,6 +4,7 @@ import CitiesController from "./controllers/citiesController";
 import StopsController from "./controllers/stopsController";
 import TripsController from "./controllers/tripsController";
 import RouteItemsController from "./controllers/routeItemsController";
+import CarriersController from "./controllers/carriersController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -83,6 +84,14 @@ const routes = (route) => {
     route.route('/route-items')
         .get(RouteItemsController.createMultiple)
 
+    // CARRIERS
+    route.route('/carrier')
+        .get(CarriersController.getAll)
+        .post(CarriersController.create)
+
+    route.route('/carrier/:id')
+        .get(CarriersController.getById)
+
     // POSTS
     route.route('/posts')
         .get(PostsController.getAll)
@@ -90,6 +99,7 @@ const routes = (route) => {
 
     route.route('/posts/:id')
         .get(PostsController.get)
+
 
 };
 
