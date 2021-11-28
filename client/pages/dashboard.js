@@ -18,6 +18,8 @@ import AddNewCarrier from "../components/Dashboard/addNewCarrier/AddNewCarrier";
 import {lookupUserInStorage, fetchLoggedUser} from '../store/users/actions'
 import Router from 'next/router'
 import {LoadingOutlined} from '@ant-design/icons'
+import CitiesList from "../components/Dashboard/citiesList/CitiesList";
+import AddNewCity from "../components/Dashboard/addNewCity/AddNewCity";
 
 
 class Dashboard extends React.Component {
@@ -80,7 +82,9 @@ class Dashboard extends React.Component {
                                     {this.state.location === 'tripList' && <TripList changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'carrierList' && <CarrierList changeLocation={this.changeLocation}/>} 
                                     {this.state.location === 'newcarrier' && <AddNewCarrier/>} 
-        
+                                    {this.state.location === 'citiesList' && <CitiesList changeLocation={this.changeLocation}/>} 
+                                    {this.state.location === 'newcity' && <AddNewCity/>} 
+
                                 </div>
                         </div>
                     );

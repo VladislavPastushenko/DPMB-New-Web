@@ -4,15 +4,27 @@ import ReactDOM from "react-dom";
 import styles from "./stopList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
-import { stopRows } from "../../../pages/dummyData";
 import { ResponsiveContainer } from "recharts";
+import { fetchStops } from "../../../store/stops/actions";
+import { LoadingOutlined } from '@ant-design/icons'
 
-export default class StopList extends React.Component {
+class StopList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: stopRows
+            data: [],
         };
+
+        this.props.fetchStops().then(
+          (res) => {
+            console.log(res)
+            this.setState({data: res})
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+  
+        );
     }
 
     handleDelete = (id) => {
@@ -22,20 +34,8 @@ export default class StopList extends React.Component {
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         
-        { field: "stopname", headerName: "Stop Name", width: 300, align: "left",},
+        { field: "name", headerName: "Stop Name", width: 1030, align: "left",},
         
-        {
-            field: "city",
-            headerName: "In city",
-            width: 280,
-            align: "left",
-        },
-        {
-            field: "buses",
-            headerName: "Bus Numbers",
-            width: 450,
-            align: "left",
-        },
         {
           field: "action",
           headerName: "Action",
@@ -56,6 +56,7 @@ export default class StopList extends React.Component {
         },
       ];
     render() {
+      if (this.state.data.length > 0) {
         return (
             
             <div className={styles.stopList}>
@@ -74,5 +75,29 @@ export default class StopList extends React.Component {
               </ResponsiveContainer>
             </div>
         );
+        } else {
+          return (
+            
+            <div className={styles.stopList}>
+              <div className={styles.stopsTitleContainer}>
+                    <h1 className="userTitle">Stops List</h1>
+                    <button className={styles.stopAddButton} onClick={() => {this.props.changeLocation('newstop')}}>Create</button>
+              </div>  
+              <ResponsiveContainer width="100%">
+                <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
+                          <LoadingOutlined/>
+                </div>
+              </ResponsiveContainer>
+            </div>
+        );
+        }
     }
 }
+
+const mapStateToProps = state => {
+  return {
+      users: state.users.res,
+  }
+}
+export default connect(mapStateToProps, {fetchStops
+}) (StopList);
