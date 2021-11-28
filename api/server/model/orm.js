@@ -2,6 +2,7 @@ import MySQL from "../mysql";
 import PostModel from "./postModel";
 import UserModel from "./userModel";
 import CityModel from "./cityModel";
+import StopModel from "./stopModel";
 
 export default class Orm {
 
@@ -19,11 +20,13 @@ export default class Orm {
         const postModel = new PostModel({orm: orm, modelName: 'Post', tableName: 'posts', options: {} })
         const userModel = new UserModel({orm: orm, modelName: 'User', tableName: 'users', options: {} })
         const cityModel = new CityModel({orm: orm, modelName: 'City', tableName: 'cities', options: {} })
+        const stopModel = new StopModel({orm: orm, modelName: 'Stop', tableName: 'stops', options: {} })
 
         this._orm = {
             postModel: postModel,
             userModel: userModel,
             cityModel: cityModel,
+            stopModel: stopModel,
         };
 
     }

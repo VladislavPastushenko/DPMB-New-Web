@@ -1,13 +1,13 @@
 import Orm from "../model/orm";
 
-class CityController {
+class CitiesController {
 
     static getAll(req, res, next) {
         return new Orm().getOrm().cityModel.getAll()
             .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
     }
 
-    static get(req, res, next) {
+    static getById(req, res, next) {
         return new Orm().getOrm().cityModel
             .getById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
     }
@@ -19,4 +19,4 @@ class CityController {
 
 }
 
-export default PostsController;
+export default CitiesController;

@@ -1,5 +1,7 @@
 import UsersController from "./controllers/usersController";
 import PostsController from "./controllers/postsController";
+import CitiesController from "./controllers/citiesController";
+import StopsController from "./controllers/stopsController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -10,6 +12,7 @@ const routes = (route) => {
         res.status(200).send(true);
     });
 
+    // USERS
     route.route('/users')
         .get(UsersController.getAll)
 
@@ -44,6 +47,29 @@ const routes = (route) => {
     route.route('/users/set-session/:authToken')
         .post(UsersController.setSession)
 
+
+    // CITIES
+    route.route('/cities')
+        .get(CitiesController.getAll)
+        .post(CitiesController.create)
+
+    route.route('/cities/:id')
+        .get(CitiesController.getById)
+
+
+    // STOPS
+    route.route('/stops')
+        .get(StopsController.getAll)
+        .post(StopsController.create)
+
+    route.route('/stops/:id')
+        .get(StopsController.getById)
+
+    route.route('/stops/get-by-city-id/:id')
+        .get(StopsController.getByCityId)
+
+
+    // POSTS
     route.route('/posts')
         .get(PostsController.getAll)
         .post(PostsController.create)
