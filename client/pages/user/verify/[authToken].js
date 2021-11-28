@@ -37,10 +37,10 @@ class UserVerifyPage extends React.Component {
     }
     returnStateSuccess(props) {
         return (
-            <Result
-                status="success"
-                title="User is successfully verified and activated."
-            />
+            <Result status="success"
+                    title="User is successfully verified and activated."
+                    className={styles.userIcon}> 
+            </Result>
         )
     }
 
@@ -49,7 +49,8 @@ class UserVerifyPage extends React.Component {
             <Result
                 status="error"
                 title={props.returnedState}
-            />
+                
+            ></Result>
         )
     }
 
@@ -60,7 +61,7 @@ class UserVerifyPage extends React.Component {
                 <Head>
                     <title>Loading</title>
                 </Head>
-                <p className="fontSizeXl" align='center' style={{marginTop: '6vh'}}>
+                <p className={styles.fontSizeXl}>
                     <LoadingOutlined/>
                 </p>
             </div>
@@ -72,12 +73,11 @@ class UserVerifyPage extends React.Component {
                     <title>Verify User</title>
                 </Head>
 
-                <Row style={{justifyContent: 'center', marginTop: 20}}>
+                <Row className={styles.row}>
                     <Col xxl={8} xl={10} lg={12} md={14} span={24}>
                         <div>
-                            <p className='fontSizeMd' align='center'>User verification</p>
-
-                            <div>
+                            <p className={styles.userVerification}>User verification</p>
+                            <div className={styles.userIcon}>
                                 {this.props.returnedState == 'OK' ? this.returnStateSuccess(this.props) : this.returnStateFail(this.props)}
                             </div>
                         </div>

@@ -38,7 +38,7 @@ function users(state = {
         case LOOKUP_USER_IN_STORAGE_SUCCESS:
             return Object.assign({}, state, {savedLocalStorageHash: action.hash});
         case LOOKUP_USER_IN_STORAGE_FAILED:
-            return Object.assign({}, state, {savedLocalStorageHash: null, error: error});
+            return Object.assign({}, state, {savedLocalStorageHash: null, error: action.error});
 
         case GET_LOGGED_USER_SUCCESS:
             return Object.assign({}, state, {loggedUser: action.loggedUser});

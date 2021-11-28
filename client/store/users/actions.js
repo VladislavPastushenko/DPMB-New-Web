@@ -45,17 +45,19 @@ export function loginUser(data) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/users/login', method: 'POST', data}).then(res =>  {
-                    if (res !== 'Invalid credentials or inactive user') {
+                    if (res !== "Invalid credentials or inactive user" && res !== 'Error occured while logging in') {
+                        console.log('res is', res)
                         localStorage.setItem('authToken', res);
-                        dispatch({type: LOGIN_USER, loginResponse: res});
+                        console.log('Item is set', localStorage.getItem('authToken'))
+                        dispatch({type: LOGIN_SUCCESS, loginResponse: res});
                         resolve(res);
                     } else {
-                        dispatch({type: LOGIN_USER_FAILED, error: res});
+                        dispatch({type: LOGIN_FAILED, error: res});
                         reject(res);
                     }
                 })
             } catch (error) {
-                dispatch({type: LOGIN_USER_FAILED, error: error});
+                dispatch({type: LOGIN_FAILED, error: error});
                 reject(error);
             }
         });
@@ -119,7 +121,7 @@ export function fetchLoggedUser(authToken) {
         return new Promise((resolve, reject) => {
             return api.call({url: '/users/get-logged/'+authToken , method: 'GET'})
                 .then(data => {
-                    dispatch({type: GET_LOGGED_USER, loggedUser: data});
+                    dispatch({type: GET_LOGGED_USER_SUCCESS, loggedUser: data});
                     resolve(data)
                 }).catch(error => {
                     dispatch({type: GET_LOGGED_USER_FAILED, error: error});
