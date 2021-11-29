@@ -5,6 +5,7 @@ import cities from "./cities/reducers";
 import stops from "./stops/reducers";
 import carrier from "./carriers/reducers";
 import trips from "./trips/reducers";
+import routeItems from "./routeItems/reducers";
 
 export default combineReducers({
     posts,
@@ -13,4 +14,5 @@ export default combineReducers({
     stops,
     carrier,
     trips,
+    routeItems,
 })
