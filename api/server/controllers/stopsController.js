@@ -19,7 +19,7 @@ class StopsController {
 
     static create(req, res, next) {
         return new Orm().getOrm().stopModel
-            .create(req.body).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
+            .create(req.body).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
     }
 
 }

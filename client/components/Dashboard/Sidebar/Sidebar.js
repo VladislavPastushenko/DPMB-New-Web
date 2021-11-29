@@ -18,9 +18,9 @@ export default class Sidebar extends React.Component {
                         <h3 className={styles.sidebarTitle}>Dashboard</h3>
 
                         <ul className={styles.sidebarList}>
-                            <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('home')}}>
-                                <Home className={styles.sidebarIcon}/>
-                                Home
+                        <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('userList')}}>
+                                <Person className={styles.sidebarIcon}/>
+                                Users
                             </li>
                         </ul>
                     </div>
@@ -28,10 +28,7 @@ export default class Sidebar extends React.Component {
                     <div className={styles.sidebarMenu}>
                         <h3 className={styles.sidebarTitle}>Main Menu</h3>
                         <ul className={styles.sidebarList}>
-                            <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('userList')}}>
-                                <Person className={styles.sidebarIcon}/>
-                                Users
-                            </li>
+                            
                             <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('carrierList')}}>
                                 <DirectionsBus className={styles.sidebarIcon}/>
                                 Carriers
@@ -62,12 +59,7 @@ export default class Sidebar extends React.Component {
                                 <Settings className={styles.sidebarIcon}/>
                                 Settings
                             </li>
-                            <li className={styles.sidebarListItem}>
-                                <Report className={styles.sidebarIcon}/>
-                                Reports
-                            </li>
-
-                            
+                                                        
                         </ul>
                     </div>
                 </div>

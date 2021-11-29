@@ -10,10 +10,7 @@ import { DeleteOutline } from "@material-ui/icons";
 
 
 
-const data = [
-    'Brno-Hlavni nadrazi -> Praha-Florenc',
-    'Praha-Florenc -> Brno-Hlavni nadrazi',
-];
+
 
 export default class MiddleCard extends React.Component {
     constructor(props) {

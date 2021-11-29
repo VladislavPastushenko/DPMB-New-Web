@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import styles from "./styles/dashboard.module.sass"
 import Topbar from "./../components/Dashboard/Topbar/Topbar"
 import Sidebar from "./../components/Dashboard/Sidebar/Sidebar"
-import Home from "./../components/Dashboard/home/Home"
 import UserList from "../components/Dashboard/userList/UserList";
 import UserEdit from "../components/Dashboard/userEdit/UserEdit";
 import AddNewRoute from "../components/Dashboard/addNewRoute/AddNewRoute";
@@ -26,7 +25,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {
             loggedUser: null,
-            location: 'home',
+            location: 'userList',
         };
 
         this.props.lookupUserInStorage()
@@ -68,7 +67,7 @@ class Dashboard extends React.Component {
                                 <Topbar {...this.props}/>
                                 <div className={styles.container}>
                                     <Sidebar changeLocation={this.changeLocation}/>
-                                    {this.state.location === 'home' && <Home/>} 
+                                    
                                     {this.state.location === 'userList' && <UserList/>}
                                     {this.state.location === 'settings' && <UserEdit/>} 
                                     {this.state.location === 'newroute' && <AddNewRoute/>} 
