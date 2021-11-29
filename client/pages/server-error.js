@@ -26,12 +26,12 @@ export default class ServerError extends React.Component {
                     status="403"
                     title={
                         <span className={styles.mainHeader}>
-                            Ooops - něco pokazilo a server nereaguje
+                            Ooops - something went wrong and the server is unresponsive
                         </span>
                     }
                     subTitle={
                         <span className={styles.nextHeader}>
-                            Ale nebojte se, brzy to opravíme
+                            But don't worry, we'll fix it soon
                         </span>
                     }
                     extra={<Button type="primary">Back Home</Button>}

@@ -28,11 +28,11 @@ export function createReservation(data) {
     };
 }
 
-export function fetchReservations() {
+export function fetchReservations(query = '') {
     return async (dispatch) => {
         return new Promise((resolve, reject) => {
             try {
-                api.call({url: '/reservations', method: 'GET'}).then(res => {
+                api.call({url: '/reservations?' + query, method: 'GET'}).then(res => {
                     console.log('res is', res)
                     dispatch({type: FETCH_RESERVATIONS_SUCCESS, data: res});
                     resolve(res);

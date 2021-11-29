@@ -15,9 +15,11 @@ export default class ReservationModel extends BaseModel {
     }
 
 
-    getAll() {
+    getAll(query = null) {
         return this.model.query(function(qb) {
             qb.select('reservations.*')
+
+            if (query.user_id) qb.where('reservations.user_id', query.user_id)
         }).fetchAll({
             withRelated: [{
                 'trip': function(qb) {},
