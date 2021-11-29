@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import styles from "./profilCard.module.sass"
 import { Card, Modal } from 'antd'
 import {
-    History,
+    
     Settings,
     ExitToApp,
 } from "@material-ui/icons";
@@ -38,10 +38,7 @@ export default class ProfilCard extends React.Component {
                     </div>
                     <div className={styles.userShowBottom}>
                         <span className={styles.userShowTitle}>Options</span>
-                        <div className={styles.userShowInfo}>
-                            <History className={styles.userShowIcon} />
-                            <span className={styles.userShowInfoTitle} onClick={() => {this.props.changeLocation('historyList')}}>My history</span>
-                        </div>
+                        
                         <div className={styles.userShowInfo}>
                             <Settings className={styles.userShowIcon} />
                             <span className={styles.userShowInfoTitle} onClick={() => {this.props.changeLocation('settings')}}>Settings</span>

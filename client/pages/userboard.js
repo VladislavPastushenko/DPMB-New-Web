@@ -7,7 +7,6 @@ import styles from './styles/userboard.module.sass'
 import ProfilCard from "../components/Userboard/profilCard/ProfilCard";
 import ActualReservationsCard from "../components/Userboard/actualReservationsCard/ActualReservationsCard";
 import EditUser from "../components/Userboard/editUser/EditUser";
-import HistoryList from "../components/Userboard/historyList/HistoryList";
 
 
 export default class Dashboard extends React.Component {
@@ -38,11 +37,6 @@ export default class Dashboard extends React.Component {
                 {this.state.location === 'settings' &&
                 <Col span={18} >
                     <EditUser changeLocation={this.changeLocation}/>
-                </Col>
-                }
-                {this.state.location === 'historyList' &&
-                <Col span={18} >
-                    <HistoryList changeLocation={this.changeLocation}/>
                 </Col>
                 }
                 {this.state.location === 'trip' &&
