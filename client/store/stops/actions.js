@@ -1,5 +1,4 @@
 import Api from "../../Api";
-import axios from 'axios';
 
 export const FETCH_STOPS_SUCCESS = 'FETCH_STOPS_SUCCESS'
 export const FETCH_STOPS_FAILED = 'FETCH_STOPS_FAILED'

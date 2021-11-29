@@ -57,4 +57,15 @@ export default class BaseModel {
         return hash.digest('hex');
     }
 
+    update(data) {
+        return this.model
+            .forge()
+            .save({...data},
+                {
+                    method: 'update',
+                    patch: true
+                }
+            );
+    }
+
 }

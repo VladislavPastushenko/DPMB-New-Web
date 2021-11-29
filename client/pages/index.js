@@ -40,11 +40,19 @@ class IndexPage extends React.Component {
                 <Row style={{height: '100%', overflow: 'hidden'}} className={styles.colContainer} align='center'>
                     <Col xs={22} md={24} lg={13} xl={14} xxl={10} align='center'>
                         <div className={styles.headerContainer}>
+                            <div className='fontSizeLg' align='left'>
+                                ConectIIS
+                            </div>
+                            <p className='fontSizeMd' align='left'>
+                                Trips around the Czech Republic and Europe
+                            </p>
                             <Searcher />
                         </div>
                     </Col>
                 </Row>
                 </div>
+
+
             </div>
 
         )
@@ -56,7 +64,7 @@ class IndexPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        posts: state.posts.posts,
+        trips: state.trips.trips,
     }
 }
 export default connect(mapStateToProps, {
