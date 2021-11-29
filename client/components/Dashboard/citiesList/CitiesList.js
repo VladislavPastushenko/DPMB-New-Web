@@ -1,15 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./carrierList.module.sass"
+import styles from "./citiesList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { LoadingOutlined } from '@ant-design/icons'
-import { fetchCarriers } from "../../../store/carriers/actions";
+import { fetchCities } from "../../../store/cities/actions";
+import {LoadingOutlined} from '@ant-design/icons'
 
-
-class CarrierList extends React.Component {
+class CitiesList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +17,7 @@ class CarrierList extends React.Component {
             isModalVisible: false,
         };
 
-        this.props.fetchCarriers().then(
+        this.props.fetchCities().then(
           (res) => {
             console.log(res)
             this.setState({data: res})
@@ -76,12 +75,12 @@ class CarrierList extends React.Component {
         
       ];
     render() {
-      if (this.state.data.length > 0) {
+        if (this.state.data.length > 0) {
         return (
             <div className={styles.carrierList}>
               <div className={styles.carrierTitleContainer}>
-                    <h1 className="userTitle">Carriers List</h1>
-                    <button className={styles.carrierAddButton} onClick={() => {this.props.changeLocation('newcarrier')}}>Create</button>
+                    <h1 className="userTitle">Cities List</h1>
+                    <button className={styles.carrierAddButton} onClick={() => {this.props.changeLocation('newcity')}}>Create</button>
                 </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -95,19 +94,20 @@ class CarrierList extends React.Component {
             </div>
         );
         } else {
-          return (
+          return(
             <div className={styles.carrierList}>
               <div className={styles.carrierTitleContainer}>
-                    <h1 className="userTitle">Carriers List</h1>
-                    <button className={styles.carrierAddButton} onClick={() => {this.props.changeLocation('newcarrier')}}>Create</button>
+                    <h1 className="userTitle">Cities List</h1>
+                    <button className={styles.carrierAddButton} onClick={() => {this.props.changeLocation('newcity')}}>Create</button>
                 </div>
               <ResponsiveContainer width="100%">
-                <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
-                    <LoadingOutlined/>
-                </div>
+              <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
+                        <LoadingOutlined/>
+              </div>
               </ResponsiveContainer>
             </div>
-        );
+            
+          );
         }
     }
 }
@@ -117,5 +117,5 @@ const mapStateToProps = state => {
       users: state.users.res,
   }
 }
-export default connect(mapStateToProps, {fetchCarriers
-}) (CarrierList);
+export default connect(mapStateToProps, {fetchCities
+}) (CitiesList);

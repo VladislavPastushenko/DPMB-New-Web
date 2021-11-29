@@ -6,8 +6,6 @@ import { Card, Col, Row, List } from 'antd';
 import styles from './styles/userboard.module.sass'
 import ProfilCard from "../components/Userboard/profilCard/ProfilCard";
 import ActualReservationsCard from "../components/Userboard/actualReservationsCard/ActualReservationsCard";
-import HistoryCard from "../components/Userboard/historyCard/HistoryCard";
-import UserEdit from "../components/Dashboard/userEdit/UserEdit";
 import EditUser from "../components/Userboard/editUser/EditUser";
 import HistoryList from "../components/Userboard/historyList/HistoryList";
 
@@ -33,13 +31,8 @@ export default class Dashboard extends React.Component {
                 </Col>
                 
                 {this.state.location === 'home' && 
-                <Col span={11}>
+                <Col span={18}>
                     <ActualReservationsCard/>
-                </Col>
-                }
-                {this.state.location === 'home' &&
-                <Col span={7} >
-                    <HistoryCard changeLocation={this.changeLocation}/>
                 </Col>
                 }
                 {this.state.location === 'settings' &&
