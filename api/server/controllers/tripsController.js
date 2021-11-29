@@ -13,7 +13,7 @@ class TripsController {
     }
 
     static getByFromToIds(req, res, next) {
-        return new Orm().getOrm().tripModel.getByFromToIds(req.params.from_id, req.params.to_id)
+        return new Orm().getOrm().tripModel.getByFromToIds(req.params.from_id, req.params.to_id, req.query.date)
             .then((row, err) => (err) ? err.toJSON():  res.send(row) );
     }
 

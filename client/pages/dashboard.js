@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
                                     {this.state.location === 'tripList' && <TripList changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'carrierList' && <CarrierList changeLocation={this.changeLocation}/>} 
                                     {this.state.location === 'newcarrier' && <AddNewCarrier/>} 
-        
+
                                 </div>
                         </div>
                     );
