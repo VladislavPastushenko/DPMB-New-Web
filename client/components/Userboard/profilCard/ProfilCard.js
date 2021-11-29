@@ -24,15 +24,15 @@ export default class ProfilCard extends React.Component {
     };
 
     render() {
-        
+
         return (
             <Card title="Profil" bordered={false}>
-                    
+
                     <div className={styles.userShow}>
                         <div className={styles.userShowTop}>
                             <img src="/user.png" alt="" className={styles.userboardImg}/>
                             <div className={styles.userShowTopTitle}>
-                                <span className={styles.userShowUsername}>email@email.com</span>
+                                <span className={styles.userShowUsername}>{this.props.loggedUser.email}</span>
                             </div>
                         </div>
                     </div>

@@ -1,21 +1,36 @@
 import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
 //import styles from "./home.module.sass"
-import { Card, Col, Row, List } from 'antd';
+import { Col, Row,} from 'antd';
 import styles from './styles/userboard.module.sass'
 import ProfilCard from "../components/Userboard/profilCard/ProfilCard";
 import ActualReservationsCard from "../components/Userboard/actualReservationsCard/ActualReservationsCard";
 import EditUser from "../components/Userboard/editUser/EditUser";
 import HistoryList from "../components/Userboard/historyList/HistoryList";
+import {lookupUserInStorage, fetchLoggedUser} from '../store/users/actions'
+import {LoadingOutlined} from '@ant-design/icons'
 
-
-export default class Dashboard extends React.Component {
+class Userboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             location: 'home',
+            loggedUser: null
         };
+
+        this.props.lookupUserInStorage()
+        .then(
+            (token) => {
+                this.props.fetchLoggedUser(token)
+                .then(
+                    (res) => {this.setState({loggedUser: res})},
+                    err => {Router.push('/login')}
+                )
+            },
+            (err) => {
+                Router.push('/login')
+            }
+        )
     }
 
     changeLocation = (location) => {
@@ -23,13 +38,13 @@ export default class Dashboard extends React.Component {
     }
 
     render() {
+        if (this.state.loggedUser !== null)
         return (
             <div className={styles.sitecardwrapper}>
                 <Row gutter={16}>
                 <Col span={6} >
-                    <ProfilCard changeLocation={this.changeLocation}/>
+                    <ProfilCard changeLocation={this.changeLocation} {...this.props}/>
                 </Col>
-                
                 {this.state.location === 'home' && 
                 <Col span={18}>
                     <ActualReservationsCard/>
@@ -53,5 +68,18 @@ export default class Dashboard extends React.Component {
                 </Row>
             </div>
         );
+        else return (
+            <div className='fontSizeLg' align='center'>
+                <LoadingOutlined/>
+            </div>
+        )
 }
 }
+
+
+const mapStateToProps = state => {
+    return {
+        loggedUser: state.users.loggedUser,
+    }
+  }
+export default connect(mapStateToProps, {lookupUserInStorage, fetchLoggedUser}) (Userboard);
