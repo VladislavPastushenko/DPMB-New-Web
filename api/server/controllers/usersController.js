@@ -81,7 +81,7 @@ class UsersController {
                 .then((row, err) => {
                     let loggedUser = row.toJSON();
                     return new Orm().getOrm().userModel
-                        .getById(res.query.id)
+                        .getById(req.params.id)
                         .then((row, err) => {
                             let user = row.toJSON();
                             req.body.id = user.id;

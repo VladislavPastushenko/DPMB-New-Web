@@ -1,91 +1,82 @@
 import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
+
 import styles from "./reservationList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
-import { DeleteOutline } from "@material-ui/icons";
-import { reservationRows } from "../../../pages/dummyData";
-import { ResponsiveContainer } from "recharts";
-import { Select, Modal, Button, List } from 'antd';
 
-export default class TransactionList extends React.Component {
+import { ResponsiveContainer } from "recharts";
+import { Select, Modal, Button, List, message } from 'antd';
+import { fetchReservations, editReservationById } from "../../../store/reservations/actions";
+
+class ReservationList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: reservationRows,
+            data: [],
             selector: '',
             isModalVisible: false,
         };
+
+        this.props.fetchReservations().then(
+          (res) => {
+            console.log(res)
+            this.setState({data: res})
+          },
+          (err) => {
+            message.open({
+              type: 'error',
+              content: 'Error while getting reservations',
+              duration: 3
+            })
+          }
+        )
+
+
     }
 
-    showModal = () => {
-      setIsModalVisible(true);
-    };
 
     handleDelete = (id) => {
         this.setState(this.state.data.filter((item) => item.id !== id));
       };
-    
-    onStatusChange = (value, options, params) => {
-        console.log("OUR FUNCTION value", value)
-        console.log("OUR FUNCTION options", options)
-        console.log("OUR FUNCTION params", params)
-        let item = params.row
 
-        item.status = value
+    onStatusChange = (value, options, params) => {
+        let changedReservation = params.row
+        delete changedReservation.trip
+        delete changedReservation.user
+        changedReservation.status = value
+
+        this.props.editReservationById(changedReservation).then(() => {console.log('Success')}, err => {
+          message.open({
+            type: 'error',
+            content: 'Something went wrong',
+            duration: 3
+          })
+        })
 
 
     };
-    
-      columns = [
+    getTrip(params) {
+      return params.value.name;
+    }
+    getUser(params) {
+      return params.value.email;
+    }
+
+    columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         {
           field: "trip",
           headerName: "Trip",
           width: 830,
           align: "left",
+          valueGetter: this.getTrip,
         },
-        
-        {
-          field: "action",
-          headerName: "Passangers",
-          width: 200,
-          renderCell: (params) => {
-            if (this.state.isModalVisible) {
-            return (
-              <>
-                <Modal title="Passangers List" visible={this.state.isModalVisible} onOk={this.setState({ isModalVisible: false})} 
-                onCancel={this.setState({ isModalVisible: false})}footer={[
-                  <Button key="submit" type="primary" >
-                    OK
-                  </Button>
-                  ]}>
-                    
-                    <List
-                      size="small"
-                      bordered
-                      dataSource={params.row.passangers}
-                      renderItem={item => <List.Item>{item}</List.Item>}
-              
-                    />
-                    {console.log(params.row.passangers)}
-                </Modal>
-    
-                  <a onClick={() => this.setState({ isModalVisible: true})}>
-                    Passangers List
-                  </a>                
-              </>
-            );} else {
-              return (
-                <>      
-                    <a onClick={() => this.setState({ isModalVisible: true})}>
-                      Passangers List
-                    </a>                
-                </>
-              );
 
-            }
-          },
+        {
+          field: "user",
+          headerName: "Buyer",
+          width: 200,
+          valueGetter: this.getUser
         },
         {
           field: "status",
@@ -96,7 +87,7 @@ export default class TransactionList extends React.Component {
             return (
               <>
               <Select
-                value={params.row.status}
+                defaultValue={params.row.status}
                 style={{
                   width: 120,
                   margin: '0 8px',
@@ -109,12 +100,10 @@ export default class TransactionList extends React.Component {
                 <Option value={'paid'}>Paid</Option>
                 <Option value={'expired'}>Expire</Option>
               </Select>
-                
               </>
             );
           },
         },
-        
       ];
     render() {
         return (
@@ -135,3 +124,11 @@ export default class TransactionList extends React.Component {
         );
     }
 }
+
+
+const mapStateToProps = state => {
+  return {
+      reservations: state.reservations.reservations,
+  }
+}
+export default connect(mapStateToProps, {fetchReservations, editReservationById}) (ReservationList);

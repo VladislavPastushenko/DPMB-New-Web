@@ -33,7 +33,6 @@ export function fetchReservations() {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/reservations', method: 'GET'}).then(res => {
-                    console.log('res is', res)
                     dispatch({type: FETCH_RESERVATIONS_SUCCESS, data: res});
                     resolve(res);
                 })
@@ -51,7 +50,6 @@ export function fetchReservationsByRouteId(route_id) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/reservations/get-by-route-id/' + route_id, method: 'GET'}).then(res => {
-                    console.log('res is', res)
                     dispatch({type: FETCH_RESERVATIONS_SUCCESS, data: res});
                     resolve(res);
                 })
@@ -69,7 +67,6 @@ export function fetchReservationsByUserId(user_id) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/reservations/get-by-user-id/' + user_id, method: 'GET'}).then(res => {
-                    console.log('res is', res)
                     dispatch({type: FETCH_RESERVATIONS_SUCCESS, data: res});
                     resolve(res);
                 })
@@ -87,13 +84,14 @@ export function editReservationById(data) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/reservations/' + data.id, method: 'POST', data}).then(res => {
+                    console.log('res for editing', res)
                     if (res === 'OK') {
                         dispatch({type: EDIT_RESERVATIONS_SUCCESS, res: res});
                         resolve(res);
                     }
                     else {
                         dispatch({type: EDIT_RESERVATIONS_FAILED, error: res});
-                        reject(error);
+                        reject(res);
                     }
                 })
             } catch (error) {

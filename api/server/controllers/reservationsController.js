@@ -48,13 +48,16 @@ class ReservationsController {
 
     static editById(req, res, next) {
         if(req.session.loggedToken) {
-            return new Orm().getOrm().reservationModel
+            return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
+                    console.log('changing reservation by user', row.toJSON())
                     let loggedUser = row.toJSON();
+                    console.log('Getting reservation ', req.params.id)
                     return new Orm().getOrm().reservationModel
-                        .getById(res.query.id)
+                        .getById(req.params.id)
                         .then((row, err) => {
+                            console.log('Changing reservation ', row.toJSON())
                             let reservation = row.toJSON();
                             if (loggedUser.role !== 'user') {
                                 return new Orm().getOrm().reservationModel

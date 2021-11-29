@@ -1,10 +1,6 @@
 import React from "react";
-import {connect} from "react-redux";
-import ReactDOM from "react-dom";
-import 'antd/dist/antd.min.css';
 import styles from "./topbar.module.sass"
-import {NotificationsNone} from '@material-ui/icons'
-import { Drawer, Modal, Button } from 'antd'
+import { Drawer, Modal,} from 'antd'
 
 export default class Topbar extends React.Component {
     constructor(props) {
@@ -43,13 +39,11 @@ export default class Topbar extends React.Component {
                         </span>
                     </div>
                     <div className={styles.topRight}>
-                        <div className={styles.topbarIconContainer}>
-                            <NotificationsNone/>
-                            <span className={styles.topIconBadge}>2</span>
-                        </div>
 
-                        <img src="/admin.jpeg" alt="" className={styles.topAvatar} onClick={this.showDrawer}/>
-                        <Drawer 
+                        <a className={'fontSizeSm'} onClick={this.showDrawer}>
+                            Logout
+                        </a>
+                        <Drawer
                             placement="right"
                             closable={true}
                             onClose={this.onClose}

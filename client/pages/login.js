@@ -54,8 +54,9 @@ class normalLoginForm extends React.Component {
       this.props.loginUser(values).then(
         (res) => {
           console.log(res)
-          message.success(
+          message.open(
             {
+              type: 'success',
               content: 'You were successfully logged in',
               duration: 3,
               onClose: () => {Router.push('/')}
