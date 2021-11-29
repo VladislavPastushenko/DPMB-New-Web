@@ -48,13 +48,16 @@ class ReservationsController {
 
     static editById(req, res, next) {
         if(req.session.loggedToken) {
-            return new Orm().getOrm().reservationModel
+            return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
+                    console.log('changing reservation by user', row.toJSON())
                     let loggedUser = row.toJSON();
+                    console.log('Getting reservation ', req.params.id)
                     return new Orm().getOrm().reservationModel
-                        .getById(res.query.id)
+                        .getById(req.params.id)
                         .then((row, err) => {
+                            console.log('Changing reservation ', row.toJSON())
                             let reservation = row.toJSON();
                             if (loggedUser.role !== 'user') {
                                 return new Orm().getOrm().reservationModel
@@ -91,6 +94,30 @@ class ReservationsController {
     static getByUserId(req, res, next) {
         return new Orm().getOrm().reservationModel
             .getByUserId(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
+    }
+
+    static removeById(req, res, next) {
+        if(req.session.loggedToken) {
+            return new Orm().getOrm().userModel
+                .getUserByAuthToken(req.session.loggedToken)
+                .then((row, err) => {
+                    let loggedUser = row.toJSON();
+                    if (loggedUser.role !== 'user') {
+                        //...
+                        return new Orm().getOrm().reservationModel
+                            .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
+                    } else {
+                        res.status(403).send("User doesn't have rights edit this user");
+                    }
+
+                }).catch(err => {
+                    if(err.message == "EmptyResponse") {
+                        res.status(404).send("User not found");
+                    }
+                })
+        } else {
+            res.status(403).send('User not logged in');
+        }
     }
 
 }
