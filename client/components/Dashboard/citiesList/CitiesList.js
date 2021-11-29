@@ -5,8 +5,10 @@ import styles from "./citiesList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchCities } from "../../../store/cities/actions";
+import { fetchCities, deleteCity } from "../../../store/cities/actions";
 import {LoadingOutlined} from '@ant-design/icons'
+import { message } from "antd";
+
 
 class CitiesList extends React.Component {
     constructor(props) {
@@ -29,13 +31,28 @@ class CitiesList extends React.Component {
         );
     }
 
+    handleDelete = (params) => {
+      let id = params.row.id
+      console.log(id)
+      this.props.deleteCity(id).then(
+        (res) => {window.location.reload(false)},
+        (err) => {
+          message.open({
+            'content': 'Error while deleting',
+            duration: 1
+          })
+        }
+        
+
+      )
+      //this.setState(this.state.data.filter((item) => item.id !== id));
+    };
+
     showModal = () => {
       setIsModalVisible(true);
     };
 
-    handleDelete = (id) => {
-        this.setState(this.state.data.filter((item) => item.id !== id));
-      };
+    
     
     onStatusChange = (value, options, params) => {
         console.log("OUR FUNCTION value", value)
@@ -65,8 +82,11 @@ class CitiesList extends React.Component {
             return (
               <>                
                 <DeleteOutline
+                  onClick={() => {
+                    this.handleDelete(params)
+                  }}
                   className={styles.carrierListDelete}
-                  onClick={() => this.handleDelete(params.row.id)}
+  
                 />
               </>
             );
@@ -117,5 +137,5 @@ const mapStateToProps = state => {
       users: state.users.res,
   }
 }
-export default connect(mapStateToProps, {fetchCities
+export default connect(mapStateToProps, {fetchCities, deleteCity
 }) (CitiesList);

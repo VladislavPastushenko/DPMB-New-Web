@@ -19,8 +19,10 @@ export const GET_LOGGED_USER_FAILED = 'GET_LOGGED_USER_FAILED';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
 export const FETCH_USERS_FAILED = 'FETCH_USERS_FAILED'
 
-export const EDIT_SUCCESS = 'EDIT_SUCCESS'
-export const EDIT_FAILED = 'EDIT_FAILED'
+
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS'
+export const DELETE_USER_FAILED = 'DELETE_USER_FAILED'
+
 
 const api = new Api();
 
@@ -169,6 +171,27 @@ export function fetchUsers() {
                 })
             } catch (error) {
                     dispatch({type: FETCH_USERS_FAILED, error: error});
+                    reject(error);
+                }
+            })
+    };
+}
+
+export function deleteUser(id) {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/users/' + id, method: 'DELETE'}).then(res => {
+                    if (res === "OK") {
+                        dispatch({type: DELETE_USER_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: DELETE_USER_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                    dispatch({type: DELETE_USER_FAILED, error: error});
                     reject(error);
                 }
             })
