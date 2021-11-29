@@ -30,7 +30,7 @@ export function createTrip(data) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/trips', method: 'POST', data}).then(res => {
-                    if (res === "OK") {
+                    if (typeof res === 'object') {
                         dispatch({type: CREATE_TRIP_SUCCESS, res: res});
                         resolve(res);
                     } else {

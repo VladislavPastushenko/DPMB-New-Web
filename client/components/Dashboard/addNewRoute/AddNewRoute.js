@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./../addNewStop/addNewStop.module.sass"
-import { Form, Button, Space, Input, Modal, Select } from 'antd'
+import { Form, Button, Space, Input, Modal, Select, InputNumber } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { createTrip } from "../../../store/trips/actions";
 import { fetchCarriers } from "../../../store/carriers/actions";
@@ -64,14 +64,20 @@ class AddNewRoute extends React.Component {
 
         }
 
-        let route_items = this.formRef.current.getFieldsValue()
-        console.log(route_items)
-        
-        console.log(data)
+        let route_items = this.formRef.current.getFieldsValue().sights
+    
+        console.log('data for server', data)
         this.props.createTrip(data).then(
             (res) => {
-                console.log(res)
-                this.props.createRouteItems().then(
+                console.log('Get response from server',res)
+                for (let i = 0; i < route_items.length; i++) {
+                    route_items[i].trip_id = res.id
+                    route_items[i].position = i
+                }
+                console.log("route_items")
+
+                console.log(route_items)
+                this.props.createRouteItems(route_items).then(
                     (res) => {
                         console.log(res);      
                     },
@@ -118,9 +124,9 @@ class AddNewRoute extends React.Component {
                         <Form.List name="sights">
                             {(fields, { add, remove }) => (
                             <>
-                                {fields.map((field) => (
-                                <Space key={field.key} align="baseline">
-                                   <Form.Item name={['from_id']} rules={[{ required: true, message: 'Choose from town' }]}>
+                                {fields.map(( key, name, fieldKey, ...restField) => (
+                                    <div key={key} style={{position: 'relative'}}>
+                                   <Form.Item  {...restField} name={[name, 'stop_id']}  fieldKey={[fieldKey, 'stop_id']} rules={[{ required: true, message: 'Choose from town' }]}>
                                         <Select
                                             showSearch
                                             style={{ width: '100%' }}
@@ -136,8 +142,18 @@ class AddNewRoute extends React.Component {
                                         </Select>
                                     </Form.Item>
 
-                                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                                </Space>
+
+                                    <Form.Item  {...restField} name={[name, 'time_from_start']}  fieldKey={[fieldKey, 'time_from_start']} rules={[{ required: true, message: 'Set the minutes' }]}>
+                                        <InputNumber
+                                            style={{ width: '100%' }}
+                                            placeholder="Time from start in mins"
+                                        >
+                                        </InputNumber>
+                                    </Form.Item>
+                                    <MinusCircleOutlined style={{position: 'absolute', right: '-2em', top: '0.5em'}} onClick={() => remove(name)} />
+
+                                    </div>
+
                                 ))}
 
                                 <Form.Item>
@@ -187,7 +203,7 @@ class AddNewRoute extends React.Component {
                         <Button key="back" onClick={this.handleOk}>
                           OK
                         </Button>]}>
-                            <p>Сarrier added successfully</p>
+                            <p>Route added successfully</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
                     <Button key="back" onClick={this.handleOk}>
