@@ -7,6 +7,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { createTrip } from "../../../store/trips/actions";
 import { fetchCarriers } from "../../../store/carriers/actions";
 import { createRouteItems } from "../../../store/routeItems/actions";
+import {fetchStops } from "../../../store/stops/actions"
 
 
 class AddNewRoute extends React.Component {
@@ -18,7 +19,9 @@ class AddNewRoute extends React.Component {
             carrier_id: null,
             carriers: [],
             routeItems: [],
+            stops: []
         };
+        this.props.fetchStops().then(res => this.setState({stops: res}))
 
         this.props.fetchCarriers().then(
             (res) => {
@@ -117,15 +120,20 @@ class AddNewRoute extends React.Component {
                             <>
                                 {fields.map((field) => (
                                 <Space key={field.key} align="baseline">
-                                    <Form.Item
-                                    
-                                    {...field}
-                                    label="Stop"
-                                    name={[field.name, "stop"]}
-                                    fieldKey={[field.fieldKey, "stop"]}
-                                    rules={[{ required: true, message: "Additional stop" }]}
-                                    >
-                                    <Input className={styles.addStopItem} name="stop" placeholder="Add stops in the order they appear"/>
+                                   <Form.Item name={['from_id']} rules={[{ required: true, message: 'Choose from town' }]}>
+                                        <Select
+                                            showSearch
+                                            style={{ width: '100%' }}
+                                            placeholder="From"
+                                            optionFilterProp="children"
+
+                                        >
+                                            {this.state.stops.length > 0 && this.state.stops.map(stop => {
+                                                return (
+                                                    <Select.Option key={'from' + stop.id} value={stop.id}>{stop.city.name} - {stop.name}</Select.Option>
+                                                )
+                                            })}
+                                        </Select>
                                     </Form.Item>
 
                                     <MinusCircleOutlined onClick={() => remove(field.name)} />
@@ -198,6 +206,6 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {createTrip, fetchCarriers, createRouteItems,
+export default connect(mapStateToProps, {createTrip, fetchCarriers, createRouteItems, fetchStops
 }) (AddNewRoute);
 

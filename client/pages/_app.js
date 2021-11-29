@@ -48,20 +48,19 @@ export default function App({ Component, pageProps }) {
             <Layout>
                 {router.pathname !== '/' &&
                 <Header>
-                    <Navigator {...pageProps} pathname={router.pathname} style={{ background: 'white'}}/>
+                    <Navigator {...pageProps} pathname={router.pathname} style={{ background: 'white'}} color='black'/>
                 </Header>}
 
-                <Content style={{ padding: '0 0',/* marginTop: 64,*/ background: 'white'}}>
-                    <div style={{paddingTop: 0, minHeight: 380 }}>
+                <Content style={{ padding: '0 0', marginTop: router.pathname !== '/' && 64, background: 'white'}}>
+                    <div style={{paddingTop: 0, minHeight: "80vh" }}>
                         <Component {...pageProps} />
-                    </div>  
+                    </div>
                 </Content>
 
-                <Footer style={{textAlign: 'center',  backgroundColor: 'white', padding: 0}}>
+                <Footer style={{textAlign: 'center',  backgroundColor: 'white', padding: 0, zIndex: 1}}>
                     <Basement {...pageProps} pathname={router.pathname}/>
                 </Footer>
                 <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
-                
             </Layout>
         </Provider>
     ) }

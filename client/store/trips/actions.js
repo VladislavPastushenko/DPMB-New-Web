@@ -40,6 +40,22 @@ export function createTrip(data) {
                 })
             } catch (error) {
                     dispatch({type: CREATE_TRIP_FAILED, error: error});
+
+export function fetchTripsByFromAndToIds(from_id, to_id, query='') {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/trips/' + from_id + '/' +to_id + '?' + query, method: 'GET'}).then(res => {
+                    if (res !== 'Routes Not Found') {
+                        dispatch({type: FETCH_TRIPS_SUCCESS, data: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: FETCH_TRIPS_FAILED, error: res});
+                        reject(error);
+                    }
+                })
+            } catch (error) {
+                    dispatch({type: FETCH_TRIPS_FAILED, error: error});
                     reject(error);
                 }
             })

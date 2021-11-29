@@ -5,6 +5,7 @@ import StopsController from "./controllers/stopsController";
 import TripsController from "./controllers/tripsController";
 import RouteItemsController from "./controllers/routeItemsController";
 import CarriersController from "./controllers/carriersController";
+import ReservationsController from "./controllers/reservationsController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -95,6 +96,24 @@ const routes = (route) => {
 
     route.route('/carrier/:id')
         .get(CarriersController.getById)
+
+    // RESERVATION
+    route.route('/reservations')
+        .get(ReservationsController.getAll)
+        .post(ReservationsController.create)
+
+    route.route('/reservations/get-by-route-id/:id')
+        .get(ReservationsController.getByRouteId)
+
+    route.route('/reservations/get-by-user-id/:id')
+        .get(ReservationsController.getByUserId)
+
+    route.route('/reservations/get-for-logged')
+        .get(ReservationsController.getForLoggedUser)
+
+    route.route('/reservations/:id')
+        .get(ReservationsController.getById)
+        .post(ReservationsController.editById)
 
     // POSTS
     route.route('/posts')
