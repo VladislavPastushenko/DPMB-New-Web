@@ -1,8 +1,12 @@
 import {
     FETCH_STOPS_SUCCESS,
     FETCH_STOPS_FAILED,
+
     CREATE_STOP_SUCCESS,
     CREATE_STOP_FAILED,
+
+    DELETE_STOP_SUCCESS,
+    DELETE_STOP_FAILED,
 } from "./actions";
 
 function stops(state = {
@@ -14,8 +18,10 @@ function stops(state = {
         case FETCH_STOPS_FAILED:
             return Object.assign({}, state, {error: action.error});
         case CREATE_STOP_SUCCESS:
-            return Object.assign({}, state, {stops: action.data});
+        case DELETE_STOP_SUCCESS:
+            return Object.assign({}, state, {stops: action.res});
         case CREATE_STOP_FAILED:
+        case DELETE_STOP_FAILED:
             return Object.assign({}, state, {error: action.error});
         default:
             return Object.assign({}, state);
