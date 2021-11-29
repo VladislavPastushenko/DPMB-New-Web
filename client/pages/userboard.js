@@ -6,7 +6,6 @@ import styles from './styles/userboard.module.sass'
 import ProfilCard from "../components/Userboard/profilCard/ProfilCard";
 import ActualReservationsCard from "../components/Userboard/actualReservationsCard/ActualReservationsCard";
 import EditUser from "../components/Userboard/editUser/EditUser";
-import HistoryList from "../components/Userboard/historyList/HistoryList";
 import {lookupUserInStorage, fetchLoggedUser} from '../store/users/actions'
 import {LoadingOutlined} from '@ant-design/icons'
 
@@ -52,7 +51,7 @@ class Userboard extends React.Component {
                 }
                 {this.state.location === 'settings' &&
                 <Col span={18} >
-                    <EditUser changeLocation={this.changeLocation}/>
+                    <EditUser changeLocation={this.changeLocation}  {...this.props}/>
                 </Col>
                 }
                 {this.state.location === 'trip' &&
