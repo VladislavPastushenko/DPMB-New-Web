@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import styles from "./profilCard.module.sass"
 import { Card, Modal } from 'antd'
 import {
-    Apartment,
+    History,
     Settings,
     ExitToApp,
 } from "@material-ui/icons";
@@ -27,6 +27,7 @@ export default class ProfilCard extends React.Component {
         
         return (
             <Card title="Profil" bordered={false}>
+                    
                     <div className={styles.userShow}>
                         <div className={styles.userShowTop}>
                             <img src="/user.png" alt="" className={styles.userboardImg}/>
@@ -37,6 +38,10 @@ export default class ProfilCard extends React.Component {
                     </div>
                     <div className={styles.userShowBottom}>
                         <span className={styles.userShowTitle}>Options</span>
+                        <div className={styles.userShowInfo}>
+                            <History className={styles.userShowIcon} />
+                            <span className={styles.userShowInfoTitle} onClick={() => {this.props.changeLocation('historyList')}}>My history</span>
+                        </div>
                         <div className={styles.userShowInfo}>
                             <Settings className={styles.userShowIcon} />
                             <span className={styles.userShowInfoTitle} onClick={() => {this.props.changeLocation('settings')}}>Settings</span>
@@ -53,8 +58,7 @@ export default class ProfilCard extends React.Component {
                     <br/>
                     <br/>
                     <br/>
-                    <br/>
-                    <br/>
+                    
                     <p></p>
                
 

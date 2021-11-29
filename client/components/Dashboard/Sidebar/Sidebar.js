@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./sidebar.module.scss"
-import { Home, DirectionsBus, Person, LocalActivity, Report, MonetizationOn, Store, Settings } from "@material-ui/icons";
+import { Home, DirectionsBus, Person, LocalActivity, Report, MonetizationOn, Store, Settings, LocationCity } from "@material-ui/icons";
 
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -35,6 +35,10 @@ export default class Sidebar extends React.Component {
                             <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('carrierList')}}>
                                 <DirectionsBus className={styles.sidebarIcon}/>
                                 Carriers
+                            </li>
+                            <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('citiesList')}}>
+                                <LocationCity className={styles.sidebarIcon}/>
+                                Cities
                             </li>
                             <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('tripList')}}>
                                 <LocalActivity className={styles.sidebarIcon}/>

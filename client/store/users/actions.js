@@ -16,6 +16,9 @@ export const LOOKUP_USER_IN_STORAGE_FAILED = 'LOOKUP_USER_IN_STORAGE_FAILED';
 export const GET_LOGGED_USER_SUCCESS = 'GET_LOGGED_USER_SUCCESS';
 export const GET_LOGGED_USER_FAILED = 'GET_LOGGED_USER_FAILED';
 
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
+export const FETCH_USERS_FAILED = 'FETCH_USERS_FAILED'
+
 const api = new Api();
 
 
@@ -129,4 +132,21 @@ export function fetchLoggedUser(authToken) {
                 } );
         })
     }
+}
+
+export function fetchUsers() {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/users', method: 'GET'}).then(res => {
+                    //console.log('res is', res)
+                    dispatch({type: FETCH_USERS_SUCCESS, data: res});
+                    resolve(res);
+                })
+            } catch (error) {
+                    dispatch({type: FETCH_USERS_FAILED, error: error});
+                    reject(error);
+                }
+            })
+    };
 }
