@@ -32,6 +32,7 @@ const routes = (route) => {
     route.route('/users/:id')
         .get(UsersController.getById)
         .post(UsersController.editById)
+        .delete(UsersController.removeById)
 
     route.route('/users/verify/:authToken')
         .get(UsersController.verify)
@@ -68,6 +69,7 @@ const routes = (route) => {
 
     route.route('/stops/:id')
         .get(StopsController.getById)
+        .delete(StopsController.removeById)
 
     route.route('/stops/get-by-city-id/:id')
         .get(StopsController.getByCityId)
@@ -80,6 +82,7 @@ const routes = (route) => {
 
     route.route('/trip/:id')
         .get(TripsController.getById)
+        .delete(TripsController.removeById)
 
     route.route('/trips/:from_id/:to_id')
         .get(TripsController.getByFromToIds)
@@ -96,6 +99,7 @@ const routes = (route) => {
 
     route.route('/carrier/:id')
         .get(CarriersController.getById)
+        .delete(CarriersController.removeById)
 
     // RESERVATION
     route.route('/reservations')
@@ -114,6 +118,7 @@ const routes = (route) => {
     route.route('/reservations/:id')
         .get(ReservationsController.getById)
         .post(ReservationsController.editById)
+        .delete(ReservationsController.removeById)
 
     // POSTS
     route.route('/posts')
