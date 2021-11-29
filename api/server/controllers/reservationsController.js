@@ -3,7 +3,7 @@ import Orm from "../model/orm";
 class ReservationsController {
 
     static getAll(req, res, next) {
-        return new Orm().getOrm().reservationModel.getAll()
+        return new Orm().getOrm().reservationModel.getAll(req.query)
             .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
     }
 

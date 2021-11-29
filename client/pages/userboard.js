@@ -55,11 +55,6 @@ class Userboard extends React.Component {
                     <EditUser changeLocation={this.changeLocation}/>
                 </Col>
                 }
-                {this.state.location === 'historyList' &&
-                <Col span={18} >
-                    <HistoryList changeLocation={this.changeLocation}/>
-                </Col>
-                }
                 {this.state.location === 'trip' &&
                 <Col span={18} >
                     <HistoryList changeLocation={this.changeLocation}/>
