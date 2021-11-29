@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./addNewCity.module.sass"
 import { Modal, Button } from 'antd'
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { createCity } from "../../../store/cities/actions";
 
 
@@ -11,7 +10,8 @@ class NewCity extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalVisible: false,
+            isSuccessModalVisible: false,
+            isErrorModalVisible: false,
         };
     }
     handleOk = () => {
