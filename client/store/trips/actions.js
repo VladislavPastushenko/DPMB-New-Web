@@ -40,6 +40,10 @@ export function createTrip(data) {
                 })
             } catch (error) {
                     dispatch({type: CREATE_TRIP_FAILED, error: error});
+            }
+        })
+    }
+}
 
 export function fetchTripsByFromAndToIds(from_id, to_id, query='') {
     return async (dispatch) => {
