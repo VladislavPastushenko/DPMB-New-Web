@@ -30,7 +30,7 @@ class Searcher extends React.Component {
         this.props.fetchTripsByFromAndToIds(values.from_id, values.to_id, 'date=' + values.start_time).then(
             res => {
                 console.log(res)
-                this.setState({routes: res.concat(res.concat(res))})
+                this.setState({routes: res.concat()})
             },
             err => {
                 if (err === 'Routes Not Found') {
@@ -104,7 +104,7 @@ class Searcher extends React.Component {
                         <p align='left' className='fontSizeMd'>
                             Results
                             <div>
-                                {this.state.routes.map(el => {return(<RouteItem item={el}/>)})}
+                                {this.state.routes.map((el, idx) => {return(<RouteItem key={idx} item={el}/>)})}
                             </div>
                         </p>
                         :

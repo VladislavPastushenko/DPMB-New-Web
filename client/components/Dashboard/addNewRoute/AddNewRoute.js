@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./../addNewStop/addNewStop.module.sass"
-import { Form, Button, Space, Input, Modal, Select, InputNumber } from 'antd'
+import { Form, Button, Modal, Select, InputNumber } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { createTrip } from "../../../store/trips/actions";
 import { fetchCarriers } from "../../../store/carriers/actions";
@@ -31,7 +31,7 @@ class AddNewRoute extends React.Component {
             (err) => {
               this.setState({errMsg: err})
             }
-    
+
           );
 
           this.formRef = React.createRef()
@@ -51,7 +51,6 @@ class AddNewRoute extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        
 
         let data = {
             name: e.target.elements.name.value,
@@ -65,7 +64,7 @@ class AddNewRoute extends React.Component {
         }
 
         let route_items = this.formRef.current.getFieldsValue().sights
-    
+
         console.log('data for server', data)
         this.props.createTrip(data).then(
             (res) => {
@@ -79,7 +78,7 @@ class AddNewRoute extends React.Component {
                 console.log(route_items)
                 this.props.createRouteItems(route_items).then(
                     (res) => {
-                        console.log(res);      
+                        console.log(res);
                     },
                     (err) => {
                         console.log(err);
@@ -103,7 +102,7 @@ class AddNewRoute extends React.Component {
             <div className={styles.newStop}>
                 <h1 className={styles.addStopTitle}>New trip</h1>
                 <form className={styles.addStopForm} onSubmit={this.handleSubmit}>
-                    
+
                     <div className={styles.addStopItem}>
                     <label>From-To</label>
                     <input type="text" name="name" placeholder="Brno-Praha" />
@@ -114,19 +113,19 @@ class AddNewRoute extends React.Component {
                     </div>
                     <div className={styles.addStopItem}>
                     <label>Additional stops</label>
-                    
+
                     <Form
                         ref={this.formRef}
                         name="dynamic_form_nest_item"
                         autoComplete="off"
-                        
+
                         >
                         <Form.List name="sights">
                             {(fields, { add, remove }) => (
                             <>
                                 {fields.map(( key, name, fieldKey, ...restField) => (
                                     <div key={key} style={{position: 'relative'}}>
-                                   <Form.Item  {...restField} name={[name, 'stop_id']}  fieldKey={[fieldKey, 'stop_id']} rules={[{ required: true, message: 'Choose from town' }]}>
+                                    <Form.Item  {...restField} name={[name, 'stop_id']}  fieldKey={[fieldKey, 'stop_id']} rules={[{ required: true, message: 'Choose from town' }]}>
                                         <Select
                                             showSearch
                                             style={{ width: '100%' }}
@@ -188,10 +187,9 @@ class AddNewRoute extends React.Component {
                                     placeholder="Choose carrier"
                                     optionFilterProp="children"
                                     onChange={this.handleChange}
-                                    
                                 >
-                                    {this.state.carriers.map(carrier => {
-                                     return(<Option value={carrier.id} >{carrier.name}</Option>)
+                                    {this.state.carriers.map((carrier, idx) => {
+                                        return(<Select.Option value={carrier.id} key={idx}>{carrier.name}</Select.Option>)
                                      })}
 
                                 </Select>

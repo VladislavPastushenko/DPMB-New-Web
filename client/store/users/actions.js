@@ -19,8 +19,8 @@ export const GET_LOGGED_USER_FAILED = 'GET_LOGGED_USER_FAILED';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS'
 export const FETCH_USERS_FAILED = 'FETCH_USERS_FAILED'
 
-export const EDIT_SUCCESS = 'EDIT_SUCCESS'
-export const EDIT_FAILED = 'EDIT_FAILED'
+export const EDIT_USER_SUCCESS = 'EDIT_SUCCESS'
+export const EDIT_USER_FAILED = 'EDIT_FAILED'
 
 const api = new Api();
 
@@ -78,15 +78,15 @@ export function editUser(data) {
                 api.call({url: '/users/' + data.id, method: 'POST', data}).then(res =>  {
                     if (res === 'OK') {
                         console.log('res is', res)
-                        dispatch({type: EDIT_SUCCESS, res: res});
+                        dispatch({type: EDIT_USER_SUCCESS, res: res});
                         resolve(res);
                     } else {
-                        dispatch({type: EDIT_FAILED, error: res});
+                        dispatch({type: EDIT_USER_FAILED, error: res});
                         reject(res);
                     }
                 })
             } catch (error) {
-                dispatch({type: EDIT_FAILED, error: error});
+                dispatch({type: EDIT_USER_FAILED, error: error});
                 reject(error);
             }
         });

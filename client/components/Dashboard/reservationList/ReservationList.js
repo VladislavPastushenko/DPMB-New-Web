@@ -96,9 +96,9 @@ class ReservationList extends React.Component {
                   this.onStatusChange(value, options, params)
                 }}
               >
-                <Option value={'unpaid'}>Unpaid</Option>
-                <Option value={'paid'}>Paid</Option>
-                <Option value={'expired'}>Expire</Option>
+                <Select.Option value={'unpaid'}>Unpaid</Select.Option>
+                <Select.Option value={'paid'}>Paid</Select.Option>
+                <Select.Option value={'expired'}>Expire</Select.Option>
               </Select>
               </>
             );

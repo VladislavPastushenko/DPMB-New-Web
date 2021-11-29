@@ -75,7 +75,7 @@ class NewStop extends React.Component {
                     <label>Stop name</label>
                     <input type="text" name="name" placeholder="Stop name" />
                     </div>
-                    
+
                     <div className={styles.addStopItem}>
                     <label>City</label>
                     <Form.Item name='city_id' className={styles.addStopItem}>
@@ -85,10 +85,10 @@ class NewStop extends React.Component {
                                     placeholder="Choose city"
                                     optionFilterProp="children"
                                     onChange={this.handleChange}
-                                    
+
                                 >
-                                    {this.state.cities.map(city => {
-                                     return(<Option value={city.id} >{city.name}</Option>)
+                                    {this.state.cities.map((city, idx) => {
+                                     return(<Select.Option value={city.id} key={idx}>{city.name}</Select.Option>)
                                      })}
 
                                 </Select>

@@ -21,7 +21,7 @@ export default class ServerError extends React.Component {
                     <title>Oooops</title>
                     <meta name='description' content='Bla'/>
                 </Head>
-                
+
                 <Result
                     status="403"
                     title={
@@ -31,7 +31,7 @@ export default class ServerError extends React.Component {
                     }
                     subTitle={
                         <span className={styles.nextHeader}>
-                            But don't worry, we'll fix it soon
+                            But don&apos;t worry, we&apos;ll fix it soon
                         </span>
                     }
                     extra={<Button type="primary">Back Home</Button>}

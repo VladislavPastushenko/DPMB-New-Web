@@ -35,7 +35,7 @@ class RouteItem extends React.Component {
     }
     render() {
         return (
-                <>
+                <div key={this.props.key}>
                 <Row className={styles.container}>
                     <Col xs={6}>
                         <span className='fontSizeSm' style={{whiteSpace: 'nowrap'}}>
@@ -72,12 +72,12 @@ class RouteItem extends React.Component {
                         <span className='fontSizeSm' style={{whiteSpace: 'nowrap'}}>
                             Number of passengers - &nbsp;
                         </span>
-                        <Form.Item name='number_of_passengers' style={{display: 'inline-block'}}>
+                        <Form.Item name='number_of_passengers' style={{display: 'inline-block'}} key='number_of_passengers'>
                             <InputNumber min={1} max={6} />
                         </Form.Item>
 
                         <div align='center'>
-                            <Form.Item name='number_of_passengers' style={{display: 'inline-block'}}>
+                            <Form.Item style={{display: 'inline-block'}} key='button'>
                                 <Button htmlType='submit' type='primary'>
                                     Create reservation
                                 </Button>
@@ -103,12 +103,12 @@ class RouteItem extends React.Component {
                             </>
                             }
                         extra={[
-                        <Button onClick={() => {this.setState({isModalVisible: false, res: null})}}> Сlose </Button>,
+                            <Button key='closeButton' onClick={() => {this.setState({isModalVisible: false, res: null})}}> Сlose </Button>,
                         ]}
                     />,
                     </div>}
                 </Modal>
-                </>
+                </div>
         )
     }
 
