@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
 //import styles from "./home.module.sass"
 import styles from "./styles/dashboard.module.sass"
 import Topbar from "./../components/Dashboard/Topbar/Topbar"
@@ -41,10 +40,7 @@ class Dashboard extends React.Component {
                 Router.push('/login')
             }
         )
-    
     }
-
-    
     changeLocation = (location) => {
         this.setState({location: location})
     }

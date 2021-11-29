@@ -47,7 +47,8 @@ export default class BaseModel {
     }
 
     removeById(id) {
-        this.model.where({'id': id}).destroy();
+        console.log(id)
+        return new this.model({id: id}).destroy();
     }
 
     createHash(str, alg) {

@@ -49,13 +49,13 @@ class RouteItem extends React.Component {
                         </span>
                     </Col>
                     <Col xs={4} align='end'>
-                        <a className='fontSizeSm' style={{whiteSpace: 'nowrap'}} onClick={() => {this.setState({isModalVisible: true})}}>
+                        <a className='fontSizeSm' style={{whiteSpace: 'nowrap'}} onClick={() => {this.setState({ isModalVisible: true })}}>
                             Reserve
                         </a>
                     </Col>
                 </Row>
 
-                <Modal title="Reservation" visible={this.state.isModalVisible} onCancel={() => {this.setState({isModalVisible: false})}} footer={null}>
+                <Modal title="Reservation" visible={this.state.isModalVisible} onCancel={() => {this.setState({ isModalVisible: false })}} footer={null}>
                     {this.state.res === null &&
                     <>
                     <p className='fontSizeSm' style={{whiteSpace: 'nowrap'}}>

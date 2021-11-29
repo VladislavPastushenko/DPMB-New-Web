@@ -5,8 +5,9 @@ import styles from "./stopList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchStops } from "../../../store/stops/actions";
+import { fetchStops, deleteStop } from "../../../store/stops/actions";
 import { LoadingOutlined } from '@ant-design/icons'
+import { message } from "antd";
 
 class StopList extends React.Component {
     constructor(props) {
@@ -27,8 +28,21 @@ class StopList extends React.Component {
         );
     }
 
-    handleDelete = (id) => {
-        this.setState(this.state.data.filter((item) => item.id !== id));
+    handleDelete = (params) => {
+        let id = params.row.id
+        console.log(id)
+        this.props.deleteStop(id).then(
+          (res) => {window.location.reload(false)},
+          (err) => {
+            message.open({
+              'content': 'Error while deleting',
+              duration: 1
+            })
+          }
+          
+
+        )
+        //this.setState(this.state.data.filter((item) => item.id !== id));
       };
     
     columns = [
@@ -44,11 +58,12 @@ class StopList extends React.Component {
             return (
               <>
                 
-                <button className={styles.stopListEdit}>Edit</button>
                 
                 <DeleteOutline
                   className={styles.stopListDelete}
-                  onClick={() => this.handleDelete(params.row.id)}
+                  onClick={() => {
+                    this.handleDelete(params)
+                  }}
                 />
               </>
             );
@@ -99,5 +114,5 @@ const mapStateToProps = state => {
       users: state.users.res,
   }
 }
-export default connect(mapStateToProps, {fetchStops
+export default connect(mapStateToProps, {fetchStops, deleteStop
 }) (StopList);

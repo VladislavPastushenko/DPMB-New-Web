@@ -3,6 +3,8 @@ import {
     FETCH_CARRIERS_FAILED,
     CREATE_CARRIER_SUCCESS,
     CREATE_CARRIER_FAILED,
+    DELETE_CARRIER_SUCCESS,
+    DELETE_CARRIER_FAILED,
 } from "./actions";
 
 function carrier(state = {
@@ -14,8 +16,10 @@ function carrier(state = {
         case FETCH_CARRIERS_FAILED:
             return Object.assign({}, state, {error: action.error});
         case CREATE_CARRIER_SUCCESS:
-            return Object.assign({}, state, {stops: action.data});
+        case DELETE_CARRIER_SUCCESS:
+            return Object.assign({}, state, {carriers: action.data});
         case CREATE_CARRIER_FAILED:
+        case DELETE_CARRIER_FAILED:
             return Object.assign({}, state, {error: action.error});
         default:
             return Object.assign({}, state);

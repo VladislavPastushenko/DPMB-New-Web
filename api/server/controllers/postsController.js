@@ -17,6 +17,11 @@ class PostsController {
             .create(req.body).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
     }
 
+    static removeById(req, res, next) {
+        return new Orm().getOrm().postModel
+            .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
+    }
+
 }
 
 export default PostsController;
