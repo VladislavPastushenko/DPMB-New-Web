@@ -76,7 +76,7 @@ export default class AddNewRoute extends React.Component {
                     </div>
                     <div className={styles.addStopItem}>
                     <label>Finish</label>
-                    <input type="text" placeholder="Finish time time" />
+                    <input type="text" placeholder="Finish time" />
                     </div>
                     <button className={styles.addStopButton}>Create</button>
                 </form>

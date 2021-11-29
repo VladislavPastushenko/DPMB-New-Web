@@ -39,7 +39,7 @@ export default class Topbar extends React.Component {
                 <div className={styles.topbarWraper}>
                     <div className={styles.topLeft}>
                         <span className={styles.logo}>
-                            Admin
+                            Admin panel
                         </span>
                     </div>
                     <div className={styles.topRight}>

@@ -68,7 +68,7 @@ export default class EditUser extends React.Component {
                         <button className={styles.historyShowButton} onClick={() => {this.props.changeLocation('home')}}>Back</button>
             </div>
         </div>
-        <br/>
+        <p></p>
 
   
 

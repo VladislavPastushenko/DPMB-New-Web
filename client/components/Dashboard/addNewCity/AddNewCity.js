@@ -11,16 +11,25 @@ export default class NewCity extends React.Component {
         this.state = {};
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let data = {
+            name: e.target.elements.name.value 
+        }
+
+        console.log(data)
+        return false;
+        }
     render() {
         return (
             <div className={styles.newCarrier}>
                 <h1 className={styles.addCarrierTitle}>New City</h1>
-                <form className={styles.addCarrierForm}>
+                <form className={styles.addCarrierForm} onSubmit={this.handleSubmit}>
                     <div className={styles.addCarrierItem}>
                     <label>City Name</label>
-                    <input type="text" placeholder="Name of city" />
+                    <input type="text" name='name' placeholder="Name of city" />
                     </div>
-                    <button className={styles.addCarrierButton}>Create</button>
+                    <button type='submit' className={styles.addCarrierButton}>Create</button>
                 </form>
             </div>
         );

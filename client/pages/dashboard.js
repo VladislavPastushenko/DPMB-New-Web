@@ -69,7 +69,7 @@ class Dashboard extends React.Component {
                     return (
                         <div>
                             <div id="container"/>
-                                <Topbar/>
+                                <Topbar {...this.props}/>
                                 <div className={styles.container}>
                                     <Sidebar changeLocation={this.changeLocation}/>
                                     {this.state.location === 'home' && <Home/>} 

@@ -4,15 +4,27 @@ import ReactDOM from "react-dom";
 import styles from "./userList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../../pages/dummyData";
 import { ResponsiveContainer } from "recharts";
+import { fetchUsers } from "../../../store/users/actions";
+import { LoadingOutlined } from '@ant-design/icons'
 
-export default class UserList extends React.Component {
+class UserList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: userRows
+            data: [],
         };
+
+        this.props.fetchUsers().then(
+          (res) => {
+            console.log(res)
+            this.setState({data: res})
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+  
+        );
     }
 
     handleDelete = (id) => {
@@ -22,30 +34,16 @@ export default class UserList extends React.Component {
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         {
-          field: "user",
+          field: "full_name",
           headerName: "User",
-          width: 300,
+          width: 450,
           align: "left",
-          renderCell: (params) => {
-            return (
-              <div className={styles.userListUser}>
-                <img className={styles.userListImg} src={params.row.avatar} alt="" />
-                {params.row.username}
-              </div>
-            );
-          },
         },
-        { field: "email", headerName: "Email", width: 300, align: "left",},
+        { field: "email", headerName: "Email", width: 450, align: "left",},
         {
-          field: "status",
+          field: "is_active",
           headerName: "Status",
           width: 120,
-          align: "left",
-        },
-        {
-          field: "Seats",
-          headerName: "Seats number",
-          width: 310,
           align: "left",
         },
         {
@@ -68,6 +66,7 @@ export default class UserList extends React.Component {
         },
       ];
     render() {
+      if (this.state.data.length > 0) {
         return (
             <div className={styles.userList}>
               <div className={styles.transportTitleContainer}>
@@ -84,5 +83,28 @@ export default class UserList extends React.Component {
               </ResponsiveContainer>
             </div>
         );
+        } else {
+          return (
+            <div className={styles.userList}>
+              <div className={styles.transportTitleContainer}>
+                    <h1 className="userTitle">Users List</h1>
+              </div>
+              <ResponsiveContainer width="100%">
+                <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
+                    <LoadingOutlined/>
+                </div>
+              </ResponsiveContainer>
+            </div>
+        );
+        }
     }
 }
+
+const mapStateToProps = state => {
+  return {
+      users: state.users.res,
+  }
+}
+
+export default connect(mapStateToProps, {fetchUsers
+}) (UserList);

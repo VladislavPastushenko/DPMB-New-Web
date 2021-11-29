@@ -15,7 +15,7 @@ class TripList extends React.Component {
         this.state = {
             data: [],
         };
-
+        console.log(this.props)
         let query = this.props.loggedUser.carrier_id && ("carrier_id=" + this.props.loggedUser.carrier_id)
 
         this.props.fetchTrips(query).then(

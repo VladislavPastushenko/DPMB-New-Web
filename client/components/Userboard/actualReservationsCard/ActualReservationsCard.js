@@ -28,7 +28,7 @@ export default class MiddleCard extends React.Component {
         {
           field: "trip",
           headerName: "Trip",
-          width: 320,
+          width: 480,
           align: "left",
         },
         {
@@ -78,9 +78,11 @@ export default class MiddleCard extends React.Component {
                         />
                     </ResponsiveContainer>
                     </div>
-                    <div className={styles.container}>
-                        <button className={styles.historyShowButton}>Go on a trip</button>
-                    </div>
+                    <div>
+                      <div className={styles.container}>
+                          <button className={styles.historyShowButton}>Go on a trip</button>
+                      </div>
+                      </div>
                 </div>
             </Card>
         );
