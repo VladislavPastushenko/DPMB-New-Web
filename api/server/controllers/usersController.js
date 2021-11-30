@@ -11,50 +11,8 @@ class UsersController {
             .then((row, err) => {
 
                 let user = row.toJSON();
-                if (user.role === 'admin') {
+                if (user.role !== 'user') {
                     return new Orm().getOrm().userModel.getAll(req.query)
-                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
-                }
-                else {
-                    res.status(403).send("User doesn't have rights to access this route");
-                }
-            })
-            .catch((err) => {
-                if (err.message == "EmptyResponse") {
-                    res.status(404).send("User not found");
-                }
-            });
-    }
-
-    static getCustomers(req, res, next) {
-        return new Orm().getOrm().userModel
-        .getUserByAuthToken(req.session.loggedToken)
-            .then((row, err) => {
-
-                let user = row.toJSON();
-                if (user.role === 'admin' || user.role === 'personnel' || user.role === 'carrier') {
-                    return new Orm().getOrm().userModel.getAll({limit: req.query.limit, role: 'user'})
-                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
-                }
-                else {
-                    res.status(403).send("User doesn't have rights to access this route");
-                }
-            })
-            .catch((err) => {
-                if (err.message == "EmptyResponse") {
-                    res.status(404).send("User not found");
-                }
-            });
-    }
-
-    static getPersonnel(req, res, next) {
-        return new Orm().getOrm().userModel
-        .getUserByAuthToken(req.session.loggedToken)
-            .then((row, err) => {
-
-                let user = row.toJSON();
-                if (user.role === 'admin' || user.role === 'carrier') {
-                    return new Orm().getOrm().userModel.getAll({limit: req.query.limit, role: 'personnel'})
                         .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
                 }
                 else {
@@ -75,6 +33,7 @@ class UsersController {
 
 
     static editById(req, res, next) {
+        console.log('EDIT BY ID')
         if(req.session.loggedToken) {
             return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)
@@ -119,6 +78,7 @@ class UsersController {
 
 
     static signup(req, res, next) {
+        console.log('SIGNUP')
         return new Orm().getOrm().userModel
             .register(req.body)
             .then((row, err) => {
@@ -160,7 +120,7 @@ class UsersController {
 
 
     static verify(req, res, next) {
-        console.log('req.params.authToken', req.params.authToken)
+        console.log('VERIFY')
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {
@@ -203,6 +163,8 @@ class UsersController {
     }
 
     static login(req, res, next) {
+        console.log('login')
+        console.log('Getting user for login')
         return new Orm().getOrm().userModel
             .getUserForLogin(req.body)
             .then((row, err) => {
@@ -223,6 +185,7 @@ class UsersController {
 
 
     static getAuthToken(req, res, next) {
+        console.log('get auth token')
         if(req.session.loggedToken) {
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.session.loggedToken)
@@ -241,6 +204,7 @@ class UsersController {
     }
 
     static getLoggedUser(req, res, next) {
+        console.log('GET LOGGED USER')        
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {
@@ -255,6 +219,7 @@ class UsersController {
     }
 
     static logout(req, res, next) {
+        console.log('LOGOUT')
         req.session.destroy();
         res.status(200).send('OK');
     }
@@ -262,6 +227,7 @@ class UsersController {
 
     // FOR TESTING
     static setSession(req, res, next) {
+        console.log('SET SESSION')
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {

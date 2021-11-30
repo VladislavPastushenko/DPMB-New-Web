@@ -22,6 +22,9 @@ export const FETCH_USERS_FAILED = 'FETCH_USERS_FAILED'
 export const EDIT_USER_SUCCESS = 'EDIT_SUCCESS'
 export const EDIT_USER_FAILED = 'EDIT_FAILED'
 
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const LOGOUT_FAILED  = 'LOGOUT_FAILED'
+
 const api = new Api();
 
 
@@ -51,7 +54,7 @@ export function loginUser(data) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/users/login', method: 'POST', data}).then(res =>  {
-                    if (res !== "Invalid credentials or inactive user" && res !== 'Error occured while logging in') {
+                    if (res !== "Invalid credentials or inactive user" && res !== 'Error occured while logging in' && res !== 'User not found') {
                         console.log('res is', res)
                         localStorage.setItem('authToken', res);
                         console.log('Item is set', localStorage.getItem('authToken'))
@@ -164,8 +167,14 @@ export function fetchUsers() {
             try {
                 api.call({url: '/users', method: 'GET'}).then(res => {
                     //console.log('res is', res)
-                    dispatch({type: FETCH_USERS_SUCCESS, data: res});
-                    resolve(res);
+                    if (res !== "User doesn't have rights to access this route") {
+
+                        dispatch({type: FETCH_USERS_SUCCESS, data: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: FETCH_USERS_FAILED, error: res});
+                        reject(res);
+                    }
                 })
             } catch (error) {
                     dispatch({type: FETCH_USERS_FAILED, error: error});
@@ -194,4 +203,28 @@ export function deleteUser(id) {
                 }
             })
     };
+}
+
+export function logoutUser(data) {
+    return async function (dispatch) {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/users/logout', method: 'POST', data}).then(res =>  {
+                    if (res !== 'OK') {
+                        console.log('res is', res)
+                        localStorage.removeItem('authToken', res);
+                        console.log('Item is set', localStorage.getItem('authToken'))
+                        dispatch({type: LOGOUT_SUCCESS, loginResponse: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: LOGOUT_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                dispatch({type: LOGOUT_FAILED, error: error});
+                reject(error);
+            }
+        });
+    }
 }

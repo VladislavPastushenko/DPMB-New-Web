@@ -3,10 +3,10 @@ import {connect} from "react-redux";
 
 import styles from "./reservationList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
-
+import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
 import { Select, Modal, Button, List, message } from 'antd';
-import { fetchReservations, editReservationById } from "../../../store/reservations/actions";
+import { fetchReservations, editReservationById, deleteReservation } from "../../../store/reservations/actions";
 
 class ReservationList extends React.Component {
     constructor(props) {
@@ -35,12 +35,27 @@ class ReservationList extends React.Component {
     }
 
 
-    handleDelete = (id) => {
-        this.setState(this.state.data.filter((item) => item.id !== id));
-      };
+    handleDelete = (params) => {
+      let id = params.row.id
+      console.log(id)
+      this.props.deleteReservation(id).then(
+        (res) => {window.location.reload(false)},
+        (err) => {
+          message.open({
+            'content': 'Error while deleting',
+            duration: 1
+          })
+        }
+        
+      )
+      //this.setState(this.state.data.filter((item) => item.id !== id));
+    };
 
     onStatusChange = (value, options, params) => {
         let changedReservation = params.row
+        console.log(changedReservation.trip)
+
+        console.log(changedReservation)
         delete changedReservation.trip
         delete changedReservation.user
         changedReservation.status = value
@@ -56,9 +71,15 @@ class ReservationList extends React.Component {
 
     };
     getTrip(params) {
+      console.log("getTrip params")
+      console.log(params)
+
       return params.value.name;
     }
     getUser(params) {
+      console.log("getUser params")
+
+      console.log(params)
       return params.value.email;
     }
 
@@ -67,7 +88,7 @@ class ReservationList extends React.Component {
         {
           field: "trip",
           headerName: "Trip",
-          width: 830,
+          width: 680,
           align: "left",
           valueGetter: this.getTrip,
         },
@@ -104,6 +125,23 @@ class ReservationList extends React.Component {
             );
           },
         },
+        {
+          field: "action",
+          headerName: "Action",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <>                
+                <DeleteOutline
+                  className={styles.reservationListDelete}
+                  onClick={() => {
+                    this.handleDelete(params)
+                  }}
+                />
+              </>
+            );
+          },
+        },
       ];
     render() {
         return (
@@ -131,4 +169,4 @@ const mapStateToProps = state => {
       reservations: state.reservations.reservations,
   }
 }
-export default connect(mapStateToProps, {fetchReservations, editReservationById}) (ReservationList);
+export default connect(mapStateToProps, {fetchReservations, editReservationById, deleteReservation}) (ReservationList);

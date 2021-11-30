@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import styles from "./tripList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { ResponsiveContainer } from "recharts";
-import { InputNumber } from 'antd'
-import { fetchTrips } from "../../../store/trips/actions";
+import { InputNumber, Select, message } from 'antd'
+import { fetchTrips, editTripById } from "../../../store/trips/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 
 
@@ -30,9 +30,32 @@ class TripList extends React.Component {
         );
     }
 
+    onStatusChange = (value, options, params) => {
+      let changedTrip = {...params.row}
+      console.log("changedTrip")
+      
+      delete changedTrip.routeItems
+      delete changedTrip.carrier
+      delete changedTrip.stops
+      changedTrip.status = value
+      console.log("change trip")
+      console.log(changedTrip)
+
+      this.props.editTripById(changedTrip).then(() => {console.log('Success')}, err => {
+        message.open({
+          type: 'error',
+          content: 'Something went wrong',
+          duration: 3
+        })
+      })
+    };
+
     getVal(params) {
       //console.log(params.value.name)
       return params.value.name;
+    }
+    getTime(params) {
+      return new Date(params.value).toLocaleString('default', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })
     }
 
     handleDelete = (id) => {
@@ -51,18 +74,8 @@ class TripList extends React.Component {
             align: "left",
             valueGetter: this.getVal,
         },
-        {
-          field: "start_time",
-          headerName: "Start",
-          width: 220,
-          align: "left",
-        },
-        {
-          field: "end_time",
-          headerName: "Finish",
-          width: 220,
-          align: "left",
-        },
+        {field: "start_time", headerName: "Start", width: 220, align: "left", valueGetter: this.getTime,},
+        {field: "end_time", headerName: "Finish", width: 220, align: "left", valueGetter: this.getTime,},
         {
           field: "capacity",
           headerName: "Seats",
@@ -74,7 +87,28 @@ class TripList extends React.Component {
           headerName: "Status",
           width: 120,
           align: "left",
+          renderCell: (params) => {
+            return (
+              <>
+              <Select
+                defaultValue={params.row.status}
+                style={{
+                  width: 120,
+                  margin: '0 8px',
+                }}
+                onSelect={(value, options) => {
+                  this.onStatusChange(value, options, params)
+                }}
+              >
+                <Select.Option value={'coming'}>Coming</Select.Option>
+                <Select.Option value={'finished'}>Finished</Select.Option>
+                <Select.Option value={'canceled'}>Canceled</Select.Option>
+              </Select>
+              </>
+            );
+          },
         },
+        
         {
           field: "delay",
           headerName: "Delay",
@@ -133,5 +167,5 @@ const mapStateToProps = state => {
       users: state.users.res,
   }
 }
-export default connect(mapStateToProps, {fetchTrips
+export default connect(mapStateToProps, {fetchTrips, editTripById
 }) (TripList);

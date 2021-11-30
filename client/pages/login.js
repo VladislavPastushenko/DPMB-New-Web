@@ -40,7 +40,11 @@ const formItemLayout = {
     },
   };
 
-class normalLoginForm extends React.Component {
+
+
+
+
+class NormalLoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +54,7 @@ class normalLoginForm extends React.Component {
 
     onFinish = (values) => {
       delete values.remember
-
+      console.log('Loggining user with cerditinals', values)
       this.props.loginUser(values).then(
         (res) => {
           console.log(res)
@@ -124,7 +128,7 @@ class normalLoginForm extends React.Component {
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button> &nbsp;
-          Or <a href="/registration">register now!</a>
+          Or <a href="/sign-up">register now!</a>
         </Form.Item>
       </Form>
     );
@@ -137,4 +141,4 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps, {loginUser
-}) (normalLoginForm);
+}) (NormalLoginForm);
