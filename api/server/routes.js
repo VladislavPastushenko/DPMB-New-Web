@@ -60,7 +60,7 @@ const routes = (route) => {
 
     route.route('/cities/:id')
         .get(CitiesController.getById)
-
+        .delete(CitiesController.removeById)
 
     // STOPS
     route.route('/stops')

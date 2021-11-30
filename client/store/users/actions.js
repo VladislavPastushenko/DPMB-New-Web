@@ -174,3 +174,24 @@ export function fetchUsers() {
             })
     };
 }
+
+export function deleteUser(id) {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/users/' + id, method: 'DELETE'}).then(res => {
+                    if (res === "OK") {
+                        dispatch({type: DELETE_USER_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: DELETE_USER_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                    dispatch({type: DELETE_USER_FAILED, error: error});
+                    reject(error);
+                }
+            })
+    };
+}

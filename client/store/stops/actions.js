@@ -54,6 +54,7 @@ export function deleteStop(id) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/stops/' + id, method: 'DELETE'}).then(res => {
+                    console.log(res)
                     if (res === "OK") {
                         dispatch({type: DELETE_STOP_SUCCESS, res: res});
                         resolve(res);

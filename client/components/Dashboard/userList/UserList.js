@@ -5,9 +5,9 @@ import styles from "./userList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchUsers } from "../../../store/users/actions";
+import { fetchUsers, deleteUser } from "../../../store/users/actions";
 import { LoadingOutlined } from '@ant-design/icons'
-
+import { message } from "antd";
 class UserList extends React.Component {
     constructor(props) {
         super(props);
@@ -27,9 +27,21 @@ class UserList extends React.Component {
         );
     }
 
-    handleDelete = (id) => {
-        this.setState(this.state.data.filter((item) => item.id !== id));
-      };
+    handleDelete = (params) => {
+      let id = params.row.id
+      console.log(id)
+      this.props.deleteUser(id).then(
+        (res) => {window.location.reload(false)},
+        (err) => {
+          message.open({
+            'content': 'Error while deleting',
+            duration: 1
+          })
+        }
+        
+      )
+      //this.setState(this.state.data.filter((item) => item.id !== id));
+    };
     
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
@@ -54,11 +66,12 @@ class UserList extends React.Component {
             return (
               <>
                 
-                <button className={styles.userListEdit}>Edit</button>
                 
                 <DeleteOutline
                   className={styles.userListDelete}
-                  onClick={() => this.handleDelete(params.row.id)}
+                  onClick={() => {
+                    this.handleDelete(params)
+                  }}
                 />
               </>
             );
@@ -106,5 +119,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers
+export default connect(mapStateToProps, {fetchUsers, deleteUser
 }) (UserList);
