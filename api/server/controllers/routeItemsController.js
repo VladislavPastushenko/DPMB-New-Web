@@ -22,7 +22,7 @@ class RouteItemsController {
                         //...
                         return new Orm().getOrm().routeItemModel
                             .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
-                    } else {
+                    } else {Number
                         res.status(403).send("User doesn't have rights edit this user");
                     }
 

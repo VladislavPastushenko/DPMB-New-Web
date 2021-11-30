@@ -67,8 +67,7 @@ class Dashboard extends React.Component {
                                 <Topbar {...this.props}/>
                                 <div className={styles.container}>
                                     <Sidebar changeLocation={this.changeLocation}/>
-                                    
-                                    {this.state.location === 'userList' && <UserList/>}
+                                    {this.state.location === 'userList' && <UserList {...this.props}/>}
                                     {this.state.location === 'settings' && <UserEdit/>} 
                                     {this.state.location === 'newroute' && <AddNewRoute/>} 
                                     {this.state.location === 'stopList' && <StopList changeLocation={this.changeLocation}/>} 

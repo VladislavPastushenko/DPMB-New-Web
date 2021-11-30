@@ -19,7 +19,6 @@ class ReservationList extends React.Component {
 
         this.props.fetchReservations().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -40,12 +39,14 @@ class ReservationList extends React.Component {
       };
 
     onStatusChange = (value, options, params) => {
-        let changedReservation = params.row
+        let changedReservation = {...params.row}
         delete changedReservation.trip
         delete changedReservation.user
         changedReservation.status = value
 
-        this.props.editReservationById(changedReservation).then(() => {console.log('Success')}, err => {
+        this.props.editReservationById(changedReservation).then(
+          () => {console.log('Success')},
+          err => {
           message.open({
             type: 'error',
             content: 'Something went wrong',
@@ -67,7 +68,7 @@ class ReservationList extends React.Component {
         {
           field: "trip",
           headerName: "Trip",
-          width: 830,
+          width: 430,
           align: "left",
           valueGetter: this.getTrip,
         },
@@ -77,6 +78,11 @@ class ReservationList extends React.Component {
           headerName: "Buyer",
           width: 200,
           valueGetter: this.getUser
+        },
+        {
+          field: "number_of_passengers",
+          headerName: "Number of Passengers",
+          width: 300,
         },
         {
           field: "status",
