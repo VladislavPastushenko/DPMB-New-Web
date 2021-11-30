@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }) {
     return (
         <Provider store={store}>
             <Head>
-                <title>DPMB</title>
+                <title>IIS</title>
             </Head>
             <Layout>
                 {router.pathname !== '/' &&

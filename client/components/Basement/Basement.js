@@ -4,7 +4,7 @@ const Footer = () => {
     return (
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
-          <h3>DPMB-New-Web</h3>
+          <h3>IIS</h3>
 
           <ul className={styles.socialsText}>
 
@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.footerBottom}>
-          <p>copyright &copy;{new Date().getFullYear()} DPMB-New-Web designed by <span>Dimasik</span></p>
+          <p>copyright &copy;{new Date().getFullYear()} IIS designed by <span>Dimasik</span></p>
         </div>
       </footer>
   );

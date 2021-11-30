@@ -24,7 +24,7 @@ class IndexPage extends React.Component {
             <div>
                 {/* Meta Tags */}
                 <Head>
-                    <title>DPMB | Index</title>
+                    <title>IIS | Index</title>
                     <meta name='description' content='Bla'/>
                 </Head>
                 <div className={styles.videoContainer} ref={this.myRef}>
