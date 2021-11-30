@@ -10,6 +10,7 @@ export default class MySQL {
                 database : database,
             }
         })
+        this.knex = knex;
         this.orm = require('bookshelf')(knex);
         this.orm.plugin('bookshelf-relations');
     }

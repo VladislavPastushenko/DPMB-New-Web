@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8cee5fe4ed7a2e2b3ff428ce7671145334218e99
 import React from "react";
 import Head from 'next/head';
 import styles from './styles/server-error.module.sass'
@@ -22,17 +25,29 @@ export default class ServerError extends React.Component {
                     <title>Oooops</title>
                     <meta name='description' content='Bla'/>
                 </Head>
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 8cee5fe4ed7a2e2b3ff428ce7671145334218e99
                 <Result
                     status="403"
                     title={
                         <span className={styles.mainHeader}>
+<<<<<<< HEAD
                             Ooops - Error 500
+=======
+                            Ooops - something went wrong and the server is unresponsive
+>>>>>>> 8cee5fe4ed7a2e2b3ff428ce7671145334218e99
                         </span>
                     }
                     subTitle={
                         <span className={styles.nextHeader}>
+<<<<<<< HEAD
                             Sorry, it's me, not you.
+=======
+                            But don&apos;t worry, we&apos;ll fix it soon
+>>>>>>> 8cee5fe4ed7a2e2b3ff428ce7671145334218e99
                         </span>
                     }
                     extra={<Button type="primary">Back Home</Button>}
@@ -45,9 +60,13 @@ export default class ServerError extends React.Component {
      }
 
 
+<<<<<<< HEAD
 }
 
 
 
 
 
+=======
+}
+>>>>>>> 8cee5fe4ed7a2e2b3ff428ce7671145334218e99

@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 export default class BaseModel {
 
     constructor({orm, modelName, tableName, options = {}}) {
@@ -15,6 +16,12 @@ export default class BaseModel {
 
     create(data) {
         return new this.model().save({...data});
+    }
+
+    createMultiple(data) {
+        return this.model
+            .collection(data)
+            .invokeThen('save')
     }
 
 
@@ -37,6 +44,29 @@ export default class BaseModel {
         let by = {};
         by[col] = value;
         return new this.model(by).fetchAll();
+    }
+
+    removeById(id) {
+        console.log(id)
+        return new this.model({id: id}).destroy();
+    }
+
+    createHash(str, alg) {
+        console.log(str)
+        let hash = crypto.createHash(alg);
+        hash.update(str);
+        return hash.digest('hex');
+    }
+
+    update(data) {
+        return this.model
+            .forge()
+            .save({...data},
+                {
+                    method: 'update',
+                    patch: true
+                }
+            );
     }
 
 }

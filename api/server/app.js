@@ -3,30 +3,45 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import path from 'path';
 import routes from "./routes";
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+var fileUpload = require('express-fileupload');
+
+const bodyParser = require('body-parser');
 const cors = require('cors');
 var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: 100 * 1024 * 1024}));
+app.use(express.urlencoded({
+    limit: 100 * 1024 * 1024,
+    extended: false
+}));
+app.use(express.static('public'));
+app.use(fileUpload({
+    limits: {
+        fileSize: 100 * 1024 * 1024,
+        abortOnLimit: true
+    },
+    useTempFiles : true,
+    tempFileDir : __dirname + '/../temp/'
+}));
+app.use(session({
+    store: new FileStore,
+    secret: 'iis',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 30 * 60 * 1000
+    }
+}));
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     origin:[
-        'http://127.0.0.1:8000',
-        'http://localhost:8000',
-        'http://mirror.aureeka.com:3000',
-        'http://localhost:3000',
-        'http://localhost',
-        'https://localhost:443',
-        'https://localhost',
-        'http://mirror.aureeka.com',
-        'https://mirror.aureeka.com',
-        'http://aureeka.com',
-        'https://aureeka.com',
-        'https://aureeka.com:443',
-        'https://www.aureeka.com',],
+        'http://localhost:3000',],
     methods:['GET','POST','PUT','DELETE'],
     credentials: true // enable set cookie
 }));
