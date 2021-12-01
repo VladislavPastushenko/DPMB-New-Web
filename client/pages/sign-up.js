@@ -263,7 +263,7 @@ class RegistrationForm extends React.Component {
         title="Your registration was successful!"
         subTitle="A confirmation email has been sent to your email address"
         extra={[
-        <Link href='/'>
+        <Link href='/' key='back home'>
         <Button type="primary" key="console">
           Main Page
         </Button>,
