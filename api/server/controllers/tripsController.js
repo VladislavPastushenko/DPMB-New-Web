@@ -31,7 +31,7 @@ class TripsController {
     }
 
     static editById(req, res, next) {
-        console.log('Changing trip', req.params.id)
+        //console.log('Changing trip', req.params.id)
         if(req.session.loggedToken) {
             return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)

@@ -27,17 +27,14 @@ class NewCity extends React.Component {
             name: e.target.elements.name.value 
         }
 
-        console.log(data)
         this.props.createCity(data).then(
             (res) => {
                 console.log(res);
                 this.setState({isSuccessModalVisible: true});
                 e.target.elements.name.value = null;
-
             },
             (err) => {
                 console.log(err);
-                console.log("hello")
                 this.setState({isErrorModalVisible: true});
             ;},
         )

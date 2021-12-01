@@ -29,7 +29,7 @@ class UserList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log(id)
+      //console.log(id)
       this.props.deleteUser(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
@@ -40,33 +40,17 @@ class UserList extends React.Component {
         }
         
       )
-      //this.setState(this.state.data.filter((item) => item.id !== id));
     };
     
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        {
-          field: "full_name",
-          headerName: "User",
-          width: 450,
-          align: "left",
-        },
+        { field: "full_name", headerName: "User", width: 450, align: "left",},
         { field: "email", headerName: "Email", width: 450, align: "left",},
-        {
-          field: "is_active",
-          headerName: "Status",
-          width: 120,
-          align: "left",
-        },
-        {
-          field: "action",
-          headerName: "Action",
-          width: 150,
+        { field: "is_active", headerName: "Status", width: 120, align: "left",},
+        { field: "action", headerName: "Action", width: 150,
           renderCell: (params) => {
             return (
               <>
-                
-                
                 <DeleteOutline
                   className={styles.userListDelete}
                   onClick={() => {
@@ -78,6 +62,7 @@ class UserList extends React.Component {
           },
         },
       ];
+
     render() {
       if (this.state.data.length > 0) {
         return (

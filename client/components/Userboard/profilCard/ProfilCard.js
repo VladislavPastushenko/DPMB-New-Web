@@ -20,8 +20,6 @@ class ProfilCard extends React.Component {
     }
 
     logout = (values) => {
-        console.log(values)
-  
         this.props.logoutUser(values).then(
           (res) => {
             console.log(res)

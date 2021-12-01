@@ -28,7 +28,6 @@ class RouteItem extends React.Component {
             },
             err => {
                 console.log(err)
-                // message.error({content: err, duration: 2})
                 this.setState({res: null})
             }
         )

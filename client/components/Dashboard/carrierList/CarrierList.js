@@ -33,7 +33,7 @@ class CarrierList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log(id)
+      //console.log(id)
       this.props.deleteCarrier(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
@@ -44,7 +44,6 @@ class CarrierList extends React.Component {
         }
         
       )
-      //this.setState(this.state.data.filter((item) => item.id !== id));
     };
 
     showModal = () => {
@@ -53,9 +52,6 @@ class CarrierList extends React.Component {
 
     
     onStatusChange = (value, options, params) => {
-        console.log("OUR FUNCTION value", value)
-        console.log("OUR FUNCTION options", options)
-        console.log("OUR FUNCTION params", params)
         let item = params.row
 
         item.status = value
@@ -65,17 +61,8 @@ class CarrierList extends React.Component {
     
       columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        {
-          field: "name",
-          headerName: "Name",
-          width: 1030,
-          align: "left",
-        },
-        
-        {
-          field: "action",
-          headerName: "Action",
-          width: 150,
+        { field: "name", headerName: "Name", width: 1030, align: "left",},
+        { field: "action", headerName: "Action", width: 150,
           renderCell: (params) => {
             return (
               <>                

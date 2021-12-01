@@ -31,9 +31,7 @@ class Topbar extends React.Component {
         });
     };
 
-    logout = (values) => {
-        console.log(values)
-  
+    logout = (values) => {  
         this.props.logoutUser(values).then(
           (res) => {
             console.log(res)

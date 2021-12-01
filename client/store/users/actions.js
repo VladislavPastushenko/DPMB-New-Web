@@ -55,9 +55,9 @@ export function loginUser(data) {
             try {
                 api.call({url: '/users/login', method: 'POST', data}).then(res =>  {
                     if (res !== "Invalid credentials or inactive user" && res !== 'Error occured while logging in' && res !== 'User not found') {
-                        console.log('res is', res)
+                        //console.log('res is', res)
                         localStorage.setItem('authToken', res);
-                        console.log('Item is set', localStorage.getItem('authToken'))
+                        //console.log('Item is set', localStorage.getItem('authToken'))
                         dispatch({type: LOGIN_SUCCESS, loginResponse: res});
                         resolve(res);
                     } else {
@@ -80,7 +80,7 @@ export function editUser(data) {
             try {
                 api.call({url: '/users/' + data.id, method: 'POST', data}).then(res =>  {
                     if (res === 'OK') {
-                        console.log('res is', res)
+                        //console.log('res is', res)
                         dispatch({type: EDIT_USER_SUCCESS, res: res});
                         resolve(res);
                     } else {
@@ -101,9 +101,8 @@ export function verifyUser(authToken) {
     return async (dispatch) => {
         return new Promise((resolve, reject) => {
             try {
-            console.log('SENDING NEW STATUS')
             api.call({url: '/users/verify/'+authToken, method: 'GET'}).then(res =>  {
-                console.log('RECEIVED', res)
+                //console.log('RECEIVED', res)
                 if (res === 'OK') {
                     dispatch({type: VERIFY_USER_SUCCESS, res: res});
                     resolve(res);
@@ -211,9 +210,8 @@ export function logoutUser(data) {
             try {
                 api.call({url: '/users/logout', method: 'POST', data}).then(res =>  {
                     if (res !== 'OK') {
-                        console.log('res is', res)
                         localStorage.removeItem('authToken', res);
-                        console.log('Item is set', localStorage.getItem('authToken'))
+                        //console.log('Item is set', localStorage.getItem('authToken'))
                         dispatch({type: LOGOUT_SUCCESS, loginResponse: res});
                         resolve(res);
                     } else {

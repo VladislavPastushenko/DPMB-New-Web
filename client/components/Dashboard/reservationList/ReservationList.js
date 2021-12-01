@@ -34,10 +34,9 @@ class ReservationList extends React.Component {
 
     }
 
-
     handleDelete = (params) => {
       let id = params.row.id
-      console.log(id)
+      //console.log(id)
       this.props.deleteReservation(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
@@ -48,62 +47,41 @@ class ReservationList extends React.Component {
         }
         
       )
-      //this.setState(this.state.data.filter((item) => item.id !== id));
     };
 
     onStatusChange = (value, options, params) => {
         let changedReservation = params.row
-        console.log(changedReservation.trip)
-
-        console.log(changedReservation)
         delete changedReservation.trip
         delete changedReservation.user
         changedReservation.status = value
 
-        this.props.editReservationById(changedReservation).then(() => {console.log('Success')}, err => {
+        this.props.editReservationById(changedReservation).then(() => {console.log('Success');
+        message.success({
+          type: 'error',
+          content: 'Status successfully changed',
+          duration: 3
+        })}, err => {
           message.open({
             type: 'error',
             content: 'Something went wrong',
             duration: 3
           })
         })
-
-
     };
-    getTrip(params) {
-      console.log("getTrip params")
-      console.log(params)
 
+    getTrip(params) {
       return params.value.name;
     }
-    getUser(params) {
-      console.log("getUser params")
 
-      console.log(params)
+    getUser(params) {
       return params.value.email;
     }
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        {
-          field: "trip",
-          headerName: "Trip",
-          width: 680,
-          align: "left",
-          valueGetter: this.getTrip,
-        },
-
-        {
-          field: "user",
-          headerName: "Buyer",
-          width: 200,
-          valueGetter: this.getUser
-        },
-        {
-          field: "status",
-          headerName: "Status",
-          width: 150,
-          align: "left",
+        { field: "trip", headerName: "Trip", width: 680, align: "left", valueGetter: this.getTrip,},
+        { field: "user", headerName: "Buyer", width: 200, valueGetter: this.getUser},
+        { field: "status", headerName: "Status", width: 150, align: "left",
           renderCell: (params) => {
             return (
               <>
@@ -125,10 +103,7 @@ class ReservationList extends React.Component {
             );
           },
         },
-        {
-          field: "action",
-          headerName: "Action",
-          width: 150,
+        { field: "action", headerName: "Action", width: 150,
           renderCell: (params) => {
             return (
               <>                

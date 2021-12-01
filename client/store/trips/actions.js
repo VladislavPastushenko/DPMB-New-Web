@@ -74,7 +74,7 @@ export function editTripById(data) {
             try {
                 console.log('sending data', data)
                 api.call({url: '/trip/' + data.id, method: 'POST', data}).then(res => {
-                    console.log('res for editing', res)
+                    //console.log('res for editing', res)
                     if (res === 'OK') {
                         dispatch({type: EDIT_TRIPS_SUCCESS, res: res});
                         resolve(res);

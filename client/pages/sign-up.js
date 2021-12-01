@@ -82,12 +82,10 @@ class RegistrationForm extends React.Component {
     delete values.surname
     delete values.agreement
     delete values.confirm
-    console.log('Received values of form: ', values);
 
     this.props.signup(values).then(
       (res) => {
         this.setState({success: true})
-        console.log(this.props.res)
         console.log(res)
       },
       (err) => {
