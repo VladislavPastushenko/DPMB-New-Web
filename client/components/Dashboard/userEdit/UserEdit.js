@@ -38,7 +38,7 @@ class UserEdit extends React.Component {
                 console.log(err)
                 message.open({
                     type: 'error',
-                    content: 'Error while editing user',
+                    content: "Error while editing user, or you don't have enough rights to edit this user",
                 })
             }
         )

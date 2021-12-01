@@ -44,6 +44,15 @@ class UsersController {
                         .then((row, err) => {
                             let user = row.toJSON();
                             req.body.id = user.id;
+                            // Only admin can change role
+                            if ((loggedUser.role !== 'admin')) {
+                                req.body.role = user.role
+                            }
+                            // Carrier and personnel can change status only for customers
+                            if ((loggedUser.role === 'carrier' || loggedUser.role === 'personnel') && user.role !== 'user') {
+                                req.body.is_active = user.is_active
+                            }
+                            // Admin can edit everyone, carrier can change personnel, carrier and personnel can edit customers, customer can edit himself
                             if (
                                 (loggedUser.role === 'admin') ||
                                 (loggedUser.role === 'carrier' && user.role === 'personnel') ||
@@ -61,7 +70,7 @@ class UsersController {
                                         res.status(500).send(err);
                                     });
                             } else {
-                                res.status(403).send("User doesn't have rights edit this user");
+                                res.status(403).send("User doesn't have rights to edit this user");
                             }
 
                         })
@@ -204,7 +213,7 @@ class UsersController {
     }
 
     static getLoggedUser(req, res, next) {
-        console.log('GET LOGGED USER')        
+        console.log('GET LOGGED USER')
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {
@@ -247,7 +256,10 @@ class UsersController {
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
                     let loggedUser = row.toJSON();
-                    if (loggedUser.role !== 'user' || loggedUser.id === req.params.id) {
+                    if ((loggedUser.role === 'admin') ||
+                        (loggedUser.role === 'carrier' && user.role === 'personnel') ||
+                        ((loggedUser.role === 'personnel' || loggedUser.role === 'carrier') && user.role === 'user') ||
+                        (loggedUser.id === user.id || user.is_active === 1)) {
                         //...
                         return new Orm().getOrm().userModel
                         .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
