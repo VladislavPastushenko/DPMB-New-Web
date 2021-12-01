@@ -18,7 +18,6 @@ class StopList extends React.Component {
 
         this.props.fetchStops().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -30,7 +29,6 @@ class StopList extends React.Component {
 
     handleDelete = (params) => {
         let id = params.row.id
-        //console.log(id)
         this.props.deleteStop(id).then(
           (res) => {window.location.reload(false)},
           (err) => {

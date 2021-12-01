@@ -22,7 +22,6 @@ class ProfilCard extends React.Component {
     logout = (values) => {
         this.props.logoutUser(values).then(
           (res) => {
-            console.log(res)
             message.open(
               {
                 type: 'success',

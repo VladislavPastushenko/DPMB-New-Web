@@ -55,10 +55,8 @@ class NormalLoginForm extends React.Component {
 
     onFinish = (values) => {
       delete values.remember
-      console.log('Loggining user with cerditinals', values)
       this.props.loginUser(values).then(
         (res) => {
-          console.log(res)
           message.open(
             {
               type: 'success',
@@ -121,6 +119,11 @@ class NormalLoginForm extends React.Component {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
+          <Link href='#'>
+          <a className="login-form-forgot">
+            Forgot password
+          </a>
+          </Link>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" className="login-form-button">

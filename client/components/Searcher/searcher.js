@@ -29,7 +29,6 @@ class Searcher extends React.Component {
 
         this.props.fetchTripsByFromAndToIds(values.from_id, values.to_id, 'date=' + values.start_time).then(
             res => {
-                console.log(res)
                 this.setState({routes: res.concat()})
             },
             err => {
@@ -96,8 +95,7 @@ class Searcher extends React.Component {
                         </Col>
                     </Row>
                 </Form>
-                {console.log('this.state.routes', this.state.routes)}
-                {console.log("this.state.routes !== 'preparing'", this.state.routes !== 'preparing')}
+                
                 {this.state.routes !== 'preparing' &&
                     <>
                         {this.state.routes.length > 0 ?

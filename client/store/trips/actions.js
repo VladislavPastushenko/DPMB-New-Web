@@ -15,7 +15,6 @@ export function fetchTrips(query = '') {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/trips?' + query, method: 'GET'}).then(res => {
-                    //console.log('res is', res)
                     dispatch({type: FETCH_TRIPS_SUCCESS, data: res});
                     resolve(res);
                 })
@@ -72,9 +71,7 @@ export function editTripById(data) {
     return async (dispatch) => {
         return new Promise((resolve, reject) => {
             try {
-                console.log('sending data', data)
                 api.call({url: '/trip/' + data.id, method: 'POST', data}).then(res => {
-                    //console.log('res for editing', res)
                     if (res === 'OK') {
                         dispatch({type: EDIT_TRIPS_SUCCESS, res: res});
                         resolve(res);

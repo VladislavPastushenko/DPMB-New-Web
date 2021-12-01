@@ -87,7 +87,6 @@ class RegistrationForm extends React.Component {
     this.props.signup(values).then(
       (res) => {
         this.setState({success: true})
-        console.log(res)
       },
       (err) => {
         this.setState({errorStatus: true})

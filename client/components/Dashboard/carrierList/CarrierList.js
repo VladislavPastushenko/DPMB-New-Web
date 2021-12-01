@@ -20,7 +20,6 @@ class CarrierList extends React.Component {
 
         this.props.fetchCarriers().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -30,7 +29,6 @@ class CarrierList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      //console.log(id)
       this.props.deleteCarrier(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
