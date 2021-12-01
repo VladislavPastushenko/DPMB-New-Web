@@ -37,15 +37,15 @@
 <h2>Users of the testing system</h2>
 <table>
 <tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
-<tr><td></td><td></td><td>Administrator</td></tr>
-<tr><td></td><td></td><td>Carrier</td></tr>
-<tr><td></td><td></td><td>Personnel</td></tr>
-<tr><td></td><td></td><td>user</td></tr>
+<tr><td>admin</td><td>admin</td><td>Administrator</td></tr>
+<tr><td>carrier</td><td>carrier</td><td>Carrier</td></tr>
+<tr><td>personnel</td><td>personnel</td><td>Personnel</td></tr>
+<tr><td>user</td><td>user</td><td>User</td></tr>
 
 </tbody></table>
 
 <p>In our case, the carrier has all the possibilities, as well as the personnel, so that in case of an unforeseen situation, he can correct some mistakes. Otherwise, the diagram has not changed.</p> 
-
+<p>For an authorized user, we recommend that you register to evaluate all the possibilities of the work done</p>
 <h2>Implementation</h2>
 <h3>Backend</h3>
  <p>In this project, the backend was executed on ExpressJS to the MVC pattern.</p>
@@ -73,7 +73,9 @@
 	<i>Basement</i> contains footer, <i>Dashboard</i> - Admin panel, <i>Navigator</i> - Navigator, <i>Searcher</i> - route search form and <i>Userboard</i> which contains user interface.
 	These folders contain subfolders that contain specific elements and their corresponding styles.</p>
  <p>The folder <i>pages</i> contains main pages, a folder <i>styles</i> with styles and a folder <i>user</i> that contains a token for user verification using <strong>Cookies</strong>
-	The file <strong>_app.js</strong> contains the main function <i>App</i> that builds the pages.<br/>
+	The file <strong>_app.js</strong> contains the main function <i>App</i> that builds the pages.
+	<br/>
+	<br/>
 	<strong>index.js</strong> - the main page where the user can choose a travel route<br/>
 	<strong>dashboard.js</strong> - administrative panel, available only for users with the appropriate roles<br/>
 	<strong>login.js</strong> - user registration form<br/>
@@ -89,6 +91,19 @@
 <img src="./database.jpg" alt="">
 
 <h2>Chips</h2>
+<h3>User registration</h3>
+ <p>When registering, the user sends a request to the server.
+	Using JWT Tokenization, a token is created with the sent password, which is stored in the database,
+	and an authentication token is created by the current date.
+	The authentication token is saved to the database, and the user receives the status <i>Inactive</i>.
+	Then a message is sent to the user's email with a link that contains this authorization token in its route.
+	When clicking on the link to the backend, an email confirmation request is sent, and the user's status changes to <i>Active</i>.
+	The authorization token is saved to the session on the backend to verify the user's authorization,
+	and additionally we save it on the frontend in cookies to protect data loss.</p>
+ <p>User roles are clearly observed, each user can use only those functions and see those pages to which he has access.
+	The admin panel is only available to users who are logged in and have the rights to do so, according to their role. 
+	The button for access to the admin panel can be found in the footer.</p>
+ <p>In the upper right corner there is a dynamic button <i>Login</i> that dynamically changes for authorized users and opens access to the user panel.</p>
 	<ul>
 		<li>Use of cookies</li>
 		<li>Sending a confirmation letter to the user about registration</li>
@@ -106,6 +121,7 @@ Strucne popiste:
 </ul>
 
 <h2>Known problems</h2>
-<p>Due to the limited time and the impossibility of constant teamwork, and the desire to make a high-quality project, it took us a little more time to implement.</p>
+<p>Due to the limited time and the impossibility of constant teamwork, and the desire to make a high-quality project, it took us a little more time to implement.
+   In rare cases, when testing this project, the database may fall. In this case, please write to us by email.</p>
 
 </body></html>

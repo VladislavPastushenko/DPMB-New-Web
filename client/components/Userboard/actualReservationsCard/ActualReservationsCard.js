@@ -47,12 +47,18 @@ class MiddleCard extends React.Component {
       return params.row.trip.status;
     }
 
+    getStatReserv(params) {
+      return params.value
+    }
+
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "name", headerName: "Trip", width: 340, align: "left", valueGetter: this.getName,},
-        { field: "start_time", headerName: "Start time", width: 300, align: "left", valueGetter: this.getTime,},
+        { field: "name", headerName: "Trip", width: 230, align: "left", valueGetter: this.getName,},
+        { field: "start_time", headerName: "Start time", width: 210, align: "left", valueGetter: this.getTime,},
         { field: "delay", headerName: "Delay", width: 120, align: "left", valueGetter: this.getDelay,},
-        { field: "status", headerName: "Status", width: 120, align: "left", valueGetter: this.getStatus,},
+        { field: "statusTrip", headerName: "Trip status", width: 160, align: "left", valueGetter: this.getStatus,},
+        { field: "status", headerName: "Reservation", width: 160, align: "left", valueGetter: this.getStatReserv},
+
       ];
 
     render() {
