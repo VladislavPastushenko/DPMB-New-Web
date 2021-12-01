@@ -53,7 +53,6 @@ class ProfilCard extends React.Component {
 
                     <div className={styles.userShow}>
                         <div className={styles.userShowTop}>
-                            <img src="/user.png" alt="" className={styles.userboardImg}/>
                             <div className={styles.userShowTopTitle}>
                                 <span className={styles.userShowUsername}>{this.props.loggedUser.email}</span>
                             </div>
