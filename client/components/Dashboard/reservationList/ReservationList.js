@@ -19,7 +19,6 @@ class ReservationList extends React.Component {
 
         this.props.fetchReservations().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -50,7 +49,7 @@ class ReservationList extends React.Component {
     };
 
     onStatusChange = (value, options, params) => {
-        let changedReservation = params.row
+        let changedReservation = {...params.row}
         delete changedReservation.trip
         delete changedReservation.user
         changedReservation.status = value

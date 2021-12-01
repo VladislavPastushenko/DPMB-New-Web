@@ -74,11 +74,6 @@ class MiddleCard extends React.Component {
                         />
                     </ResponsiveContainer>
                     </div>
-                    <div>
-                      <div className={styles.container}>
-                          <button className={styles.historyShowButton}>Go on a trip</button>
-                      </div>
-                      </div>
                 </div>
             </Card>
         );
@@ -93,12 +88,7 @@ class MiddleCard extends React.Component {
                         <LoadingOutlined/>
                       </div>
                     </ResponsiveContainer>
-                    </div>
-                    <div>
-                      <div className={styles.container}>
-                          <button className={styles.historyShowButton}>Go on a trip</button>
-                      </div>
-                      </div>
+                    </div>                  
                 </div>
             </Card>
           );

@@ -8,6 +8,7 @@ import { ResponsiveContainer } from "recharts";
 import { fetchUsers, deleteUser } from "../../../store/users/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
+import UserEdit from "../userEdit/UserEdit";
 class UserList extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +24,7 @@ class UserList extends React.Component {
           (err) => {
             this.setState({errMsg: err})
           }
-  
+
         );
     }
 
@@ -38,16 +39,28 @@ class UserList extends React.Component {
             duration: 1
           })
         }
-        
       )
     };
-    
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "full_name", headerName: "User", width: 450, align: "left",},
-        { field: "email", headerName: "Email", width: 450, align: "left",},
+        { field: "email", headerName: "Email", width: 250, align: "left",},
+        { field: "full_name", headerName: "User", width: 250, align: "left",},
+        { field: "role", headerName: "Role", width: 250, align: "left",},
         { field: "is_active", headerName: "Status", width: 120, align: "left",},
-        { field: "action", headerName: "Action", width: 150,
+        {
+          field: "edit",
+          headerName: "Edit",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <UserEdit user={params.row} {...this.props}/>
+            );
+          },
+        },
+        {
+          field: "delete",
+          headerName: "Delete",
+          width: 150,
           renderCell: (params) => {
             return (
               <>

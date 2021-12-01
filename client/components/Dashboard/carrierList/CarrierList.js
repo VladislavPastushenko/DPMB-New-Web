@@ -26,9 +26,7 @@ class CarrierList extends React.Component {
           },
           (err) => {
             this.setState({errMsg: err})
-          }
-  
-        );
+          });
     }
 
     handleDelete = (params) => {
