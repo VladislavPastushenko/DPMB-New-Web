@@ -25,7 +25,6 @@ class AddNewRoute extends React.Component {
 
         this.props.fetchCarriers().then(
             (res) => {
-              console.log(res)
               this.setState({carriers: res})
             },
             (err) => {
@@ -67,7 +66,6 @@ class AddNewRoute extends React.Component {
 
         this.props.createTrip(data).then(
             (res) => {
-                //console.log('Get response from server',res)
                 for (let i = 0; i < route_items.length; i++) {
                     route_items[i].trip_id = res.id
                     route_items[i].position = i
@@ -75,14 +73,12 @@ class AddNewRoute extends React.Component {
     
                 this.props.createRouteItems(route_items).then(
                     (res) => {
-                        console.log(res);
                     },
                     (err) => {
                         console.log(err);
                         this.setState({isErrorModalVisible: true});
                     ;},
                 )
-                console.log(res);
                 this.setState({isSuccessModalVisible: true});
                 e.target.elements.name.value = null;
 

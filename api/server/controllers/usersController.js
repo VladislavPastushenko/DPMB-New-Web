@@ -33,7 +33,6 @@ class UsersController {
 
 
     static editById(req, res, next) {
-        console.log('EDIT BY ID')
         if(req.session.loggedToken) {
             return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)
@@ -87,7 +86,6 @@ class UsersController {
 
 
     static signup(req, res, next) {
-        console.log('SIGNUP')
         return new Orm().getOrm().userModel
             .register(req.body)
             .then((row, err) => {
@@ -115,7 +113,6 @@ class UsersController {
                 );
             })
             .catch((err) => {
-                console.log(err.message);
 
                 if(err.message.includes('Duplicate entry')) {
                     if(err.message.endsWith('for key \'email\'')) {
@@ -129,18 +126,15 @@ class UsersController {
 
 
     static verify(req, res, next) {
-        console.log('VERIFY')
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {
                 if(row.toJSON().is_active == 1) {
-                    console.log(row.toJSON())
                     res.status(200).send('User is already verified and active');
                 } else {
                     return new Orm().getOrm().userModel
                         .activateUserById(row.toJSON().id)
                         .then((row, err) => {
-                            console.log('User activated, signing in')
 
                             req.session.loggedToken = req.params.authToken;
 
@@ -149,7 +143,6 @@ class UsersController {
                                 'context': {}
                             }
 
-                            console.log('Sending email')
                             Mailer.sendEmail(
                                 config.parsed.EMAIL_FROM,
                                 row.toJSON().email,
@@ -172,13 +165,10 @@ class UsersController {
     }
 
     static login(req, res, next) {
-        console.log('login')
-        console.log('Getting user for login')
         return new Orm().getOrm().userModel
             .getUserForLogin(req.body)
             .then((row, err) => {
                 if(row) {
-                    console.log('user ' + row.toJSON().email + ' is logged in' )
                     req.session.loggedToken = row.toJSON().auth_token;
                     res.status(200).send(row.toJSON().auth_token)
                 }
@@ -194,7 +184,6 @@ class UsersController {
 
 
     static getAuthToken(req, res, next) {
-        console.log('get auth token')
         if(req.session.loggedToken) {
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.session.loggedToken)
@@ -213,7 +202,6 @@ class UsersController {
     }
 
     static getLoggedUser(req, res, next) {
-        console.log('GET LOGGED USER')
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {
@@ -228,7 +216,6 @@ class UsersController {
     }
 
     static logout(req, res, next) {
-        console.log('LOGOUT')
         req.session.destroy();
         res.status(200).send('OK');
     }
@@ -236,7 +223,6 @@ class UsersController {
 
     // FOR TESTING
     static setSession(req, res, next) {
-        console.log('SET SESSION')
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {

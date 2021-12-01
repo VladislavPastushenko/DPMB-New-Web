@@ -23,7 +23,6 @@ class MiddleCard extends React.Component {
 
         this.props.fetchReservations(query).then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {

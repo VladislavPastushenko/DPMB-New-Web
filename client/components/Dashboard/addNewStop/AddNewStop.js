@@ -20,7 +20,6 @@ class NewStop extends React.Component {
 
         this.props.fetchCities().then(
             (res) => {
-              console.log(res)
               this.setState({cities: res})
             },
             (err) => {
@@ -49,7 +48,6 @@ class NewStop extends React.Component {
 
         this.props.createStop(data).then(
             (res) => {
-                console.log(res);
                 this.setState({isSuccessModalVisible: true});
                 e.target.elements.name.value = null;
 

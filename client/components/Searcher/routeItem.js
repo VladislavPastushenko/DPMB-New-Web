@@ -23,7 +23,6 @@ class RouteItem extends React.Component {
         this.setState({res: 'loading'})
         this.props.createReservation(values).then(
             res => {
-                console.log(res)
                 this.setState({res: res})
             },
             err => {

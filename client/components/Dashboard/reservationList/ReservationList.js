@@ -35,7 +35,6 @@ class ReservationList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      //console.log(id)
       this.props.deleteReservation(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
@@ -54,7 +53,7 @@ class ReservationList extends React.Component {
         delete changedReservation.user
         changedReservation.status = value
 
-        this.props.editReservationById(changedReservation).then(() => {console.log('Success');
+        this.props.editReservationById(changedReservation).then(() => {
         message.success({
           type: 'error',
           content: 'Status successfully changed',
