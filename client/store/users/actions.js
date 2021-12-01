@@ -125,6 +125,7 @@ export function verifyUser(authToken) {
 export function lookupUserInStorage() {
     return async function (dispatch) {
         return new Promise((resolve, reject) => {
+            try {
             const hash = localStorage.getItem('authToken');
 
             if (hash !== null) {
@@ -140,7 +141,11 @@ export function lookupUserInStorage() {
                 })
             } else {
                 dispatch({type: LOOKUP_USER_IN_STORAGE_FAILED, error: 'User token is not saved in cookie'});
-                reject(null);
+                reject(null)
+            }
+        } catch (err) {
+                dispatch({type: LOOKUP_USER_IN_STORAGE_FAILED, error: 'User token is not saved in cookie'});
+                reject(null)
             }
         });
     }

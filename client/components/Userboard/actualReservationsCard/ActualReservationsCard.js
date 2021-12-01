@@ -18,7 +18,7 @@ class MiddleCard extends React.Component {
         this.state = {
             data: [],
         };
-        
+
         let query = this.props.loggedUser && ("user_id=" + this.props.loggedUser.id)
 
         this.props.fetchReservations(query).then(
@@ -29,10 +29,8 @@ class MiddleCard extends React.Component {
           (err) => {
             this.setState({errMsg: err})
           }
-  
         );
     }
-    
     getName(params) {
       return params.row.trip.name;
     }
@@ -54,7 +52,7 @@ class MiddleCard extends React.Component {
         { field: "name", headerName: "Trip", width: 340, align: "left", valueGetter: this.getName,},
         { field: "start_time", headerName: "Start time", width: 300, align: "left", valueGetter: this.getTime,},
         { field: "delay", headerName: "Delay", width: 120, align: "left", valueGetter: this.getDelay,},
-        { field: "status", headerName: "Status", width: 120, align: "left", valueGetter: this.getStatus,},  
+        { field: "status", headerName: "Status", width: 120, align: "left", valueGetter: this.getStatus,},
       ];
 
     render() {
@@ -63,7 +61,6 @@ class MiddleCard extends React.Component {
             <Card title="Actual reservations" bordered={false}>
                 <div className={styles.userShow}>
                     <div className={styles.carrierList}>
-                        
                     <ResponsiveContainer width="100%">
                         <DataGrid
                             rows={this.state.data}

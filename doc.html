@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0070)https://www.fit.vutbr.cz/study/courses/IIS/private/projekt/doc.html.cs -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
-    
+
     <title>Projekt IIS documentation</title>
     <style type="text/css">
     	table { border-collapse: collapse; }
@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<!-- Zkontrolujte pros�m nastaven� k�dov�n� v hlavi�ce dokumentu 
+<!-- Zkontrolujte pros�m nastaven� k�dov�n� v hlavi�ce dokumentu
      podle pou�it�ho editoru -->
 
 <h1>Public transport</h1> <!-- Nahradte n�zvem sv�ho zad�n� -->
@@ -19,16 +19,16 @@
 <dl>
 	<dt>Authors</dt>
 	<dd>Pastushenko Vladislav<!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
-	    <a href="mailto:xpastu01@stud.fit.vutbr.cz">xpastu01@stud.fit.vutbr.cz</a> -
-		Frontend(10%) a Backend(95%): writing logic, setting up a database, drawing up the interaction of the main modules of the project
+	    <a href="mailto:xpastu01@stud.fit.vutbr.cz">xpastu04@stud.fit.vutbr.cz</a> -
+		Frontend(15%), Backend(80%): writing logic, setting up a database, drawing up the interaction of the main modules of the project, index page and reservations in FE
 	</dd>
-	<dd>Rozhevnikov Dmitrii <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
-	    <a href="mailto:xkozhe00@stud.fit.vutbr.cz">xkozhe00@stud.fit.vutbr.cz</a> - 
-		Frontend(85%): writing the main pages and components of the project, design selection, linking the main modules of the project, writing documentation
+	<dd>Kozhevnikov Dmitrii <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
+	    <a href="mailto:xkozhe00@stud.fit.vutbr.cz">xkozhe00@stud.fit.vutbr.cz</a> -
+		Frontend(85%) Backend(10%): writing the main pages and components of the project, design selection, linking the main modules of the project, writing documentation, admin and userboard FE
 	</dd>
   <dd>Senichak Yahor <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
-	    <a href="mailto:xsenic00@stud.fit.vutbr.cz">xsenic00@stud.fit.vutbr.cz</a> - 
-		Frontend(5%) a Backend(5%): Mascot
+	    <a href="mailto:xsenic00@stud.fit.vutbr.cz">xsenic00@stud.fit.vutbr.cz</a> -
+		Frontend(5%), Backend(10%), Testing, Documentation: Mascot
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="http://www.stud.fit.vutbr.cz/~xautor01/IIS">WE NEED URL!</a></dd>
@@ -48,21 +48,21 @@
 
 <h2>Implementation</h2>
 <h3>Backend</h3>
- <p>In this project, the backend was executed on ExpressJS to the MVC pattern.</p> 
+ <p>In this project, the backend was executed on ExpressJS to the MVC pattern.</p>
  <p>In the root folder <i>api</i> there is a file <strong>.env</strong> in which there is configuration data, such as passwords, URL, etc.</p>
- <p>The main implementation files are located in the folder<strong>server</strong> 
+ <p>The main implementation files are located in the folder<strong>server</strong>
 	The folder <i>server</i> contains a file <strong>app.js</strong> with the configuration settings for ExpressJS.
-	The file <strong>mysql.js</strong> contains a class <i>MySQL</i> that is used to connect to the database. 
+	The file <strong>mysql.js</strong> contains a class <i>MySQL</i> that is used to connect to the database.
 	It contains a constructor in which we use the <i>bookshelf</i> to connect to the database and interact with it,  and we also use <i>knex</i>.</p>
- <p>The file <stong>routes.js</stong> contains the main routes of our backend available for external connection. 
+ <p>The file <stong>routes.js</stong> contains the main routes of our backend available for external connection.
 	These routes are divided into groups according to the models that are used in the database.</p>
  <p>There are also folders <i>controllers, model, utils</i>.</p>
- <p>The folder <i>controller</i> contains all controllers for each database entity. 
+ <p>The folder <i>controller</i> contains all controllers for each database entity.
 	The controller is called from the routes and then processes the received data and sends a request to the model and sends a request to the model, which are located in the folder <i>model</i>.</p>
  <p>In the <i>model</i> folder there is a file <strong>baseModel.js</strong> in which  represented the parent class <i>BaseModel</i>.
-	This class has basic functions that are often used by other models. 
+	This class has basic functions that are often used by other models.
 	The other files contain the implementation of independent modules in which queries to the database are generated.</p>
- <p>There is also a folder <i>public</i> containing all public pages. 
+ <p>There is also a folder <i>public</i> containing all public pages.
 	The subfolder <i>email-templates</i> contains templates for sending emails.</p>
 
 <h3>Frontend</h3>
@@ -95,11 +95,10 @@
 		<li>Footer and navigator for moving the user around the site</li>
 		<li>Special design</li>
 	</ul>
-	
 
 <h2>Installation</h2>
 
-Strucne popiste: 
+Strucne popiste:
 <ul>
 <li>postup instalace na server,</li>
 <li>softwarove pozadavky (verze PHP apod.),</li>
