@@ -55,10 +55,8 @@ class NormalLoginForm extends React.Component {
 
     onFinish = (values) => {
       delete values.remember
-      console.log('Loggining user with cerditinals', values)
       this.props.loginUser(values).then(
         (res) => {
-          console.log(res)
           message.open(
             {
               type: 'success',

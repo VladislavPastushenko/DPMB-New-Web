@@ -24,7 +24,6 @@ class TripList extends React.Component {
 
         this.props.fetchTrips(query).then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -42,7 +41,7 @@ class TripList extends React.Component {
       delete changedDelay.stops
       changedDelay.delay = value
 
-      this.props.editTripById(changedDelay).then(() => {console.log('Success'); 
+      this.props.editTripById(changedDelay).then(() => {
         message.success({
           type: 'error',
           content: 'Delay successfully changed',
@@ -64,7 +63,7 @@ class TripList extends React.Component {
       delete changedTrip.stops
       changedTrip.status = value
 
-      this.props.editTripById(changedTrip).then(() => {console.log('Success');
+      this.props.editTripById(changedTrip).then(() => {
       message.success({
         type: 'error',
         content: 'Status successfully changed',

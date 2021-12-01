@@ -17,7 +17,6 @@ class UserVerifyPage extends React.Component {
         if (this.props.authToken) {
             this.props.verifyUser(this.props.authToken).then(
                 () => {
-                    console.log('verified')
                     window.localStorage.setItem('authToken', this.props.authToken)
                 },
                 (err) => {

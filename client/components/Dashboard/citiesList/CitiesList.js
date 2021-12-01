@@ -21,7 +21,6 @@ class CitiesList extends React.Component {
 
         this.props.fetchCities().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -33,7 +32,6 @@ class CitiesList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      //console.log(id)
       this.props.deleteCity(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
@@ -45,7 +43,6 @@ class CitiesList extends React.Component {
         
 
       )
-      //this.setState(this.state.data.filter((item) => item.id !== id));
     };
 
     showModal = () => {

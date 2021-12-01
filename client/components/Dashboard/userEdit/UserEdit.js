@@ -60,7 +60,7 @@ class UserEdit extends React.Component {
                     }}
                         onFinish={this.onFinish}
                     >
-                    {console.log(this.props.user)}
+                    
                         <div className={'fontSizeXs'}>
                             Email:
                         </div>

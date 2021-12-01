@@ -29,7 +29,6 @@ class NewCarrier extends React.Component {
     
             this.props.createCarrier(data).then(
                 (res) => {
-                    console.log(res);
                     this.setState({isSuccessModalVisible: true});
                     e.target.elements.name.value = null;
                 },

@@ -15,7 +15,6 @@ export function fetchCities() {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/cities', method: 'GET'}).then(res => {
-                    //console.log('res is', res)
                     dispatch({type: FETCH_CITIES_SUCCESS, data: res});
                     resolve(res);
                 })

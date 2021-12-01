@@ -19,7 +19,6 @@ export function createReservation(data) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/reservations', method: 'POST', data}).then(res => {
-                    //console.log('res is', res)
                     dispatch({type: CREATE_RESERVATIONS_SUCCESS, res: res});
                     resolve(res);
                 })
@@ -36,7 +35,6 @@ export function fetchReservations(query = '') {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/reservations?' + query, method: 'GET'}).then(res => {
-                    console.log('res is', res)
                     dispatch({type: FETCH_RESERVATIONS_SUCCESS, data: res});
                     resolve(res);
                 })
@@ -88,7 +86,6 @@ export function editReservationById(data) {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/reservations/' + data.id, method: 'POST', data}).then(res => {
-                    console.log('res for editing', res)
                     if (res === 'OK') {
                         dispatch({type: EDIT_RESERVATIONS_SUCCESS, res: res});
                         resolve(res);
