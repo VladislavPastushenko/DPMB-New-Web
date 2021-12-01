@@ -25,7 +25,7 @@ class CitiesController {
                     let loggedUser = row.toJSON();
                     if (loggedUser.role !== 'user') {
                         //...
-                        return new Orm().getOrm().carrierModel
+                        return new Orm().getOrm().cityModel
                             .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
                     } else {
                         res.status(403).send("User doesn't have rights edit this user");
