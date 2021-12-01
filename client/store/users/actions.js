@@ -25,6 +25,9 @@ export const EDIT_USER_FAILED = 'EDIT_FAILED'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_FAILED  = 'LOGOUT_FAILED'
 
+export const DELETE_USER_SUCCESS = 'DELETE_STOP_SUCCESS'
+export const DELETE_USER_FAILED = 'DELETE_STOP_FAILED'
+
 const api = new Api();
 
 

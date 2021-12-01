@@ -104,7 +104,7 @@ class RouteItem extends React.Component {
                         extra={[
                             <Button key='closeButton' onClick={() => {this.setState({isModalVisible: false, res: null})}}> Сlose </Button>,
                         ]}
-                    />,
+                    />
                     </div>}
                 </Modal>
                 </div>
