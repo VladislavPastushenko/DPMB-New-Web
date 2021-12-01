@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./topbar.module.sass"
-import { Drawer, Modal,} from 'antd'
+import { message, Modal,} from 'antd'
+import { logoutUser } from "../../../store/users/actions";
+import {connect} from "react-redux";
+import Router from 'next/router'
 
-export default class Topbar extends React.Component {
+class Topbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,6 +31,27 @@ export default class Topbar extends React.Component {
         });
     };
 
+    logout = (values) => {  
+        this.props.logoutUser(values).then(
+          (res) => {
+            console.log(res)
+            message.open(
+              {
+                type: 'success',
+                content: 'You were successfully loggout in',
+                duration: 3,
+                onClose: () => {Router.push('/')}
+              }
+            )
+            window.location.reload(false)
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+  
+        )
+  
+      };
 
     render() {
         return (
@@ -40,20 +64,11 @@ export default class Topbar extends React.Component {
                     </div>
                     <div className={styles.topRight}>
 
-                        <a className={'fontSizeSm'} onClick={this.showDrawer}>
+                        <a className={'fontSizeSm'} onClick={() => {this.setState({visible: false}); this.setState({isModalVisible: true})}}>
                             Logout
                         </a>
-                        <Drawer
-                            placement="right"
-                            closable={true}
-                            onClose={this.onClose}
-                            visible={this.state.visible}
-                            getContainer={true}
-                            style={{ position: 'absolute'}}
-                            >
-                            <button className={styles.topbarButton} onClick={() => {this.setState({visible: false}); this.setState({isModalVisible: true})}}>Logout</button>
-                        </Drawer>
-                        <Modal title="Exit" visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleOk}>
+                        
+                        <Modal title="Exit" visible={this.state.isModalVisible} onOk={this.logout} onCancel={this.handleOk}>
                             <p>Are you sure you want to get out?</p>
                         </Modal>
                     </div>
@@ -62,3 +77,11 @@ export default class Topbar extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        users: state.users.res,
+    }
+  }
+export default connect(mapStateToProps, {logoutUser
+  }) (Topbar);

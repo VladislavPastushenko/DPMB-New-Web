@@ -9,6 +9,9 @@ export const FETCH_RESERVATIONS_FAILED = 'FETCH_RESERVATIONS_FAILED'
 export const EDIT_RESERVATIONS_SUCCESS = 'EDIT_RESERVATIONS_SUCCESS'
 export const EDIT_RESERVATIONS_FAILED = 'EDIT_RESERVATIONS_FAILED'
 
+export const DELETE_RESERVATION_SUCCESS = 'DELETE_RESERVATION_SUCCESS'
+export const DELETE_RESERVATION_FAILED = 'DELETE_RESERVATION_FAILED'
+
 const api = new Api();
 
 export function createReservation(data) {
@@ -97,6 +100,27 @@ export function editReservationById(data) {
                 })
             } catch (error) {
                     dispatch({type: EDIT_RESERVATIONS_FAILED, error: error});
+                    reject(error);
+                }
+            })
+    };
+}
+
+export function deleteReservation(id) {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/reservations/' + id, method: 'DELETE'}).then(res => {
+                    if (res === "OK") {
+                        dispatch({type: DELETE_RESERVATION_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: DELETE_RESERVATION_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                    dispatch({type: DELETE_RESERVATION_FAILED, error: error});
                     reject(error);
                 }
             })

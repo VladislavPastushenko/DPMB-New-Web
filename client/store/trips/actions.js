@@ -5,6 +5,8 @@ export const FETCH_TRIPS_SUCCESS = 'FETCH_TRIPS_SUCCESS'
 export const FETCH_TRIPS_FAILED = 'FETCH_TRIPS_FAILED'
 export const CREATE_TRIP_SUCCESS = 'CREATE_TRIP_SUCCESS'
 export const CREATE_TRIP_FAILED = 'CREATE_TRIP_FAILED'
+export const EDIT_TRIPS_SUCCESS = 'EDIT_TRIPS_SUCCESS'
+export const EDIT_TRIPS_FAILED = 'EDIT_TRIPS_FAILED'
 
 const api = new Api();
 
@@ -60,6 +62,30 @@ export function fetchTripsByFromAndToIds(from_id, to_id, query='') {
                 })
             } catch (error) {
                     dispatch({type: FETCH_TRIPS_FAILED, error: error});
+                    reject(error);
+                }
+            })
+    };
+}
+
+export function editTripById(data) {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                console.log('sending data', data)
+                api.call({url: '/trip/' + data.id, method: 'POST', data}).then(res => {
+                    //console.log('res for editing', res)
+                    if (res === 'OK') {
+                        dispatch({type: EDIT_TRIPS_SUCCESS, res: res});
+                        resolve(res);
+                    }
+                    else {
+                        dispatch({type: EDIT_TRIPS_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                    dispatch({type: EDIT_TRIPS_FAILED, error: error});
                     reject(error);
                 }
             })

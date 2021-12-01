@@ -30,6 +30,46 @@ class TripsController {
             .create(req.body).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
     }
 
+    static editById(req, res, next) {
+        //console.log('Changing trip', req.params.id)
+        if(req.session.loggedToken) {
+            return new Orm().getOrm().userModel
+                .getUserByAuthToken(req.session.loggedToken)
+                .then((row, err) => {
+                    let loggedUser = row.toJSON();
+                    return new Orm().getOrm().tripModel
+                        .getById(req.params.id)
+                        .then((row, err) => {
+                            let trip = row.toJSON();
+                            req.body.start_time = trip.start_time
+                            req.body.end_time = trip.end_time
+                            if (loggedUser.role !== 'user') {
+                                return new Orm().getOrm().tripModel
+                                    .update(req.body)
+                                    .then((row) => {
+                                        let updTrip = row.toJSON();
+                                        res.status(200).send('OK');
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                        res.status(500).send(err);
+                                    });
+                            } else {
+                                res.status(403).send("User doesn't have rights edit this user");
+                            }
+
+                        })
+                        .catch(err => {
+                            if(err.message == "EmptyResponse") {
+                                res.status(404).send("Trip not found");
+                            }
+                        })
+                });
+        } else {
+            res.status(403).send('User not logged in');
+        }
+    }
+
     static removeById(req, res, next) {
         if(req.session.loggedToken) {
             return new Orm().getOrm().userModel

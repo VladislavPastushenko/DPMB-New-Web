@@ -8,6 +8,8 @@ import ActualReservationsCard from "../components/Userboard/actualReservationsCa
 import EditUser from "../components/Userboard/editUser/EditUser";
 import {lookupUserInStorage, fetchLoggedUser} from '../store/users/actions'
 import {LoadingOutlined} from '@ant-design/icons'
+import Router from 'next/router'
+
 
 class Userboard extends React.Component {
     constructor(props) {

@@ -18,8 +18,7 @@ class MiddleCard extends React.Component {
         this.state = {
             data: [],
         };
-
-        console.log(this.props)
+        
         let query = this.props.loggedUser && ("user_id=" + this.props.loggedUser.id)
 
         this.props.fetchReservations(query).then(
@@ -34,62 +33,30 @@ class MiddleCard extends React.Component {
         );
     }
     
-
     getName(params) {
-      //console.log(params.row.trip.name)
       return params.row.trip.name;
     }
 
     getTime(params) {
-      //console.log(params.value.name)
-      return params.row.trip.start_time;
+      return new Date(params.row.trip.start_time).toLocaleString('default', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })
     }
 
     getDelay(params) {
-      //console.log(params.value.name)
       return params.row.trip.delay;
     }
 
     getStatus(params) {
-      //console.log(params.value.name)
       return params.row.trip.status;
     }
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        {
-          field: "name",
-          headerName: "Trip",
-          width: 320,
-          align: "left",
-          valueGetter: this.getName,
-        },
-        {
-            field: "start_time",
-            headerName: "Start time",
-            width: 320,
-            align: "left",
-            valueGetter: this.getTime,
-
-        },
-        {
-          field: "delay",
-          headerName: "Delay",
-          width: 120,
-          align: "left",
-          valueGetter: this.getDelay,
-
-      },
-        {
-            field: "status",
-            headerName: "Status",
-            width: 100,
-            align: "left",
-            valueGetter: this.getStatus,
-        },
-        
-        
+        { field: "name", headerName: "Trip", width: 340, align: "left", valueGetter: this.getName,},
+        { field: "start_time", headerName: "Start time", width: 300, align: "left", valueGetter: this.getTime,},
+        { field: "delay", headerName: "Delay", width: 120, align: "left", valueGetter: this.getDelay,},
+        { field: "status", headerName: "Status", width: 120, align: "left", valueGetter: this.getStatus,},  
       ];
+
     render() {
       if (this.state.data.length > 0) {
         return (
@@ -107,11 +74,6 @@ class MiddleCard extends React.Component {
                         />
                     </ResponsiveContainer>
                     </div>
-                    <div>
-                      <div className={styles.container}>
-                          <button className={styles.historyShowButton}>Go on a trip</button>
-                      </div>
-                      </div>
                 </div>
             </Card>
         );
@@ -126,12 +88,7 @@ class MiddleCard extends React.Component {
                         <LoadingOutlined/>
                       </div>
                     </ResponsiveContainer>
-                    </div>
-                    <div>
-                      <div className={styles.container}>
-                          <button className={styles.historyShowButton}>Go on a trip</button>
-                      </div>
-                      </div>
+                    </div>                  
                 </div>
             </Card>
           );

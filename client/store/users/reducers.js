@@ -24,6 +24,9 @@ DELETE_USER_FAILED,
 EDIT_USER_SUCCESS,
 EDIT_USER_FAILED,
 
+LOGOUT_SUCCESS,
+LOGOUT_FAILED,
+
 } from "./actions";
 
 function users(state = {
@@ -36,12 +39,14 @@ function users(state = {
     switch (action.type) {
         case SIGNUP_SUCCESS:
         case LOGIN_SUCCESS:
+        case LOGOUT_SUCCESS:
         case VERIFY_USER_SUCCESS:
         case EDIT_USER_SUCCESS:
             return Object.assign({}, state, {res: action.res});
 
         case SIGNUP_FAILED:
         case LOGIN_FAILED:
+        case LOGOUT_FAILED:    
         case VERIFY_USER_FAILED:
         case GET_LOGGED_USER_FAILED:
         case EDIT_USER_FAILED:

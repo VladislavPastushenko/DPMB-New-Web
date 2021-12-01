@@ -34,7 +34,7 @@ export default class UserModel extends BaseModel {
     }
 
     getUserByAuthToken(authToken) {
-        console.log('GETTING USER')
+        console.log('GETTING USER BY AUTH TOKEN')
         return this.model.query(function(qb) {
             qb.select('*');
             qb.where('auth_token', authToken);
@@ -46,6 +46,7 @@ export default class UserModel extends BaseModel {
     }
 
     getUserForLogin(data) {
+        console.log('GETTING USER FOR LOGIN')
         data.password = this.createHash(data.password, 'sha1');
         return this.model.query(function(qb) {
             qb.select('*')

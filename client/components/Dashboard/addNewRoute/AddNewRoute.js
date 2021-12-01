@@ -25,7 +25,7 @@ class AddNewRoute extends React.Component {
 
         this.props.fetchCarriers().then(
             (res) => {
-              //console.log(res)
+              console.log(res)
               this.setState({carriers: res})
             },
             (err) => {
@@ -65,17 +65,14 @@ class AddNewRoute extends React.Component {
 
         let route_items = this.formRef.current.getFieldsValue().sights
 
-        console.log('data for server', data)
         this.props.createTrip(data).then(
             (res) => {
-                console.log('Get response from server',res)
+                //console.log('Get response from server',res)
                 for (let i = 0; i < route_items.length; i++) {
                     route_items[i].trip_id = res.id
                     route_items[i].position = i
                 }
-                console.log("route_items")
-
-                console.log(route_items)
+    
                 this.props.createRouteItems(route_items).then(
                     (res) => {
                         console.log(res);

@@ -19,14 +19,14 @@ class ReservationsController {
 
     static create(req, res, next) {
         req.body.status = 'unpaid'
-        console.log('req.session.loggedToken',req.session.loggedToken)
+        //console.log('req.session.loggedToken',req.session.loggedToken)
         if (req.session.loggedToken) {
             return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
                     let user = row.toJSON()
                     req.body.user_id = user.id
-                    console.log(req.body)
+                    //console.log(req.body)
                     return new Orm().getOrm().reservationModel
                         .create(req.body).then((row) => {
                             res.status(200).send(row.toJSON())
@@ -51,13 +51,13 @@ class ReservationsController {
             return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
-                    console.log('changing reservation by user', row.toJSON())
+                    //console.log('changing reservation by user', row.toJSON())
                     let loggedUser = row.toJSON();
-                    console.log('Getting reservation ', req.params.id)
+                    //console.log('Getting reservation ', req.params.id)
                     return new Orm().getOrm().reservationModel
                         .getById(req.params.id)
                         .then((row, err) => {
-                            console.log('Changing reservation ', row.toJSON())
+                            //console.log('Changing reservation ', row.toJSON())
                             let reservation = row.toJSON();
                             if (loggedUser.role !== 'user') {
                                 return new Orm().getOrm().reservationModel

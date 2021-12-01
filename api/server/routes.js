@@ -20,14 +20,11 @@ const routes = (route) => {
     route.route('/users')
         .get(UsersController.getAll)
 
-    route.route('/users/customers')
-        .get(UsersController.getCustomers)
-
-    route.route('/users/personnel')
-        .get(UsersController.getPersonnel)
-
     route.route('/users/sign-up')
         .post(UsersController.signup)
+
+    route.route('/users/login')
+        .post(UsersController.login)
 
     route.route('/users/:id')
         .get(UsersController.getById)
@@ -37,8 +34,6 @@ const routes = (route) => {
     route.route('/users/verify/:authToken')
         .get(UsersController.verify)
 
-    route.route('/users/login')
-        .post(UsersController.login)
 
     route.route('/users/logout')
         .get(UsersController.logout)
@@ -82,6 +77,7 @@ const routes = (route) => {
 
     route.route('/trip/:id')
         .get(TripsController.getById)
+        .post(TripsController.editById)
         .delete(TripsController.removeById)
 
     route.route('/trips/:from_id/:to_id')

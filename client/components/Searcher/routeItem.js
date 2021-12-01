@@ -28,7 +28,6 @@ class RouteItem extends React.Component {
             },
             err => {
                 console.log(err)
-                // message.error({content: err, duration: 2})
                 this.setState({res: null})
             }
         )
@@ -105,7 +104,7 @@ class RouteItem extends React.Component {
                         extra={[
                             <Button key='closeButton' onClick={() => {this.setState({isModalVisible: false, res: null})}}> Сlose </Button>,
                         ]}
-                    />,
+                    />
                     </div>}
                 </Modal>
                 </div>

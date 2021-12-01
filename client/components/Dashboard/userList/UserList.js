@@ -30,7 +30,7 @@ class UserList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log(id)
+      //console.log(id)
       this.props.deleteUser(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
@@ -40,7 +40,6 @@ class UserList extends React.Component {
           })
         }
       )
-      //this.setState(this.state.data.filter((item) => item.id !== id));
     };
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
@@ -76,6 +75,7 @@ class UserList extends React.Component {
           },
         },
       ];
+
     render() {
       if (this.state.data.length > 0) {
         return (
