@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { loginUser } from "../store/users/actions";
 import Router from 'next/router'
+import Link from 'next/link'
 
 
 const formItemLayout = {
@@ -120,15 +121,18 @@ class NormalLoginForm extends React.Component {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-          <a className="login-form-forgot" href="">
+          <Link href='#'>
+          <a className="login-form-forgot">
             Forgot password
           </a>
+          </Link>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button> &nbsp;
-          Or <a href="/sign-up">register now!</a>
+
+          Or <Link href='/sign-up'><a>register now!</a></Link>
         </Form.Item>
       </Form>
     );

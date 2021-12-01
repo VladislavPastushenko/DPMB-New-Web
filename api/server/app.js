@@ -41,7 +41,12 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     origin:[
-        'http://localhost:3000',],
+        'http://localhost:3000',
+        'http://167.172.175.231:3000',
+        'http://167.172.175.231',
+        'http://167.172.175.231:80',
+        'https://167.172.175.231'
+    ],
     methods:['GET','POST','PUT','DELETE'],
     credentials: true // enable set cookie
 }));
