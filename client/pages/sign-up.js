@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import 'antd/dist/antd.min.css';
 import styles from './styles/sign-up.module.sass'
 import { signup } from "../store/users/actions";
+import Link from "next/link";
 import {
     Form,
     Input,
@@ -261,9 +262,11 @@ class RegistrationForm extends React.Component {
         title="Your registration was successful!"
         subTitle="A confirmation email has been sent to your email address"
         extra={[
+        <Link href='/' key='back home'>
         <Button type="primary" key="console">
           Main Page
         </Button>,
+        </Link>
         ]}
       />
       );

@@ -29,7 +29,7 @@ class IndexPage extends React.Component {
                 </Head>
                 <div className={styles.videoContainer} ref={this.myRef}>
                 <video autoPlay={true} muted loop className={styles.myVideo}>
-                    <source src="/train.mp4"/>
+                    <source src="/train-min.mp4"/>
                 </video>
                 <div className={styles.videoOverlay}/>
 
