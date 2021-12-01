@@ -41,6 +41,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
     origin:[
+        'http://localhost',
         'http://localhost:3000',
         'http://localhost:80',
         'http://167.172.175.231:3000',

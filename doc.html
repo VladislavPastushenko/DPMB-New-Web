@@ -20,15 +20,15 @@
 	<dt>Authors</dt>
 	<dd>Pastushenko Vladislav<!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
 	    <a href="mailto:xpastu01@stud.fit.vutbr.cz">xpastu04@stud.fit.vutbr.cz</a> -
-		Frontend(15%), Backend(80%): writing logic, setting up a database, drawing up the interaction of the main modules of the project, index page and reservations in FE
+		Frontend(10%), Backend(80%): writing logic, setting up a database, drawing up the interaction of the main modules of the project, index page and reservations in FE
 	</dd>
 	<dd>Kozhevnikov Dmitrii <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
 	    <a href="mailto:xkozhe00@stud.fit.vutbr.cz">xkozhe00@stud.fit.vutbr.cz</a> -
-		Frontend(85%) Backend(10%): writing the main pages and components of the project, design selection, linking the main modules of the project, writing documentation, admin and userboard FE
+		Frontend(80%) Backend(10%): writing the main pages and components of the project, design selection, linking the main modules of the project, writing documentation, admin and userboard FE
 	</dd>
   <dd>Senichak Yahor <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
 	    <a href="mailto:xsenic00@stud.fit.vutbr.cz">xsenic00@stud.fit.vutbr.cz</a> -
-		Frontend(5%), Backend(10%), Testing, Documentation: Mascot
+		Frontend(10%), Backend(10%), Testing, Documentation, DB: writing documentation, setting up the database, filling the database, help in BE and FE
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="http://167.172.175.231/">http://167.172.175.231/</a></dd>
@@ -39,10 +39,10 @@
 <h2>Users of the testing system</h2>
 <table>
 <tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
-<tr><td>admin</td><td>admin</td><td>Administrator</td></tr>
-<tr><td>carrier</td><td>carrier</td><td>Carrier</td></tr>
-<tr><td>personnel</td><td>personnel</td><td>Personnel</td></tr>
-<tr><td>user</td><td>user</td><td>User</td></tr>
+<tr><td>admin@admin.com</td><td>Admin123</td><td>Administrator</td></tr>
+<tr><td>carrier@carrier.com</td><td>Carrier123</td><td>Carrier</td></tr>
+<tr><td>personnel@personnel.com</td><td>Personnel123</td><td>Personnel</td></tr>
+<tr><td>user@user.com</td><td>user</td><td>User1234</td></tr>
 
 </tbody></table>
 
@@ -103,7 +103,7 @@
 	The authorization token is saved to the session on the backend to verify the user's authorization,
 	and additionally we save it on the frontend in cookies to protect data loss.</p>
  <p>User roles are clearly observed, each user can use only those functions and see those pages to which he has access.
-	The admin panel is only available to users who are logged in and have the rights to do so, according to their role. 
+	The admin panel is only available to users who are logged in and have the rights to do so, according to their role.
 	The button for access to the admin panel can be found in the footer.</p>
  <p>In the upper right corner there is a dynamic button <i>Login</i> that dynamically changes for authorized users and opens access to the user panel.</p>
 	<ul>
@@ -117,9 +117,10 @@
 
 Strucne popiste:
 <ul>
-<li>postup instalace na server,</li>
-<li>softwarove pozadavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat databazi, ...</li>
+<li>From root folder of project</li>
+<li>(cd client; sudo npm install &); (cd api; sudo npm install &);</li>
+<li>(cd client; sudo npm run start &); (cd api; sudo npm run start &);</li>
+<li>FE: localhost, BE: localhost:8000</li>
 </ul>
 
 <h2>Known problems</h2>
