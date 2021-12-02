@@ -6,6 +6,7 @@ import TripsController from "./controllers/tripsController";
 import RouteItemsController from "./controllers/routeItemsController";
 import CarriersController from "./controllers/carriersController";
 import ReservationsController from "./controllers/reservationsController";
+import QuestionsFromUsersController from "./controllers/questionFromUserController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -124,6 +125,10 @@ const routes = (route) => {
     route.route('/posts/:id')
         .get(PostsController.get)
 
+    // QUESTIONS_FROM_USERS
+    route.route('/questions-from-users')
+        .get(QuestionsFromUsersController.getAll)
+        .post(QuestionsFromUsersController.create)
 
 };
 
