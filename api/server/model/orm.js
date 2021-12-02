@@ -7,6 +7,7 @@ import TripModel from "./tripModel";
 import RouteItemModel from "./routeItemModel";
 import CarrierModel from "./carrierModel";
 import ReservationModel from "./reservationModel";
+import QuestionFromUserModel from "./questionFromUserModel";
 
 export default class Orm {
 
@@ -29,6 +30,8 @@ export default class Orm {
         const routeItemModel = new RouteItemModel({orm: orm, modelName: 'RouteItem', tableName: 'route_items', options: {} })
         const carrierModel = new CarrierModel({orm: orm, modelName: 'Carrier', tableName: 'carriers', options: {} })
         const reservationModel = new ReservationModel({orm: orm, modelName: 'Reservation', tableName: 'reservations', options: {} })
+        const questionFromUserModel = new QuestionFromUserModel({orm: orm, modelName: 'QuestionFromUser', tableName: 'questions_from_users', options: {} })
+
 
         this._orm = {
             postModel: postModel,
@@ -38,7 +41,9 @@ export default class Orm {
             tripModel: tripModel,
             routeItemModel: routeItemModel,
             carrierModel: carrierModel,
-            reservationModel: reservationModel
+            reservationModel: reservationModel,
+            questionFromUserModel: questionFromUserModel,
+
         };
 
     }
