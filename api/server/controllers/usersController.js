@@ -9,15 +9,10 @@ class UsersController {
         return new Orm().getOrm().userModel
         .getUserByAuthToken(req.session.loggedToken)
             .then((row, err) => {
-
                 let user = row.toJSON();
-                if (user.role !== 'user') {
-                    return new Orm().getOrm().userModel.getAll(req.query)
-                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
-                }
-                else {
-                    res.status(403).send("User doesn't have rights to access this route");
-                }
+                console.log(user)
+                return new Orm().getOrm().userModel.getAll(req.query)
+                    .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
             })
             .catch((err) => {
                 if (err.message == "EmptyResponse") {
@@ -43,19 +38,14 @@ class UsersController {
                         .then((row, err) => {
                             let user = row.toJSON();
                             req.body.id = user.id;
-                            // Only admin can change role
+                            // Only admin can change role and status
                             if ((loggedUser.role !== 'admin')) {
                                 req.body.role = user.role
-                            }
-                            // Carrier and personnel can change status only for customers
-                            if ((loggedUser.role === 'carrier' || loggedUser.role === 'personnel') && user.role !== 'user') {
                                 req.body.is_active = user.is_active
                             }
-                            // Admin can edit everyone, carrier can change personnel, carrier and personnel can edit customers, customer can edit himself
+                            // Admin can edit everyone, personnel can edit himself
                             if (
                                 (loggedUser.role === 'admin') ||
-                                (loggedUser.role === 'carrier' && user.role === 'personnel') ||
-                                ((loggedUser.role === 'personnel' || loggedUser.role === 'carrier') && user.role === 'user') ||
                                 (loggedUser.id === user.id || user.is_active === 1)
                             ) {
                                 return new Orm().getOrm().userModel
@@ -242,13 +232,9 @@ class UsersController {
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
                     let loggedUser = row.toJSON();
-                    if ((loggedUser.role === 'admin') ||
-                        (loggedUser.role === 'carrier' && user.role === 'personnel') ||
-                        ((loggedUser.role === 'personnel' || loggedUser.role === 'carrier') && user.role === 'user') ||
-                        (loggedUser.id === user.id || user.is_active === 1)) {
-                        //...
+                    if ((loggedUser.role === 'admin')) {
                         return new Orm().getOrm().userModel
-                        .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
+                            .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
                     } else {
                         res.status(403).send("User doesn't have rights edit this user");
                     }
