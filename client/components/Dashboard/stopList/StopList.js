@@ -18,7 +18,6 @@ class StopList extends React.Component {
 
         this.props.fetchStops().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -30,7 +29,6 @@ class StopList extends React.Component {
 
     handleDelete = (params) => {
         let id = params.row.id
-        console.log(id)
         this.props.deleteStop(id).then(
           (res) => {window.location.reload(false)},
           (err) => {
@@ -39,10 +37,7 @@ class StopList extends React.Component {
               duration: 1
             })
           }
-          
-
         )
-        //this.setState(this.state.data.filter((item) => item.id !== id));
       };
     
     columns = [
@@ -50,15 +45,10 @@ class StopList extends React.Component {
         
         { field: "name", headerName: "Stop Name", width: 1030, align: "left",},
         
-        {
-          field: "action",
-          headerName: "Action",
-          width: 150,
+        { field: "action", headerName: "Action", width: 150,
           renderCell: (params) => {
             return (
-              <>
-                
-                
+              <> 
                 <DeleteOutline
                   className={styles.stopListDelete}
                   onClick={() => {

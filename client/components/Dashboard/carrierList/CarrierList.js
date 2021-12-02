@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
 import styles from "./carrierList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
@@ -21,64 +20,36 @@ class CarrierList extends React.Component {
 
         this.props.fetchCarriers().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
             this.setState({errMsg: err})
-          }
-  
-        );
+          });
     }
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log(id)
       this.props.deleteCarrier(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
           message.open({
-            'content': 'Error while deleting',
+            'content': "Error while deleting, or you don't have enough rights to delete carrier",
             duration: 1
           })
         }
-        
       )
-      //this.setState(this.state.data.filter((item) => item.id !== id));
     };
 
     showModal = () => {
       setIsModalVisible(true);
     };
-
-    
-    onStatusChange = (value, options, params) => {
-        console.log("OUR FUNCTION value", value)
-        console.log("OUR FUNCTION options", options)
-        console.log("OUR FUNCTION params", params)
-        let item = params.row
-
-        item.status = value
-
-
-    };
-    
       columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        {
-          field: "name",
-          headerName: "Name",
-          width: 1030,
-          align: "left",
-        },
-        
-        {
-          field: "action",
-          headerName: "Action",
-          width: 150,
+        { field: "name", headerName: "Name", width: 1030, align: "left",},
+        { field: "action", headerName: "Action", width: 150,
           renderCell: (params) => {
             return (
-              <>                
+              <>
                 <DeleteOutline
                   className={styles.carrierListDelete}
                   onClick={() => {
@@ -89,7 +60,7 @@ class CarrierList extends React.Component {
             );
           },
         },
-        
+
       ];
     render() {
       if (this.state.data.length > 0) {

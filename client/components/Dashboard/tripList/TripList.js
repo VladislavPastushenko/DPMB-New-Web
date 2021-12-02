@@ -4,9 +4,12 @@ import ReactDOM from "react-dom";
 import styles from "./tripList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { ResponsiveContainer } from "recharts";
-import { InputNumber } from 'antd'
-import { fetchTrips } from "../../../store/trips/actions";
+import { InputNumber, Select, message, Form, Button } from 'antd'
+import { fetchTrips, editTripById } from "../../../store/trips/actions";
 import { LoadingOutlined } from '@ant-design/icons'
+import { Check } from "@material-ui/icons";
+
+
 
 
 class TripList extends React.Component {
@@ -14,13 +17,13 @@ class TripList extends React.Component {
         super(props);
         this.state = {
             data: [],
+            newDelay: null,
         };
-        console.log(this.props)
+
         let query = this.props.loggedUser.carrier_id && ("carrier_id=" + this.props.loggedUser.carrier_id)
 
         this.props.fetchTrips(query).then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -29,65 +32,113 @@ class TripList extends React.Component {
   
         );
     }
+    
+    onDelayChange = (value, options, params) => {
+      let changedDelay = {...params.row}
+      value = this.state.newDelay
+      delete changedDelay.routeItems
+      delete changedDelay.carrier
+      delete changedDelay.stops
+      changedDelay.delay = value
+
+      this.props.editTripById(changedDelay).then(() => {
+        message.success({
+          type: 'error',
+          content: 'Delay successfully changed',
+          duration: 3
+        })
+      }, err => {
+        message.open({
+          type: 'error',
+          content: 'Something went wrong',
+          duration: 3
+        })
+      })
+    };
+
+    onStatusChange = (value, options, params) => {
+      let changedTrip = {...params.row}      
+      delete changedTrip.routeItems
+      delete changedTrip.carrier
+      delete changedTrip.stops
+      changedTrip.status = value
+
+      this.props.editTripById(changedTrip).then(() => {
+      message.success({
+        type: 'error',
+        content: 'Status successfully changed',
+        duration: 3
+      })}, err => {
+        message.open({
+          type: 'error',
+          content: 'Something went wrong',
+          duration: 3
+        })
+      })
+    };
 
     getVal(params) {
-      //console.log(params.value.name)
       return params.value.name;
     }
 
-    handleDelete = (id) => {
-        this.setState(this.state.data.filter((item) => item.id !== id));
-      };
+    getDelay(params) {
+      return params.value;
+    }
+
+    getTime(params) {
+      return new Date(params.value).toLocaleString('default', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+    }
     
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        
-        { field: "name", headerName: "From - To", width: 210, align: "left",},
-        
-        {
-            field: "carrier",
-            headerName: "Carrier",
-            width: 170,
-            align: "left",
-            valueGetter: this.getVal,
-        },
-        {
-          field: "start_time",
-          headerName: "Start",
-          width: 220,
-          align: "left",
-        },
-        {
-          field: "end_time",
-          headerName: "Finish",
-          width: 220,
-          align: "left",
-        },
-        {
-          field: "capacity",
-          headerName: "Seats",
-          width: 120,
-          align: "left",
-        },
-        {
-          field: "status",
-          headerName: "Status",
-          width: 120,
-          align: "left",
-        },
-        {
-          field: "delay",
-          headerName: "Delay",
-          width: 120,
+        { field: "name", headerName: "From - To", width: 210, align: "left",},       
+        { field: "carrier", headerName: "Carrier", width: 160, align: "left", valueGetter: this.getVal,},
+        { field: "start_time", headerName: "Start", width: 185, align: "left", valueGetter: this.getTime,},
+        { field: "end_time", headerName: "Finish", width: 185, align: "left", valueGetter: this.getTime,},
+        { field: "capacity", headerName: "Seats", width: 120, align: "left",},
+        { field: "status", headerName: "Status", width: 120, align: "left",
           renderCell: (params) => {
             return (
               <>
-                
-                <InputNumber min={0} max={1000} defaultValue={0} style={{ width: 80 }} />
+              <Select
+                defaultValue={params.row.status}
+                style={{
+                  width: 120,
+                  margin: '0 8px',
+                }}
+                onSelect={(value, options) => {
+                  this.onStatusChange(value, options, params)
+                }}
+              >
+                <Select.Option value={'coming'}>Coming</Select.Option>
+                <Select.Option value={'finished'}>Finished</Select.Option>
+                <Select.Option value={'canceled'}>Canceled</Select.Option>
+              </Select>
               </>
             );
           },
         },
+        { field: "delay", headerName: "Delay", width: 200,
+          renderCell: (params) => {            
+            return (
+              <>
+                <Form layout="inline">
+                  <Form.Item >
+                    <InputNumber min={0} max={1000} style={{ width: 80 }} onChange={(value) => this.setState({newDelay: value})} defaultValue={params.row.delay}/>
+
+                  </Form.Item>
+                  <Form.Item >
+                    <Button className={styles.acceptButton} htmlType="submit"  
+                            onClick={(value, options) => {this.onDelayChange(value, options, params)}}>Accept</Button>
+
+                  </Form.Item>
+                </Form>
+            
+              </>
+            );
+          },
+        },
+        
       ];
     render() {
       if (this.state.data.length > 0) {
@@ -133,5 +184,6 @@ const mapStateToProps = state => {
       users: state.users.res,
   }
 }
-export default connect(mapStateToProps, {fetchTrips
+
+export default connect(mapStateToProps, {fetchTrips, editTripById
 }) (TripList);

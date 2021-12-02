@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./sidebar.module.scss"
 import { Home, DirectionsBus, Person, LocalActivity, Report, MonetizationOn, Store, Settings, LocationCity } from "@material-ui/icons";
+import Link from "next/link"
 
 export default class Sidebar extends React.Component {
     constructor(props) {
@@ -28,7 +29,7 @@ export default class Sidebar extends React.Component {
                     <div className={styles.sidebarMenu}>
                         <h3 className={styles.sidebarTitle}>Main Menu</h3>
                         <ul className={styles.sidebarList}>
-                            
+
                             <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('carrierList')}}>
                                 <DirectionsBus className={styles.sidebarIcon}/>
                                 Carriers
@@ -55,11 +56,12 @@ export default class Sidebar extends React.Component {
                     <div className={styles.sidebarMenu}>
                         <h3 className={styles.sidebarTitle}>Staff</h3>
                         <ul className={styles.sidebarList}>
-                            <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('settings')}}>
+                            <Link href='/userboard'>
+                            <li className={styles.sidebarListItem}>
                                 <Settings className={styles.sidebarIcon}/>
-                                Settings
+                                My profile
                             </li>
-                                                        
+                            </Link>
                         </ul>
                     </div>
                 </div>

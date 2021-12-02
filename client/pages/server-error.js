@@ -1,7 +1,7 @@
 import React from "react";
 import Head from 'next/head';
 import styles from './styles/server-error.module.sass'
-
+import { Router } from 'next/router';
 import { Result, Button } from 'antd';
 
 
@@ -33,7 +33,7 @@ export default class ServerError extends React.Component {
                             But don&apos;t worry, we&apos;ll fix it soon
                         </span>
                     }
-                    extra={<Button type="primary">Back Home</Button>}
+                    extra={<Button type="primary" onClick={() => window.location.href = "/"}>Back Home</Button>}
                     className={styles.result}
 
                     />

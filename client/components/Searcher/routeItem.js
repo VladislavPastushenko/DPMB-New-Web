@@ -23,12 +23,10 @@ class RouteItem extends React.Component {
         this.setState({res: 'loading'})
         this.props.createReservation(values).then(
             res => {
-                console.log(res)
                 this.setState({res: res})
             },
             err => {
                 console.log(err)
-                // message.error({content: err, duration: 2})
                 this.setState({res: null})
             }
         )
@@ -105,7 +103,7 @@ class RouteItem extends React.Component {
                         extra={[
                             <Button key='closeButton' onClick={() => {this.setState({isModalVisible: false, res: null})}}> Сlose </Button>,
                         ]}
-                    />,
+                    />
                     </div>}
                 </Modal>
                 </div>

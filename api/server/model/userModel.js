@@ -34,7 +34,6 @@ export default class UserModel extends BaseModel {
     }
 
     getUserByAuthToken(authToken) {
-        console.log('GETTING USER')
         return this.model.query(function(qb) {
             qb.select('*');
             qb.where('auth_token', authToken);
@@ -57,7 +56,6 @@ export default class UserModel extends BaseModel {
 
 
     activateUserById(user_id) {
-        console.log('Activating user')
         return this.model
             .forge()
             .save({

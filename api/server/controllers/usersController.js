@@ -11,50 +11,8 @@ class UsersController {
             .then((row, err) => {
 
                 let user = row.toJSON();
-                if (user.role === 'admin') {
+                if (user.role !== 'user') {
                     return new Orm().getOrm().userModel.getAll(req.query)
-                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
-                }
-                else {
-                    res.status(403).send("User doesn't have rights to access this route");
-                }
-            })
-            .catch((err) => {
-                if (err.message == "EmptyResponse") {
-                    res.status(404).send("User not found");
-                }
-            });
-    }
-
-    static getCustomers(req, res, next) {
-        return new Orm().getOrm().userModel
-        .getUserByAuthToken(req.session.loggedToken)
-            .then((row, err) => {
-
-                let user = row.toJSON();
-                if (user.role === 'admin' || user.role === 'personnel' || user.role === 'carrier') {
-                    return new Orm().getOrm().userModel.getAll({limit: req.query.limit, role: 'user'})
-                        .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
-                }
-                else {
-                    res.status(403).send("User doesn't have rights to access this route");
-                }
-            })
-            .catch((err) => {
-                if (err.message == "EmptyResponse") {
-                    res.status(404).send("User not found");
-                }
-            });
-    }
-
-    static getPersonnel(req, res, next) {
-        return new Orm().getOrm().userModel
-        .getUserByAuthToken(req.session.loggedToken)
-            .then((row, err) => {
-
-                let user = row.toJSON();
-                if (user.role === 'admin' || user.role === 'carrier') {
-                    return new Orm().getOrm().userModel.getAll({limit: req.query.limit, role: 'personnel'})
                         .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
                 }
                 else {
@@ -85,6 +43,15 @@ class UsersController {
                         .then((row, err) => {
                             let user = row.toJSON();
                             req.body.id = user.id;
+                            // Only admin can change role
+                            if ((loggedUser.role !== 'admin')) {
+                                req.body.role = user.role
+                            }
+                            // Carrier and personnel can change status only for customers
+                            if ((loggedUser.role === 'carrier' || loggedUser.role === 'personnel') && user.role !== 'user') {
+                                req.body.is_active = user.is_active
+                            }
+                            // Admin can edit everyone, carrier can change personnel, carrier and personnel can edit customers, customer can edit himself
                             if (
                                 (loggedUser.role === 'admin') ||
                                 (loggedUser.role === 'carrier' && user.role === 'personnel') ||
@@ -102,7 +69,7 @@ class UsersController {
                                         res.status(500).send(err);
                                     });
                             } else {
-                                res.status(403).send("User doesn't have rights edit this user");
+                                res.status(403).send("User doesn't have rights to edit this user");
                             }
 
                         })
@@ -146,7 +113,6 @@ class UsersController {
                 );
             })
             .catch((err) => {
-                console.log(err.message);
 
                 if(err.message.includes('Duplicate entry')) {
                     if(err.message.endsWith('for key \'email\'')) {
@@ -160,18 +126,15 @@ class UsersController {
 
 
     static verify(req, res, next) {
-        console.log('req.params.authToken', req.params.authToken)
         return new Orm().getOrm().userModel
             .getUserByAuthToken(req.params.authToken)
             .then((row, err) => {
                 if(row.toJSON().is_active == 1) {
-                    console.log(row.toJSON())
                     res.status(200).send('User is already verified and active');
                 } else {
                     return new Orm().getOrm().userModel
                         .activateUserById(row.toJSON().id)
                         .then((row, err) => {
-                            console.log('User activated, signing in')
 
                             req.session.loggedToken = req.params.authToken;
 
@@ -180,7 +143,6 @@ class UsersController {
                                 'context': {}
                             }
 
-                            console.log('Sending email')
                             Mailer.sendEmail(
                                 config.parsed.EMAIL_FROM,
                                 row.toJSON().email,
@@ -207,7 +169,6 @@ class UsersController {
             .getUserForLogin(req.body)
             .then((row, err) => {
                 if(row) {
-                    console.log('user ' + row.toJSON().email + ' is logged in' )
                     req.session.loggedToken = row.toJSON().auth_token;
                     res.status(200).send(row.toJSON().auth_token)
                 }
@@ -281,7 +242,10 @@ class UsersController {
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
                     let loggedUser = row.toJSON();
-                    if (loggedUser.role !== 'user' || loggedUser.id === req.params.id) {
+                    if ((loggedUser.role === 'admin') ||
+                        (loggedUser.role === 'carrier' && user.role === 'personnel') ||
+                        ((loggedUser.role === 'personnel' || loggedUser.role === 'carrier') && user.role === 'user') ||
+                        (loggedUser.id === user.id || user.is_active === 1)) {
                         //...
                         return new Orm().getOrm().userModel
                         .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )

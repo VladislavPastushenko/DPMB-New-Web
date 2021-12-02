@@ -1,101 +1,153 @@
 import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
 import styles from "./userEdit.module.sass"
-import {
-    Apartment,
-    MailOutline,
-    PermIdentity,
-    
-  } from "@material-ui/icons";
+import {Modal, Form, Input, Select, Button, message} from "antd"
+import { fetchCarriers } from "../../../store/carriers/actions";
+import { editUser } from '../../../store/users/actions'
+import { LoadingOutlined } from '@ant-design/icons'
 
-export default class UserEdit extends React.Component {
+
+class UserEdit extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isModalOpen: false,
+            carriers: null,
+            res: 'preparing',
+        };
+
+        this.props.fetchCarriers().then(
+            (res) => {
+              this.setState({carriers: res})
+            },
+            (err) => {
+              message.open({type: 'Error', content: 'Error while getting carriers list'})
+            });
     }
 
+    onFinish = (values) => {
+        if (!values.role) values.role = this.props.user.role
+        if (!values.carrier_id) values.carrier_id = this.props.user.carrier_id
+        values.id = this.props.user.id
+        this.setState({res: 'loading'})
+        this.props.editUser(values).then(
+            res => {
+                this.setState({res: 'OK'})
+            },
+            err => {
+                console.log(err)
+                message.open({
+                    type: 'error',
+                    content: "Error while editing user, or you don't have enough rights to edit this user",
+                })
+            }
+        )
+    }
     render() {
         return (
-            <div className={styles.user}>
-                <div className={styles.userTitleContainer}>
-                    <h1 className={styles.userTitle}>Edit User</h1>  
-                </div>
-
-                <div className={styles.userContainer}>
-                    <div className={styles.userShow}>
-                    <div className={styles.userShowTop}>
-                        <img
-                        src="/user.png"
-                        alt=""
-                        className={styles.userShowImg}
-                        />
-                        <div className={styles.userShowTopTitle}>
-                        <span className={styles.userShowUsername}>Name Surname</span>
-                        <span className={styles.userShowUserTitle}>Role</span>
+            <>
+                <a onClick={() => {this.setState({isModalOpen: true})}}>
+                    Edit
+                </a>
+                <Modal title="Edit user data" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={null}>
+                    {this.state.res === 'preparing' &&
+                    <Form initialValues={{
+                        email: this.props.user.email,
+                        full_name: this.props.user.full_name,
+                        role: this.props.user.role,
+                        is_active: this.props.user.is_active,
+                        carrier_id: this.props.user.carrier_id
+                    }}
+                        onFinish={this.onFinish}
+                    >
+                    
+                        <div className={'fontSizeXs'}>
+                            Email:
                         </div>
-                    </div>
+                        <Form.Item
+                            name="email"
+                            rules={[
+                            {
+                                required: true,
+                                message: 'Please input E-mail',
+                            },
+                            ]}
+                        >
+                            <Input placeholder="E-mail" />
+                        </Form.Item>
 
-                    <div className={styles.userShowBottom}>
-                        <span className={styles.userShowTitle}>Account Details</span>
-                        <div className={styles.userShowInfo}>
-                            <PermIdentity className={styles.userShowIcon} />
-                            <span className={styles.userShowInfoTitle}>Your Full Name</span>
+                        <div className={'fontSizeXs'}>
+                            Full name:
                         </div>
+                        <Form.Item
+                            name="full_name"
+                        >
+                            <Input placeholder="Full name" />
+                        </Form.Item>
 
-                        <div className={styles.userShowInfo}>
-                            <Apartment className={styles.userShowIcon} />
-                            <span className={styles.userShowInfoTitle}>Regiojet</span>
+                        {this.props.loggedUser.role === 'admin' &&
+                        <div className={'fontSizeXs'}>
+                            Role:
+                            <Form.Item name="role">
+                                <Select style={{ width: 120 }} >
+                                    <Select.Option value="user">User</Select.Option>
+                                    <Select.Option value="personnel">Personnel</Select.Option>
+                                    <Select.Option value="carrier">Carrier</Select.Option>
+                                    <Select.Option value="admin">Admin</Select.Option>
+                                </Select>
+                            </Form.Item>
                         </div>
+                        }
 
-                        <span className={styles.userShowTitle}>Contact Details</span>
+                        {this.props.loggedUser.role === 'admin' && this.state.carriers &&
+                        <div className={'fontSizeXs'}>
+                            Carrier Company:
+                            <Form.Item name="carrier_id">
+                                <Select style={{ width: 120 }} >
+                                    {this.state.carriers.map(el => (
+                                        <Select.Option value={el.id} key={el.name}>{el.name}</Select.Option>
+                                    ))}
+                                    <Select.Option value={null} key={'null'}>None</Select.Option>
+                                    </Select>
+                            </Form.Item>
+                        </div>}
 
-                        <div className={styles.userShowInfo}>
-                            <MailOutline className={styles.userShowIcon} />
-                            <span className={styles.userShowInfoTitle}>yourmail@gmail.com</span>
+                        <div className={'fontSizeXs'}>
+                            Is active:
                         </div>
-                    </div>
-                </div>
+                        <Form.Item name="is_active">
+                               <Select style={{ width: 120 }} >
+                                    <Select.Option value={1}>Active</Select.Option>
+                                    <Select.Option value={0}>Disabled</Select.Option>
+                                </Select>
+                        </Form.Item>
 
-                <div className={styles.userUpdate}>
-                    <span className={styles.userUpdateTitle}>Edit</span>
-                    <form className={styles.userUpdateForm}>
-                        <div className={styles.userUpdateLeft}>
-                            
-
-                        <div className={styles.userUpdateItem}>
-                            <label>Name</label>
-                            <input
-                            type="text"
-                            placeholder="Name"
-                            className={styles.userUpdateInput}
-                            />
-                        </div>
-
-                        <div className={styles.userUpdateItem}>
-                            <label>Surname</label>
-                            <input
-                            type="text"
-                            placeholder="Surname"
-                            className={styles.userUpdateInput}
-                            />
-                        </div>
-
-                    </div>
-                    <div className={styles.userUpdateRight}>
-                        <div className={styles.userUpdateUpload}>
-                            <img
-                            className={styles.userUpdateImg}
-                            src="/user.png"
-                            alt=""
-                            />
-                        </div>
-                    <button className={styles.userUpdateButton}>Update</button>
-                    </div>
-                </form>
-                </div>
-            </div>
-        </div>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">
+                            Edit
+                            </Button>
+                        </Form.Item>
+                    </Form>}
+                    {this.state.res === 'loading' &&
+                    <div className='fontSizeLg' align='center' style={{padding: '2em'}}>
+                        <LoadingOutlined/>
+                    </div>}
+                    {this.state.res === 'OK' &&
+                    <div className='fontSizeLg' align='center' style={{padding: '2em'}}>
+                        User edited successfully
+                    </div>}
+                </Modal>
+            </>
         );
     }
 }
+
+
+const mapStateToProps = state => {
+    return {
+        carriers: state.carrier.carriers,
+        res: state.users.res,
+    }
+  }
+  export default connect(mapStateToProps, {fetchCarriers, editUser
+  }) (UserEdit);

@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import 'antd/dist/antd.min.css';
 import styles from './styles/sign-up.module.sass'
 import { signup } from "../store/users/actions";
+import Link from "next/link";
 import {
     Form,
     Input,
@@ -82,13 +83,10 @@ class RegistrationForm extends React.Component {
     delete values.surname
     delete values.agreement
     delete values.confirm
-    console.log('Received values of form: ', values);
 
     this.props.signup(values).then(
       (res) => {
         this.setState({success: true})
-        console.log(this.props.res)
-        console.log(res)
       },
       (err) => {
         this.setState({errorStatus: true})
@@ -264,9 +262,11 @@ class RegistrationForm extends React.Component {
         title="Your registration was successful!"
         subTitle="A confirmation email has been sent to your email address"
         extra={[
+        <Link href='/' key='back home'>
         <Button type="primary" key="console">
           Main Page
         </Button>,
+        </Link>
         ]}
       />
       );

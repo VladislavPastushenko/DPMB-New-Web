@@ -47,12 +47,10 @@ export default class BaseModel {
     }
 
     removeById(id) {
-        console.log(id)
         return new this.model({id: id}).destroy();
     }
 
     createHash(str, alg) {
-        console.log(str)
         let hash = crypto.createHash(alg);
         hash.update(str);
         return hash.digest('hex');

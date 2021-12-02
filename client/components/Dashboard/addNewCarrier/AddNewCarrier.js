@@ -27,13 +27,10 @@ class NewCarrier extends React.Component {
                 name: e.target.elements.name.value 
             }
     
-            console.log(data)
             this.props.createCarrier(data).then(
                 (res) => {
-                    console.log(res);
                     this.setState({isSuccessModalVisible: true});
                     e.target.elements.name.value = null;
-    
                 },
                 (err) => {
                     console.log(err);
@@ -42,7 +39,6 @@ class NewCarrier extends React.Component {
             )
             }
     
-
     render() {
         return (
             <div className={styles.newCarrier}>

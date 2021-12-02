@@ -21,7 +21,6 @@ class CitiesList extends React.Component {
 
         this.props.fetchCities().then(
           (res) => {
-            console.log(res)
             this.setState({data: res})
           },
           (err) => {
@@ -33,7 +32,6 @@ class CitiesList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log(id)
       this.props.deleteCity(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
@@ -45,39 +43,16 @@ class CitiesList extends React.Component {
         
 
       )
-      //this.setState(this.state.data.filter((item) => item.id !== id));
     };
 
     showModal = () => {
       setIsModalVisible(true);
     };
-
-    
-    
-    onStatusChange = (value, options, params) => {
-        console.log("OUR FUNCTION value", value)
-        console.log("OUR FUNCTION options", options)
-        console.log("OUR FUNCTION params", params)
-        let item = params.row
-
-        item.status = value
-
-
-    };
     
       columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        {
-          field: "name",
-          headerName: "Name",
-          width: 1030,
-          align: "left",
-        },
-        
-        {
-          field: "action",
-          headerName: "Action",
-          width: 150,
+        { field: "name", headerName: "Name", width: 1030, align: "left",},
+        { field: "action", headerName: "Action", width: 150,
           renderCell: (params) => {
             return (
               <>                

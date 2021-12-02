@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { loginUser } from "../store/users/actions";
 import Router from 'next/router'
+import Link from 'next/link'
 
 
 const formItemLayout = {
@@ -40,7 +41,11 @@ const formItemLayout = {
     },
   };
 
-class normalLoginForm extends React.Component {
+
+
+
+
+class NormalLoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,10 +55,8 @@ class normalLoginForm extends React.Component {
 
     onFinish = (values) => {
       delete values.remember
-
       this.props.loginUser(values).then(
         (res) => {
-          console.log(res)
           message.open(
             {
               type: 'success',
@@ -116,15 +119,18 @@ class normalLoginForm extends React.Component {
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
-          <a className="login-form-forgot" href="">
+          <Link href='#'>
+          <a className="login-form-forgot">
             Forgot password
           </a>
+          </Link>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button> &nbsp;
-          Or <a href="/registration">register now!</a>
+
+          Or <Link href='/sign-up'><a>register now!</a></Link>
         </Form.Item>
       </Form>
     );
@@ -137,4 +143,4 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps, {loginUser
-}) (normalLoginForm);
+}) (NormalLoginForm);

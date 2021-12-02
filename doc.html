@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0070)https://www.fit.vutbr.cz/study/courses/IIS/private/projekt/doc.html.cs -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+
+    <title>Projekt IIS documentation</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte pros�m nastaven� k�dov�n� v hlavi�ce dokumentu
+     podle pou�it�ho editoru -->
+
+<h1>Public transport</h1> <!-- Nahradte n�zvem sv�ho zad�n� -->
+
+<dl>
+	<dt>Authors</dt>
+	<dd>Pastushenko Vladislav<!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
+	    <a href="mailto:xpastu01@stud.fit.vutbr.cz">xpastu04@stud.fit.vutbr.cz</a> -
+		Frontend(10%), Backend(80%): writing logic, setting up a database, drawing up the interaction of the main modules of the project, index page and reservations in FE
+	</dd>
+	<dd>Kozhevnikov Dmitrii <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
+	    <a href="mailto:xkozhe00@stud.fit.vutbr.cz">xkozhe00@stud.fit.vutbr.cz</a> -
+		Frontend(80%) Backend(10%): writing the main pages and components of the project, design selection, linking the main modules of the project, writing documentation, admin and userboard FE
+	</dd>
+  <dd>Senichak Yahor <!-- Nahra�te skute�n�m jm�nem a e-mailem autora a popisem �innosti -->
+	    <a href="mailto:xsenic00@stud.fit.vutbr.cz">xsenic00@stud.fit.vutbr.cz</a> -
+		Frontend(10%), Backend(10%), Testing, Documentation, DB: writing documentation, setting up the database, filling the database, help in BE and FE
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://167.172.175.231/">http://167.172.175.231/</a></dd>
+	<dd><a href="http://167.172.175.231:8000">http://167.172.175.231:8000</a></dd>
+
+</dl>
+
+<h2>Users of the testing system</h2>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin@admin.com</td><td>Admin123</td><td>Administrator</td></tr>
+<tr><td>carrier@carrier.com</td><td>Carrier123</td><td>Carrier</td></tr>
+<tr><td>personnel@personnel.com</td><td>Personnel123</td><td>Personnel</td></tr>
+<tr><td>user@user.com</td><td>user</td><td>User1234</td></tr>
+
+</tbody></table>
+
+<p>In our case, the carrier has all the possibilities, as well as the personnel, so that in case of an unforeseen situation, he can correct some mistakes. Otherwise, the diagram has not changed.</p> 
+<p>For an authorized user, we recommend that you register to evaluate all the possibilities of the work done</p>
+<h2>Implementation</h2>
+<h3>Backend</h3>
+ <p>In this project, the backend was executed on ExpressJS to the MVC pattern.</p>
+ <p>In the root folder <i>api</i> there is a file <strong>.env</strong> in which there is configuration data, such as passwords, URL, etc.</p>
+ <p>The main implementation files are located in the folder<strong>server</strong>
+	The folder <i>server</i> contains a file <strong>app.js</strong> with the configuration settings for ExpressJS.
+	The file <strong>mysql.js</strong> contains a class <i>MySQL</i> that is used to connect to the database.
+	It contains a constructor in which we use the <i>bookshelf</i> to connect to the database and interact with it,  and we also use <i>knex</i>.</p>
+ <p>The file <stong>routes.js</stong> contains the main routes of our backend available for external connection.
+	These routes are divided into groups according to the models that are used in the database.</p>
+ <p>There are also folders <i>controllers, model, utils</i>.</p>
+ <p>The folder <i>controller</i> contains all controllers for each database entity.
+	The controller is called from the routes and then processes the received data and sends a request to the model and sends a request to the model, which are located in the folder <i>model</i>.</p>
+ <p>In the <i>model</i> folder there is a file <strong>baseModel.js</strong> in which  represented the parent class <i>BaseModel</i>.
+	This class has basic functions that are often used by other models.
+	The other files contain the implementation of independent modules in which queries to the database are generated.</p>
+ <p>There is also a folder <i>public</i> containing all public pages.
+	The subfolder <i>email-templates</i> contains templates for sending emails.</p>
+
+<h3>Frontend</h3>
+ <p>In this project, the backend was executed on ReactJS with using the Sass preprocessor.</p>
+ <p>In the root folder <i>client</i> contains the main file <strong>Api.js</strong> a file <strong>style.sass</strong> that contains the main styles for the main page.
+	Also here are the folders <i>components</i>, <i>pages</i>, <i>public</i>, <i>store</i>.</p>
+ <p>The folder <i>components</i> contains the main components that the user sees.
+	<i>Basement</i> contains footer, <i>Dashboard</i> - Admin panel, <i>Navigator</i> - Navigator, <i>Searcher</i> - route search form and <i>Userboard</i> which contains user interface.
+	These folders contain subfolders that contain specific elements and their corresponding styles.</p>
+ <p>The folder <i>pages</i> contains main pages, a folder <i>styles</i> with styles and a folder <i>user</i> that contains a token for user verification using <strong>Cookies</strong>
+	The file <strong>_app.js</strong> contains the main function <i>App</i> that builds the pages.
+	<br/>
+	<br/>
+	<strong>index.js</strong> - the main page where the user can choose a travel route<br/>
+	<strong>dashboard.js</strong> - administrative panel, available only for users with the appropriate roles<br/>
+	<strong>login.js</strong> - user registration form<br/>
+	<strong>sign-up.js</strong> - registration form<br/>
+	<strong>userboard.js</strong> - a page with a user interface containing his current trips and settings<br/>
+	<strong>server-error.js</strong> - the error page, if the backend does not respond</p>
+ <p>The folder <i>public</i> contains the main files for design solutions.</p>
+ <p>The folder <i>store</i> contains subfolders for elements containing files that link the frontend to the backend.</p>
+ <p>During the implementation, we used graphic libraries <i>Ant Design</i> and <i>MUI</i>.</p>
+
+<h3>Database</h3>
+
+<img src="./database.jpg" alt="">
+
+<h2>Chips</h2>
+<h3>User registration</h3>
+ <p>When registering, the user sends a request to the server.
+	Using JWT Tokenization, a token is created with the sent password, which is stored in the database,
+	and an authentication token is created by the current date.
+	The authentication token is saved to the database, and the user receives the status <i>Inactive</i>.
+	Then a message is sent to the user's email with a link that contains this authorization token in its route.
+	When clicking on the link to the backend, an email confirmation request is sent, and the user's status changes to <i>Active</i>.
+	The authorization token is saved to the session on the backend to verify the user's authorization,
+	and additionally we save it on the frontend in cookies to protect data loss.</p>
+ <p>User roles are clearly observed, each user can use only those functions and see those pages to which he has access.
+	The admin panel is only available to users who are logged in and have the rights to do so, according to their role.
+	The button for access to the admin panel can be found in the footer.</p>
+ <p>In the upper right corner there is a dynamic button <i>Login</i> that dynamically changes for authorized users and opens access to the user panel.</p>
+	<ul>
+		<li>Use of cookies</li>
+		<li>Sending a confirmation letter to the user about registration</li>
+		<li>Footer and navigator for moving the user around the site</li>
+		<li>Special design</li>
+	</ul>
+
+<h2>Installation</h2>
+
+Strucne popiste:
+<ul>
+<li>From root folder of project</li>
+<li>(cd client; sudo npm install &); (cd api; sudo npm install &);</li>
+<li>(cd client; sudo npm run start &); (cd api; sudo npm run start &);</li>
+<li>FE: localhost, BE: localhost:8000</li>
+</ul>
+
+<h2>Known problems</h2>
+<p>Due to the limited time and the impossibility of constant teamwork, and the desire to make a high-quality project, it took us a little more time to implement.
+   In rare cases, when testing this project, the database may fall. In this case, please write to us by email.</p>
+<p>Sometimes it takes too long to send an email or is sent to spam</p>
+
+</body></html>
