@@ -158,13 +158,13 @@ class Ztraty extends React.Component {
                         </div>
                         <div>
                         <p className='fontSizeSm' >
-                            Níže uvedený seznam je evidencí věcí nalezených v dopravních prostředcích a v prostorách Dopravního podniku města Brna, a.s.</p>
+                            Níže uvedený seznam je evidencí věcí nalezených v dopravních prostředcích a v prostorách <i>Dopravního podniku města Brna, a.s.</i></p>
                         <p className='fontSizeSm'>
-                            Věci nalezené v dopravních prostředcích jsou skladovány na příslušných výpravnách (Medlánky, Pisárky, Husovice, Slatina, Komín),
-                            ostatní věci jsou skladovány v Informační kanceláři na ul. Novobranské 18 v Brně.</p>
+                            Věci nalezené v dopravních prostředcích jsou skladovány na příslušných výpravnách (<i>Medlánky, Pisárky, Husovice, Slatina, Komín</i>),
+                            ostatní věci jsou skladovány v Informační kanceláři na <i>ul. Novobranské 18 v Brně</i>.</p>
                         <p className='fontSizeSm'>
                             Informaci o možnostech vyzvednutí věci, příp. s uvedením kontaktu na příslušnou výpravnu Vám poskytne Informační kancelář, 
-                            a to v provozní době (pondělí-pátek od 6:00 hod. do 19:00 hod., v sobotu od 8:00 hod. do 15:30 hod, přestávka 12:30-13:00 hod)
+                            a to v provozní době (<i>pondělí-pátek od 6:00 hod. do 19:00 hod., v sobotu od 8:00 hod. do 15:30 hod, přestávka 12:30-13:00 hod</i>):
                         </p>
                         <ul>
                             <li className='fontSizeXs'>telefonicky: na čísle 543 174 317 / provolba 2</li>
@@ -175,7 +175,7 @@ class Ztraty extends React.Component {
                             Při převzetí nalezené věci je nezbytné prokázat vlastnictví této věci, předložit průkaz totožnosti a svým podpisem stvrdit převzetí.
                         </p>
                         <p className='fontSizeSm'>
-                            Věci, které byly odevzdány na referát podatelny Magistrátu města Brna jsou v níže uvedeném seznamu zvýrazněny <strong>žlutým podbarvením</strong>.
+                            Věci, které byly odevzdány na referát podatelny <i>Magistrátu města Brna</i> jsou v níže uvedeném seznamu zvýrazněny <strong>žlutým podbarvením</strong>.
                         </p>
                         </div>
                         <div className={styles.title}>
