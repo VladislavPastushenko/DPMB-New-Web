@@ -9,6 +9,7 @@ import {
 
 function cities(state = {
     cities: [],
+    error: null,
 }, action) {
     switch (action.type) {
         case FETCH_CITIES_SUCCESS:

@@ -22,6 +22,7 @@ class CitiesList extends React.Component {
         this.props.fetchCities().then(
           (res) => {
             this.setState({data: res})
+            
           },
           (err) => {
             this.setState({errMsg: err})
@@ -109,7 +110,7 @@ class CitiesList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-      users: state.users.res,
+      cities: state.cities.cities,
   }
 }
 export default connect(mapStateToProps, {fetchCities, deleteCity

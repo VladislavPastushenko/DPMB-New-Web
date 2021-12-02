@@ -17,7 +17,7 @@ class ContactPage extends React.Component {
         this.state = {}
     }
     handleFinish = (values) => {
-        
+        console.log(values)
     }
     render() {
         return (
@@ -36,12 +36,12 @@ class ContactPage extends React.Component {
                             Do you have any questions?
                             </p>
                             <Form onFinish={this.handleFinish}  >
-                                <Form.Item name="email" >
+                                <Form.Item name="contact" >
                                     <Input required
                                     placeholder='Input your e-mail'   type="email"
                                     className={styles.forms} size='large' />    
                                         </Form.Item>
-                                <Form.Item name="text" >
+                                <Form.Item name="message" >
                                     <Input.TextArea required
                                     placeholder='Your message'
                                     className={styles.forms} size='large' />    
