@@ -7,6 +7,9 @@ import RouteItemsController from "./controllers/routeItemsController";
 import CarriersController from "./controllers/carriersController";
 import ReservationsController from "./controllers/reservationsController";
 import QuestionsFromUsersController from "./controllers/questionFromUserController";
+import NewsController from "./controllers/newsController";
+import FAQsController from "./controllers/faqsController";
+import LostThingsController from "./controllers/lostThingsController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -130,6 +133,36 @@ const routes = (route) => {
         .get(QuestionsFromUsersController.getAll)
         .post(QuestionsFromUsersController.create)
 
+    route.route('/questions-from-users/:id')
+        .get(QuestionsFromUsersController.getAll)
+        .delete(QuestionsFromUsersController.removeById)
+
+    // NEWS
+    route.route('/news')
+        .get(NewsController.getAll)
+        .post(NewsController.create)
+
+    route.route('/news/:id')
+        .get(NewsController.getAll)
+        .delete(NewsController.removeById)
+
+    // FAQ
+    route.route('/faqs')
+        .get(FAQsController.getAll)
+        .post(FAQsController.create)
+
+    route.route('/faqs/:id')
+        .get(FAQsController.getAll)
+        .delete(FAQsController.removeById)
+
+    // LOST THINGS
+    route.route('/lost-things')
+        .get(LostThingsController.getAll)
+        .post(LostThingsController.create)
+
+    route.route('/lost-things/:id')
+        .get(LostThingsController.getAll)
+        .delete(LostThingsController.removeById)
 };
 
 export default routes;

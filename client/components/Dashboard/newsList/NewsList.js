@@ -1,22 +1,23 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./userList.module.sass"
+import styles from "./newsList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchUsers, deleteUser } from "../../../store/users/actions";
+import { fetchNews, deleteNews } from "../../../store/news/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import UserEdit from "../userEdit/UserEdit";
-class UserList extends React.Component {
+import EditNews from "../editNews/EditNews";
+
+class News extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
         };
 
-        this.props.fetchUsers().then(
+        this.props.fetchNews().then(
           (res) => {
             this.setState({data: res})
           },
@@ -25,11 +26,15 @@ class UserList extends React.Component {
           }
 
         );
+        
     }
 
     handleDelete = (params) => {
       let id = params.row.id
-      this.props.deleteUser(id).then(
+      console.log("params")
+      console.log(params)
+
+      this.props.deleteNews(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
           message.open({
@@ -39,19 +44,15 @@ class UserList extends React.Component {
         }
       )
     };
+
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "email", headerName: "Email", width: 250, align: "left",},
-        { field: "full_name", headerName: "Uživatel", width: 250, align: "left",},
-        { field: "role", headerName: "Role", width: 250, align: "left",},
-        { field: "is_active", headerName: "Status", width: 120, align: "left",},
-        {
-          field: "edit",
-          headerName: "Upravit",
-          width: 150,
+        { field: "name", headerName: "Název", width: 600, align: "left",},
+        { field: "text", headerName: "Text novinky", width: 400, align: "left",
+        
           renderCell: (params) => {
             return (
-              <UserEdit user={params.row} {...this.props}/>
+              <EditNews text={params.row} {...this.props}/>
             );
           },
         },
@@ -76,11 +77,12 @@ class UserList extends React.Component {
 
     render() {
       if (this.state.data.length > 0) {
+        console.log('1 okno')
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Seznam Uživatelů</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">Novinky</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newNews')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -97,8 +99,8 @@ class UserList extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Seznam Uživatelů</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">Novinky</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newNews')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -117,5 +119,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, deleteUser
-}) (UserList);
+export default connect(mapStateToProps, {fetchNews, deleteNews
+}) (News);

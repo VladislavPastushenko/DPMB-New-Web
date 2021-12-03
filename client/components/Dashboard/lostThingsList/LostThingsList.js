@@ -1,22 +1,22 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./userList.module.sass"
+import styles from "./lostThingsList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchUsers, deleteUser } from "../../../store/users/actions";
+import { fetchLostThings, deleteLostThings } from "../../../store/lostThings/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import UserEdit from "../userEdit/UserEdit";
-class UserList extends React.Component {
+
+class LostThingsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
         };
 
-        this.props.fetchUsers().then(
+        this.props.fetchLostThings().then(
           (res) => {
             this.setState({data: res})
           },
@@ -25,11 +25,15 @@ class UserList extends React.Component {
           }
 
         );
+        
     }
 
     handleDelete = (params) => {
       let id = params.row.id
-      this.props.deleteUser(id).then(
+      console.log("params")
+      console.log(params)
+
+      this.props.deleteLostThings(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
           message.open({
@@ -39,22 +43,16 @@ class UserList extends React.Component {
         }
       )
     };
+    getTime(params) {
+      return new Date(params.value).toLocaleString('default', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+    }
+
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "email", headerName: "Email", width: 250, align: "left",},
-        { field: "full_name", headerName: "Uživatel", width: 250, align: "left",},
-        { field: "role", headerName: "Role", width: 250, align: "left",},
-        { field: "is_active", headerName: "Status", width: 120, align: "left",},
-        {
-          field: "edit",
-          headerName: "Upravit",
-          width: 150,
-          renderCell: (params) => {
-            return (
-              <UserEdit user={params.row} {...this.props}/>
-            );
-          },
-        },
+        { field: "date", headerName: "Datum", width: 130, align: "left", valueGetter: this.getTime,},
+        { field: "description", headerName: "Popis", width: 410, align: "left",},
+        { field: "storage_location", headerName: "Úložiště", width: 320, align: "left",},
+        { field: "phone", headerName: "Telefon", width: 170, align: "left",},
         {
           field: "delete",
           headerName: "Odstranit",
@@ -79,8 +77,8 @@ class UserList extends React.Component {
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Seznam Uživatelů</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">Ztracené věci</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newLostThing')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -97,8 +95,8 @@ class UserList extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Seznam Uživatelů</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">Ztracené věci</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newLostThing')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -117,5 +115,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, deleteUser
-}) (UserList);
+export default connect(mapStateToProps, {fetchLostThings, deleteLostThings
+}) (LostThingsList);

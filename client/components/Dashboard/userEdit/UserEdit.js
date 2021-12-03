@@ -47,7 +47,7 @@ class UserEdit extends React.Component {
         return (
             <>
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
-                    Edit
+                    Upravit
                 </a>
                 <Modal title="Edit user data" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={null}>
                     {this.state.res === 'preparing' &&
@@ -77,7 +77,7 @@ class UserEdit extends React.Component {
                         </Form.Item>
 
                         <div className={'fontSizeXs'}>
-                            Full name:
+                            Jmeno a Příjmení:
                         </div>
                         <Form.Item
                             name="full_name"
@@ -89,42 +89,27 @@ class UserEdit extends React.Component {
                         <div className={'fontSizeXs'}>
                             Role:
                             <Form.Item name="role">
-                                <Select style={{ width: 120 }} >
-                                    <Select.Option value="user">User</Select.Option>
-                                    <Select.Option value="personnel">Personnel</Select.Option>
-                                    <Select.Option value="carrier">Carrier</Select.Option>
-                                    <Select.Option value="admin">Admin</Select.Option>
+                                <Select style={{ width: 150 }} >     
+                                    <Select.Option value="personnel">Personál</Select.Option>
+                                    <Select.Option value="admin">Administrátor</Select.Option>
                                 </Select>
                             </Form.Item>
                         </div>
                         }
 
-                        {this.props.loggedUser.role === 'admin' && this.state.carriers &&
                         <div className={'fontSizeXs'}>
-                            Carrier Company:
-                            <Form.Item name="carrier_id">
-                                <Select style={{ width: 120 }} >
-                                    {this.state.carriers.map(el => (
-                                        <Select.Option value={el.id} key={el.name}>{el.name}</Select.Option>
-                                    ))}
-                                    <Select.Option value={null} key={'null'}>None</Select.Option>
-                                    </Select>
-                            </Form.Item>
-                        </div>}
-
-                        <div className={'fontSizeXs'}>
-                            Is active:
+                            Je aktivní:
                         </div>
                         <Form.Item name="is_active">
                                <Select style={{ width: 120 }} >
-                                    <Select.Option value={1}>Active</Select.Option>
-                                    <Select.Option value={0}>Disabled</Select.Option>
+                                    <Select.Option value={1}>Aktivní</Select.Option>
+                                    <Select.Option value={0}>Neaktivní</Select.Option>
                                 </Select>
                         </Form.Item>
 
                         <Form.Item>
                             <Button type="primary" htmlType="submit">
-                            Edit
+                            Upravit
                             </Button>
                         </Form.Item>
                     </Form>}
@@ -134,7 +119,7 @@ class UserEdit extends React.Component {
                     </div>}
                     {this.state.res === 'OK' &&
                     <div className='fontSizeLg' align='center' style={{padding: '2em'}}>
-                        User edited successfully
+                        Uživatel byl úspěšně upraven
                     </div>}
                 </Modal>
             </>

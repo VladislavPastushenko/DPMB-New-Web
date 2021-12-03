@@ -5,20 +5,20 @@ import styles from "./styles/dashboard.module.sass"
 import Topbar from "./../components/Dashboard/Topbar/Topbar"
 import Sidebar from "./../components/Dashboard/Sidebar/Sidebar"
 import UserList from "../components/Dashboard/userList/UserList";
-import UserEdit from "../components/Dashboard/userEdit/UserEdit";
-import AddNewRoute from "../components/Dashboard/addNewRoute/AddNewRoute";
 import StopList from "../components/Dashboard/stopList/StopList";
 import AddNewStop from "../components/Dashboard/addNewStop/AddNewStop";
-import ReservationList from "../components/Dashboard/reservationList/ReservationList";
-import TripList from "../components/Dashboard/tripList/TripList";
-import CarrierList from "../components/Dashboard/carrierList/CarrierList";
-import AddNewCarrier from "../components/Dashboard/addNewCarrier/AddNewCarrier";
+import QuestionsFromUsersList from "../components/Dashboard/questionsFromUsersList/QuestionsFromUsersList";
 import {lookupUserInStorage, fetchLoggedUser} from '../store/users/actions'
 import Router from 'next/router'
 import {LoadingOutlined} from '@ant-design/icons'
-import CitiesList from "../components/Dashboard/citiesList/CitiesList";
-import AddNewCity from "../components/Dashboard/addNewCity/AddNewCity";
-
+import AddNewUser from "../components/Dashboard/addNewUser/AddNewUser";
+import NewsList from "../components/Dashboard/newsList/NewsList";
+import AddNewNews from "../components/Dashboard/addNewNews/AddNewNews";
+import FAQsList from "../components/Dashboard/faqsList/FAQsList";
+import AddNewFAQ from "../components/Dashboard/addNewFAQ/AddNewFAQ";
+import LostThingsList from "../components/Dashboard/lostThingsList/LostThingsList";
+import AddNewLostThing from "../components/Dashboard/addNewLostThing/AddNewLostThing";
+import EditUser from "../components/Dashboard/editUser/EditUser";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -54,33 +54,36 @@ class Dashboard extends React.Component {
                 )
             }
             else {
-                if (this.state.loggedUser.role === 'user') {
-                    return (
-                        <p align='center' className='fontSizeMd'>
-                            This page is only for personnel
-                        </p>
-                    )
-                } else {
+                if (this.state.loggedUser.role === 'admin' || this.state.loggedUser.role === 'personnel') {
                     return (
                         <div>
                             <div id="container"/>
                                 <Topbar {...this.props}/>
                                 <div className={styles.container}>
                                     <Sidebar changeLocation={this.changeLocation}/>
-                                    {this.state.location === 'userList' && <UserList {...this.props}/>}
-                                    {this.state.location === 'newroute' && <AddNewRoute/>}
+                                    {this.state.location === 'userList' && <UserList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newuser' && <AddNewUser/>}
                                     {this.state.location === 'stopList' && <StopList changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newstop' && <AddNewStop/>}
-                                    {this.state.location === 'reservationList' && <ReservationList/>}
-                                    {this.state.location === 'tripList' && <TripList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'carrierList' && <CarrierList changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newcarrier' && <AddNewCarrier/>}
-                                    {this.state.location === 'citiesList' && <CitiesList changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newcity' && <AddNewCity/>}
+                                    {this.state.location === 'questionsFromUsersList' && <QuestionsFromUsersList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newsList' && <NewsList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newNews' && <AddNewNews/>}
+                                    {this.state.location === 'FAQsList' && <FAQsList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newFAQ' && <AddNewFAQ/>}
+                                    {this.state.location === 'lostThingsList' && <LostThingsList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newLostThing' && <AddNewLostThing/>}
+                                    {this.state.location === 'editUser' && <EditUser {...this.props} changeLocation={this.changeLocation}/>}
+
 
                                 </div>
                         </div>
                     );
+                } else {
+                    return (
+                        <p align='center' className='fontSizeMd'>
+                            Tato stránka je určena pouze pro personál
+                        </p>
+                    )
                 }
             }
     }

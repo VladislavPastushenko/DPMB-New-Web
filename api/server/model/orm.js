@@ -8,6 +8,9 @@ import RouteItemModel from "./routeItemModel";
 import CarrierModel from "./carrierModel";
 import ReservationModel from "./reservationModel";
 import QuestionFromUserModel from "./questionFromUserModel";
+import NewsModel from "./newsModel";
+import FAQsModel from "./faqsModel";
+import LostThingsModel from "./lostThingsModel";
 
 export default class Orm {
 
@@ -31,7 +34,11 @@ export default class Orm {
         const carrierModel = new CarrierModel({orm: orm, modelName: 'Carrier', tableName: 'carriers', options: {} })
         const reservationModel = new ReservationModel({orm: orm, modelName: 'Reservation', tableName: 'reservations', options: {} })
         const questionFromUserModel = new QuestionFromUserModel({orm: orm, modelName: 'QuestionFromUser', tableName: 'questions_from_users', options: {} })
-
+        const newsModel = new NewsModel({orm: orm, modelName: 'NewsModel', tableName: 'novinky', options: {} })
+        const faqsModel = new FAQsModel({orm: orm, modelName: 'FAQsModel', tableName: 'faqs', options: {} })
+        const lostThingsModel = new LostThingsModel({orm: orm, modelName: 'LostThingsModel', tableName: 'lost_things', options: {} })
+        
+        
 
         this._orm = {
             postModel: postModel,
@@ -43,7 +50,9 @@ export default class Orm {
             carrierModel: carrierModel,
             reservationModel: reservationModel,
             questionFromUserModel: questionFromUserModel,
-
+            newsModel: newsModel,
+            faqsModel: faqsModel,
+            lostThingsModel: lostThingsModel,
         };
 
     }

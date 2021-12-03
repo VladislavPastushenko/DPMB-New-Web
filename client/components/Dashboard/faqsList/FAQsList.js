@@ -1,22 +1,25 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./userList.module.sass"
+import styles from "./faqsList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchUsers, deleteUser } from "../../../store/users/actions";
+import { fetchFAQs, deleteFAQs } from "../../../store/FAQs/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import UserEdit from "../userEdit/UserEdit";
-class UserList extends React.Component {
+import EditAnswer from "../editAnswer/EditAnswer";
+import EditQuestion from "../editQuestion/EditQuestion";
+
+
+class FAQs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
         };
 
-        this.props.fetchUsers().then(
+        this.props.fetchFAQs().then(
           (res) => {
             this.setState({data: res})
           },
@@ -25,11 +28,15 @@ class UserList extends React.Component {
           }
 
         );
+        
     }
 
     handleDelete = (params) => {
       let id = params.row.id
-      this.props.deleteUser(id).then(
+      console.log("params")
+      console.log(params)
+
+      this.props.deleteFAQs(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
           message.open({
@@ -39,19 +46,21 @@ class UserList extends React.Component {
         }
       )
     };
+
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "email", headerName: "Email", width: 250, align: "left",},
-        { field: "full_name", headerName: "Uživatel", width: 250, align: "left",},
-        { field: "role", headerName: "Role", width: 250, align: "left",},
-        { field: "is_active", headerName: "Status", width: 120, align: "left",},
-        {
-          field: "edit",
-          headerName: "Upravit",
-          width: 150,
+        { field: "question", headerName: "Otázka", width: 500, align: "left", 
           renderCell: (params) => {
             return (
-              <UserEdit user={params.row} {...this.props}/>
+              <EditQuestion question={params.row} {...this.props}/>
+            );
+          },
+        },
+        { field: "answer", headerName: "Odpověď", width: 500, align: "left",
+        
+          renderCell: (params) => {
+            return (
+              <EditAnswer answer={params.row} {...this.props}/>
             );
           },
         },
@@ -79,8 +88,8 @@ class UserList extends React.Component {
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Seznam Uživatelů</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">FAQs</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newFAQ')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -97,8 +106,8 @@ class UserList extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Seznam Uživatelů</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">Novinky</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newFAQ')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -117,5 +126,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchUsers, deleteUser
-}) (UserList);
+export default connect(mapStateToProps, {fetchFAQs, deleteFAQs
+}) (FAQs);
