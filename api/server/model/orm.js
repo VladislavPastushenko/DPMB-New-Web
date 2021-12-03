@@ -8,6 +8,8 @@ import RouteItemModel from "./routeItemModel";
 import CarrierModel from "./carrierModel";
 import ReservationModel from "./reservationModel";
 import QuestionFromUserModel from "./questionFromUserModel";
+import NewsModel from "./newsModel";
+
 
 export default class Orm {
 
@@ -31,7 +33,8 @@ export default class Orm {
         const carrierModel = new CarrierModel({orm: orm, modelName: 'Carrier', tableName: 'carriers', options: {} })
         const reservationModel = new ReservationModel({orm: orm, modelName: 'Reservation', tableName: 'reservations', options: {} })
         const questionFromUserModel = new QuestionFromUserModel({orm: orm, modelName: 'QuestionFromUser', tableName: 'questions_from_users', options: {} })
-
+        const newsModel = new NewsModel({orm: orm, modelName: 'NewsModel', tableName: 'novinky', options: {} })
+        
 
         this._orm = {
             postModel: postModel,
@@ -43,6 +46,7 @@ export default class Orm {
             carrierModel: carrierModel,
             reservationModel: reservationModel,
             questionFromUserModel: questionFromUserModel,
+            newsModel: newsModel,
 
         };
 

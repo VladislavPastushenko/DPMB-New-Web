@@ -1,23 +1,23 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./questionsFromUsers.module.sass"
+import styles from "./newsList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchQuestionsFromUsers, deleteQuestionFromUser } from "../../../store/questionsFromUsers/actions";
+import { fetchNews, deleteNews } from "../../../store/news/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import MessageShow from "../messageShow/MessageShow";
+import EditNews from "../editNews/EditNews";
 
-class QuestionsFromUsersList extends React.Component {
+class News extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
         };
 
-        this.props.fetchQuestionsFromUsers().then(
+        this.props.fetchNews().then(
           (res) => {
             this.setState({data: res})
           },
@@ -26,6 +26,7 @@ class QuestionsFromUsersList extends React.Component {
           }
 
         );
+        
     }
 
     handleDelete = (params) => {
@@ -33,7 +34,7 @@ class QuestionsFromUsersList extends React.Component {
       console.log("params")
       console.log(params)
 
-      this.props.deleteQuestionFromUser(id).then(
+      this.props.deleteNews(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
           message.open({
@@ -46,12 +47,12 @@ class QuestionsFromUsersList extends React.Component {
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "contact", headerName: "Od koho", width: 600, align: "left",},
-        { field: "message", headerName: "Zpráva", width: 400, align: "left",
+        { field: "name", headerName: "Název", width: 600, align: "left",},
+        { field: "text", headerName: "Text novinky", width: 400, align: "left",
         
           renderCell: (params) => {
             return (
-              <MessageShow message={params.row} {...this.props}/>
+              <EditNews text={params.row} {...this.props}/>
             );
           },
         },
@@ -76,10 +77,12 @@ class QuestionsFromUsersList extends React.Component {
 
     render() {
       if (this.state.data.length > 0) {
+        console.log('1 okno')
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Otázky</h1>
+                    <h1 className="userTitle">Novinky</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newNews')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -96,8 +99,8 @@ class QuestionsFromUsersList extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Otázky</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">Novinky</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newNews')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -116,5 +119,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchQuestionsFromUsers, deleteQuestionFromUser
-}) (QuestionsFromUsersList);
+export default connect(mapStateToProps, {fetchNews, deleteNews
+}) (News);

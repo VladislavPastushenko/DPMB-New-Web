@@ -33,7 +33,7 @@ class MessageShow extends React.Component {
         this.setState({askModal: false});
         message.success({
             type: 'error',
-            content: 'Message successfully send',
+            content: 'Zpráva úspěšně odeslána',
             duration: 3
         })
     };
@@ -42,9 +42,9 @@ class MessageShow extends React.Component {
         return (
             <>
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
-                    Show message
+                    Zobrazit zprávu
                 </a>
-                <Modal title="Message from user" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
+                <Modal title="Zpráva od uživatele" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
                         <Button key="back" type="primary" onClick={() => {this.setState({ isModalOpen: false }); this.setState({askModal: true})}}>
                           Odpovědět
                         </Button>]}>
@@ -66,9 +66,9 @@ class MessageShow extends React.Component {
                         </Form.Item>
                     </Form>
                 </Modal>
-                <Modal title="Message from user" visible={this.state.askModal} onCancel={() => {this.setState({ askModal: false })}} footer={[
-                    <Button key="back" onClick={this.handleOk}>
-                      Send
+                <Modal title="Odpověď pro uživatele" visible={this.state.askModal} onCancel={() => {this.setState({ askModal: false })}} footer={[
+                    <Button key="send" type="primary" onClick={this.handleOk}>
+                      Odeslat
                     </Button>]}>
                     <Form
             
@@ -93,7 +93,6 @@ class MessageShow extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        carriers: state.carrier.carriers,
         res: state.questionsFromUsers.res,
     }
   }

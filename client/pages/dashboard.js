@@ -19,6 +19,8 @@ import {LoadingOutlined} from '@ant-design/icons'
 import CitiesList from "../components/Dashboard/citiesList/CitiesList";
 import AddNewCity from "../components/Dashboard/addNewCity/AddNewCity";
 import AddNewUser from "../components/Dashboard/addNewUser/AddNewUser";
+import NewsList from "../components/Dashboard/newsList/NewsList";
+import AddNewNews from "../components/Dashboard/addNewNews/AddNewNews";
 
 
 class Dashboard extends React.Component {
@@ -67,6 +69,9 @@ class Dashboard extends React.Component {
                                     {this.state.location === 'stopList' && <StopList changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newstop' && <AddNewStop/>}
                                     {this.state.location === 'questionsFromUsersList' && <QuestionsFromUsersList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newsList' && <NewsList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newNews' && <AddNewNews/>}
+
                                     
 
                                 </div>
@@ -75,7 +80,7 @@ class Dashboard extends React.Component {
                 } else {
                     return (
                         <p align='center' className='fontSizeMd'>
-                            This page is only for personnel
+                            Tato stránka je určena pouze pro personál
                         </p>
                     )
                 }

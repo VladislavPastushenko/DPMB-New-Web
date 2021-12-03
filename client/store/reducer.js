@@ -8,6 +8,8 @@ import trips from "./trips/reducers";
 import routeItems from "./routeItems/reducers";
 import reservations from "./reservations/reducers";
 import questionsFromUsers from "./questionsFromUsers/reducers";
+import news from "./news/reducers";
+
 
 export default combineReducers({
     posts,
@@ -19,4 +21,5 @@ export default combineReducers({
     routeItems,
     reservations,
     questionsFromUsers,
+    news,
 })

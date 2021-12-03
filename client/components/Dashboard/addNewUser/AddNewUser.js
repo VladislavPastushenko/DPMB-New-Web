@@ -113,7 +113,7 @@ class AddNewUser extends React.Component {
                     <Form.Item
                         name="email"
                         label="E-mail"
-                        tooltip="After registration, a confirmation mail will be sent to your email"
+                        
                         rules={[
                         {
                             type: 'email',
