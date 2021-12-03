@@ -10,8 +10,7 @@ import reservations from "./reservations/reducers";
 import questionsFromUsers from "./questionsFromUsers/reducers";
 import news from "./news/reducers";
 import FAQs from "./FAQs/reducers";
-
-
+import lostThings from "./lostThings/reducers";
 
 export default combineReducers({
     posts,
@@ -25,4 +24,5 @@ export default combineReducers({
     questionsFromUsers,
     news,
     FAQs,
+    lostThings,
 })

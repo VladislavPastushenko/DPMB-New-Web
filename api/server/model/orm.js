@@ -10,8 +10,7 @@ import ReservationModel from "./reservationModel";
 import QuestionFromUserModel from "./questionFromUserModel";
 import NewsModel from "./newsModel";
 import FAQsModel from "./faqsModel";
-
-
+import LostThingsModel from "./lostThingsModel";
 
 export default class Orm {
 
@@ -37,7 +36,8 @@ export default class Orm {
         const questionFromUserModel = new QuestionFromUserModel({orm: orm, modelName: 'QuestionFromUser', tableName: 'questions_from_users', options: {} })
         const newsModel = new NewsModel({orm: orm, modelName: 'NewsModel', tableName: 'novinky', options: {} })
         const faqsModel = new FAQsModel({orm: orm, modelName: 'FAQsModel', tableName: 'faqs', options: {} })
-
+        const lostThingsModel = new LostThingsModel({orm: orm, modelName: 'LostThingsModel', tableName: 'lost_things', options: {} })
+        
         
 
         this._orm = {
@@ -52,8 +52,7 @@ export default class Orm {
             questionFromUserModel: questionFromUserModel,
             newsModel: newsModel,
             faqsModel: faqsModel,
-
-
+            lostThingsModel: lostThingsModel,
         };
 
     }

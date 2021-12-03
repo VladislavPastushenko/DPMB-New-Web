@@ -16,7 +16,9 @@ import NewsList from "../components/Dashboard/newsList/NewsList";
 import AddNewNews from "../components/Dashboard/addNewNews/AddNewNews";
 import FAQsList from "../components/Dashboard/faqsList/FAQsList";
 import AddNewFAQ from "../components/Dashboard/addNewFAQ/AddNewFAQ";
-
+import LostThingsList from "../components/Dashboard/lostThingsList/LostThingsList";
+import AddNewLostThing from "../components/Dashboard/addNewLostThing/AddNewLostThing";
+import EditUser from "../components/Dashboard/editUser/EditUser";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -68,7 +70,10 @@ class Dashboard extends React.Component {
                                     {this.state.location === 'newNews' && <AddNewNews/>}
                                     {this.state.location === 'FAQsList' && <FAQsList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newFAQ' && <AddNewFAQ/>}
-                                    
+                                    {this.state.location === 'lostThingsList' && <LostThingsList {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'newLostThing' && <AddNewLostThing/>}
+                                    {this.state.location === 'editUser' && <EditUser {...this.props} changeLocation={this.changeLocation}/>}
+
 
                                 </div>
                         </div>

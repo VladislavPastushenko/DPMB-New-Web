@@ -9,7 +9,7 @@ import ReservationsController from "./controllers/reservationsController";
 import QuestionsFromUsersController from "./controllers/questionFromUserController";
 import NewsController from "./controllers/newsController";
 import FAQsController from "./controllers/faqsController";
-
+import LostThingsController from "./controllers/lostThingsController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -155,7 +155,14 @@ const routes = (route) => {
         .get(FAQsController.getAll)
         .delete(FAQsController.removeById)
 
+    // LOST THINGS
+    route.route('/lost-things')
+        .get(LostThingsController.getAll)
+        .post(LostThingsController.create)
 
+    route.route('/lost-things/:id')
+        .get(LostThingsController.getAll)
+        .delete(LostThingsController.removeById)
 };
 
 export default routes;
