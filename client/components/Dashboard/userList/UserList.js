@@ -42,12 +42,12 @@ class UserList extends React.Component {
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         { field: "email", headerName: "Email", width: 250, align: "left",},
-        { field: "full_name", headerName: "User", width: 250, align: "left",},
+        { field: "full_name", headerName: "Uživatel", width: 250, align: "left",},
         { field: "role", headerName: "Role", width: 250, align: "left",},
         { field: "is_active", headerName: "Status", width: 120, align: "left",},
         {
           field: "edit",
-          headerName: "Edit",
+          headerName: "Upravit",
           width: 150,
           renderCell: (params) => {
             return (
@@ -57,7 +57,7 @@ class UserList extends React.Component {
         },
         {
           field: "delete",
-          headerName: "Delete",
+          headerName: "Odstranit",
           width: 150,
           renderCell: (params) => {
             return (
@@ -79,8 +79,8 @@ class UserList extends React.Component {
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Users List</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Create</button>
+                    <h1 className="userTitle">Seznam Uživatelů</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -97,8 +97,8 @@ class UserList extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Users List</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Create</button>
+                    <h1 className="userTitle">Seznam Uživatelů</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>

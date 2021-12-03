@@ -22,9 +22,6 @@ class MessageShow extends React.Component {
         this.props.fetchQuestionsFromUsers().then(
             (res) => {
               this.setState({data: res})
-              console.log("this.state.data")
-
-              console.log(this.state.data)
             },
             (err) => {
               this.setState({errMsg: err})

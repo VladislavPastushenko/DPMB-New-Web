@@ -130,6 +130,10 @@ const routes = (route) => {
         .get(QuestionsFromUsersController.getAll)
         .post(QuestionsFromUsersController.create)
 
+    route.route('/questions-from-users/:id')
+        .get(QuestionsFromUsersController.getAll)
+        .delete(QuestionsFromUsersController.removeById)
+
 };
 
 export default routes;

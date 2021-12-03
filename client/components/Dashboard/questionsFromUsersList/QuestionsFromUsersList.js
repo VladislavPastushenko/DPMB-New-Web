@@ -5,7 +5,7 @@ import styles from "./questionsFromUsers.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchQuestionsFromUsers, deleteQuestionsFromUsers } from "../../../store/questionsFromUsers/actions";
+import { fetchQuestionsFromUsers, deleteQuestionFromUser } from "../../../store/questionsFromUsers/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
 import MessageShow from "../messageShow/MessageShow";
@@ -30,7 +30,10 @@ class QuestionsFromUsersList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      this.props.deleteQuestionsFromUsersList(id).then(
+      console.log("params")
+      console.log(params)
+
+      this.props.deleteQuestionFromUser(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
           message.open({
@@ -43,8 +46,8 @@ class QuestionsFromUsersList extends React.Component {
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "contact", headerName: "From contact", width: 600, align: "left",},
-        { field: "message", headerName: "Message", width: 400, align: "left",
+        { field: "contact", headerName: "Od koho", width: 600, align: "left",},
+        { field: "message", headerName: "Zpráva", width: 400, align: "left",
         
           renderCell: (params) => {
             return (
@@ -54,7 +57,7 @@ class QuestionsFromUsersList extends React.Component {
         },
         {
           field: "delete",
-          headerName: "Delete",
+          headerName: "Odstranit",
           width: 150,
           renderCell: (params) => {
             return (
@@ -73,10 +76,11 @@ class QuestionsFromUsersList extends React.Component {
 
     render() {
       if (this.state.data.length > 0) {
+        console.log('1 okno')
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Questions</h1>
+                    <h1 className="userTitle">Otázky</h1>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -93,8 +97,8 @@ class QuestionsFromUsersList extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Questions</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Create</button>
+                    <h1 className="userTitle">Otázky</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -113,5 +117,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchQuestionsFromUsers, deleteQuestionsFromUsers
+export default connect(mapStateToProps, {fetchQuestionsFromUsers, deleteQuestionFromUser
 }) (QuestionsFromUsersList);

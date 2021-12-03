@@ -50,25 +50,25 @@ class NewStop extends React.Component {
     render() {
         return (
             <div className={styles.newStop}>
-                <h1 className={styles.addStopTitle}>New Stop</h1>
+                <h1 className={styles.addStopTitle}>Nová Zastávka</h1>
                 <form className={styles.addStopForm} onSubmit={this.handleSubmit}>
                     <div className={styles.addStopItem}>
-                    <label>Stop name</label>
-                    <input type="text" name="name" placeholder="Stop name" />
+                    <label>Název zastávky</label>
+                    <input type="text" name="name" placeholder="Název zastávky" />
                     </div>
-                    <button className={styles.addStopButton}>Create</button>
+                    <button className={styles.addStopButton}>Vytvořit</button>
                 </form>
                 <Modal title="Success" visible={this.state.isSuccessModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
                         <Button key="back" onClick={this.handleOk}>
                           OK
                         </Button>]}>
-                            <p>Stop added successfully</p>
+                            <p>Zastávky úspěšně přidána</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
                     <Button key="back" onClick={this.handleOk}>
                       OK
                     </Button>]}>
-                        <p>Something went wrong</p>
+                        <p>Něco se pokazilo</p>
                 </Modal>
             </div>
         );

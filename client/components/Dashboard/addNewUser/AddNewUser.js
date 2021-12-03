@@ -117,11 +117,11 @@ class AddNewUser extends React.Component {
                         rules={[
                         {
                             type: 'email',
-                            message: 'The input is not valid E-mail!',
+                            message: 'Vstup není platný E-mail!',
                         },
                         {
                             required: true,
-                            message: 'Please input your E-mail!',
+                            message: 'Zadejte prosím E-mail!',
                         },
                         ]}
                     >
@@ -130,12 +130,12 @@ class AddNewUser extends React.Component {
 
                     <Form.Item
                         name="password"
-                        label="Password"
-                        tooltip="The password must be at least 8 characters long and must have a large letter, a small letter and a number"
+                        label="Heslo"
+                        tooltip="Heslo musí mít alespoň 8 znaků a musí mít velké písmeno, malé písmeno a číslo"
                         rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: 'Zadejte prosím heslo!',
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
@@ -153,12 +153,12 @@ class AddNewUser extends React.Component {
                             } 
                             
                             if (value.length < 8) {
-                                return Promise.reject(new Error('The password must be at least 8 characters long'));
+                                return Promise.reject(new Error('Heslo musí mít alespoň 8 znaků'));
                             }
                             if (isSmall === true && isBig === true && isDigit === true) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error('Your password must have a large letter, a small letter and a number'));
+                            return Promise.reject(new Error('Vaše heslo musí mít velké písmeno, malé písmeno a číslo'));
                             },
                         }),
                         
@@ -170,20 +170,20 @@ class AddNewUser extends React.Component {
 
                     <Form.Item
                         name="confirm"
-                        label="Confirm Password"
+                        label="Potvrdit Heslo"
                         dependencies={['password']}
                         hasFeedback
                         rules={[
                         {
                             required: true,
-                            message: 'Please confirm your password!',
+                            message: 'Potvrďte prosím heslo!',
                         },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             } 
-                            return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                            return Promise.reject(new Error('Dvě hesla, která jste zadali, se neshodují!'));
                             },
                         }),
                         ]}
@@ -193,11 +193,11 @@ class AddNewUser extends React.Component {
 
                     <Form.Item
                         name="name"
-                        label="Name"
+                        label="Jméno"
                         rules={[
                         {
                             required: false,
-                            message: 'Please input your name!',
+                            message: 'Prosím, zadejte jméno!',
                             whitespace: true,
                         },
                         ]}
@@ -207,11 +207,11 @@ class AddNewUser extends React.Component {
 
                     <Form.Item
                         name="surname"
-                        label="Surname"
+                        label="Příjmení"
                         rules={[
                         {
                             required: false,
-                            message: 'Please input your surname!',
+                            message: 'Prosím, zadejte příjmení!',
                             whitespace: true,
                         },
                         ]}
@@ -221,7 +221,7 @@ class AddNewUser extends React.Component {
                     
                     <Form.Item {...tailFormItemLayout} className={styles.addStopItem}>
                         <Button type="primary" htmlType="submit" className={styles.addStopButton}>
-                        Create
+                        Vytvořit
                         </Button>
                     </Form.Item>
                 </Form>
@@ -232,10 +232,10 @@ class AddNewUser extends React.Component {
             <div className={styles.newStop}>  
               <Result
               status="error"
-              title="Something went wrong!"
+              title="Něco se pokazilo!"
               extra={[
                 <Button type="primary" key="try" onClick={() => this.setState({ errorStatus: false})}>
-                  Try again
+                  Opakovat
                 </Button>,
             ]}
             ></Result>

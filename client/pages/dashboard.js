@@ -55,13 +55,7 @@ class Dashboard extends React.Component {
                 )
             }
             else {
-                if (this.state.loggedUser.role === 'user') {
-                    return (
-                        <p align='center' className='fontSizeMd'>
-                            This page is only for personnel
-                        </p>
-                    )
-                } else {
+                if (this.state.loggedUser.role === 'admin' || this.state.loggedUser.role === 'personnel') {
                     return (
                         <div>
                             <div id="container"/>
@@ -69,20 +63,21 @@ class Dashboard extends React.Component {
                                 <div className={styles.container}>
                                     <Sidebar changeLocation={this.changeLocation}/>
                                     {this.state.location === 'userList' && <UserList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newroute' && <AddNewRoute/>}
+                                    {this.state.location === 'newuser' && <AddNewUser/>}
                                     {this.state.location === 'stopList' && <StopList changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newstop' && <AddNewStop/>}
-                                    {this.state.location === 'reservationList' && <ReservationList/>}
-                                    {this.state.location === 'tripList' && <TripList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'questionsFromUsersList' && <QuestionsFromUsersList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newcarrier' && <AddNewCarrier/>}
-                                    {this.state.location === 'citiesList' && <CitiesList changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newcity' && <AddNewCity/>}
-                                    {this.state.location === 'newuser' && <AddNewUser/>}
+                                    
 
                                 </div>
                         </div>
                     );
+                } else {
+                    return (
+                        <p align='center' className='fontSizeMd'>
+                            This page is only for personnel
+                        </p>
+                    )
                 }
             }
     }

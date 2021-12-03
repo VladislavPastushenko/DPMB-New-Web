@@ -43,9 +43,9 @@ class StopList extends React.Component {
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         
-        { field: "name", headerName: "Stop Name", width: 1030, align: "left",},
+        { field: "name", headerName: "Název Zastávky", width: 1030, align: "left",},
         
-        { field: "action", headerName: "Action", width: 150,
+        { field: "action", headerName: "Odstranit", width: 150,
           renderCell: (params) => {
             return (
               <> 
@@ -62,13 +62,13 @@ class StopList extends React.Component {
       ];
     render() {
       if (this.state.data.length > 0) {
-        console.log("hey")
+        
         return (
             
             <div className={styles.stopList}>
               <div className={styles.stopsTitleContainer}>
-                    <h1 className="userTitle">Stops List</h1>
-                    <button className={styles.stopAddButton} onClick={() => {this.props.changeLocation('newstop')}}>Create</button>
+                    <h1 className="userTitle">Seznam Zastávek</h1>
+                    <button className={styles.stopAddButton} onClick={() => {this.props.changeLocation('newstop')}}>Vytvořit</button>
               </div>  
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -86,8 +86,8 @@ class StopList extends React.Component {
             
             <div className={styles.stopList}>
               <div className={styles.stopsTitleContainer}>
-                    <h1 className="userTitle">Stops List</h1>
-                    <button className={styles.stopAddButton} onClick={() => {this.props.changeLocation('newstop')}}>Create</button>
+                    <h1 className="userTitle">Seznam Zastávek</h1>
+                    <button className={styles.stopAddButton} onClick={() => {this.props.changeLocation('newstop')}}>Vytvořit</button>
               </div>  
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
