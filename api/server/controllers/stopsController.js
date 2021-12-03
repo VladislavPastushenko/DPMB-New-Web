@@ -12,10 +12,6 @@ class StopsController {
             .getById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
     }
 
-    static getByCityId(req, res, next) {
-        return new Orm().getOrm().stopModel
-            .getByCityId(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) );
-    }
 
     static create(req, res, next) {
         return new Orm().getOrm().stopModel
@@ -28,13 +24,9 @@ class StopsController {
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
                     let loggedUser = row.toJSON();
-                    if (loggedUser.role !== 'user') {
                         //...
-                        return new Orm().getOrm().stopModel
-                            .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
-                    } else {
-                        res.status(403).send("User doesn't have rights edit this user");
-                    }
+                    return new Orm().getOrm().stopModel
+                        .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
 
                 }).catch(err => {
                     if(err.message == "EmptyResponse") {

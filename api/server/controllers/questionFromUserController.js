@@ -24,13 +24,9 @@ class QuestionsFromUsersController {
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
                     let loggedUser = row.toJSON();
-                    if (loggedUser.role !== 'user') {
                         //...
-                        return new Orm().getOrm().questionFromUserModel
-                            .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
-                    } else {
-                        res.status(403).send("User doesn't have rights edit this user");
-                    }
+                    return new Orm().getOrm().questionFromUserModel
+                        .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
 
                 }).catch(err => {
                     if(err.message == "EmptyResponse") {

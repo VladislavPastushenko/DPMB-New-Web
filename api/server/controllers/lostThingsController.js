@@ -13,8 +13,23 @@ class LostThingsController {
     }
 
     static create(req, res, next) {
-        return new Orm().getOrm().lostThingsModel
-            .create(req.body).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
+        if(req.session.loggedToken) {
+            return new Orm().getOrm().userModel
+                .getUserByAuthToken(req.session.loggedToken)
+                .then((row, err) => {
+                    let loggedUser = row.toJSON();
+                        //...
+                    return new Orm().getOrm().lostThingsModel
+                        .create(req.body).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
+
+                }).catch(err => {
+                    if(err.message == "EmptyResponse") {
+                        res.status(404).send("User not found");
+                    }
+                })
+        } else {
+            res.status(403).send('User not logged in');
+        }
     }
 
     static removeById(req, res, next) {
@@ -23,13 +38,9 @@ class LostThingsController {
                 .getUserByAuthToken(req.session.loggedToken)
                 .then((row, err) => {
                     let loggedUser = row.toJSON();
-                    if (loggedUser.role !== 'user') {
                         //...
-                        return new Orm().getOrm().lostThingsModel
-                            .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
-                    } else {
-                        res.status(403).send("User doesn't have rights edit this user");
-                    }
+                    return new Orm().getOrm().lostThingsModel
+                        .removeById(req.params.id).then((row, err) => (err) ? err.toJSON():  res.send("OK") )
 
                 }).catch(err => {
                     if(err.message == "EmptyResponse") {
