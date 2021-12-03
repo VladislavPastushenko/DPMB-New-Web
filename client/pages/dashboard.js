@@ -11,13 +11,14 @@ import StopList from "../components/Dashboard/stopList/StopList";
 import AddNewStop from "../components/Dashboard/addNewStop/AddNewStop";
 import ReservationList from "../components/Dashboard/reservationList/ReservationList";
 import TripList from "../components/Dashboard/tripList/TripList";
-import CarrierList from "../components/Dashboard/carrierList/CarrierList";
+import QuestionsFromUsersList from "../components/Dashboard/questionsFromUsersList/QuestionsFromUsersList";
 import AddNewCarrier from "../components/Dashboard/addNewCarrier/AddNewCarrier";
 import {lookupUserInStorage, fetchLoggedUser} from '../store/users/actions'
 import Router from 'next/router'
 import {LoadingOutlined} from '@ant-design/icons'
 import CitiesList from "../components/Dashboard/citiesList/CitiesList";
 import AddNewCity from "../components/Dashboard/addNewCity/AddNewCity";
+import AddNewUser from "../components/Dashboard/addNewUser/AddNewUser";
 
 
 class Dashboard extends React.Component {
@@ -67,16 +68,17 @@ class Dashboard extends React.Component {
                                 <Topbar {...this.props}/>
                                 <div className={styles.container}>
                                     <Sidebar changeLocation={this.changeLocation}/>
-                                    {this.state.location === 'userList' && <UserList {...this.props}/>}
+                                    {this.state.location === 'userList' && <UserList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newroute' && <AddNewRoute/>}
                                     {this.state.location === 'stopList' && <StopList changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newstop' && <AddNewStop/>}
                                     {this.state.location === 'reservationList' && <ReservationList/>}
                                     {this.state.location === 'tripList' && <TripList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'carrierList' && <CarrierList changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'questionsFromUsersList' && <QuestionsFromUsersList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newcarrier' && <AddNewCarrier/>}
                                     {this.state.location === 'citiesList' && <CitiesList changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newcity' && <AddNewCity/>}
+                                    {this.state.location === 'newuser' && <AddNewUser/>}
 
                                 </div>
                         </div>

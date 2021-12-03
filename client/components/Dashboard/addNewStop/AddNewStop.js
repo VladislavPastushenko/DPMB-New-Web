@@ -4,9 +4,6 @@ import ReactDOM from "react-dom";
 import styles from "./addNewStop.module.sass"
 import { Button, Modal, Form, Select } from 'antd'
 import { createStop } from "../../../store/stops/actions";
-import { fetchCities } from "../../../store/cities/actions";
-
-
 
 class NewStop extends React.Component {
     constructor(props) {
@@ -18,15 +15,6 @@ class NewStop extends React.Component {
             isErrorModalVisible: false,
         };
 
-        this.props.fetchCities().then(
-            (res) => {
-              this.setState({cities: res})
-            },
-            (err) => {
-              this.setState({errMsg: err})
-            }
-    
-          );
     }
     handleOk = () => {
         this.setState({
@@ -42,9 +30,9 @@ class NewStop extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let data = {
-            name: e.target.elements.name.value,
-            city_id: this.state.city_id, 
+            name: e.target.elements.name.value, 
         }
+        console.log(data)
 
         this.props.createStop(data).then(
             (res) => {
@@ -67,25 +55,6 @@ class NewStop extends React.Component {
                     <div className={styles.addStopItem}>
                     <label>Stop name</label>
                     <input type="text" name="name" placeholder="Stop name" />
-                    </div>
-
-                    <div className={styles.addStopItem}>
-                    <label>City</label>
-                    <Form.Item name='city_id' className={styles.addStopItem}>
-                                <Select
-                                    showSearch
-                                    style={{ width: '100%' }}
-                                    placeholder="Choose city"
-                                    optionFilterProp="children"
-                                    onChange={this.handleChange}
-
-                                >
-                                    {this.state.cities.map((city, idx) => {
-                                     return(<Select.Option value={city.id} key={idx}>{city.name}</Select.Option>)
-                                     })}
-
-                                </Select>
-                    </Form.Item>
                     </div>
                     <button className={styles.addStopButton}>Create</button>
                 </form>
@@ -112,5 +81,5 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {createStop, fetchCities
+export default connect(mapStateToProps, {createStop,
 }) (NewStop);

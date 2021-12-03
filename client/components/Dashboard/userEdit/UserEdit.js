@@ -89,10 +89,8 @@ class UserEdit extends React.Component {
                         <div className={'fontSizeXs'}>
                             Role:
                             <Form.Item name="role">
-                                <Select style={{ width: 120 }} >
-                                    <Select.Option value="user">User</Select.Option>
+                                <Select style={{ width: 120 }} >     
                                     <Select.Option value="personnel">Personnel</Select.Option>
-                                    <Select.Option value="carrier">Carrier</Select.Option>
                                     <Select.Option value="admin">Admin</Select.Option>
                                 </Select>
                             </Form.Item>

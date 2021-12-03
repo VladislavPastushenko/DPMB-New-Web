@@ -78,8 +78,9 @@ class UserList extends React.Component {
       if (this.state.data.length > 0) {
         return (
             <div className={styles.userList}>
-              <div className={styles.transportTitleContainer}>
+              <div className={styles.userTitleContainer}>
                     <h1 className="userTitle">Users List</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Create</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -95,8 +96,9 @@ class UserList extends React.Component {
         } else {
           return (
             <div className={styles.userList}>
-              <div className={styles.transportTitleContainer}>
+              <div className={styles.userTitleContainer}>
                     <h1 className="userTitle">Users List</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Create</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>

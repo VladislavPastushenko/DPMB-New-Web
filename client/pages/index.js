@@ -46,7 +46,7 @@ class IndexPage extends React.Component {
                             <p className='fontSizeMd' align='left'>
                                 Trips around the Czech Republic and Europe
                             </p>
-                            <Searcher />
+                            
                         </div>
                     </Col>
                 </Row>
