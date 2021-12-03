@@ -1,4 +1,3 @@
-import { CREATE_CARRIER_FAILED } from "../carriers/actions";
 import {
 SIGNUP_SUCCESS,
 SIGNUP_FAILED,
@@ -68,7 +67,7 @@ function users(state = {
         case CREATE_USER_SUCCESS:
             return Object.assign({}, state, {users: action.data});
         case FETCH_USERS_FAILED:
-        case CREATE_CARRIER_FAILED:
+        case CREATE_USER_FAILED:
         case DELETE_USER_FAILED:
             return Object.assign({}, state, {error: action.error});
         default:

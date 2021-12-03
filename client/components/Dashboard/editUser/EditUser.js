@@ -59,6 +59,17 @@ class EditUser extends React.Component {
                         </Form.Item>
                         </div>
 
+                        <div className={styles.userUpdateItem}>
+                        Email
+                            <Form.Item name='email'>
+                                <Input
+                                type="text"
+                                placeholder="Email"
+                                className={styles.userUpdateInput}
+                                />
+                            </Form.Item>
+                        </div>
+
                         <Form.Item>
                             <Button className={styles.userUpdateButton} htmlType='submit'> Aktualizace </Button>
                         </Form.Item>

@@ -111,19 +111,19 @@ class NewNews extends React.Component {
                             ]}
                             {...tailFormItemLayout}
                         >
-                            <TextArea size="medium" onChange={this.takeValue}/>
+                            <TextArea size="medium" onChange={this.takeValue} style={{height: '300px'}}/>
                         </Form.Item>
                     </Form>
                     <button className={styles.addStopButton}>Vytvořit</button>
                 </form>
                 <Modal title="Success" visible={this.state.isSuccessModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                        <Button key="back" onClick={this.handleOk}>
+                        <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                           OK
                         </Button>]}>
                             <p>Novinka úspěšně přidána</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                    <Button key="back" onClick={this.handleOk}>
+                    <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                       OK
                     </Button>]}>
                         <p>Něco se pokazilo</p>

@@ -7,8 +7,6 @@ import {Col, Row} from 'antd';
 import Navigator from "../components/Navigator/Navigator";
 import styles from './styles/index.module.sass'
 
-import Searcher from "../components/Searcher/searcher"
-
 const api = new Api;
 
 
@@ -64,7 +62,7 @@ class IndexPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        trips: state.trips.trips,
+
     }
 }
 export default connect(mapStateToProps, {

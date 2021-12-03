@@ -43,14 +43,13 @@ class EditNews extends React.Component {
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
                     Text novinky
                 </a>
-                <Modal title="Text novinky" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
-                        <Button key="back" type="primary" onClick={this.handleOk}>
+                <Modal style={{height: '60%'}} title="Text novinky" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
+                        <Button key="back" type="primary" onClick={this.handleOk} className={styles.addStopButton}>
                           Editovat
                         </Button>]}>
                     <Form initialValues={{
                             text: this.props.text.text
                         }}
-            
                     >
                         <Form.Item
                             name="text"
@@ -61,7 +60,7 @@ class EditNews extends React.Component {
                             },
                             ]}
                         >
-                            <TextArea size="large"/>
+                            <TextArea size="large" style={{height: '300px'}}/>
                         </Form.Item>
                     </Form>
                 </Modal>

@@ -42,10 +42,10 @@ class MessageShow extends React.Component {
         return (
             <>
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
-                    Zobrazit zprávu
+                    Zobrazit
                 </a>
-                <Modal title="Zpráva od uživatele" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
-                        <Button key="back" type="primary" onClick={() => {this.setState({ isModalOpen: false }); this.setState({askModal: true})}}>
+                <Modal style={{height: '60%'}} title="Zpráva od uživatele" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
+                        <Button key="back" type="primary" onClick={() => {this.setState({ isModalOpen: false }); this.setState({askModal: true})}} className={styles.addStopButton}>
                           Odpovědět
                         </Button>]}>
                     <Form initialValues={{
@@ -62,12 +62,12 @@ class MessageShow extends React.Component {
                             },
                             ]}
                         >
-                            <TextArea size="large" disabled/>
+                            <TextArea size="large" disabled style={{height: '300px'}}/>
                         </Form.Item>
                     </Form>
                 </Modal>
-                <Modal title="Odpověď pro uživatele" visible={this.state.askModal} onCancel={() => {this.setState({ askModal: false })}} footer={[
-                    <Button key="send" type="primary" onClick={this.handleOk}>
+                <Modal style={{height: '60%'}}title="Odpověď pro uživatele" visible={this.state.askModal} onCancel={() => {this.setState({ askModal: false })}} footer={[
+                    <Button key="send" type="primary" onClick={this.handleOk} className={styles.addStopButton}>
                       Odeslat
                     </Button>]}>
                     <Form
@@ -82,7 +82,7 @@ class MessageShow extends React.Component {
                             },
                             ]}
                         >
-                            <TextArea size="large" />
+                            <TextArea size="large" style={{height: '300px'}}/>
                         </Form.Item>
                     </Form>
                 </Modal>

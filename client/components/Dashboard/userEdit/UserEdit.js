@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 import styles from "./userEdit.module.sass"
 import {Modal, Form, Input, Select, Button, message} from "antd"
-import { fetchCarriers } from "../../../store/carriers/actions";
 import { editUser } from '../../../store/users/actions'
 import { LoadingOutlined } from '@ant-design/icons'
 
@@ -15,14 +14,6 @@ class UserEdit extends React.Component {
             carriers: null,
             res: 'preparing',
         };
-
-        this.props.fetchCarriers().then(
-            (res) => {
-              this.setState({carriers: res})
-            },
-            (err) => {
-              message.open({type: 'Error', content: 'Error while getting carriers list'})
-            });
     }
 
     onFinish = (values) => {
@@ -49,7 +40,7 @@ class UserEdit extends React.Component {
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
                     Upravit
                 </a>
-                <Modal title="Edit user data" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={null}>
+                <Modal title="Upravit uživatelská data" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={null}>
                     {this.state.res === 'preparing' &&
                     <Form initialValues={{
                         email: this.props.user.email,
@@ -108,7 +99,7 @@ class UserEdit extends React.Component {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" className={styles.addStopButton}>
                             Upravit
                             </Button>
                         </Form.Item>
@@ -130,9 +121,8 @@ class UserEdit extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        carriers: state.carrier.carriers,
         res: state.users.res,
     }
   }
-  export default connect(mapStateToProps, {fetchCarriers, editUser
+  export default connect(mapStateToProps, { editUser
   }) (UserEdit);

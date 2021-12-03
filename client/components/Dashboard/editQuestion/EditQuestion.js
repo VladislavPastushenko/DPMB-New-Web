@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Modal, Form, Input, Select, Button, message} from "antd"
 import { LoadingOutlined } from '@ant-design/icons'
 import { fetchFAQs } from "../../../store/FAQs/actions";
+import styles from './editQuestion.module.sass'
 
 const { TextArea } = Input;
 
@@ -40,10 +41,10 @@ class EditQuestion extends React.Component {
         return (
             <>
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
-                    Text otázky
+                    Zobrazit
                 </a>
-                <Modal title="Text otázky" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
-                        <Button key="back" type="primary" onClick={this.handleOk}>
+                <Modal style={{height: '60%'}} title="Text otázky" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
+                        <Button key="back" type="primary" onClick={this.handleOk} className={styles.addStopButton} >
                           Editovat
                         </Button>]}>
                     <Form initialValues={{
@@ -60,7 +61,7 @@ class EditQuestion extends React.Component {
                             },
                             ]}
                         >
-                            <TextArea size="large"/>
+                            <TextArea size="large" style={{height: '300px'}} />
                         </Form.Item>
                     </Form>
                 </Modal>

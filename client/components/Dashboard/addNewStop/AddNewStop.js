@@ -59,13 +59,13 @@ class NewStop extends React.Component {
                     <button className={styles.addStopButton}>Vytvořit</button>
                 </form>
                 <Modal title="Success" visible={this.state.isSuccessModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                        <Button key="back" onClick={this.handleOk}>
+                        <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                           OK
                         </Button>]}>
                             <p>Zastávky úspěšně přidána</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                    <Button key="back" onClick={this.handleOk}>
+                    <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                       OK
                     </Button>]}>
                         <p>Něco se pokazilo</p>
