@@ -17,8 +17,9 @@ function news(state = {
     switch (action.type) {
         case FETCH_NEWS_SUCCESS:
         case DELETE_NEWS_SUCCESS:
-        case CREATE_NEWS_SUCCESS:
             return Object.assign({}, state, {news: action.data});
+        case CREATE_NEWS_SUCCESS:
+            return Object.assign({}, state, {news: action.res});
         case FETCH_NEWS_FAILED:
         case DELETE_NEWS_FAILED:
         case CREATE_NEWS_FAILED:

@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./addNewNews.module.sass"
+import styles from "./addNewFAQ.module.sass"
 import { Button, Modal, Input, Form, Result } from 'antd'
-import { createNews } from "../../../store/news/actions";
+import { createFAQs } from "../../../store/FAQs/actions";
 
 const { TextArea } = Input;
 
@@ -39,7 +39,7 @@ const formItemLayout = {
     },
   };
 
-class NewNews extends React.Component {
+class NewFAQ extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,7 +48,9 @@ class NewNews extends React.Component {
             isModalVisible: false,
             success: false,
             errorStatus: false,
-            message: [],
+            question: [],
+            answer: [],
+
         };
 
     }
@@ -59,25 +61,16 @@ class NewNews extends React.Component {
         });
     };
 
-    handleChange = (value) => {
-        this.setState({city_id: value})
-    }
-
     handleSubmit = (e) => {
-        e.preventDefault();
-        
-        
+        e.preventDefault(); 
         let data = {
-          name: e.target.elements.name.value,
-          text: this.state.message,
-          
+          question: this.state.question,
+          answer: this.state.answer,
         }
 
-        this.props.createNews(data).then(
+        this.props.createFAQs(data).then(
             (res) => {
                 this.setState({isSuccessModalVisible: true});
-                e.target.elements.name.value = null;
-
             },
             (err) => {
                 console.log(err);
@@ -86,23 +79,25 @@ class NewNews extends React.Component {
         )
     }
 
-    takeValue = (e) => {
-        this.setState({message: e.target.value})
+    takeQuestion = (e) => {
+        this.setState({question: e.target.value})
+    }
 
+    takeAnswer = (e) => {
+      this.setState({answer: e.target.value})
     }
 
     render() {
         return (
             <div className={styles.newStop}>
-                <h1 className={styles.addStopTitle}>Nová Novinka</h1>
+                <h1 className={styles.addStopTitle}>Novy FAQ</h1>
                 <form className={styles.addStopForm} onSubmit={this.handleSubmit}>
                     <div className={styles.addStopItem}>
-                    <label>Název novinky</label>
-                    <input type="text" name="name" placeholder="Název novinky" />
+                    <label>Otázka</label>
                     </div>
                     <Form className={styles.addStopForm} {...formItemLayout}>
                         <Form.Item
-                            name="new"
+                            name="question"
                             rules={[
                             {
                                 required: true,
@@ -111,16 +106,35 @@ class NewNews extends React.Component {
                             ]}
                             {...tailFormItemLayout}
                         >
-                            <TextArea size="medium" onChange={this.takeValue}/>
+                            <TextArea size="medium" onChange={this.takeQuestion}/>
                         </Form.Item>
                     </Form>
+                    
+                    <div className={styles.addStopItem}>
+                    <label>Odpověď</label>
+                    </div>
+                    <Form className={styles.addStopForm} {...formItemLayout}>
+                        <Form.Item
+                            name="answer"
+                            rules={[
+                            {
+                                required: true,
+                                message: '',
+                            },
+                            ]}
+                            {...tailFormItemLayout}
+                        >
+                            <TextArea size="medium" onChange={this.takeAnswer}/>
+                        </Form.Item>
+                    </Form>
+                    
                     <button className={styles.addStopButton}>Vytvořit</button>
                 </form>
                 <Modal title="Success" visible={this.state.isSuccessModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
                         <Button key="back" onClick={this.handleOk}>
                           OK
                         </Button>]}>
-                            <p>Novinka úspěšně přidána</p>
+                            <p>FAQ úspěšně přidán</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
                     <Button key="back" onClick={this.handleOk}>
@@ -139,5 +153,5 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {createNews,
-}) (NewNews);
+export default connect(mapStateToProps, {createFAQs,
+}) (NewFAQ);

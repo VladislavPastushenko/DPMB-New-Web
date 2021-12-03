@@ -9,6 +9,8 @@ import routeItems from "./routeItems/reducers";
 import reservations from "./reservations/reducers";
 import questionsFromUsers from "./questionsFromUsers/reducers";
 import news from "./news/reducers";
+import FAQs from "./FAQs/reducers";
+
 
 
 export default combineReducers({
@@ -22,4 +24,5 @@ export default combineReducers({
     reservations,
     questionsFromUsers,
     news,
+    FAQs,
 })

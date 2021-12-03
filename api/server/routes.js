@@ -8,6 +8,7 @@ import CarriersController from "./controllers/carriersController";
 import ReservationsController from "./controllers/reservationsController";
 import QuestionsFromUsersController from "./controllers/questionFromUserController";
 import NewsController from "./controllers/newsController";
+import FAQsController from "./controllers/faqsController";
 
 
 const routes = (route) => {
@@ -144,6 +145,16 @@ const routes = (route) => {
     route.route('/news/:id')
         .get(NewsController.getAll)
         .delete(NewsController.removeById)
+
+    // FAQ
+    route.route('/faqs')
+        .get(FAQsController.getAll)
+        .post(FAQsController.create)
+
+    route.route('/faqs/:id')
+        .get(FAQsController.getAll)
+        .delete(FAQsController.removeById)
+
 
 };
 
