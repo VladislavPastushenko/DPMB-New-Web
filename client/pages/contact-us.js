@@ -2,10 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import Head from 'next/head';
 import Api from "./../Api";
-import {Col, Row, Form,Input, Button} from 'antd';
+import {Col, Row, Form,Input, Button, message, Result} from 'antd';
 
 import styles from './styles/contact.module.sass'
-
+import {createQuestionFromUser} from "../store/questionsFromUser/actions"
 const api = new Api;
 
 
@@ -14,45 +14,78 @@ class ContactPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            'isAnswerGotten': false
+        }
     }
+
+
     handleFinish = (values) => {
-        console.log(values)
+        console.log(this.props);
+
+        this.props.createQuestionFromUser(values).then(
+            res => {
+                this.setState({isAnswerGotten: true})
+            },
+            err => {
+                message.open({"type": "error", content: "Chyba při odesílání vašeho dotazu"})
+            }
+        )
+
     }
+    
     render() {
         return (
             <div>
                 {/* Meta Tags */}
+
                 <Head>
                     <title>Contact us</title>
                 </Head>
+                {!this.state.isAnswerGotten ?
                 <Row style={{height: '100%', overflow: 'hidden'}} align='center'>
-                    <Col xs={22} md={24} lg={13} xl={14} xxl={8} align='center'>
+                    <Col xs={16} md={14} lg={12} xl={10} xxl={8} align='center'>
                         <p className='fontSizeMd' align='center'>
-                            Contact us!   
+                            Kontaktujte nás!   
                         </p>
                         <div >
                             <p className='fontSizeSm' align='center'>
-                            Do you have any questions?
+                            Máte nějaké otázky?
                             </p>
                             <Form onFinish={this.handleFinish}  >
                                 <Form.Item name="contact" >
                                     <Input required
-                                    placeholder='Input your e-mail'   type="email"
+                                    placeholder='Zadejte svůj e-mail' type="email"
                                     className={styles.forms} size='large' />    
                                         </Form.Item>
                                 <Form.Item name="message" >
                                     <Input.TextArea required
-                                    placeholder='Your message'
+                                    placeholder='Napište svůj dotaz'
                                     className={styles.forms} size='large' />    
                                 </Form.Item>
                                 <Form.Item>
-                                    <Button type='primary' size='large' htmlType='submit'> SEND </Button>
+                                    <Button type='primary' size='large' htmlType='submit'> ODESLAT </Button>
                                 </Form.Item>
                             </Form>
                         </div>
                     </Col>
                 </Row>
+                :
+                <Row style={{height: '100%', overflow: 'hidden'}} align='center'>
+                <Col xs={22} md={24} lg={13} xl={14} xxl={8} align='center'>
+                <Result
+                    status="success"
+                    title="Vaše zpráva byla úspěšně odeslána!"
+                    subTitle="Odpovíme co nejdříve"
+                    extra={[
+                    <Button type="primary" size='large' onClick={() => {this.setState({isAnswerGotten: false})}} key="console">
+                        Zpět
+                    </Button>
+                    ]}/>
+                </Col>
+                </Row>
+
+    }
             </div>
 
         )
@@ -64,10 +97,10 @@ class ContactPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        trips: state.trips.trips,
+        res: state.questionsFromUser.res,
     }
 }
-export default connect(mapStateToProps, {
+export default connect(mapStateToProps, {createQuestionFromUser
 }) (ContactPage);
 
 

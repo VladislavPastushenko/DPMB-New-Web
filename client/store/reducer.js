@@ -7,6 +7,7 @@ import carrier from "./carriers/reducers";
 import trips from "./trips/reducers";
 import routeItems from "./routeItems/reducers";
 import reservations from "./reservations/reducers";
+import questionsFromUser from "./questionsFromUser/reducers"
 
 
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
     carrier,
     trips,
     routeItems,
-    reservations
+    reservations,
+    questionsFromUser
 })
