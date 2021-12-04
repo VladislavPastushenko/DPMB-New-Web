@@ -1,23 +1,24 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./questionsFromUsers.module.sass"
+import styles from "./vacanciesList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchQuestionsFromUsers, deleteQuestionFromUser } from "../../../store/questionsFromUsers/actions";
+import { fetchVacancies, deleteVacancy } from "../../../store/vacancies/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import MessageShow from "../messageShow/MessageShow";
+import ShowRequirement from "../showRequirement/ShowRequirement";
+import ShowOffers from "../showOffers/ShowOffers";
 
-class QuestionsFromUsersList extends React.Component {
+class VacanciesList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
         };
 
-        this.props.fetchQuestionsFromUsers().then(
+        this.props.fetchVacancies().then(
           (res) => {
             this.setState({data: res})
           },
@@ -26,12 +27,13 @@ class QuestionsFromUsersList extends React.Component {
           }
 
         );
+        
     }
 
     handleDelete = (params) => {
       let id = params.row.id
 
-      this.props.deleteQuestionFromUser(id).then(
+      this.props.deleteVacancy(id).then(
         (res) => {window.location.reload(false)},
         (err) => {
           message.open({
@@ -44,13 +46,20 @@ class QuestionsFromUsersList extends React.Component {
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "contact", headerName: "Od koho", width: 250, align: "left",},
-        { field: "message", headerName: "Zpráva", width: 600, align: "left",},
-        { field: "full_message", headerName: "Zobrazit zprávu", width: 180, align: "left",
+        { field: "name", headerName: "Název", width: 600, align: "left",},
+        { field: "requirements", headerName: "Požadavky", width: 200, align: "left",
         
           renderCell: (params) => {
             return (
-              <MessageShow message={params.row} {...this.props}/>
+              <ShowRequirement requirements={params.row} {...this.props}/>
+            );
+          },
+        },
+        { field: "offers", headerName: "Nabídka", width: 200, align: "left",
+        
+          renderCell: (params) => {
+            return (
+              <ShowOffers offers={params.row} {...this.props}/>
             );
           },
         },
@@ -78,7 +87,8 @@ class QuestionsFromUsersList extends React.Component {
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Otázky</h1>
+                    <h1 className="userTitle">Zaměstnání</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newVacancy')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -95,8 +105,8 @@ class QuestionsFromUsersList extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Otázky</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newuser')}}>Vytvořit</button>
+                    <h1 className="userTitle">Zaměstnání</h1>
+                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newVacancy')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -115,5 +125,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchQuestionsFromUsers, deleteQuestionFromUser
-}) (QuestionsFromUsersList);
+export default connect(mapStateToProps, {fetchVacancies, deleteVacancy
+}) (VacanciesList);

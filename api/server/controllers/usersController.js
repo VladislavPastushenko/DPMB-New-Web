@@ -10,7 +10,6 @@ class UsersController {
         .getUserByAuthToken(req.session.loggedToken)
             .then((row, err) => {
                 let user = row.toJSON();
-                console.log(user)
                 return new Orm().getOrm().userModel.getAll(req.query)
                     .then((row, err) => (err) ? err.toJSON():  res.send(row.toJSON()) )
             })

@@ -33,8 +33,6 @@ class FAQs extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log("params")
-      console.log(params)
 
       this.props.deleteFAQs(id).then(
         (res) => {window.location.reload(false)},

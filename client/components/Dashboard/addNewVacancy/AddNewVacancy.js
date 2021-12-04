@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
-import styles from "./addNewLostThing.module.sass"
+import styles from "./addNewVacancy.module.sass"
 import { Button, Modal, Input, Form, Result } from 'antd'
-import { createLostThings } from "../../../store/lostThings/actions";
+import { createVacancy } from "../../../store/vacancies/actions";
 
 const { TextArea } = Input;
 
@@ -39,7 +39,7 @@ const formItemLayout = {
     },
   };
 
-class NewLostThing extends React.Component {
+class NewVacancy extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,10 +48,11 @@ class NewLostThing extends React.Component {
             isModalVisible: false,
             success: false,
             errorStatus: false,
-            message: [],
+            requirements: [],
+            offers: [],
         };
-
     }
+
     handleOk = () => {
         this.setState({
             isSuccessModalVisible: false,
@@ -59,26 +60,19 @@ class NewLostThing extends React.Component {
         });
     };
 
-    handleChange = (value) => {
-        this.setState({city_id: value})
-    }
-
     handleSubmit = (e) => {
         e.preventDefault();
-        
-        
+            
         let data = {
-          description: e.target.elements.description.value,
-          storage_location: e.target.elements.storage_location.value,
-          phone: e.target.elements.phone.value,
+          name: e.target.elements.name.value,
+          requirements: this.state.requirements,
+          offers: this.state.offers,
         }
 
-        this.props.createLostThings(data).then(
+        this.props.createVacancy(data).then(
             (res) => {
                 this.setState({isSuccessModalVisible: true});
-                e.target.elements.description.value = null;
-                e.target.elements.storage_location.value = null;
-                e.target.elements.phone.value = null;
+                e.target.elements.name.value = null;
             },
             (err) => {
                 console.log(err);
@@ -87,30 +81,59 @@ class NewLostThing extends React.Component {
         )
     }
 
-    takeValue = (e) => {
-        this.setState({message: e.target.value})
+    takeOffer = (e) => {
+        this.setState({offers: e.target.value})
+    }
 
+    takeRequirement = (e) => {
+      this.setState({requirements: e.target.value})
     }
 
     render() {
         return (
             <div className={styles.newStop}>
-                <h1 className={styles.addStopTitle}>Nová vec</h1>
+                <h1 className={styles.addStopTitle}>Nová pozice</h1>
                 <form className={styles.addStopForm} onSubmit={this.handleSubmit}>
                     <div className={styles.addStopItem}>
-                    <label>Popis věci</label>
-                    <input type="text" name="description" placeholder="Popis věci" />
+                    <label>Název</label>
+                    <input type="text" name="name" placeholder="Název pozice" />
                     </div>
 
                     <div className={styles.addStopItem}>
-                    <label>Úložiště</label>
-                    <input type="text" name="storage_location" placeholder="Úložiště" />
+                    <label>Požadavek</label>
                     </div>
+                    <Form className={styles.addStopForm} {...formItemLayout}>
+                        <Form.Item
+                            name="requirements"
+                            rules={[
+                            {
+                                required: true,
+                                message: '',
+                            },
+                            ]}
+                            {...tailFormItemLayout}
+                        >
+                            <TextArea size="medium" onChange={this.takeRequirement} style={{height: '200px'}}/>
+                        </Form.Item>
+                    </Form>
 
                     <div className={styles.addStopItem}>
-                    <label>Telefon</label>
-                    <input type="text" name="phone" placeholder="Telefon" />
+                    <label>Nabídka</label>
                     </div>
+                    <Form className={styles.addStopForm} {...formItemLayout}>
+                        <Form.Item
+                            name="offers"
+                            rules={[
+                            {
+                                required: true,
+                                message: '',
+                            },
+                            ]}
+                            {...tailFormItemLayout}
+                        >
+                            <TextArea size="medium" onChange={this.takeOffer} style={{height: '200px'}}/>
+                        </Form.Item>
+                    </Form>
 
                     <button className={styles.addStopButton}>Vytvořit</button>
                 </form>
@@ -118,7 +141,7 @@ class NewLostThing extends React.Component {
                         <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                           OK
                         </Button>]}>
-                            <p>Vec úspěšně přidána</p>
+                            <p>Pozice úspěšně přidána</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
                     <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
@@ -137,5 +160,5 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {createLostThings,
-}) (NewLostThing);
+export default connect(mapStateToProps, {createVacancy,
+}) (NewVacancy);

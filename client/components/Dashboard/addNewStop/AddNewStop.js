@@ -32,7 +32,6 @@ class NewStop extends React.Component {
         let data = {
             name: e.target.elements.name.value, 
         }
-        console.log(data)
 
         this.props.createStop(data).then(
             (res) => {

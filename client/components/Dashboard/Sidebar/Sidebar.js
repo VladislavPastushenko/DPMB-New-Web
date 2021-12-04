@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./sidebar.module.scss"
-import { ContactSupport, Person, Store, Settings, FiberNew, Info, SentimentVeryDissatisfied } from "@material-ui/icons";
+import { ContactSupport, Person, Store, Settings, FiberNew, Info, SentimentVeryDissatisfied, Work } from "@material-ui/icons";
 import Link from "next/link"
 
 export default class Sidebar extends React.Component {
@@ -42,6 +42,11 @@ export default class Sidebar extends React.Component {
                             <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('lostThingsList')}}>
                                 <SentimentVeryDissatisfied className={styles.sidebarIcon}/>
                                 Ztraty
+                            </li>
+
+                            <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('vacanciesList')}}>
+                                <Work className={styles.sidebarIcon}/>
+                                Zaměstnání
                             </li>
 
                             <li className={styles.sidebarListItem} onClick={() => {this.props.changeLocation('questionsFromUsersList')}}>

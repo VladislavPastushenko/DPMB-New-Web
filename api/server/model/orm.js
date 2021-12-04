@@ -6,6 +6,8 @@ import QuestionFromUserModel from "./questionFromUserModel";
 import NewsModel from "./newsModel";
 import FAQsModel from "./faqsModel";
 import LostThingsModel from "./lostThingsModel";
+import VacanciesModel from "./vacanciesModel";
+
 
 export default class Orm {
 
@@ -27,8 +29,7 @@ export default class Orm {
         const newsModel = new NewsModel({orm: orm, modelName: 'NewsModel', tableName: 'novinky', options: {} })
         const faqsModel = new FAQsModel({orm: orm, modelName: 'FAQsModel', tableName: 'faqs', options: {} })
         const lostThingsModel = new LostThingsModel({orm: orm, modelName: 'LostThingsModel', tableName: 'lost_things', options: {} })
-        
-        
+        const vacanciesModel = new VacanciesModel({orm: orm, modelName: 'VacanciesModel', tableName: 'vacancies', options: {} })        
 
         this._orm = {
             postModel: postModel,
@@ -38,6 +39,7 @@ export default class Orm {
             newsModel: newsModel,
             faqsModel: faqsModel,
             lostThingsModel: lostThingsModel,
+            vacanciesModel: vacanciesModel,
         };
     }
 

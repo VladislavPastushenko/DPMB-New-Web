@@ -18,9 +18,6 @@ class EditNews extends React.Component {
         this.props.fetchNews().then(
             (res) => {
               this.setState({data: res})
-              console.log("data")
-              console.log(this.state.data)
-
             },
             (err) => {
               this.setState({errMsg: err})
@@ -41,7 +38,7 @@ class EditNews extends React.Component {
         return (
             <>
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
-                    Text novinky
+                    Zobrazit
                 </a>
                 <Modal style={{height: '60%'}} title="Text novinky" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
                         <Button key="back" type="primary" onClick={this.handleOk} className={styles.addStopButton}>

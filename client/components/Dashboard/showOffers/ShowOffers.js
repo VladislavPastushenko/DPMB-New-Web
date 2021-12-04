@@ -1,13 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Modal, Form, Input, Select, Button, message} from "antd"
-import { LoadingOutlined } from '@ant-design/icons'
-import { fetchFAQs } from "../../../store/FAQs/actions";
-import styles from './editQuestion.module.sass'
+import styles from "./showOffers.module.sass"
+import { Modal, Form, Input, Button, message } from "antd"
+import { fetchVacancies } from "../../../store/vacancies/actions";
 
 const { TextArea } = Input;
 
-class EditQuestion extends React.Component {
+class ShowOffers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,21 +14,21 @@ class EditQuestion extends React.Component {
             data: [],
         };
 
-        this.props.fetchFAQs().then(
+        this.props.fetchVacancies().then(
             (res) => {
               this.setState({data: res})
             },
             (err) => {
               this.setState({errMsg: err})
             }
-  
           );
     }
+
     handleOk = () => {
         this.setState({isModalOpen: false});
         message.success({
             type: 'error',
-            content: 'Otázka úspěšně editovana',
+            content: 'Nabídka úspěšně editovana',
             duration: 3
         })
     };
@@ -40,17 +39,16 @@ class EditQuestion extends React.Component {
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
                     Zobrazit
                 </a>
-                <Modal style={{height: '60%'}} title="Text otázky" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
-                        <Button key="back" type="primary" onClick={this.handleOk} className={styles.addStopButton} >
+                <Modal style={{height: '60%'}} title="Text nabídky" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
+                        <Button key="back" type="primary" onClick={this.handleOk} className={styles.addStopButton}>
                           Editovat
                         </Button>]}>
                     <Form initialValues={{
-                            question: this.props.question.question
+                            offers: this.props.offers.offers
                         }}
-            
                     >
                         <Form.Item
-                            name="question"
+                            name="offers"
                             rules={[
                             {
                                 required: true,
@@ -58,7 +56,7 @@ class EditQuestion extends React.Component {
                             },
                             ]}
                         >
-                            <TextArea size="large" style={{height: '300px'}} />
+                            <TextArea size="large" style={{height: '300px'}}/>
                         </Form.Item>
                     </Form>
                 </Modal>
@@ -69,8 +67,8 @@ class EditQuestion extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        res: state.FAQs.res,
+        res: state.vacancies.res,
     }
   }
-  export default connect(mapStateToProps, {fetchFAQs
-  }) (EditQuestion);
+  export default connect(mapStateToProps, {fetchVacancies
+  }) (ShowOffers);

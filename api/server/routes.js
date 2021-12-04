@@ -5,6 +5,7 @@ import QuestionsFromUsersController from "./controllers/questionFromUserControll
 import NewsController from "./controllers/newsController";
 import FAQsController from "./controllers/faqsController";
 import LostThingsController from "./controllers/lostThingsController";
+import VacanciesController from "./controllers/vacanciesController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -100,6 +101,15 @@ const routes = (route) => {
     route.route('/lost-things/:id')
         .get(LostThingsController.getAll)
         .delete(LostThingsController.removeById)
+
+    // VACANCIES
+    route.route('/vacancies')
+        .get(VacanciesController.getAll)
+        .post(VacanciesController.create)
+
+    route.route('/vacancies/:id')
+        .get(VacanciesController.getAll)
+        .delete(VacanciesController.removeById)
 };
 
 export default routes;

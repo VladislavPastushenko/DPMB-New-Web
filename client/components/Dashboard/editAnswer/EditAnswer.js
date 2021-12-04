@@ -18,9 +18,6 @@ class EditAnswer extends React.Component {
         this.props.fetchFAQs().then(
             (res) => {
               this.setState({data: res})
-              console.log("data")
-              console.log(this.state.data)
-
             },
             (err) => {
               this.setState({errMsg: err})
