@@ -24,7 +24,7 @@ class ContactPage extends React.Component {
                 {/* Meta Tags */}
 
                 <Head>
-                    <title>Contact us</title>
+                    <title>Kontakt</title>
                 </Head>
                 <p className='fontSizeLg' align='center' >
                         Základní identifikační údaje           
@@ -72,7 +72,9 @@ class ContactPage extends React.Component {
                  }`
                  }}/>
                     <p align='center' className='fontSizeMd' >
-                             <a href="/contact-us">Napište nam!</a> 
+                        <Link href="/contact-us">
+                             <a >Napište nam!</a> </Link>
+
                              </p>
                              </Col>
                 </Row>

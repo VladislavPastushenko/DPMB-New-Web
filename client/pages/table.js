@@ -119,10 +119,10 @@ export default class ContactPage extends React.Component {
             <div>
                 {/* Meta Tags */}
                 <Head>
-                    <title>Contact us</title>
+                    <title>Reklama</title>
                     <style dangerouslySetInnerHTML={{__html: `
                     .ant-table-thead > tr > th {
-                        background: #96d9d2 !important;
+                        background: #cee6e3  !important;
                     }`
                     }}/>
 
