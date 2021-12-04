@@ -25,12 +25,11 @@ class Ztraty extends React.Component {
 
         this.props.fetchLostThings().then(
           (res) => {
-            this.setState({data: res})
-            // this.state.data.map(el => {
-            //   let date = new Date(el.date)
-            //   el.date = date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear()
-            // })
-            // console.log(this.state.data[1])
+            this.setState({data: res.map(el => {
+              let date = new Date(el.date)
+              return {...el,date: date.getDay()+"."+date.getMonth()+"."+date.getFullYear()}
+            })})
+
           },
           (err) => {
             this.setState({errMsg: err})
