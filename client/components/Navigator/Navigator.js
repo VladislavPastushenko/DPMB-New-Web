@@ -15,6 +15,7 @@ const menuItems = [
     {name: 'Kariera', link: 'vacancies'},
     {name: 'Doklady', link: 'link'},
     {name: 'Kontakty', link: '/contact'},
+    {name: 'Ztráty a nálezy', link: 'lost-and-founds'}
 ]
 
 
