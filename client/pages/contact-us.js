@@ -5,7 +5,7 @@ import Api from "./../Api";
 import {Col, Row, Form,Input, Button, message, Result} from 'antd';
 
 import styles from './styles/contact.module.sass'
-import {createQuestionFromUser} from "../store/questionsFromUser/actions"
+import {createQuestionFromUser} from "../store/questionsFromUsers/actions"
 const api = new Api;
 
 
@@ -100,7 +100,7 @@ const mapStateToProps = state => {
         res: state.questionsFromUser.res,
     }
 }
-export default connect(mapStateToProps, {createQuestionFromUser
+export default connect(mapStateToProps, {createQuestionFromUsers
 }) (ContactPage);
 
 

@@ -27,6 +27,9 @@ EDIT_USER_FAILED,
 LOGOUT_SUCCESS,
 LOGOUT_FAILED,
 
+CREATE_USER_SUCCESS,
+CREATE_USER_FAILED,
+
 } from "./actions";
 
 function users(state = {
@@ -61,8 +64,10 @@ function users(state = {
             return Object.assign({}, state, {loggedUser: action.loggedUser});
         case FETCH_USERS_SUCCESS:
         case DELETE_USER_SUCCESS:
+        case CREATE_USER_SUCCESS:
             return Object.assign({}, state, {users: action.data});
         case FETCH_USERS_FAILED:
+        case CREATE_USER_FAILED:
         case DELETE_USER_FAILED:
             return Object.assign({}, state, {error: action.error});
         default:

@@ -6,8 +6,6 @@ import { MailOutlined, PhoneOutlined, UserAddOutlined, HistoryOutlined} from '@a
 import {Col, Row, Form,Input, Button, message, Result} from 'antd';
 
 import styles from './styles/table.module.sass'
-import {createQuestionFromUser} from "../store/questionsFromUser/actions"
-import { BorderColor } from "@material-ui/icons";
 const api = new Api;
 
 
@@ -68,7 +66,7 @@ const mapStateToProps = state => {
         res: state.questionsFromUser.res,
     }
 }
-export default connect(mapStateToProps, {createQuestionFromUser
+export default connect(mapStateToProps, {
 }) (ContactPage);
 
 

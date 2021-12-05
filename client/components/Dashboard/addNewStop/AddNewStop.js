@@ -4,9 +4,6 @@ import ReactDOM from "react-dom";
 import styles from "./addNewStop.module.sass"
 import { Button, Modal, Form, Select } from 'antd'
 import { createStop } from "../../../store/stops/actions";
-import { fetchCities } from "../../../store/cities/actions";
-
-
 
 class NewStop extends React.Component {
     constructor(props) {
@@ -18,15 +15,6 @@ class NewStop extends React.Component {
             isErrorModalVisible: false,
         };
 
-        this.props.fetchCities().then(
-            (res) => {
-              this.setState({cities: res})
-            },
-            (err) => {
-              this.setState({errMsg: err})
-            }
-    
-          );
     }
     handleOk = () => {
         this.setState({
@@ -42,8 +30,7 @@ class NewStop extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let data = {
-            name: e.target.elements.name.value,
-            city_id: this.state.city_id, 
+            name: e.target.elements.name.value, 
         }
 
         this.props.createStop(data).then(
@@ -62,44 +49,25 @@ class NewStop extends React.Component {
     render() {
         return (
             <div className={styles.newStop}>
-                <h1 className={styles.addStopTitle}>New Stop</h1>
+                <h1 className={styles.addStopTitle}>Nová Zastávka</h1>
                 <form className={styles.addStopForm} onSubmit={this.handleSubmit}>
                     <div className={styles.addStopItem}>
-                    <label>Stop name</label>
-                    <input type="text" name="name" placeholder="Stop name" />
+                    <label>Název zastávky</label>
+                    <input type="text" name="name" placeholder="Název zastávky" />
                     </div>
-
-                    <div className={styles.addStopItem}>
-                    <label>City</label>
-                    <Form.Item name='city_id' className={styles.addStopItem}>
-                                <Select
-                                    showSearch
-                                    style={{ width: '100%' }}
-                                    placeholder="Choose city"
-                                    optionFilterProp="children"
-                                    onChange={this.handleChange}
-
-                                >
-                                    {this.state.cities.map((city, idx) => {
-                                     return(<Select.Option value={city.id} key={idx}>{city.name}</Select.Option>)
-                                     })}
-
-                                </Select>
-                    </Form.Item>
-                    </div>
-                    <button className={styles.addStopButton}>Create</button>
+                    <button className={styles.addStopButton}>Vytvořit</button>
                 </form>
                 <Modal title="Success" visible={this.state.isSuccessModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                        <Button key="back" onClick={this.handleOk}>
+                        <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                           OK
                         </Button>]}>
-                            <p>Stop added successfully</p>
+                            <p>Zastávky úspěšně přidána</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                    <Button key="back" onClick={this.handleOk}>
+                    <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                       OK
                     </Button>]}>
-                        <p>Something went wrong</p>
+                        <p>Něco se pokazilo</p>
                 </Modal>
             </div>
         );
@@ -112,5 +80,5 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {createStop, fetchCities
+export default connect(mapStateToProps, {createStop,
 }) (NewStop);
