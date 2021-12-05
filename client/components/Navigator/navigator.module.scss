@@ -36,6 +36,7 @@ $md: 992px;
         height: 2px;
         margin-top: .75rem;
         transition: all .3s;
+        background: rgba(200, 200, 200, 0.5);
     }
 
     @media screen and (max-width: $md) {
@@ -43,17 +44,6 @@ $md: 992px;
     }
 }
 
-.navigatorItemWhiteAfter {
-    &::after {
-        background: white;
-    }
-}
-
-.navigatorItemBlackAfter {
-    &::after {
-        background: black;
-    }
-}
 
 .navigatorLink {
     color: white;

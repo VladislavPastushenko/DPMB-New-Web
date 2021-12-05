@@ -32,6 +32,22 @@ export function fetchNews() {
     };
 }
 
+export function fetchNewsById(id) {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/news/' + id , method: 'GET'}).then(res => {
+                    dispatch({type: FETCH_NEWS_SUCCESS, data: res});
+                    resolve(res);
+                })
+            } catch (error) {
+                    dispatch({type: FETCH_NEWS_FAILED, error: error});
+                    reject(error);
+                }
+            })
+    };
+}
+
 export function deleteNews(id) {
     return async (dispatch) => {
         return new Promise((resolve, reject) => {

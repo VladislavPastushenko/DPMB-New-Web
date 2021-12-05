@@ -75,10 +75,10 @@ class IndexPage extends React.Component {
 
                         <Row gutter={[{xs: 0, md: 62, lg: 62}, 62]} align='center' style={{marginBottom: '10rem'}}>
                             <Col xs={22} sm={22} md={21} lg={13} xl={8} xxl={7} style={{position: 'relative', padding: '0 1em'}} id='howItWorks' className='fontSizeSm'>
-                                <div  className={styles.card} style={{backgroundColor: 'black', color: 'white'}}>
+                                <div  className={styles.card} style={{backgroundColor: '#5d83b6', color: 'white'}}>
                                     <div className={styles.flexBlockCenterItems}>
                                         <div>
-                                        <Link href=''>
+                                        <Link href='/transport'>
                                             <p className={' fontSizeMd ' + styles.cardLinkHeader} align='left'>
                                                 Doprava
                                             </p>
@@ -89,7 +89,7 @@ class IndexPage extends React.Component {
                                         <p className={' fontSizeSm ' + styles.blocksText}>
                                             Zjistěte naše trasy v různých kategoriích transportů
                                         </p>
-                                        <Link href=''>
+                                        <Link href='/transport'>
                                             <p className={' fontSizeSm ' + styles.cardLinkHeader}>
                                                 Learn More
                                             </p>
@@ -103,7 +103,7 @@ class IndexPage extends React.Component {
                                     <Col xs={22} sm={14} md={24} className={styles.card} style={{background: '#e5e5e5', padding: '3em 1.5em'}}>
                                         <div className={styles.flexBlockCenterItems}>
                                             <div>
-                                                <Link href='/our-story'>
+                                                <Link href='/vacancies'>
                                                     <span className={styles.cardLinkHeader + ' fontSizeMd'}>
                                                         Kariéra
                                                     </span>
@@ -116,9 +116,9 @@ class IndexPage extends React.Component {
                                 <Row>
                                     <Col xs={22} sm={14} md={24} className={styles.card} style={{background: '#f5f5f5', padding: '3em 1.5em'}}>
                                         <div className={styles.flexBlockCenterItems}>
-                                            <Link href='/why-free'>
+                                            <Link href='/pricelist'>
                                                 <span className={styles.cardLinkHeader + ' fontSizeMd'}>
-                                                    Služby
+                                                    Reklamní služby
                                                 </span>
                                             </Link>
                                         </div>

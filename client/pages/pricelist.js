@@ -2,7 +2,6 @@
 // Login: xtomas34
 import React from "react";
 import Head from 'next/head';
-import Api from "./../Api";
 import {Col, Row, Table } from 'antd';
 
 const { Column, ColumnGroup } = Table;
