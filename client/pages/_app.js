@@ -1,3 +1,6 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
+
 import React, { useEffect, useState } from "react";
 
 import { Provider } from 'react-redux';

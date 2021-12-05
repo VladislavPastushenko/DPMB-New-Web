@@ -1,3 +1,6 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
+
 import React from "react";
 import {Card, Col, Row, Result, Button} from "antd";
 import {verifyUser} from "../../../store/users/actions";
