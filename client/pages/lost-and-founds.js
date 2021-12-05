@@ -148,7 +148,7 @@ class Ztraty extends React.Component {
                 <Row style={{height: '100%', overflow: 'hidden'}} align='center'>
                     <Col xs={19} md={31} lg={20} xl={21} xxl={15}>
                         <div className={styles.title}>
-                            <p className='fontSizeMd' align='center'>Ztráty a nálezy věcí</p>
+                            <p className='fontSizeMd' style={{padding: '0.5em 0'}} align='center'>Ztráty a nálezy věcí</p>
                         </div>
                         <div>
                         <p className='fontSizeSm' >
@@ -173,8 +173,8 @@ class Ztraty extends React.Component {
                         </p>
                         </div>
                         <div className={styles.title}>
-                        <p className='fontSizeMd' align='center'>
-                            Něco jste ztratili?   
+                        <p className='fontSizeMd' align='center' style={{padding: '0.5em 0'}}>
+                            Něco jste ztratili?
                         </p>
                         </div>
                         <div >

@@ -8,7 +8,6 @@ const { Column, ColumnGroup } = Table;
 
 import styles from './styles/table.module.sass'
 
-const api = new Api;
 
 const data = [
     {
@@ -125,19 +124,18 @@ export default class ContactPage extends React.Component {
                     }`
                     }}/>
                 </Head>
-                <Row style={{overflow: 'hidden'}} align='center'>
-         
+                <Row style={{overflow: 'hidden', marginBottom: '8vh'}} align='center'>
                     <Col xs={18} md={16} lg={15} xl={14} xxl={14} align='center' className={styles.table}>
                     <div className={styles.title}>
-                            <p className='fontSizeMd' align='center'>VŠEOBECNÉ TECHNICKÉ PODMÍNKY POLEPU VOZIDEL A CENÍK</p>
+                            <p className='fontSizeMd' style={{padding: '0.5em 0'}} align='center'>VŠEOBECNÉ TECHNICKÉ PODMÍNKY POLEPU VOZIDEL A CENÍK</p>
                         </div>
-                        <div className='fontSizeSm' align='center'>
-                        <p >Objednavatel nese odpovědnost za estetickou úroveň, formu a obsah reklamy.
-                        Celoplošná reklama musí zachovat kontrastní viditelnost povinných provozních údajů na povrchu vozidla,
-                        musí zachovat předepsanou barvu živých částí elektrického zařízení pod napětím a výstražných tabulek.
-                        Nesmí zakrývat svítilny, zrcátka, odrazky a
-                        prosklennéčásti na pravé straně vozidla. 
-                        </p>
+                        <div className='fontSizeSm' align='center' style={{marginBottom: '8vh'}}>
+                          <p >Objednavatel nese odpovědnost za estetickou úroveň, formu a obsah reklamy.
+                          Celoplošná reklama musí zachovat kontrastní viditelnost povinných provozních údajů na povrchu vozidla,
+                          musí zachovat předepsanou barvu živých částí elektrického zařízení pod napětím a výstražných tabulek.
+                          Nesmí zakrývat svítilny, zrcátka, odrazky a
+                          prosklennéčásti na pravé straně vozidla.
+                          </p>
                         </div>
                         <div className={styles.table}>
                         <Table dataSource={data} pagination={false} className={styles.table} bordered='true' tableLayout='fixed' rowClassName={'fontSizeSm'}>
@@ -151,7 +149,7 @@ export default class ContactPage extends React.Component {
                             <Column title="Zhotovení" dataIndex="product" key="product" className={'fontSizeMd'} />
                             </ColumnGroup>
                         </Table>
-                        <div className='fontSizeSm' align='center' style={{marginTop: '1em'}}>
+                        <div className='fontSizeSm' align='center' style={{marginBottom: '10vh'}}>
                         <p>*Reklamy typu MOBILBOARD, TRAMBOARD jsou řešeny kombinací speciálníokenní fólie
                         se schváleným použítím i na nouzových východech a klasické vinylové fólie. Reklama se instaluje na nenástupní stranu vozidla 
                         Přesný rozměr reklamního polepu se určuje podle konkrétního typu vozidla.

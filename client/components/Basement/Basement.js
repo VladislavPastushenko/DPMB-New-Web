@@ -15,13 +15,10 @@ const Footer = () => {
             <Link href='/'>
               <li><a href="#"><p>Home</p></a></li>
             </Link>
-            <Link href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
+            <Link href='/faq'>
               <li><a href="#"><p>FAQ</p></a></li>
             </Link>
-            <Link href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
-              <li><a href="#"><p>About Us</p></a></li>
-            </Link>
-            <Link href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>
+            <Link href='/contact-us'>
               <li><a href="#"><p>Help</p></a></li>
             </Link>
             <Link href='/dashboard'>

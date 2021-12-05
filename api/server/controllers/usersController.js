@@ -1,5 +1,4 @@
 import Orm from "../model/orm";
-import Mailer from '../utils/mailer';
 const dotenv = require("dotenv");
 const config = dotenv.config();
 
@@ -88,18 +87,7 @@ class UsersController {
                         }
                 }
 
-                Mailer.sendEmail(
-                    config.parsed.EMAIL_FROM,
-                    row.toJSON().email,
-                    bodyParams,
-                    (err, info) => {
-                        if(err) {
-                            res.status(500).send('Error: '+err.message);
-                        } else {
-                            res.status(200).send('OK');
-                        }
-                    },
-                );
+                res.status(200).send('OK');
             })
             .catch((err) => {
 
@@ -127,23 +115,7 @@ class UsersController {
 
                             req.session.loggedToken = req.params.authToken;
 
-                            const bodyParams = {
-                                'template': 'userVerified.html',
-                                'context': {}
-                            }
-
-                            Mailer.sendEmail(
-                                config.parsed.EMAIL_FROM,
-                                row.toJSON().email,
-                                bodyParams,
-                                (err, info) => {
-                                    if(err) {
-                                        res.status(500).send('Error: '+err.message);
-                                    } else {
-                                        res.status(200).send('OK');
-                                    }},
-                                res
-                            );
+                            res.status(200).send('OK');
                         });
                 }
             }).catch((err) => {
