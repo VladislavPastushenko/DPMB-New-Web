@@ -9,6 +9,7 @@ import styles from './styles/index.module.sass'
 
 import Searcher from "../components/Searcher/searcher"
 import News from "../components/News/news"
+import Trams from "../components/Trams/trams"
 
 
 const api = new Api;
@@ -61,6 +62,9 @@ class IndexPage extends React.Component {
                     <div style={{position: 'relative', zIndex: '0'}}>
                         <News/>
                     </div>
+                    {/* <div style={{position: 'relative', zIndex: '0'}}>
+                        <Trams/>
+                    </div> */}
                 </div>
 
 
