@@ -13,10 +13,11 @@ import Tramvaj from "../components/TransportTables/tramvaj/Tramvaj";
 import NightBus from "../components/TransportTables/nightBus/NightBus";
 import Trolejbus from "../components/TransportTables/trolejbus/Trolejbus";
 import Bus from "../components/TransportTables/bus/Bus";
+import router from "next/router";
 
 const api = new Api;
 
-export default class LodniDoprava extends React.Component {
+export default class Transport extends React.Component {
 
     constructor(props) {
         super(props);
@@ -56,10 +57,14 @@ export default class LodniDoprava extends React.Component {
       this.setState({nightBus: false})
     }
 
+    takeShip = () => {
+      router.push("/lodni-doprava")
+    }
+
     render() {
         return (
             <div>
-                {/* Meta Tags */}
+                {/* Meta Ta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gs */}
                 <Head>
                     <title>Transport</title>
                     <style dangerouslySetInnerHTML={{__html: `
@@ -116,6 +121,16 @@ export default class LodniDoprava extends React.Component {
                             <div className={styles.transportIcon}>
                               <i className="las la-moon"></i>
                               <h3 className='fontSizeSm'>Noční linka</h3>
+                            </div>
+                          </span>
+                        </label>
+                        <label className={styles.customRadio}>
+                          <input type="radio" name="radio" onClick={this.takeShip}/>
+                          <span className={styles.radioBtn}
+                            ><i className="las la-check"></i>
+                            <div className={styles.transportIcon}>
+                              <i className="las la-ship"></i>
+                              <h3 className='fontSizeSm'>Lodní doprava</h3>
                             </div>
                           </span>
                         </label>
