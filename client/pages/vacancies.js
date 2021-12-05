@@ -1,3 +1,5 @@
+// Author: Tomason Viktoryia
+// Login: xtomas34
 import React from "react";
 import {connect} from "react-redux";
 import Head from 'next/head';
@@ -19,7 +21,6 @@ class Vacancy extends React.Component {
             offers: [],
             requirements: []
         }
-    
 
     this.props.fetchVacancies().then(
         (res) => {

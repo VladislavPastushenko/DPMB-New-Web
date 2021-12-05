@@ -1,8 +1,9 @@
+// Author: Tomason Viktoryia
+// Login: xtomas34
 import React from "react";
-import {connect} from "react-redux";
 import Head from 'next/head';
 import Api from "./../Api";
-import {Col, Row, Form,Input, Button, message, Result, Table, Tag, Space } from 'antd';
+import {Col, Row, Table } from 'antd';
 
 const { Column, ColumnGroup } = Table;
 
@@ -124,9 +125,7 @@ export default class ContactPage extends React.Component {
                         background: #cee6e3  !important;
                     }`
                     }}/>
-
                 </Head>
-         
                 <Row style={{overflow: 'hidden'}} align='center'>
          
                     <Col xs={18} md={16} lg={15} xl={14} xxl={14} align='center' className={styles.table}>
@@ -185,10 +184,8 @@ export default class ContactPage extends React.Component {
                     </Col>
                 </Row>
             </div>
-
         )
     }
-
 }
 
 

@@ -1,8 +1,9 @@
+// Author: Tomason Viktoryia
+// Login: xtomas34
 import React from "react";
-import {connect} from "react-redux";
 import Head from 'next/head';
 import {LinkOutlined} from '@ant-design/icons';
-import {Col, Row, List, Avatar} from 'antd';
+import {Col, Row, List} from 'antd';
 
 
 const data = [
