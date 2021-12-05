@@ -64,12 +64,12 @@ class IndexPage extends React.Component {
                     <h1 className='fontSizeXl' align='center' style={{fontWeight: 600, marginBottom: '5rem'}}>
                         Naše novinky
                     </h1>
-                    <div style={{position: 'relative', zIndex: '0'}}>
+                    <div style={{position: 'relative', zIndex: '0', marginBottom: '10rem'}}>
                         <News/>
                     </div>
-                    {/* <div style={{position: 'relative', zIndex: '0'}}>
+                    <div style={{position: 'relative', zIndex: '0'}}>
                         <Trams/>
-                    </div> */}
+                    </div>
 
                     <div style={{marginTop: '12em', overflow: 'hidden'}}>
 

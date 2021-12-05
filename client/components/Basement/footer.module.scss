@@ -3,12 +3,12 @@
 
 .footer {
     z-index: 1;
-    background: #111;
+    background: #f0f0f0;
     height: auto;
     width: auto;
     font-family: "Mukta Vaani";
     padding-top: 40px;
-    color: white;
+    color: gray;
 }
 
 .footerContent {
@@ -24,7 +24,7 @@
     font-weight: 400;
     text-transform: capitalize;
     line-height: 2rem;
-    color: white;
+    color: gray;
 }
 
 .footerContent p {
@@ -35,11 +35,15 @@
 }
 
 .socialsText {
+    padding: 0;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 0 0 0;
+    @media screen and (max-width: 510px) {
+        display: block;
+    }
 }
 
 .socialsText li {
@@ -48,7 +52,7 @@
 
 .socialsText a {
     text-decoration: none;
-    color: white;
+    color: gray;
     transition: color .4s ease;
 }
 
@@ -57,11 +61,12 @@
 }
 
 .socialsIcons {
+    padding: 0;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0 0 0;
 }
 
 .socialsIcons li {
@@ -70,7 +75,7 @@
 
 .socialsIcons a {
     text-decoration: none;
-    color: white;
+    color: gray;
     transition: color .4s ease;
 }
 
@@ -79,7 +84,7 @@
 }
 
 .footerBottom {
-    background: #000;
+    background: #f0f0f0;
     width: auto;
     padding: 20px 0;
     text-align: center;

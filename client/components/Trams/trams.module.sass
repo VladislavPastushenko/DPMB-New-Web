@@ -1,32 +1,58 @@
 .container
-    height: 371px
+    height: 600px
     position: relative
     overflow: hidden
 
 .contentContainer
     position: absolute
-    width: 700px
+    width: 780px
     height: 100%
     left: 50%
     transform: translateX(-50%)
     overflow: hidden
 
-.image
-    -o-object-fit: cover
-    object-fit: cover
-    background: #292929 no-repeat 50%
-    background-size: cover
-    z-index: -2
-    background-image: url('/cat.png')
-    height: 100%
-    width: 100%
+.myVideo
+  position: fixed
+  right: 0
+  bottom: 0
+  min-width: 100%
+  min-height: 100%
+
+
+
+@mixin animate($animation,$duration,$method,$times)
+    animation: $animation $duration $method $times
+
+@mixin keyframes($name)
+    @keyframes #{$name}
+        @content
 
 .trams
+    white-space: nowrap
     left: 0px
     top: 0
-    width: 100%
-    height: 128px
-    background-size: contain
-    background-image: url(/trams.png)
     position: absolute
-    background-repeat: no-repeat
+    border-right: 50px solid white
+    @include keyframes(shift)
+        0%
+            border-left: 0px solid white
+        50%
+            border-left: 30px solid white
+        100%
+            border-left: 0px solid white
+    @include animate(shift, 1.5s, linear, infinite)
+
+.line1
+    animation-delay: 0
+
+.line2
+    animation-delay: .75S
+
+.line3
+    animation-delay: 0
+
+.line4
+    animation-delay: .75S
+
+.line5
+    animation-delay: 0

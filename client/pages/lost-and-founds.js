@@ -4,14 +4,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import Head from 'next/head';
-import Api from "./../Api";
+import Api from "../Api";
 import {Col, Row} from 'antd';
 import { Table, Input, Button, Space } from 'antd';
 import Navigator from "../components/Navigator/Navigator";
 import styles from './styles/ztraty.module.sass'
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { fetchLostThings } from "./../store/lostThings/actions";
+import { fetchLostThings } from "../store/lostThings/actions";
 
 const api = new Api;
 
