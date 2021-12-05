@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Head from 'next/head';
 import Api from "./../Api";
 import { MailOutlined, PhoneOutlined, HomeOutlined, HistoryOutlined} from '@ant-design/icons';
-import {Col, Row, Form,Input, Button, message, Result} from 'antd';
+import {Col, Row, Link} from 'antd';
 
 import styles from './styles/contact.module.sass'
 import {createQuestionFromUser} from "../store/questionsFromUser/actions"
