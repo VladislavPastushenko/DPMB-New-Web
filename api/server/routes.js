@@ -1,5 +1,4 @@
 import UsersController from "./controllers/usersController";
-import PostsController from "./controllers/postsController";
 import StopsController from "./controllers/stopsController";
 import QuestionsFromUsersController from "./controllers/questionFromUserController";
 import NewsController from "./controllers/newsController";
@@ -56,15 +55,7 @@ const routes = (route) => {
         .delete(StopsController.removeById)
 
     route.route('/stops/get-by-city-id/:id')
-        .get(StopsController.getByCityId)
-
-    // POSTS
-    route.route('/posts')
-        .get(PostsController.getAll)
-        .post(PostsController.create)
-
-    route.route('/posts/:id')
-        .get(PostsController.get)
+        .get(StopsController.getById)
 
     // QUESTIONS_FROM_USERS
     route.route('/questions-from-users')

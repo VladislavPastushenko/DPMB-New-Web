@@ -21,7 +21,6 @@ export default class ServerError extends React.Component {
                     <title>Oooops</title>
                     <meta name='description' content='Bla'/>
                 </Head>
-
                 <Result
                     status="403"
                     title={

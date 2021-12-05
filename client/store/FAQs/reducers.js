@@ -14,15 +14,15 @@ CREATE_FAQS_FAILED,
 } from "./actions";
 
 function FAQs(state = {
-    questionsFromUsers: [],
+    faqs: [],
     res: null,
 }, action) {
     switch (action.type) {
         case FETCH_FAQS_SUCCESS:
         case DELETE_FAQS_SUCCESS:
-            return Object.assign({}, state, {FAQs: action.data});
+            return Object.assign({}, state, {faqs: action.data});
         case CREATE_FAQS_SUCCESS:
-            return Object.assign({}, state, {FAQs: action.res});
+            return Object.assign({}, state, {faqs: action.res});
         case FETCH_FAQS_FAILED:
         case DELETE_FAQS_FAILED:
         case CREATE_FAQS_FAILED:

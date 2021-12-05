@@ -14,7 +14,7 @@ CREATE_NEWS_FAILED,
 } from "./actions";
 
 function news(state = {
-    questionsFromUsers: [],
+    news: [],
     res: null,
 }, action) {
     switch (action.type) {
