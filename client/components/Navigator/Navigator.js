@@ -4,18 +4,17 @@
 import React from "react";
 import { Row, Col, Dropdown, Menu} from "antd";
 import styles from './navigator.module.scss'
-import {SearchOutlined} from '@ant-design/icons';
+// import {SearchOutlined} from '@ant-design/icons';
 import Link from 'next/link'
 
 
 const menuItems = [
-    {name: 'Aktuality', link: ''},
-    {name: 'Doprava', link: ''},
-    {name: 'Jizdne', link: ''},
-    {name: 'Sluzby', link: ''},
-    {name: 'Kariera', link: ''},
-    {name: 'O Nas', link: ''},
-    {name: 'Kontakty', link: ''},
+    {name: 'Hlavní', link: '/'},
+    {name: 'Doprava', link: '/transport'},
+    {name: 'Reklama', link: '/pricelist'},
+    {name: 'Kariera', link: 'vacancies'},
+    {name: 'Doklady', link: 'link'},
+    {name: 'Kontakty', link: '/contact'},
 ]
 
 
@@ -50,8 +49,8 @@ class Navigator extends React.Component {
                                     xxl={3}
                                     xl={3}
                                     lg={3}
-                                    className={(this.props.color === 'white' ? styles.navigatorItemWhiteAfter : styles.navigatorItemBlackAfter) + ' ' + styles.navigatorItem}
-                                    style={{borderRight: menuItems.length - 1 === idx ? 'none' : '', borderColor: this.props.color}}
+                                    className={styles.navigatorItem}
+                                    style={{borderRight: menuItems.length - 1 === idx ? 'none' : '', borderColor: 'rgba(200, 200, 200, 0.5)'}}
                                 >
                                         <a className={styles.navigatorLink} style={{color: this.props.color}}>
                                             {el.name}

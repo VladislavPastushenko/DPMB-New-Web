@@ -1,8 +1,8 @@
 // Author: Kozhevnikov Dmitrii
 // Login: xkozhe00
 
+import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
 import styles from "./addNewFAQ.module.sass"
 import { Button, Modal, Input, Form, Result } from 'antd'
 import { createFAQs } from "../../../store/FAQs/actions";

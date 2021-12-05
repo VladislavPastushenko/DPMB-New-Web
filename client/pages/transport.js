@@ -84,7 +84,7 @@ export default class LodniDoprava extends React.Component {
                           <span className={styles.radioBtn}
                             ><i className="las la-check"></i>
                             <div className={styles.transportIcon}>
-                              <i class="las la-tram"></i>
+                              <i className="las la-tram"></i>
                               <h3 className='fontSizeSm'>Šalina</h3>
                             </div>
                           </span>
@@ -92,9 +92,9 @@ export default class LodniDoprava extends React.Component {
                         <label className={styles.customRadio}>
                           <input type="radio" name="radio" onClick={this.takeBus}/>
                           <span className={styles.radioBtn}
-                            ><i class="las la-check"></i>
+                            ><i className="las la-check"></i>
                             <div className={styles.transportIcon}>
-                              <i class="las la-bus"></i>
+                              <i className="las la-bus"></i>
                               <h3 className='fontSizeSm'>Autobus</h3>
                             </div>
                           </span>
@@ -102,9 +102,9 @@ export default class LodniDoprava extends React.Component {
                         <label className={styles.customRadio}>
                           <input type="radio" name="radio" onClick={this.takeTrolejbus}/>
                           <span className={styles.radioBtn}
-                            ><i class="las la-check"></i>
+                            ><i className="las la-check"></i>
                             <div className={styles.transportIcon}>
-                              <i class="las la-bus-alt"></i>
+                              <i className="las la-bus-alt"></i>
                               <h3 className='fontSizeSm'>Trolejbus</h3>
                             </div>
                           </span>
@@ -112,20 +112,19 @@ export default class LodniDoprava extends React.Component {
                         <label className={styles.customRadio}>
                           <input type="radio" name="radio" onClick={this.takeNightBus}/>
                           <span className={styles.radioBtn}
-                            ><i class="las la-check"></i>
+                            ><i className="las la-check"></i>
                             <div className={styles.transportIcon}>
-                              <i class="las la-moon"></i>
+                              <i className="las la-moon"></i>
                               <h3 className='fontSizeSm'>Noční linka</h3>
                             </div>
                           </span>
                         </label>
                       </div>
-                   
                     </div>
                     {this.state.tramvaj === true && <Tramvaj/>}
                     {this.state.nightBus === true && <NightBus/>}
                     {this.state.trolejbus=== true && <Trolejbus/>}
-                    {this.state.bus=== true && <Bus/>}             
+                    {this.state.bus=== true && <Bus/>}
                     </Col>
                 </Row>
 
