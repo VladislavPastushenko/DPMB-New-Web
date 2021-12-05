@@ -1,14 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 import styles from './faqs.module.sass';
-import {Row, Col} from 'antd';
 import Link from "next/link";
 
 
 const items = [
     {name: 'Co je SMS jizdenka?', link: '/faq#2',},
     {name: 'Zapomenutá předplatní jízdenka', link: '/faq#3'},
-    {name: 'Lorem ipsum dolor sit amen', link: '/Lorem-ipsum-dolor-sit-amen',}
+    {name: 'Kam se obrátit v případě otázky?', link: '/faq#4',}
 ]
 
 class FAQIntegrated extends React.Component {
