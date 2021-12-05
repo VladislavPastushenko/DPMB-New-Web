@@ -16,7 +16,7 @@ import Bus from "../components/TransportTables/bus/Bus";
 
 const api = new Api;
 
-export default class LodniDoprava extends React.Component {
+export default class Transport extends React.Component {
 
     constructor(props) {
         super(props);
@@ -59,7 +59,7 @@ export default class LodniDoprava extends React.Component {
     render() {
         return (
             <div>
-                {/* Meta Tags */}
+                {/* Meta Ta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gs */}
                 <Head>
                     <title>Transport</title>
                     <style dangerouslySetInnerHTML={{__html: `
