@@ -12,8 +12,8 @@ const menuItems = [
     {name: 'Hlavní', link: '/'},
     {name: 'Doprava', link: '/transport'},
     {name: 'Reklama', link: '/pricelist'},
-    {name: 'Kariera', link: 'vacancies'},
-    {name: 'Doklady', link: 'link'},
+    {name: 'Kariera', link: '/vacancies'},
+    {name: 'Doklady', link: '/documents'},
     {name: 'Kontakty', link: '/contact'},
     {name: 'Ztráty a nálezy', link: 'lost-and-founds'}
 ]
