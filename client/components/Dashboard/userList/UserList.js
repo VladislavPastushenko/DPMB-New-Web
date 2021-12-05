@@ -3,7 +3,6 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
 import styles from "./userList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";

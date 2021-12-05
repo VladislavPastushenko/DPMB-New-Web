@@ -2,12 +2,9 @@
 // Login: xkozhe00
 
 import React from "react";
-import {connect} from "react-redux";
 import Head from 'next/head';
 import Api from "../Api";
 import {Col, Row} from 'antd';
-import { Table } from 'antd';
-import Navigator from "../components/Navigator/Navigator";
 import styles from './styles/transport.module.sass'
 import Tramvaj from "../components/TransportTables/tramvaj/Tramvaj";
 import NightBus from "../components/TransportTables/nightBus/NightBus";

@@ -3,7 +3,6 @@
 
 import React from "react";
 import {connect} from "react-redux";
-//import styles from "./home.module.sass"
 import styles from "./styles/dashboard.module.sass"
 import Topbar from "./../components/Dashboard/Topbar/Topbar"
 import Sidebar from "./../components/Dashboard/Sidebar/Sidebar"

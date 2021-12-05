@@ -1,7 +1,6 @@
 import React from "react";
 import {Row, Col, Divider, Skeleton} from "antd";
 import Head from 'next/head';
-import Link from 'next/link';
 import {fetchFAQs} from '../store/FAQs/actions';
 import { connect } from "react-redux";
 
