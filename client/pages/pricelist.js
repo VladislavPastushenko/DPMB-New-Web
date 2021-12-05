@@ -1,8 +1,7 @@
 import React from "react";
-import {connect} from "react-redux";
 import Head from 'next/head';
-import Api from "./../Api";
-import {Col, Row, Form,Input, Button, message, Result, Table, Tag, Space } from 'antd';
+import Api from "../Api";
+import {Col, Row, Table } from 'antd';
 
 const { Column, ColumnGroup } = Table;
 
