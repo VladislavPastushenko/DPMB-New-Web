@@ -4,6 +4,7 @@ import {Col, Row, TimePicker, Form, Select, Button} from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import {fetchNews} from '../../store/news/actions'
 import styles from './news.module.sass'
+import Link from 'next/link';
 
 class News extends React.Component {
 
@@ -46,9 +47,11 @@ class News extends React.Component {
                                     <div className={styles.carouselItemDate + ' fontSizeXs'}>
                                         {new Date(el.date).toLocaleString('default', { month: 'short', day: '2-digit' })} {new Date(el.date).getFullYear()}
                                     </div>
-                                    <div className={styles.carouselItemText + ' fontSizeLg'}>
-                                    {el.name}
+                                    <Link href={'/news/' + el.id}>
+                                    <div className={styles.carouselItemText + ' fontSizeLg ' + styles.hoverForBlack}>
+                                        {el.name}
                                     </div>
+                                    </Link>
                                 </div>
                             )
                         })}
@@ -64,9 +67,11 @@ class News extends React.Component {
                                     <div className={styles.carouselItemDate + ' fontSizeXs'}>
                                         {new Date(el.date).toLocaleString('default', { month: 'short', day: '2-digit' })} {new Date(el.date).getFullYear()}
                                     </div>
-                                    <div className={styles.carouselItemText + ' fontSizeLg'}>
-                                    {el.name}
-                                    </div>
+                                    <Link href={'/news/' + el.id}>
+                                        <div className={styles.carouselItemText + ' fontSizeLg'}>
+                                            {el.name}
+                                        </div>
+                                    </Link>
                                 </div>
                             )
                         })}
