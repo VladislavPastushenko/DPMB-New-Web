@@ -9,7 +9,7 @@ import {createQuestionFromUser} from "../store/questionsFromUsers/actions"
 const api = new Api;
 
 
-class ContactPage extends React.Component {
+class ContactUs extends React.Component {
 
 
     constructor(props) {
@@ -97,10 +97,10 @@ class ContactPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        res: state.questionsFromUser.res,
+        res: state.questionsFromUsers.res,
     }
 }
-export default connect(mapStateToProps, {createQuestionFromUsers
-}) (ContactPage);
+export default connect(mapStateToProps, {createQuestionFromUser
+}) (ContactUs);
 
 

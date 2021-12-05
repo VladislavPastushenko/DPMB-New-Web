@@ -1,15 +1,15 @@
 import React from "react";
 import {connect} from "react-redux";
 import Head from 'next/head';
-import Api from "./../Api";
-import { MailOutlined, PhoneOutlined, UserAddOutlined, HistoryOutlined} from '@ant-design/icons';
-import {Col, Row, Form,Input, Button, message, Result} from 'antd';
+import Api from "../Api";
+import {UserAddOutlined} from '@ant-design/icons';
+import {Col, Row} from 'antd';
 
 import styles from './styles/table.module.sass'
 const api = new Api;
 
 
-class ContactPage extends React.Component {
+class Vacancy extends React.Component {
 
     constructor(props) {
         super(props);
@@ -40,7 +40,7 @@ class ContactPage extends React.Component {
                            <div className={styles.title} style={{borderRadius:'4px', padding: '0.5em 0', color: 'white', fontWeight : '600'}}>
                             <div className='fontSizeMd' align='center' > Řidič tramvaje - nástupní mzda cca 32 400 Kč</div>
                             </div>
-                            <div className='fontSizeSm' align='left' style={{ borderStyle: 'solid', borderColor: 'rgb(75, 146, 147)' }}>
+                            <div className='fontSizeSm' align='left' style={{ marginTop: '2em', borderColor: 'rgb(75, 146, 147)' }}>
                         <div style={{marginBottom: '1em'}}>POŽADUJEME:<br/>
                         <div style={{marginLeft: '1em'}}>
                                 • věk od 21 let<br/>
@@ -63,10 +63,10 @@ class ContactPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        res: state.questionsFromUser.res,
+        res: state.questionsFromUsers.res,
     }
 }
 export default connect(mapStateToProps, {
-}) (ContactPage);
+}) (Vacancy);
 
 

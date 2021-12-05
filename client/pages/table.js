@@ -113,7 +113,6 @@ export default class ContactPage extends React.Component {
         super(props);
         this.state = {}
     }
-    //96d9d2 5d83b6
     render() {
         return (
             <div>
