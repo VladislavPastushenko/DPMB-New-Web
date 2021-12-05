@@ -7,6 +7,11 @@ import {Col, Row} from 'antd';
 import Navigator from "../components/Navigator/Navigator";
 import styles from './styles/index.module.sass'
 
+import Searcher from "../components/Searcher/searcher"
+import News from "../components/News/news"
+import Trams from "../components/Trams/trams"
+
+
 const api = new Api;
 
 
@@ -22,7 +27,7 @@ class IndexPage extends React.Component {
             <div>
                 {/* Meta Tags */}
                 <Head>
-                    <title>IIS | Index</title>
+                    <title>DP | Index</title>
                     <meta name='description' content='Bla'/>
                 </Head>
                 <div className={styles.videoContainer} ref={this.myRef}>
@@ -39,15 +44,27 @@ class IndexPage extends React.Component {
                     <Col xs={22} md={24} lg={13} xl={14} xxl={10} align='center'>
                         <div className={styles.headerContainer}>
                             <div className='fontSizeLg' align='left'>
-                                ConectIIS
+                                Dopravní podnik
                             </div>
                             <p className='fontSizeMd' align='left'>
-                                Trips around the Czech Republic and Europe
+                                Jezdíme pro vás
                             </p>
-                            
+                            <Searcher />
                         </div>
                     </Col>
                 </Row>
+                </div>
+
+                <div className={styles.secondSection}>
+                    <h1 className='fontSizeXl' align='center' style={{fontWeight: 600, marginBottom: '5rem'}}>
+                        Naše novinky
+                    </h1>
+                    <div style={{position: 'relative', zIndex: '0'}}>
+                        <News/>
+                    </div>
+                    {/* <div style={{position: 'relative', zIndex: '0'}}>
+                        <Trams/>
+                    </div> */}
                 </div>
 
 
