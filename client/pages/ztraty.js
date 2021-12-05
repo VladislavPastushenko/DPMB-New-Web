@@ -20,7 +20,6 @@ class Ztraty extends React.Component {
             searchText: '',
             searchedColumn: '',
             data: [],
-            date: null,
         }
 
         this.props.fetchLostThings().then(
