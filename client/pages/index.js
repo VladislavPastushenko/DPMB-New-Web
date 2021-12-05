@@ -79,7 +79,7 @@ class IndexPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        trips: state.trips.trips,
+
     }
 }
 export default connect(mapStateToProps, {

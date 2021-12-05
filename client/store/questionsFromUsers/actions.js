@@ -32,7 +32,6 @@ export function fetchQuestionsFromUsers() {
 }
 
 export function deleteQuestionFromUser(id) {
-    console.log("hey")
     return async (dispatch) => {
         return new Promise((resolve, reject) => {
             try {
@@ -41,7 +40,6 @@ export function deleteQuestionFromUser(id) {
                         dispatch({type: DELETE_QUESTION_FROM_USER_SUCCESS, res: res});
                         resolve(res);
                     } else {
-                        console.log("error1")
                         console.log(res)
 
                         dispatch({type: DELETE_QUESTION_FROM_USER_FAILED, error: res});
@@ -49,8 +47,6 @@ export function deleteQuestionFromUser(id) {
                     }
                 })
             } catch (error) {
-                console.log("error2")
-
                     dispatch({type: DELETE_QUESTION_FROM_USER_FAILED, error: error});
                     reject(error);
                 }

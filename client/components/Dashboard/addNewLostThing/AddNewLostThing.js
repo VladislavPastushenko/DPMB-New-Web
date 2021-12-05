@@ -71,7 +71,6 @@ class NewLostThing extends React.Component {
           description: e.target.elements.description.value,
           storage_location: e.target.elements.storage_location.value,
           phone: e.target.elements.phone.value,
-          date: e.target.elements.date.value,
         }
 
         this.props.createLostThings(data).then(
@@ -80,7 +79,6 @@ class NewLostThing extends React.Component {
                 e.target.elements.description.value = null;
                 e.target.elements.storage_location.value = null;
                 e.target.elements.phone.value = null;
-                e.target.elements.date.value = null;
             },
             (err) => {
                 console.log(err);
@@ -114,21 +112,16 @@ class NewLostThing extends React.Component {
                     <input type="text" name="phone" placeholder="Telefon" />
                     </div>
 
-                    <div className={styles.addStopItem}>
-                    <label>Datum a čas</label>
-                    <input type="text" name="date" placeholder="YYYY-MM-DD hh:mm:ss" />
-                    </div>
-
                     <button className={styles.addStopButton}>Vytvořit</button>
                 </form>
                 <Modal title="Success" visible={this.state.isSuccessModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                        <Button key="back" onClick={this.handleOk}>
+                        <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                           OK
                         </Button>]}>
                             <p>Vec úspěšně přidána</p>
                 </Modal>
                 <Modal title="Error" visible={this.state.isErrorModalVisible} onOk={this.handleOk} onCancel={this.handleOk} footer={[
-                    <Button key="back" onClick={this.handleOk}>
+                    <Button key="back" onClick={this.handleOk} className={styles.addStopButton}>
                       OK
                     </Button>]}>
                         <p>Něco se pokazilo</p>

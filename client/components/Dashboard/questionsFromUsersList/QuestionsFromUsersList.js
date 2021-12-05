@@ -30,8 +30,6 @@ class QuestionsFromUsersList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log("params")
-      console.log(params)
 
       this.props.deleteQuestionFromUser(id).then(
         (res) => {window.location.reload(false)},
@@ -46,8 +44,9 @@ class QuestionsFromUsersList extends React.Component {
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "contact", headerName: "Od koho", width: 600, align: "left",},
-        { field: "message", headerName: "Zpráva", width: 400, align: "left",
+        { field: "contact", headerName: "Od koho", width: 250, align: "left",},
+        { field: "message", headerName: "Zpráva", width: 600, align: "left",},
+        { field: "full_message", headerName: "Zobrazit zprávu", width: 180, align: "left",
         
           renderCell: (params) => {
             return (

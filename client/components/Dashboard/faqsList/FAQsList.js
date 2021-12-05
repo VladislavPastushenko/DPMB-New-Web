@@ -33,8 +33,6 @@ class FAQs extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log("params")
-      console.log(params)
 
       this.props.deleteFAQs(id).then(
         (res) => {window.location.reload(false)},
@@ -49,14 +47,15 @@ class FAQs extends React.Component {
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "question", headerName: "Otázka", width: 500, align: "left", 
+        { field: "question", headerName: "Otázka", width: 670 , align: "left",},
+        { field: "full_question", headerName: "Cela otázka", width: 180, align: "left", 
           renderCell: (params) => {
             return (
               <EditQuestion question={params.row} {...this.props}/>
             );
           },
         },
-        { field: "answer", headerName: "Odpověď", width: 500, align: "left",
+        { field: "answer", headerName: "Cela odpověď", width: 180, align: "left",
         
           renderCell: (params) => {
             return (

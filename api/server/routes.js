@@ -1,9 +1,14 @@
 import UsersController from "./controllers/usersController";
+<<<<<<< HEAD
+import PostsController from "./controllers/postsController";
+=======
+>>>>>>> main
 import StopsController from "./controllers/stopsController";
 import QuestionsFromUsersController from "./controllers/questionFromUserController";
 import NewsController from "./controllers/newsController";
 import FAQsController from "./controllers/faqsController";
 import LostThingsController from "./controllers/lostThingsController";
+import VacanciesController from "./controllers/vacanciesController";
 
 const routes = (route) => {
     route.get('/', (req, res) => {
@@ -31,7 +36,6 @@ const routes = (route) => {
 
     route.route('/users/verify/:authToken')
         .get(UsersController.verify)
-
 
     route.route('/users/logout')
         .get(UsersController.logout)
@@ -92,6 +96,15 @@ const routes = (route) => {
     route.route('/lost-things/:id')
         .get(LostThingsController.getAll)
         .delete(LostThingsController.removeById)
+
+    // VACANCIES
+    route.route('/vacancies')
+        .get(VacanciesController.getAll)
+        .post(VacanciesController.create)
+
+    route.route('/vacancies/:id')
+        .get(VacanciesController.getAll)
+        .delete(VacanciesController.removeById)
 };
 
 export default routes;

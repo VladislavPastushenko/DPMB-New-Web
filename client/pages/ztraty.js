@@ -8,33 +8,9 @@ import Navigator from "../components/Navigator/Navigator";
 import styles from './styles/ztraty.module.sass'
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-
+import { fetchLostThings } from "./../store/lostThings/actions";
 
 const api = new Api;
-
-const data = [
-    {
-      key: '1',
-      date: '02-12-2021',
-      name: "Fialovo-černý batoh",
-      place: "Výpravčí ED Pisárky",
-      phone: "5-4317-1435",
-    },
-    {
-        key: '2',
-        date: '02-12-2021',
-        name: "červený pytel,boty,triko",
-        place: "Výpravčí AD Medlánky",
-        phone: "5-4317-2619",
-    },
-    {
-        key: '3',
-        date: '01-12-2021',
-        name: "dětská korunka",
-        place: "Výpravčí ED Pisárky",
-        phone: "5-4317-1435",
-    }
-]
 
 class Ztraty extends React.Component {
 
@@ -43,7 +19,22 @@ class Ztraty extends React.Component {
         this.state = {
             searchText: '',
             searchedColumn: '',
+            data: [],
         }
+
+        this.props.fetchLostThings().then(
+          (res) => {
+            this.setState({data: res.map(el => {
+              let date = new Date(el.date)
+              return {...el,date: date.getDay()+"."+date.getMonth()+"."+date.getFullYear()}
+            })})
+
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+
+        );
     }
 
     getColumnSearchProps = dataIndex => ({
@@ -125,8 +116,8 @@ class Ztraty extends React.Component {
       };
 
     columns = [
-        { title: 'Datum nálezu', dataIndex: 'date', width: '15%', ...this.getColumnSearchProps('date'),},
-        { title: 'Nalezená věc', dataIndex: 'name', ...this.getColumnSearchProps('name'),
+        { title: 'Datum nálezu', dataIndex: 'date', width: '15%', render: (text) => moment(text).format("YYYY-MM-DD"), ...this.getColumnSearchProps('date'), },
+        { title: 'Nalezená věc', dataIndex: 'description', ...this.getColumnSearchProps('description'),
           sorter: {
             compare: (a, b) => a.name - b.name,
             multiple: 2,
@@ -134,7 +125,7 @@ class Ztraty extends React.Component {
         },
         {
           title: 'Umístění nalezené věci v rámci DPMB, a.s.',
-          dataIndex: 'place',
+          dataIndex: 'storage_location',
           width: '25%',
           sorter: {
             compare: (a, b) => a.place - b.place,
@@ -184,7 +175,7 @@ class Ztraty extends React.Component {
                         </p>
                         </div>
                         <div >
-                            <Table columns={this.columns} dataSource={data} className={styles.table}/>
+                            <Table columns={this.columns} dataSource={this.state.data} className={styles.table}/>
                         </div>
                     </Col>
                 </Row>
@@ -199,10 +190,10 @@ class Ztraty extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        trips: state.trips.trips,
+        lostThings: state.lostThings.trips,
     }
 }
-export default connect(mapStateToProps, {
+export default connect(mapStateToProps, { fetchLostThings
 }) (Ztraty);
 
 

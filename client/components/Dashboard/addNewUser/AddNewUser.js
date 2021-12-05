@@ -57,19 +57,15 @@ class AddNewUser extends React.Component {
     };
 
     handleChangeRole = (value) => {
-        console.log("value: " + value)
         this.setState({role: value})
     }
 
     handleChangeStatus = (value) => {
-        console.log("value: " + value)
         this.setState({status: value})
     }
 
 
     onFinish = (values) => {
-        console.log("values")
-        console.log(values)
 
         if (values.name === undefined) {
           values.name = null

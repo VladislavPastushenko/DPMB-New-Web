@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Modal, Form, Input, Select, Button, message} from "antd"
 import { LoadingOutlined } from '@ant-design/icons'
 import { fetchFAQs } from "../../../store/FAQs/actions";
+import styles from './../editQuestion/editQuestion.module.sass'
 
 const { TextArea } = Input;
 
@@ -17,9 +18,6 @@ class EditAnswer extends React.Component {
         this.props.fetchFAQs().then(
             (res) => {
               this.setState({data: res})
-              console.log("data")
-              console.log(this.state.data)
-
             },
             (err) => {
               this.setState({errMsg: err})
@@ -40,10 +38,10 @@ class EditAnswer extends React.Component {
         return (
             <>
                 <a onClick={() => {this.setState({isModalOpen: true})}}>
-                    Text odpovědi
+                    Zobrazit
                 </a>
-                <Modal title="Text odpovědi" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
-                        <Button key="back" type="primary" onClick={this.handleOk}>
+                <Modal style={{height: '60%'}} title="Text odpovědi" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
+                        <Button key="back" type="primary" onClick={this.handleOk} className={styles.addStopButton}>
                           Editovat
                         </Button>]}>
                     <Form initialValues={{
@@ -60,7 +58,7 @@ class EditAnswer extends React.Component {
                             },
                             ]}
                         >
-                            <TextArea size="large"/>
+                            <TextArea size="large" style={{height: '300px'}}/>
                         </Form.Item>
                     </Form>
                 </Modal>

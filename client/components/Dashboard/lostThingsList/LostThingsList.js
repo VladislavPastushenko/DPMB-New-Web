@@ -30,8 +30,6 @@ class LostThingsList extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log("params")
-      console.log(params)
 
       this.props.deleteLostThings(id).then(
         (res) => {window.location.reload(false)},

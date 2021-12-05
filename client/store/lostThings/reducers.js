@@ -11,7 +11,7 @@ CREATE_LOST_THINGS_FAILED,
 } from "./actions";
 
 function lostThings(state = {
-    questionsFromUsers: [],
+    lostThings: [],
     res: null,
 }, action) {
     switch (action.type) {

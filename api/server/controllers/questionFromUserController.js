@@ -18,7 +18,6 @@ class QuestionsFromUsersController {
     }
 
     static removeById(req, res, next) {
-        console.log("REMOVE QUESTION")
         if(req.session.loggedToken) {
             return new Orm().getOrm().userModel
                 .getUserByAuthToken(req.session.loggedToken)

@@ -31,8 +31,6 @@ class News extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-      console.log("params")
-      console.log(params)
 
       this.props.deleteNews(id).then(
         (res) => {window.location.reload(false)},
@@ -45,9 +43,14 @@ class News extends React.Component {
       )
     };
 
+    getTime(params) {
+      return new Date(params.value).toLocaleString('default', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+    }
+
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "name", headerName: "Název", width: 600, align: "left",},
+        { field: "date", headerName: "Datum", width: 130, align: "left", valueGetter: this.getTime},
+        { field: "name", headerName: "Název", width: 480, align: "left",},
         { field: "text", headerName: "Text novinky", width: 400, align: "left",
         
           renderCell: (params) => {
@@ -77,7 +80,6 @@ class News extends React.Component {
 
     render() {
       if (this.state.data.length > 0) {
-        console.log('1 okno')
         return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
