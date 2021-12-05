@@ -1,3 +1,6 @@
+// Author: Kozhevnikov Dmitrii
+// Login: xkozhe00
+
 import {
 
 FETCH_QUESTIONS_FROM_USERS_SUCCESS,

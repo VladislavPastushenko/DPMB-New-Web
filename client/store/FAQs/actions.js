@@ -1,3 +1,6 @@
+// Author: Kozhevnikov Dmitrii
+// Login: xkozhe00
+
 import Api from "../../Api";
 import axios from 'axios';
 

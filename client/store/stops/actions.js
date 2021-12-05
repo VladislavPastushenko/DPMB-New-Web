@@ -1,3 +1,6 @@
+// Author: Kozhevnikov Dmitrii
+// Login: xkozhe00
+
 import Api from "../../Api";
 
 export const FETCH_STOPS_SUCCESS = 'FETCH_STOPS_SUCCESS'

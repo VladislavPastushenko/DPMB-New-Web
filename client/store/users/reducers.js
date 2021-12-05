@@ -1,3 +1,6 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
+
 import {
 SIGNUP_SUCCESS,
 SIGNUP_FAILED,
