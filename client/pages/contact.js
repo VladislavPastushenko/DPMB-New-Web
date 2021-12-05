@@ -1,6 +1,8 @@
+// Author: Tomason Viktoryia
+// Login: xtomas34
 import React from "react";
 import Head from 'next/head';
-import { MailOutlined, PhoneOutlined, HomeOutlined, HistoryOutlined} from '@ant-design/icons';
+import { MailOutlined, PhoneOutlined, HomeOutlined} from '@ant-design/icons';
 import {Col, Row} from 'antd';
 import Link from 'next/link'
 
@@ -10,7 +12,6 @@ export default class ContactPage extends React.Component {
         return (
             <div>
                 {/* Meta Tags */}
-
                 <Head>
                     <title>Kontakt</title>
                 </Head>

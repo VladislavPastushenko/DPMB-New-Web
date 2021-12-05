@@ -1,3 +1,5 @@
+// Author: Tomason Viktoryia
+// Login: xtomas34
 import React from "react";
 import {connect} from "react-redux";
 import Head from 'next/head';
@@ -10,15 +12,12 @@ const api = new Api;
 
 
 class ContactUs extends React.Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
             'isAnswerGotten': false
         }
     }
-
 
     handleFinish = (values) => {
         console.log(this.props);
@@ -38,7 +37,6 @@ class ContactUs extends React.Component {
         return (
             <div>
                 {/* Meta Tags */}
-
                 <Head>
                     <title>Contact us</title>
                 </Head>
@@ -52,16 +50,16 @@ class ContactUs extends React.Component {
                             <p className='fontSizeSm' align='center'>
                             Máte nějaké otázky?
                             </p>
-                            <Form onFinish={this.handleFinish}  >
+                            <Form onFinish={this.handleFinish}>
                                 <Form.Item name="contact" >
                                     <Input required
                                     placeholder='Zadejte svůj e-mail' type="email"
-                                    className={styles.forms} size='large' />    
+                                    className={styles.forms} size='large'/>    
                                         </Form.Item>
                                 <Form.Item name="message" >
                                     <Input.TextArea required
                                     placeholder='Napište svůj dotaz'
-                                    className={styles.forms} size='large' />    
+                                    className={styles.forms} size='large'/>    
                                 </Form.Item>
                                 <Form.Item>
                                     <Button type='primary' size='large' htmlType='submit'> ODESLAT </Button>
@@ -92,8 +90,6 @@ class ContactUs extends React.Component {
     }
 
 }
-
-
 
 const mapStateToProps = state => {
     return {

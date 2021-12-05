@@ -8,19 +8,19 @@ import {Col, Row, List} from 'antd';
 
 const data = [
     {
-      title: <span className='fontSizeMd'>Organizační schéma DPMB, a.s.</span>,
+      title: <span className='fontSizeMd'><a href="https://dpmb.cz/cs/download/6755">Organizační schéma DPMB, a.s.</a></span>,
       description: 'Popis všech schémat různých přeprav od roku 2017'
     },
     {
-      title: <span className='fontSizeMd'>Strategie DPMB</span>,
+      title: <span className='fontSizeMd'><a href="#">Strategie DPMB</a></span>,
       description: 'Strategie je vyjádřena v jednoduchém grafickém schématu.'
     },
     {
-      title: <span className='fontSizeMd'>Výroční zprávy</span>,
+      title: <span className='fontSizeMd'><a href="#">Výroční zprávy</a></span>,
       description: 'Katalog všech hlavních novinek pro každý rok'
     },
     {
-      title: <span className='fontSizeMd'>Historie firmy</span>,
+      title: <span className='fontSizeMd'><a href="#">Historie firmy</a></span>,
       description: 'Popis založení společnosti'
       
     },
@@ -28,38 +28,38 @@ const data = [
 
   const dat = [
     {
-      title: <span className='fontSizeMd'>Nabídky pronájmů</span>,
+      title: <span className='fontSizeMd'><a href="#">Nabídky pronájmů</a></span>,
       description: 'Сeny a nabídka'
     },
     {
-      title: <span className='fontSizeMd'>Veřejné zakázky podlimitní</span>,
+      title: <span className='fontSizeMd'><a href="#">Veřejné zakázky podlimitní</a></span>,
       description: 'Věstník veřejných zakázek:'
     },
     {
-      title: <span className='fontSizeMd'>Informace zveřejňované o povinném subjektu</span>,
+      title: <span className='fontSizeMd'><a href="#">Informace zveřejňované o povinném subjektu</a></span>,
       description: 'Kontakt, způsob založení, organizace'
     },
     {
-      title: <span className='fontSizeMd'>Lodní doprava</span>,
+      title: <span className='fontSizeMd'><a href="#">Lodní doprava</a></span>,
       description: 'Popis všech schémat různých přeprav od roku 2017'
 
     },
   ];
   const date = [
     {
-      title: <span className='fontSizeMd'>Dopravní informace</span>,
+      title: <span className='fontSizeMd'><a href="#">Dopravní informace</a></span>,
       description: 'Popis kompletní práce komunikace'
     },
     {
-      title: <span className='fontSizeMd'>Dopravní podniky</span>, 
+      title: <span className='fontSizeMd'><a href="#">Dopravní podniky</a></span>, 
       description: 'Odkaz na stránky'
     },
     {
-      title: <span className='fontSizeMd'>Jihomoravský kraj</span>, 
+      title: <span className='fontSizeMd'><a href="#">Jihomoravský kraj</a></span>, 
       description: 'Novinky a zprávy kraje'
     },
     {
-      title: <span className='fontSizeMd'>Statutární město Brno</span>,
+      title: <span className='fontSizeMd'><a href="#">Statutární město Brno</a></span>,
       description: 'Popis města Brno'
 
     },
@@ -87,7 +87,7 @@ export default class Links extends React.Component {
                 </Head>
                 <p className='fontSizeLg' align='center' >
                     Důležité odkazy</p>
-                 <Row align='center' style={{height: '100%', overflow: 'hidden'}} gutter={[0,40]}>
+                <Row align='center' style={{height: '100%', overflow: 'hidden'}} gutter={[0,40]}>
                     <Col xs={22} md={20} lg={6} xl={6} xxl={6} style={{paddingRight:'2em'}} align='center' >
                         <List itemLayout="horizontal"
                         size="large" 
@@ -95,39 +95,39 @@ export default class Links extends React.Component {
                             renderItem={item => (
                             <List.Item >
                                 <List.Item.Meta
-                                    avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)' }}/>}
+                                    avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)'}}/>}
                                     title={<a href="/">{item.title}</a>}
                                     description={item.description}
                                     />
                              </List.Item>)}/>
-              </Col> 
-              <Col xs={22} md={20} lg={6} xl={6} xxl={6} style={{paddingRight:'2em'}} align='center'>
+                    </Col> 
+                    <Col xs={22} md={20} lg={6} xl={6} xxl={6} style={{paddingRight:'2em'}} align='center'>
                         <List itemLayout="horizontal"
                         size="large"
                             dataSource={dat}
                             renderItem={item => (
                             <List.Item>
                                 <List.Item.Meta
-                                    avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)' }}/>}
+                                    avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)'}}/>}
                                     title={<a href="/">{item.title}</a>}
                                     description={item.description}
                                     />
                              </List.Item>)}/>
-              </Col> 
-              <Col xs={22} md={20} lg={6} xl={6} xxl={6} style={{paddingRight:'2em'}} align='center'>
+                    </Col> 
+                    <Col xs={22} md={20} lg={6} xl={6} xxl={6} style={{paddingRight:'2em'}} align='center'>
                         <List itemLayout="horizontal"
                         size="large"
                             dataSource={date}
                             renderItem={item => (
                             <List.Item>
                                 <List.Item.Meta
-                                    avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)' }}/>}
+                                    avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)'}}/>}
                                     title={<a href="/">{item.title}</a>}
                                     description={item.description}
                                     />
                              </List.Item>)}/>
-              </Col> 
-              </Row>                  
+                    </Col> 
+                </Row>                  
             </div>
         )
     }

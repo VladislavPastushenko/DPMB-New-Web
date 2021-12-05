@@ -1,18 +1,17 @@
+// Author: Tomason Viktoryia
+// Login: xtomas34
 import React from "react";
 import Head from 'next/head';
 import styles from './styles/server-error.module.sass'
-import { Router } from 'next/router';
 import { Result, Button } from 'antd';
 
 
 export default class ServerError extends React.Component {
 
-
     constructor(props) {
         super(props);
         this.state = {}
     }
-    //render_error = new Vivus('render_error', {type: 'oneByOne', duration: 500});
 
      render() {
         return (
@@ -25,15 +24,15 @@ export default class ServerError extends React.Component {
                     status="403"
                     title={
                         <span className={styles.mainHeader}>
-                            Ooops - something went wrong and the server is unresponsive
+                            Ooops - něco se pokazilo a server neodpovídá
                         </span>
                     }
                     subTitle={
                         <span className={styles.nextHeader}>
-                            But don&apos;t worry, we&apos;ll fix it soon
+                            Ale nebojte se, brzy to napravíme
                         </span>
                     }
-                    extra={<Button type="primary" onClick={() => window.location.href = "/"}>Back Home</Button>}
+                    extra={<Button type="primary" onClick={() => window.location.href = "/"}>Zpět</Button>}
                     className={styles.result}
 
                     />

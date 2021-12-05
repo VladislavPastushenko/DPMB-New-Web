@@ -5,7 +5,6 @@ import React, {useState} from "react";
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import 'antd/dist/antd.min.css';
-import styles from './styles/sign-up.module.sass'
 import { signup } from "../store/users/actions";
 import Link from "next/link";
 import {
