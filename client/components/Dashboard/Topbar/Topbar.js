@@ -37,7 +37,7 @@ class Topbar extends React.Component {
             message.open(
               {
                 type: 'success',
-                content: 'You were successfully loggout in',
+                content: 'Úspěšně jste se odhlásili',
                 duration: 3,
                 onClose: () => {Router.push('/')}
               }
@@ -68,7 +68,7 @@ class Topbar extends React.Component {
                         </a>
                         
                         <Modal title="Exit" visible={this.state.isModalVisible} onOk={this.logout} onCancel={this.handleOk}>
-                            <p>Are you sure you want to get out?</p>
+                            <p>Určitě se chceš dostat ven?</p>
                         </Modal>
                     </div>
                 </div>

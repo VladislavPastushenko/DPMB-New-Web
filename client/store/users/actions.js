@@ -28,6 +28,9 @@ export const LOGOUT_FAILED  = 'LOGOUT_FAILED'
 export const DELETE_USER_SUCCESS = 'DELETE_STOP_SUCCESS'
 export const DELETE_USER_FAILED = 'DELETE_STOP_FAILED'
 
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
+export const CREATE_USER_FAILED = 'CREATE_USER_FAILED'
+
 const api = new Api();
 
 
@@ -226,5 +229,25 @@ export function logoutUser(data) {
                 reject(error);
             }
         });
+    }
+}
+
+export function createUser(data) {
+    return async (dispatch) => {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/users', method: 'POST', data}).then(res => {
+                    if (typeof res === 'object') {
+                        dispatch({type: CREATE_USER_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: CREATE_USER_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                    dispatch({type: CREATE_USER_FAILED, error: error});
+            }
+        })
     }
 }

@@ -6,7 +6,6 @@ import { MailOutlined, PhoneOutlined, HomeOutlined, HistoryOutlined} from '@ant-
 import {Col, Row, Link} from 'antd';
 
 import styles from './styles/contact.module.sass'
-import {createQuestionFromUser} from "../store/questionsFromUser/actions"
 const api = new Api;
 
 
@@ -92,7 +91,7 @@ const mapStateToProps = state => {
         res: state.questionsFromUser.res,
     }
 }
-export default connect(mapStateToProps, {createQuestionFromUser
+export default connect(mapStateToProps, {
 }) (ContactPage);
 
 
