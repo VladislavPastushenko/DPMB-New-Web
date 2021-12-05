@@ -44,7 +44,7 @@ class News extends React.Component {
                             return (
                                 <div key={el.name + '1'} className={styles.carouselItem} style={{left:  50 + 100 * idx - this.state.carouselItemLeft + '%', color: "black"}}>
                                     <div className={styles.carouselItemDate + ' fontSizeXs'}>
-                                    16 Mar 2000
+                                        {new Date(el.date).toLocaleString('default', { month: 'short', day: '2-digit' })} {new Date(el.date).getFullYear()}
                                     </div>
                                     <div className={styles.carouselItemText + ' fontSizeLg'}>
                                     {el.name}
@@ -62,7 +62,7 @@ class News extends React.Component {
                             return (
                                 <div key={el.name + '2'} className={styles.carouselItem} style={{left:  50 + 100 * idx - this.state.carouselItemLeft + '%', color: "white"}}>
                                     <div className={styles.carouselItemDate + ' fontSizeXs'}>
-                                    16 Mar 2000
+                                        {new Date(el.date).toLocaleString('default', { month: 'short', day: '2-digit' })} {new Date(el.date).getFullYear()}
                                     </div>
                                     <div className={styles.carouselItemText + ' fontSizeLg'}>
                                     {el.name}

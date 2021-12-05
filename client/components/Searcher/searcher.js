@@ -4,8 +4,7 @@ import {Col, Row, TimePicker, Form, Select, Button} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import {fetchStops} from '../../store/stops/actions'
 import moment from 'moment';
-import {fetchTripsByFromAndToIds} from '../../store/trips/actions'
-import RouteItem from "./routeItem";
+// import RouteItem from "./routeItem";
 import Router from "next/router";
 
 class Searcher extends React.Component {
@@ -127,6 +126,6 @@ const mapStateToProps = state => {
     }
 }
 export default connect(mapStateToProps, {
-    fetchStops, fetchTripsByFromAndToIds
+    fetchStops
 }) (Searcher);
 
