@@ -1,3 +1,6 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
+
 import Api from "../../Api";
 import axios from 'axios';
 

@@ -1,3 +1,6 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
+
 import { combineReducers } from 'redux'
 import posts from "./posts/reducers";
 import users from "./users/reducers";

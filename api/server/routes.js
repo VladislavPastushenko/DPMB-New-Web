@@ -81,6 +81,7 @@ const routes = (route) => {
         .post(FAQsController.create)
 
     route.route('/faqs/:id')
+        .get(FAQsController.get)
         .get(FAQsController.getAll)
         .delete(FAQsController.removeById)
 
