@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Col, Row, DatePicker, Form, Select, Button} from 'antd';
+import {Col, Row, TimePicker, Form, Select, Button} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import {fetchStops} from '../../store/stops/actions'
 import moment from 'moment';
 import {fetchTripsByFromAndToIds} from '../../store/trips/actions'
 import RouteItem from "./routeItem";
+import Router from "next/router";
 
 class Searcher extends React.Component {
 
@@ -19,84 +20,83 @@ class Searcher extends React.Component {
         this.props.fetchStops().then(res => this.setState({stops: res}))
     }
 
-    disabledDate(current) {
-        return current && current < moment().startOf('day');
-    }
 
     onSearch = (values) => {
-        if (values.start_time)
-                values.start_time = values.start_time.add(-(new Date().getTimezoneOffset()), 'm').format().slice(0, 10).replace('T', ' ')
 
-        this.props.fetchTripsByFromAndToIds(values.from_id, values.to_id, 'date=' + values.start_time).then(
-            res => {
-                this.setState({routes: res.concat()})
-            },
-            err => {
-                if (err === 'Routes Not Found') {
-                    console.log('Routes Not Found')
-                }
-            }
-        )
+        // ?f=achtelky&t=antonínská&date=3.12.2021&time=20:45&&byarr=false&lng=c&submit=true
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+
+        today = dd + '.' + mm + '.' + yyyy;
+
+        let queryData = {}
+        queryData.f = values.from.toLowerCase()
+        queryData.t = values.to.toLowerCase()
+        queryData.date = today
+        queryData.time = moment(values.start_time).format("HH:mm")
+
+        queryData.byarr = false
+        queryData.lng = 'c'
+        queryData.submit = true
+
+        Router.push({pathname: 'https://idos.idnes.cz/vlakyautobusymhdvse/spojeni/vysledky', query: {...queryData}})
     }
 
     render() {
         return (
             <div>
-                <Form onFinish={this.onSearch}>
+                <Form onFinish={this.onSearch} initialValues={{start_time: moment()}}>
                     <Row align='left' gutter={[10, 0]}>
                         <Col xs={6} align='start'>
-                            <Form.Item name={['from_id']} rules={[{ required: true, message: 'Choose from town' }]}>
+                            <Form.Item name={'from'} rules={[{ required: true, message: 'Vyberte odkud' }]}>
                                 <Select
                                     showSearch
                                     style={{ width: '100%' }}
-                                    placeholder="From"
+                                    placeholder="Odkud"
                                     optionFilterProp="children"
 
                                 >
                                     {this.state.stops.length > 0 && this.state.stops.map(stop => {
                                         return (
-                                            <Select.Option key={'from' + stop.id} value={stop.id}>{stop.city.name} - {stop.name}</Select.Option>
+                                            <Select.Option key={'from' + stop.id} value={stop.name}> {stop.name}</Select.Option>
                                         )
                                     })}
                                 </Select>
                             </Form.Item>
                         </Col>
                         <Col xs={6} align='start'>
-                            <Form.Item name='to_id' rules={[{ required: true, message: 'Choose destination town' }]}>
+                            <Form.Item name='to' rules={[{ required: true, message: 'Vyberte kam' }]}>
                                 <Select
                                     showSearch
                                     style={{ width: '100%' }}
-                                    placeholder="To"
+                                    placeholder="Kam"
                                     optionFilterProp="children"
                                 >
                                     {this.state.stops.length > 0 && this.state.stops.map(stop => {
                                         return (
-                                            <Select.Option key={'to' + stop.id} value={stop.id}>{stop.city.name} - {stop.name}</Select.Option>
+                                            <Select.Option key={'to' + stop.id} value={stop.name}>{stop.name}</Select.Option>
                                         )
                                     })}
                                 </Select>
                             </Form.Item>
                         </Col>
                         <Col xs={6} align='start'>
-                            <Form.Item name='start_time' rules={[{ required: true, message: 'Choose date' }]}>
-                                <DatePicker
-                                    showToday={false}
-                                    style={{width: '100%'}}
-                                    disabledDate={this.disabledDate}
-                                    />
+                            <Form.Item name='start_time' rules={[{ required: true, message: 'Vyberte čas odjezdu' }]}>
+                                <TimePicker format={'HH:mm'} placeholder='Vyberte čas odjezdu'/>
                             </Form.Item>
                         </Col>
                         <Col xs={6} align='start'>
                             <Form.Item name='start_time'>
                                 <Button htmlType='submit' type='primary' icon={<SearchOutlined />}>
-                                    Search
+                                    Hledat
                                 </Button>
                             </Form.Item>
                         </Col>
                     </Row>
                 </Form>
-                
-                {this.state.routes !== 'preparing' &&
+                {/* {this.state.routes !== 'preparing' &&
                     <>
                         {this.state.routes.length > 0 ?
                         <p align='left' className='fontSizeMd'>
@@ -110,7 +110,7 @@ class Searcher extends React.Component {
                             We could not find anything for your request.
                         </p>}
                     </>
-                }
+                } */}
 
             </div>
 
@@ -123,7 +123,7 @@ class Searcher extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        trips: state.trips.trips,
+        stops: state.stops.stops,
     }
 }
 export default connect(mapStateToProps, {

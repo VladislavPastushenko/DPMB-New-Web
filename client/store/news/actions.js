@@ -18,13 +18,8 @@ export function fetchNews() {
         return new Promise((resolve, reject) => {
             try {
                 api.call({url: '/news', method: 'GET'}).then(res => {
-                    if (res !== "User doesn't have rights to access this route") {
-                        dispatch({type: FETCH_NEWS_SUCCESS, data: res});
-                        resolve(res);
-                    } else {
-                        dispatch({type: FETCH_NEWS_FAILED, error: res});
-                        reject(res);
-                    }
+                    dispatch({type: FETCH_NEWS_SUCCESS, data: res});
+                    resolve(res);
                 })
             } catch (error) {
                     dispatch({type: FETCH_NEWS_FAILED, error: error});
