@@ -1,5 +1,6 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
 import React from "react";
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import styles from './trams.module.sass'
 
 export default class Trams extends React.Component {

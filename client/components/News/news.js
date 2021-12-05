@@ -1,6 +1,7 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
 import React from "react";
 import {connect} from "react-redux";
-import {Col, Row, TimePicker, Form, Select, Button} from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import {fetchNews} from '../../store/news/actions'
 import styles from './news.module.sass'

@@ -1,3 +1,6 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
+
 import React from "react";
 import {Row, Col, Divider, Skeleton} from "antd";
 import Head from 'next/head';

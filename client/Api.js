@@ -1,3 +1,5 @@
+// Author: Pastushenko Vladislav
+// Login: xpastu04
 import axios from 'axios';
 
 const URL = 'http://localhost:8000'
