@@ -1,4 +1,6 @@
-import React from "react";
+// Author: Kozhevnikov Dmitrii
+// Login: xkozhe00
+
 import {connect} from "react-redux";
 import ReactDOM from "react-dom";
 import styles from "./addNewFAQ.module.sass"

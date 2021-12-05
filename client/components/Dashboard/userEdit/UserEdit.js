@@ -1,3 +1,6 @@
+// Author: Paspushenko Vladislav
+// Login: xpastu04
+
 import React from "react";
 import {connect} from "react-redux";
 import styles from "./userEdit.module.sass"
