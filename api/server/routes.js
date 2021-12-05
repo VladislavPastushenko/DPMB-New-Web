@@ -1,8 +1,4 @@
 import UsersController from "./controllers/usersController";
-<<<<<<< HEAD
-import PostsController from "./controllers/postsController";
-=======
->>>>>>> main
 import StopsController from "./controllers/stopsController";
 import QuestionsFromUsersController from "./controllers/questionFromUserController";
 import NewsController from "./controllers/newsController";
