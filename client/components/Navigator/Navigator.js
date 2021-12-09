@@ -23,7 +23,7 @@ const menu = (
     <Menu>
         {menuItems.map(el => {
             return (
-                <Menu.Item>
+                <Menu.Item key={el.name + 'mobile'}>
                     <Link href={el.link}>
                         <a className={styles.mobileMenuItem}>
                             {el.name}

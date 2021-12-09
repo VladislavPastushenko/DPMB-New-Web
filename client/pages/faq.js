@@ -32,7 +32,7 @@ class FAQ extends React.Component {
                         <div className='fontSizeMd'>
                             {this.state.faqs.map(el => {
                                 return (
-                                <div>
+                                <div key={el.question}>
                                     <div style={{fontWeight: '600'}}>
                                         {el.question}
                                     </div>

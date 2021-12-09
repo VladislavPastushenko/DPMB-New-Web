@@ -4,6 +4,7 @@ import React from "react";
 import Head from 'next/head';
 import {LinkOutlined} from '@ant-design/icons';
 import {Col, Row, List} from 'antd';
+import Link from 'next/link'
 
 
 const data = [
@@ -96,11 +97,11 @@ export default class Links extends React.Component {
                             <List.Item >
                                 <List.Item.Meta
                                     avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)'}}/>}
-                                    title={<a href="/">{item.title}</a>}
+                                    title={<Link href="/"><a>{item.title}</a></Link>}
                                     description={item.description}
                                     />
                              </List.Item>)}/>
-                    </Col> 
+                    </Col>
                     <Col xs={22} md={20} lg={6} xl={6} xxl={6} style={{paddingRight:'2em'}} align='center'>
                         <List itemLayout="horizontal"
                         size="large"
@@ -109,11 +110,11 @@ export default class Links extends React.Component {
                             <List.Item>
                                 <List.Item.Meta
                                     avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)'}}/>}
-                                    title={<a href="/">{item.title}</a>}
+                                    title={<Link href="/"><a>{item.title}</a></Link>}
                                     description={item.description}
                                     />
                              </List.Item>)}/>
-                    </Col> 
+                    </Col>
                     <Col xs={22} md={20} lg={6} xl={6} xxl={6} style={{paddingRight:'2em'}} align='center'>
                         <List itemLayout="horizontal"
                         size="large"
@@ -122,12 +123,12 @@ export default class Links extends React.Component {
                             <List.Item>
                                 <List.Item.Meta
                                     avatar={<LinkOutlined  style={{ fontSize: '20px', color: 'rgb(75, 146, 147)'}}/>}
-                                    title={<a href="/">{item.title}</a>}
+                                    title={<Link href="/"><a>{item.title}</a></Link>}
                                     description={item.description}
                                     />
                              </List.Item>)}/>
-                    </Col> 
-                </Row>                  
+                    </Col>
+                </Row>
             </div>
         )
     }

@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 import styles from "./../addNewStop/addNewStop.module.sass"
 import { Form, Button, Modal, Input, Result } from 'antd'
 import { signup } from "../../../store/users/actions";
+import Link from "next/link"
 
 const formItemLayout = {
     labelCol: {
