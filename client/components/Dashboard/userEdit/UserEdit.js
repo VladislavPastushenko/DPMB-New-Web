@@ -27,6 +27,8 @@ class UserEdit extends React.Component {
         this.props.editUser(values).then(
             res => {
                 this.setState({res: 'OK'})
+                this.props.handleUpdate()
+                setTimeout(this.setState({ isModalOpen: false }), 1500)
             },
             err => {
                 console.log(err)

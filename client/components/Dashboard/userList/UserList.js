@@ -32,7 +32,7 @@ class UserList extends React.Component {
     handleDelete = (params) => {
       let id = params.row.id
       this.props.deleteUser(id).then(
-        (res) => {window.location.reload(false)},
+        (res) => {this.handleUpdate()},
         (err) => {
           message.open({
             'content': 'Error while deleting',
@@ -40,6 +40,18 @@ class UserList extends React.Component {
           })
         }
       )
+    };
+
+    handleUpdate = () => {
+      this.props.fetchUsers().then(
+        (res) => {
+          this.setState({data: res})
+        },
+        (err) => {
+          this.setState({errMsg: err})
+        }
+
+      );
     };
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
@@ -53,7 +65,7 @@ class UserList extends React.Component {
           width: 150,
           renderCell: (params) => {
             return (
-              <UserEdit user={params.row} {...this.props}/>
+              <UserEdit user={params.row} {...this.props} handleUpdate={this.handleUpdate}/>
             );
           },
         },
