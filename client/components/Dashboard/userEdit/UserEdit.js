@@ -28,7 +28,9 @@ class UserEdit extends React.Component {
             res => {
                 this.setState({res: 'OK'})
                 this.props.handleUpdate()
-                setTimeout(this.setState({ isModalOpen: false }), 1500)
+                setTimeout(() => {
+                        this.setState({ isModalOpen: false, res: 'preparing' })
+                    }, 1500)
             },
             err => {
                 console.log(err)

@@ -74,19 +74,10 @@ class UsersController {
 
 
     static signup(req, res, next) {
+        req.body.role = 'personnel'
         return new Orm().getOrm().userModel
             .register(req.body)
             .then((row, err) => {
-                const bodyParams = {
-                    'template': 'userVerification.html',
-                    'context': {
-                        'userVerificationUrl':
-                            'http://' + req.hostname +
-                            config.parsed.USER_VERIFICATION_URL +
-                            row.toJSON().auth_token
-                        }
-                }
-
                 res.status(200).send('OK');
             })
             .catch((err) => {

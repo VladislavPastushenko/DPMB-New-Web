@@ -7,7 +7,7 @@ import ReactDOM from "react-dom";
 import styles from "./../addNewStop/addNewStop.module.sass"
 import { Form, Button, Modal, Input, Result } from 'antd'
 import { signup } from "../../../store/users/actions";
-import Link from "next/link"
+import Router from "next/router"
 
 const formItemLayout = {
     labelCol: {
@@ -248,13 +248,6 @@ class AddNewUser extends React.Component {
                 status="success"
                 title="Your registration was successful!"
                 subTitle="A confirmation email has been sent to your email address"
-                extra={[
-                <Link href='/dashboar' key='back home'>
-                <Button type="primary" key="console">
-                  Main Page
-                </Button>,
-                </Link>
-                ]}
               />
             </div>
               );
