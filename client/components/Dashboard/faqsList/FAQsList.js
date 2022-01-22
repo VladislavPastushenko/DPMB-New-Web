@@ -11,9 +11,7 @@ import { ResponsiveContainer } from "recharts";
 import { fetchFAQs, deleteFAQs } from "../../../store/FAQs/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import EditAnswer from "../editAnswer/EditAnswer";
-import EditQuestion from "../editQuestion/EditQuestion";
-
+import FAQEdit from "../faqEdit/FAQEdit";
 
 class FAQs extends React.Component {
     constructor(props) {
@@ -38,7 +36,7 @@ class FAQs extends React.Component {
       let id = params.row.id
 
       this.props.deleteFAQs(id).then(
-        (res) => {window.location.reload(false)},
+        (res) => {this.handleUpdate()},
         (err) => {
           message.open({
             'content': 'Error while deleting',
@@ -48,21 +46,28 @@ class FAQs extends React.Component {
       )
     };
 
+    handleUpdate = () => {
+      this.props.fetchFAQs().then(
+        (res) => {
+          this.setState({data: res})
+        },
+        (err) => {
+          this.setState({errMsg: err})
+        }
+
+      );
+    };
+
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "question", headerName: "Otázka", width: 670 , align: "left",},
-        { field: "full_question", headerName: "Cela otázka", width: 180, align: "left", 
+        { field: "question", headerName: "Otázka", width: 770 , align: "left",},
+        {
+          field: "edit",
+          headerName: "Upravit",
+          width: 350,
           renderCell: (params) => {
             return (
-              <EditQuestion question={params.row} {...this.props}/>
-            );
-          },
-        },
-        { field: "answer", headerName: "Cela odpověď", width: 180, align: "left",
-        
-          renderCell: (params) => {
-            return (
-              <EditAnswer answer={params.row} {...this.props}/>
+              <FAQEdit FAQ={params.row} {...this.props} handleUpdate={this.handleUpdate}/>
             );
           },
         },
@@ -108,7 +113,7 @@ class FAQs extends React.Component {
           return (
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
-                    <h1 className="userTitle">Novinky</h1>
+                    <h1 className="userTitle">FAQs</h1>
                     <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newFAQ')}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">

@@ -11,8 +11,7 @@ import { ResponsiveContainer } from "recharts";
 import { fetchVacancies, deleteVacancy } from "../../../store/vacancies/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import ShowRequirement from "../showRequirement/ShowRequirement";
-import ShowOffers from "../showOffers/ShowOffers";
+import VacancyEdit from "../vacancyEdit/VacancyEdit";
 
 class VacanciesList extends React.Component {
     constructor(props) {
@@ -37,7 +36,7 @@ class VacanciesList extends React.Component {
       let id = params.row.id
 
       this.props.deleteVacancy(id).then(
-        (res) => {window.location.reload(false)},
+        (res) => {this.handleUpdate()},
         (err) => {
           message.open({
             'content': 'Error while deleting',
@@ -47,22 +46,27 @@ class VacanciesList extends React.Component {
       )
     };
 
+    handleUpdate = () => {
+      this.props.fetchVacancies().then(
+        (res) => {
+          this.setState({data: res})
+        },
+        (err) => {
+          this.setState({errMsg: err})
+        }
+      );
+    };
+
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "name", headerName: "Název", width: 600, align: "left",},
-        { field: "requirements", headerName: "Požadavky", width: 200, align: "left",
-        
+        { field: "name", headerName: "Název", width: 800, align: "left",},
+        {
+          field: "edit",
+          headerName: "Upravit",
+          width: 350,
           renderCell: (params) => {
             return (
-              <ShowRequirement requirements={params.row} {...this.props}/>
-            );
-          },
-        },
-        { field: "offers", headerName: "Nabídka", width: 200, align: "left",
-        
-          renderCell: (params) => {
-            return (
-              <ShowOffers offers={params.row} {...this.props}/>
+              <VacancyEdit vacancy={params.row} {...this.props} handleUpdate={this.handleUpdate}/>
             );
           },
         },

@@ -11,7 +11,7 @@ import { ResponsiveContainer } from "recharts";
 import { fetchNews, deleteNews } from "../../../store/news/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
-import EditNews from "../editNews/EditNews";
+import NewsEdit from "../newsEdit/NewsEdit";
 
 class News extends React.Component {
     constructor(props) {
@@ -34,9 +34,8 @@ class News extends React.Component {
 
     handleDelete = (params) => {
       let id = params.row.id
-
       this.props.deleteNews(id).then(
-        (res) => {window.location.reload(false)},
+        (res) => {this.handleUpdate()},
         (err) => {
           message.open({
             'content': 'Error while deleting',
@@ -46,19 +45,32 @@ class News extends React.Component {
       )
     };
 
+    handleUpdate = () => {
+      this.props.fetchNews().then(
+        (res) => {
+          this.setState({data: res})
+        },
+        (err) => {
+          this.setState({errMsg: err})
+        }
+      );
+    };
+
     getTime(params) {
       return new Date(params.value).toLocaleString('default', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })
     }
 
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
-        { field: "date", headerName: "Datum", width: 130, align: "left", valueGetter: this.getTime},
-        { field: "name", headerName: "Název", width: 480, align: "left",},
-        { field: "text", headerName: "Text novinky", width: 400, align: "left",
-        
+        { field: "date", headerName: "Datum", width: 230, align: "left", valueGetter: this.getTime},
+        { field: "name", headerName: "Název", width: 630, align: "left",},
+        {
+          field: "edit",
+          headerName: "Upravit",
+          width: 150,
           renderCell: (params) => {
             return (
-              <EditNews text={params.row} {...this.props}/>
+              <NewsEdit news={params.row} {...this.props} handleUpdate={this.handleUpdate}/>
             );
           },
         },

@@ -11,6 +11,7 @@ import { ResponsiveContainer } from "recharts";
 import { fetchStops, deleteStop } from "../../../store/stops/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
+import StopEdit from "../stopEdit/StopEdit";
 
 class StopList extends React.Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class StopList extends React.Component {
     handleDelete = (params) => {
         let id = params.row.id
         this.props.deleteStop(id).then(
-          (res) => {window.location.reload(false)},
+          (res) => {this.handleUpdate()},
           (err) => {
             message.open({
               'content': 'Error while deleting',
@@ -42,11 +43,33 @@ class StopList extends React.Component {
           }
         )
       };
-    
+      
+    handleUpdate = () => {
+        this.props.fetchStops().then(
+          (res) => {
+            this.setState({data: res})
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+  
+        );
+      };
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         
-        { field: "name", headerName: "Název Zastávky", width: 1030, align: "left",},
+        { field: "name", headerName: "Název Zastávky", width: 880, align: "left",},
+
+        {
+          field: "edit",
+          headerName: "Upravit",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <StopEdit stop={params.row} {...this.props} handleUpdate={this.handleUpdate}/>
+            );
+          },
+        },
         
         { field: "action", headerName: "Odstranit", width: 150,
           renderCell: (params) => {

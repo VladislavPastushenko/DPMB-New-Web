@@ -11,6 +11,7 @@ import { ResponsiveContainer } from "recharts";
 import { fetchLostThings, deleteLostThings } from "../../../store/lostThings/actions";
 import { LoadingOutlined } from '@ant-design/icons'
 import { message } from "antd";
+import LostThingEdit from "../lostThingEdit/LostThingEdit";
 
 class LostThingsList extends React.Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class LostThingsList extends React.Component {
       let id = params.row.id
 
       this.props.deleteLostThings(id).then(
-        (res) => {window.location.reload(false)},
+        (res) => {this.handleUpdate()},
         (err) => {
           message.open({
             'content': 'Error while deleting',
@@ -44,6 +45,19 @@ class LostThingsList extends React.Component {
         }
       )
     };
+
+    handleUpdate = () => {
+      this.props.fetchLostThings().then(
+        (res) => {
+          this.setState({data: res})
+        },
+        (err) => {
+          this.setState({errMsg: err})
+        }
+
+      );
+    };
+
     getTime(params) {
       return new Date(params.value).toLocaleString('default', { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' })
     }
@@ -51,9 +65,19 @@ class LostThingsList extends React.Component {
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         { field: "date", headerName: "Datum", width: 130, align: "left", valueGetter: this.getTime,},
-        { field: "description", headerName: "Popis", width: 410, align: "left",},
-        { field: "storage_location", headerName: "Úložiště", width: 320, align: "left",},
+        { field: "description", headerName: "Popis", width: 310, align: "left",},
+        { field: "storage_location", headerName: "Úložiště", width: 270, align: "left",},
         { field: "phone", headerName: "Telefon", width: 170, align: "left",},
+        {
+          field: "edit",
+          headerName: "Upravit",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <LostThingEdit lostThing={params.row} {...this.props} handleUpdate={this.handleUpdate}/>
+            );
+          },
+        },
         {
           field: "delete",
           headerName: "Odstranit",

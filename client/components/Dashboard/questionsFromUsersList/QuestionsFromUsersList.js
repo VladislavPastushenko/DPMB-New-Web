@@ -35,7 +35,7 @@ class QuestionsFromUsersList extends React.Component {
       let id = params.row.id
 
       this.props.deleteQuestionFromUser(id).then(
-        (res) => {window.location.reload(false)},
+        (res) => {this.handleUpdate()},
         (err) => {
           message.open({
             'content': 'Error while deleting',
@@ -43,6 +43,18 @@ class QuestionsFromUsersList extends React.Component {
           })
         }
       )
+    };
+
+    handleUpdate = () => {
+      this.props.fetchQuestionsFromUsers().then(
+        (res) => {
+          this.setState({data: res})
+        },
+        (err) => {
+          this.setState({errMsg: err})
+        }
+
+      );
     };
 
     columns = [
