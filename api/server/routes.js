@@ -73,6 +73,7 @@ const routes = (route) => {
 
     route.route('/news/:id')
         .get(NewsController.get)
+        .post(NewsController.editById)
         .delete(NewsController.removeById)
 
     // FAQ

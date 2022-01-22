@@ -21,7 +21,6 @@ class UserEdit extends React.Component {
 
     onFinish = (values) => {
         if (!values.role) values.role = this.props.user.role
-        if (!values.carrier_id) values.carrier_id = this.props.user.carrier_id
         values.id = this.props.user.id
         this.setState({res: 'loading'})
         this.props.editUser(values).then(
