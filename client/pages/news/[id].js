@@ -78,11 +78,12 @@ class News extends React.Component {
                                     <article className='fontSizeSm'>
                                         {this.state.item.text}
                                     </article>
+                                    {this.state.loggedUser &&
                                     <div align='right'>
                                         <Button size="large" onClick={() => {this.setState({edit: true})}}>
                                             Editovat
                                         </Button>
-                                    </div>
+                                    </div>}
                                 </div>}
                             </Skeleton>
                         </Col>

@@ -4,10 +4,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import styles from "./vacancyEdit.module.sass"
-import {Modal, Form, Input, Select, Button, message} from "antd"
+import {Modal, Form, Input, Button, message} from "antd"
 import { editVacancy } from '../../../store/vacancies/actions'
 import { LoadingOutlined } from '@ant-design/icons'
 import TextArea from "antd/lib/input/TextArea";
+
 
 class VacancyEdit extends React.Component {
     constructor(props) {

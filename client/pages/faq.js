@@ -50,11 +50,12 @@ class Question extends React.Component {
                     <div>
                         {this.state.el.answer}
                     </div>
+                    {this.props.loggedUser &&
                     <div align='right'>
                         <Button size="large" onClick={() => {this.setState({edit: true})}}>
                             Editovat
                         </Button>
-                    </div>
+                    </div>}
                     <Divider/>
                 </div>
             )
