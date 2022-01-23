@@ -8,16 +8,51 @@ import styles from "./lostThingsList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
-import { fetchLostThings, deleteLostThings } from "../../../store/lostThings/actions";
+import { fetchLostThings, deleteLostThings, createLostThings } from "../../../store/lostThings/actions";
 import { LoadingOutlined } from '@ant-design/icons'
-import { message } from "antd";
+import { message, Modal, Input } from "antd";
 import LostThingEdit from "../lostThingEdit/LostThingEdit";
+
+const { TextArea } = Input;
+
+const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 2,
+      },
+      sm: {
+        span: 2,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 6,
+      },
+      sm: {
+        span: 6,
+      },
+    },
+  };
+
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 15,
+        offset: 0,
+      },
+      sm: {
+        span: 15,
+        offset: 0,
+      },
+    },
+  };
 
 class LostThingsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
+            isModalOpen: false,
         };
 
         this.props.fetchLostThings().then(
@@ -31,6 +66,42 @@ class LostThingsList extends React.Component {
         );
         
     }
+
+    handleOk = () => {
+      this.setState({
+          isModalOpen: false,
+      });
+    };
+
+    handleSubmit = (e) => {
+      e.preventDefault();
+      
+      
+      let data = {
+        description: e.target.elements.description.value,
+        storage_location: e.target.elements.storage_location.value,
+        phone: e.target.elements.phone.value,
+      }
+
+      this.props.createLostThings(data).then(
+          (res) => {
+              this.setState({isSuccessModalVisible: true});
+              e.target.elements.description.value = null;
+              e.target.elements.storage_location.value = null;
+              e.target.elements.phone.value = null;
+              this.handleUpdate();
+          },
+          (err) => {
+              console.log(err);
+              this.setState({isErrorModalVisible: true});
+          ;},
+      )
+  }
+
+  takeValue = (e) => {
+      this.setState({message: e.target.value})
+
+  }
 
     handleDelete = (params) => {
       let id = params.row.id
@@ -103,7 +174,7 @@ class LostThingsList extends React.Component {
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
                     <h1 className="userTitle">Ztracené věci</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newLostThing')}}>Vytvořit</button>
+                    <button className={styles.userAddButton} onClick={() => {this.setState({isModalOpen: true})}}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -114,6 +185,27 @@ class LostThingsList extends React.Component {
                     checkboxSelection
                 />
               </ResponsiveContainer>
+              <Modal title="Upravit data" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={null}>
+              <h1 className={styles.addStopTitle}>Nová vec</h1>
+                <form className={styles.addStopForm} onSubmit={this.handleSubmit}>
+                    <div className={styles.addStopItem}>
+                    <label>Popis věci</label>
+                    <input type="text" name="description" placeholder="Popis věci" />
+                    </div>
+
+                    <div className={styles.addStopItem}>
+                    <label>Úložiště</label>
+                    <input type="text" name="storage_location" placeholder="Úložiště" />
+                    </div>
+
+                    <div className={styles.addStopItem}>
+                    <label>Telefon</label>
+                    <input type="text" name="phone" placeholder="Telefon" />
+                    </div>
+
+                    <button className={styles.addStopButton} onClick={this.handleOk}>Vytvořit</button>
+                </form>
+              </Modal>
             </div>
         );
         } else {
@@ -121,7 +213,7 @@ class LostThingsList extends React.Component {
             <div className={styles.userList}>
               <div className={styles.userTitleContainer}>
                     <h1 className="userTitle">Ztracené věci</h1>
-                    <button className={styles.userAddButton} onClick={() => {this.props.changeLocation('newLostThing')}}>Vytvořit</button>
+                    <button className={styles.userAddButton}>Vytvořit</button>
               </div>
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -140,5 +232,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchLostThings, deleteLostThings
+export default connect(mapStateToProps, {fetchLostThings, deleteLostThings, createLostThings
 }) (LostThingsList);

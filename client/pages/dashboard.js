@@ -8,21 +8,16 @@ import Topbar from "./../components/Dashboard/Topbar/Topbar"
 import Sidebar from "./../components/Dashboard/Sidebar/Sidebar"
 import UserList from "../components/Dashboard/userList/UserList";
 import StopList from "../components/Dashboard/stopList/StopList";
-import AddNewStop from "../components/Dashboard/addNewStop/AddNewStop";
 import QuestionsFromUsersList from "../components/Dashboard/questionsFromUsersList/QuestionsFromUsersList";
 import {lookupUserInStorage, fetchLoggedUser} from '../store/users/actions'
 import Router from 'next/router'
 import {LoadingOutlined} from '@ant-design/icons'
 import AddNewUser from "../components/Dashboard/addNewUser/AddNewUser";
 import NewsList from "../components/Dashboard/newsList/NewsList";
-import AddNewNews from "../components/Dashboard/addNewNews/AddNewNews";
 import FAQsList from "../components/Dashboard/faqsList/FAQsList";
-import AddNewFAQ from "../components/Dashboard/addNewFAQ/AddNewFAQ";
 import LostThingsList from "../components/Dashboard/lostThingsList/LostThingsList";
-import AddNewLostThing from "../components/Dashboard/addNewLostThing/AddNewLostThing";
 import EditUser from "../components/Dashboard/editUser/EditUser";
 import VacanciesList from "../components/Dashboard/vacanciesList/VacanciesList";
-import AddNewVacancy from "../components/Dashboard/addNewVacancy/AddNewVacancy";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -68,17 +63,12 @@ class Dashboard extends React.Component {
                                     {this.state.location === 'userList' && <UserList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newuser' && <AddNewUser/>}
                                     {this.state.location === 'stopList' && <StopList changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newstop' && <AddNewStop/>}
                                     {this.state.location === 'questionsFromUsersList' && <QuestionsFromUsersList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'newsList' && <NewsList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newNews' && <AddNewNews/>}
                                     {this.state.location === 'FAQsList' && <FAQsList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newFAQ' && <AddNewFAQ/>}
                                     {this.state.location === 'lostThingsList' && <LostThingsList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newLostThing' && <AddNewLostThing/>}
                                     {this.state.location === 'editUser' && <EditUser {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'vacanciesList' && <VacanciesList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'newVacancy' && <AddNewVacancy/>}
                                 </div>
                         </div>
                     );

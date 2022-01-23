@@ -29,7 +29,9 @@ class Ztraty extends React.Component {
           (res) => {
             this.setState({data: res.map(el => {
               let date = new Date(el.date)
-              return {...el,date: date.getDay()+"."+date.getMonth()+"."+date.getFullYear()}
+              return {...el,date: date.toLocaleString('default', { year: 'numeric', month: '2-digit', day: '2-digit'})}
+
+              //return {...el,date: date.getDay()+"."+date.getMonth()+"."+date.getFullYear()}
             })})
 
           },
@@ -118,6 +120,23 @@ class Ztraty extends React.Component {
         this.setState({ searchText: '' });
       };
 
+      handleUpdate = () => {
+        this.props.fetchLostThings().then(
+          (res) => {
+            this.setState({data: res.map(el => {
+              let date = new Date(el.date)
+              //console.log(el.date)
+              //console.log(date.toLocaleString('default', { month: 'short', day: '2-digit'}))
+
+              return {...el,date: date.toLocaleString('default', { year: 'numeric', month: '2-digit', day: '2-digit'})}
+            })})
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+        );
+      };
+
     columns = [
         { title: 'Datum nálezu', dataIndex: 'date', width: '15%', render: (text) => moment(text).format("YYYY-MM-DD"), ...this.getColumnSearchProps('date'), },
         { title: 'Nalezená věc', dataIndex: 'description', ...this.getColumnSearchProps('description'),
@@ -178,7 +197,8 @@ class Ztraty extends React.Component {
                         </p>
                         </div>
                         <div >
-                            <Table columns={this.columns} dataSource={this.state.data} className={styles.table}/>
+                            <Table columns={this.columns} dataSource={this.state.data} className={styles.table} />
+                            <button onClick={this.handleUpdate}>Show new</button>
                         </div>
                     </Col>
                 </Row>
