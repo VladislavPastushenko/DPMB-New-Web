@@ -27,8 +27,7 @@ class Dashboard extends React.Component {
             location: 'userList',
         };
 
-        this.props.lookupUserInStorage()
-        .then(
+        this.props.lookupUserInStorage().then(
             (token) => {
                 this.props.fetchLoggedUser(token)
                 .then(

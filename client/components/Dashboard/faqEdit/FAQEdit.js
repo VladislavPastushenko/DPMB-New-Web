@@ -48,24 +48,20 @@ class FAQEdit extends React.Component {
                 <Modal title="Upravit data" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={null}>
                     {this.state.res === 'preparing' &&
                     <Form initialValues={{
-                        question: this.props.FAQ.question,
-                        answer: this.props.FAQ.answer,
-                    }}
+                            question: this.props.FAQ.question,
+                            answer: this.props.FAQ.answer,
+                        }}
                         onFinish={this.onFinish}
                     >
-                    
                         <div className={'fontSizeXs'}>
                             Otazka:
                         </div>
                         <Form.Item
                             name="question"
-                            rules={[
-                            {
+                            rules={[{
                                 required: true,
                                 message: 'Please input question',
-                            },
-                            ]}
-                        >
+                        }]}>
                             <TextArea size="large" style={{height: '300px'}} placeholder="Otazka" />
                         </Form.Item>
 
@@ -74,12 +70,10 @@ class FAQEdit extends React.Component {
                         </div>
                         <Form.Item
                             name="answer"
-                            rules={[
-                            {
+                            rules={[{
                                 required: true,
                                 message: 'Please input answer',
-                            },
-                            ]}
+                            },]}
                         >
                             <TextArea size="large" style={{height: '300px'}} placeholder="Odpoved" />
                         </Form.Item>
