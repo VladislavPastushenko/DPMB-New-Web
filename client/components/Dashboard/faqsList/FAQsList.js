@@ -1,9 +1,8 @@
-// Author: Kozhevnikov Dmitrii
-// Login: xkozhe00
+// Author: Kozhevnikov Dmitrii, Viktoryia Tomason
+// Login: xkozhe00, xtomas34
 
 import React from "react";
 import {connect} from "react-redux";
-import ReactDOM from "react-dom";
 import styles from "./faqsList.module.sass"
 import { DataGrid } from "@material-ui/data-grid"
 import { DeleteOutline } from "@material-ui/icons";

@@ -1,5 +1,5 @@
-// Author: Kozhevnikov Dmitrii
-// Login: xkozhe00
+// Author: Kozhevnikov Dmitrii, Vladislav Pastushenko
+// Login: xkozhe00, xpastu04
 
 import React from "react";
 import {connect} from "react-redux";
