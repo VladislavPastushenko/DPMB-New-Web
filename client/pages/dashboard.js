@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
             (token) => {
                 this.props.fetchLoggedUser(token)
                 .then(
-                    (res) => {this.setState({loggedUser: res})}
+                    (res) => {this.setState({loggedUser: res});}
                 )
             },
             (err) => {
@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
                                     {this.state.location === 'newsList' && <NewsList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'FAQsList' && <FAQsList {...this.props} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'lostThingsList' && <LostThingsList {...this.props} changeLocation={this.changeLocation}/>}
-                                    {this.state.location === 'editUser' && <EditUser {...this.props} changeLocation={this.changeLocation}/>}
+                                    {this.state.location === 'editUser' && <EditUser {...this.props} loggedUser={this.state.loggedUser} changeLocation={this.changeLocation}/>}
                                     {this.state.location === 'vacanciesList' && <VacanciesList {...this.props} changeLocation={this.changeLocation}/>}
                                 </div>
                         </div>

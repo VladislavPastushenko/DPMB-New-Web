@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }) {
     return (
         <Provider store={store}>
             <Head>
-                <title>IIS</title>
+                <title>ITU</title>
             </Head>
             <Layout>
                 {router.pathname !== '/' &&

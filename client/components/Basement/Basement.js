@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.footerBottom}>
-          <p>copyright &copy;{new Date().getFullYear()} IIS designed by <span>Us</span></p>
+          <p>copyright &copy;{new Date().getFullYear()} ITU designed by <span>Us</span></p>
         </div>
       </footer>
   );

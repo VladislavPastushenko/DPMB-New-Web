@@ -57,7 +57,6 @@ class UserEdit extends React.Component {
                     }}
                         onFinish={this.onFinish}
                     >
-                    
                         <div className={'fontSizeXs'}>
                             Email:
                         </div>
@@ -86,7 +85,7 @@ class UserEdit extends React.Component {
                         <div className={'fontSizeXs'}>
                             Role:
                             <Form.Item name="role">
-                                <Select style={{ width: 150 }} >     
+                                <Select style={{ width: 150 }} >
                                     <Select.Option value="personnel">Personál</Select.Option>
                                     <Select.Option value="admin">Administrátor</Select.Option>
                                 </Select>

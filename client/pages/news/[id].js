@@ -27,7 +27,6 @@ class FAQSection extends React.Component {
     render() {
         return (
             <div>
-                {console.log(this.state.item)}
                 <Head>
                     <title> Novinky </title>
                 </Head>

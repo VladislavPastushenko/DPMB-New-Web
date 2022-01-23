@@ -20,7 +20,6 @@ class ContactUs extends React.Component {
     }
 
     handleFinish = (values) => {
-        console.log(this.props);
 
         this.props.createQuestionFromUser(values).then(
             res => {
