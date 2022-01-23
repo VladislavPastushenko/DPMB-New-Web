@@ -12,6 +12,9 @@ export const CREATE_STOP_FAILED = 'CREATE_STOP_FAILED'
 export const DELETE_STOP_SUCCESS = 'DELETE_STOP_SUCCESS'
 export const DELETE_STOP_FAILED = 'DELETE_STOP_FAILED'
 
+export const EDIT_STOP_SUCCESS = 'EDIT_SUCCESS'
+export const EDIT_STOP_FAILED = 'EDIT_FAILED'
+
 const api = new Api();
 
 export function fetchStops() {
@@ -70,4 +73,25 @@ export function deleteStop(id) {
                 }
             })
     };
+}
+
+export function editStop(data) {
+    return async function (dispatch) {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/stops/' + data.id, method: 'POST', data}).then(res =>  {
+                    if (res === 'OK') {
+                        dispatch({type: EDIT_STOP_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: EDIT_STOP_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                dispatch({type: EDIT_STOP_FAILED, error: error});
+                reject(error);
+            }
+        });
+    }
 }

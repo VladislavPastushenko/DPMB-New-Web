@@ -11,6 +11,10 @@ DELETE_VACANCIES_FAILED,
 
 CREATE_VACANCIES_SUCCESS,
 CREATE_VACANCIES_FAILED,
+
+EDIT_VACANCY_SUCCESS,
+EDIT_VACANCY_FAILED,
+
 } from "./actions";
 
 function vacancies(state = {
@@ -18,6 +22,8 @@ function vacancies(state = {
     res: null,
 }, action) {
     switch (action.type) {
+        case EDIT_VACANCY_SUCCESS:
+            return Object.assign({}, state, {res: action.res});
         case FETCH_VACANCIES_SUCCESS:
         case DELETE_VACANCIES_SUCCESS:
             return Object.assign({}, state, {vacancies: action.data});
@@ -26,6 +32,7 @@ function vacancies(state = {
         case FETCH_VACANCIES_FAILED:
         case DELETE_VACANCIES_FAILED:
         case CREATE_VACANCIES_FAILED:
+        case EDIT_VACANCY_FAILED:
             return Object.assign({}, state, {error: action.error});
         default:
             return Object.assign({}, state);

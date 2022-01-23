@@ -13,6 +13,9 @@ export const DELETE_NEWS_FAILED = 'DELETE_NEWS_FAILED'
 export const CREATE_NEWS_SUCCESS = 'CREATE_NEWS_SUCCESS'
 export const CREATE_NEWS_FAILED = 'CREATE_NEWS_FAILED'
 
+export const EDIT_NEWS_SUCCESS = 'EDIT_SUCCESS'
+export const EDIT_NEWS_FAILED = 'EDIT_FAILED'
+
 const api = new Api();
 
 
@@ -90,4 +93,25 @@ export function createNews(data) {
                 }
             })
     };
+}
+
+export function editNews(data) {
+    return async function (dispatch) {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/news/' + data.id, method: 'POST', data}).then(res =>  {
+                    if (res === 'OK') {
+                        dispatch({type: EDIT_NEWS_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: EDIT_NEWS_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                dispatch({type: EDIT_NEWS_FAILED, error: error});
+                reject(error);
+            }
+        });
+    }
 }

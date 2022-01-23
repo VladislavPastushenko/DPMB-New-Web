@@ -13,8 +13,10 @@ export const DELETE_LOST_THINGS_FAILED = 'DELETE_LOST_THINGS_FAILED'
 export const CREATE_LOST_THINGS_SUCCESS = 'CREATE_LOST_THINGS_SUCCESS'
 export const CREATE_LOST_THINGS_FAILED = 'CREATE_LOST_THINGS_FAILED'
 
-const api = new Api();
+export const EDIT_LOST_THING_SUCCESS = 'EDIT_SUCCESS'
+export const EDIT_LOST_THING_FAILED = 'EDIT_FAILED'
 
+const api = new Api();
 
 export function fetchLostThings() {
     return async (dispatch) => {
@@ -79,4 +81,25 @@ export function createLostThings(data) {
                 }
             })
     };
+}
+
+export function editLostThing(data) {
+    return async function (dispatch) {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/lost-things/' + data.id, method: 'POST', data}).then(res =>  {
+                    if (res === 'OK') {
+                        dispatch({type: EDIT_LOST_THING_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: EDIT_LOST_THING_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                dispatch({type: EDIT_LOST_THING_FAILED, error: error});
+                reject(error);
+            }
+        });
+    }
 }

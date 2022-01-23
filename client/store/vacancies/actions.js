@@ -13,6 +13,9 @@ export const DELETE_VACANCIES_FAILED = 'DELETE_VACANCIES_FAILED'
 export const CREATE_VACANCIES_SUCCESS = 'CREATE_VACANCIES_SUCCESS'
 export const CREATE_VACANCIES_FAILED = 'CREATE_VACANCIES_FAILED'
 
+export const EDIT_VACANCY_SUCCESS = 'EDIT_SUCCESS'
+export const EDIT_VACANCY_FAILED = 'EDIT_FAILED'
+
 const api = new Api();
 
 
@@ -79,4 +82,25 @@ export function createVacancy(data) {
                 }
             })
     };
+}
+
+export function editVacancy(data) {
+    return async function (dispatch) {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/vacancies/' + data.id, method: 'POST', data}).then(res =>  {
+                    if (res === 'OK') {
+                        dispatch({type: EDIT_VACANCY_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: EDIT_VACANCY_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                dispatch({type: EDIT_VACANCY_FAILED, error: error});
+                reject(error);
+            }
+        });
+    }
 }

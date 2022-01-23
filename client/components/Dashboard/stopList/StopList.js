@@ -10,13 +10,17 @@ import { DeleteOutline } from "@material-ui/icons";
 import { ResponsiveContainer } from "recharts";
 import { fetchStops, deleteStop } from "../../../store/stops/actions";
 import { LoadingOutlined } from '@ant-design/icons'
-import { message } from "antd";
+import {Modal, Button, message} from "antd"
+import StopEdit from "../stopEdit/StopEdit";
+import { createStop } from "../../../store/stops/actions";
+
 
 class StopList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
+            isModalOpen: false,
         };
 
         this.props.fetchStops().then(
@@ -30,10 +34,34 @@ class StopList extends React.Component {
         );
     }
 
+    handleOk = () => {
+      this.setState({
+          isModalOpen: false,
+      });
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let data = {
+            name: e.target.elements.name.value, 
+        }
+
+        this.props.createStop(data).then(
+            (res) => {
+                e.target.elements.name.value = null;
+                this.handleUpdate();
+
+            },
+            (err) => {
+                console.log(err);
+            ;},
+        )
+    }
+
     handleDelete = (params) => {
         let id = params.row.id
         this.props.deleteStop(id).then(
-          (res) => {window.location.reload(false)},
+          (res) => {this.handleUpdate()},
           (err) => {
             message.open({
               'content': 'Error while deleting',
@@ -42,11 +70,33 @@ class StopList extends React.Component {
           }
         )
       };
-    
+      
+    handleUpdate = () => {
+        this.props.fetchStops().then(
+          (res) => {
+            this.setState({data: res})
+          },
+          (err) => {
+            this.setState({errMsg: err})
+          }
+  
+        );
+      };
     columns = [
         { field: "id", headerName: "ID", width: 100 , align: "left",},
         
-        { field: "name", headerName: "Název Zastávky", width: 1030, align: "left",},
+        { field: "name", headerName: "Název Zastávky", width: 880, align: "left",},
+
+        {
+          field: "edit",
+          headerName: "Upravit",
+          width: 150,
+          renderCell: (params) => {
+            return (
+              <StopEdit stop={params.row} {...this.props} handleUpdate={this.handleUpdate}/>
+            );
+          },
+        },
         
         { field: "action", headerName: "Odstranit", width: 150,
           renderCell: (params) => {
@@ -71,7 +121,7 @@ class StopList extends React.Component {
             <div className={styles.stopList}>
               <div className={styles.stopsTitleContainer}>
                     <h1 className="userTitle">Seznam Zastávek</h1>
-                    <button className={styles.stopAddButton} onClick={() => {this.props.changeLocation('newstop')}}>Vytvořit</button>
+                    <button className={styles.stopAddButton} onClick={() => {this.setState({isModalOpen: true})}}>Vytvořit</button>
               </div>  
               <ResponsiveContainer width="100%">
                 <DataGrid
@@ -82,6 +132,17 @@ class StopList extends React.Component {
                     checkboxSelection
                 />
               </ResponsiveContainer>
+              <Modal title="Upravit data" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={null}>
+                <h1 className={styles.addStopTitle}>Nová Zastávka</h1>
+                <form className={styles.addStopForm} onSubmit={this.handleSubmit}>
+                    <div className={styles.addStopItem}>
+                    <label>Název zastávky</label>
+                    <br/>
+                    <input type="text" name="name" placeholder="Název zastávky" />
+                    </div>
+                    <button className={styles.addStopButton} onClick={this.handleOk}>Vytvořit</button>
+                </form>
+                </Modal>
             </div>
         );
         } else {
@@ -90,7 +151,7 @@ class StopList extends React.Component {
             <div className={styles.stopList}>
               <div className={styles.stopsTitleContainer}>
                     <h1 className="userTitle">Seznam Zastávek</h1>
-                    <button className={styles.stopAddButton} onClick={() => {this.props.changeLocation('newstop')}}>Vytvořit</button>
+                    <button className={styles.stopAddButton}>Vytvořit</button>
               </div>  
               <ResponsiveContainer width="100%">
                 <div align='center' style={{marginTop: '2em'}} className='fontSizeMd'>
@@ -108,5 +169,5 @@ const mapStateToProps = state => {
       users: state.users.res,
   }
 }
-export default connect(mapStateToProps, {fetchStops, deleteStop
+export default connect(mapStateToProps, {fetchStops, deleteStop, createStop
 }) (StopList);

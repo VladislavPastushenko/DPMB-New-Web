@@ -52,6 +52,7 @@ const routes = (route) => {
 
     route.route('/stops/:id')
         .get(StopsController.getById)
+        .post(StopsController.editById)
         .delete(StopsController.removeById)
 
     route.route('/stops/get-by-city-id/:id')
@@ -84,6 +85,7 @@ const routes = (route) => {
     route.route('/faqs/:id')
         .get(FAQsController.get)
         .get(FAQsController.getAll)
+        .post(FAQsController.editById)
         .delete(FAQsController.removeById)
 
     // LOST THINGS
@@ -93,6 +95,7 @@ const routes = (route) => {
 
     route.route('/lost-things/:id')
         .get(LostThingsController.getAll)
+        .post(LostThingsController.editById)
         .delete(LostThingsController.removeById)
 
     // VACANCIES
@@ -102,6 +105,7 @@ const routes = (route) => {
 
     route.route('/vacancies/:id')
         .get(VacanciesController.getAll)
+        .post(VacanciesController.editById)
         .delete(VacanciesController.removeById)
 };
 

@@ -48,8 +48,8 @@ class MessageShow extends React.Component {
                     Zobrazit
                 </a>
                 <Modal style={{height: '60%'}} title="Zpráva od uživatele" visible={this.state.isModalOpen} onCancel={() => {this.setState({ isModalOpen: false })}} footer={[
-                        <Button key="back" type="primary" onClick={() => {this.setState({ isModalOpen: false }); this.setState({askModal: true})}} className={styles.addStopButton}>
-                          Odpovědět
+                        <Button key="back" type="primary" onClick={() => {this.setState({ isModalOpen: false })}} className={styles.addStopButton}>
+                          OK
                         </Button>]}>
                     <Form initialValues={{
                             message: this.props.message.message

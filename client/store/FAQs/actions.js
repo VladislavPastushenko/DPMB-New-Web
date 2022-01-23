@@ -13,6 +13,9 @@ export const DELETE_FAQS_FAILED = 'DELETE_FAQS_FAILED'
 export const CREATE_FAQS_SUCCESS = 'CREATE_FAQS_SUCCESS'
 export const CREATE_FAQS_FAILED = 'CREATE_FAQS_FAILED'
 
+export const EDIT_FAQ_SUCCESS = 'EDIT_SUCCESS'
+export const EDIT_FAQ_FAILED = 'EDIT_FAILED'
+
 const api = new Api();
 
 
@@ -79,4 +82,25 @@ export function createFAQs(data) {
                 }
             })
     };
+}
+
+export function FAQedit(data) {
+    return async function (dispatch) {
+        return new Promise((resolve, reject) => {
+            try {
+                api.call({url: '/faqs/' + data.id, method: 'POST', data}).then(res =>  {
+                    if (res === 'OK') {
+                        dispatch({type: EDIT_FAQ_SUCCESS, res: res});
+                        resolve(res);
+                    } else {
+                        dispatch({type: EDIT_FAQ_FAILED, error: res});
+                        reject(res);
+                    }
+                })
+            } catch (error) {
+                dispatch({type: EDIT_FAQ_FAILED, error: error});
+                reject(error);
+            }
+        });
+    }
 }

@@ -10,15 +10,22 @@ import {
 
     DELETE_STOP_SUCCESS,
     DELETE_STOP_FAILED,
+
+    EDIT_STOP_SUCCESS,
+    EDIT_STOP_FAILED,
+
 } from "./actions";
 
 function stops(state = {
     stops: [],
 }, action) {
     switch (action.type) {
+        case EDIT_STOP_SUCCESS:
+            return Object.assign({}, state, {res: action.res});
         case FETCH_STOPS_SUCCESS:
             return Object.assign({}, state, {stops: action.data});
         case FETCH_STOPS_FAILED:
+        case EDIT_STOP_FAILED:
             return Object.assign({}, state, {error: action.error});
         case CREATE_STOP_SUCCESS:
         case DELETE_STOP_SUCCESS:
