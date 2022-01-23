@@ -65,6 +65,7 @@ class NewsController {
                             let news = row.toJSON();
                             req.body.id = news.id; // Add id to data
 
+
                             return new Orm().getOrm().newsModel // Updating
                                 .update(req.body)
                                 .then((row) => { // Response with OK status

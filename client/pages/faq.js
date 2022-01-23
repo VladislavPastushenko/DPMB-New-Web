@@ -2,7 +2,7 @@
 // Login: xpastu04
 
 import React from "react";
-import {Row, Col, Divider, Skeleton, Button, Form, Input, message} from "antd";
+import {Row, Col, Divider, Skeleton, Button, Form, message} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 
 import Head from 'next/head';

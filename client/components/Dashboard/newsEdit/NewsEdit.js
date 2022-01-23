@@ -4,7 +4,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import styles from "./newsEdit.module.sass"
-import {Modal, Form, Input, Select, Button, message} from "antd"
+import {Modal, Form, Input, Button, message} from "antd"
 import { editNews } from '../../../store/news/actions'
 import { LoadingOutlined } from '@ant-design/icons'
 import TextArea from "antd/lib/input/TextArea";
@@ -21,9 +21,6 @@ class NewsEdit extends React.Component {
 
     onFinish = (values) => {
         values.id = this.props.news.id
-        console.log("values")
-        console.log(values)
-
         this.setState({res: 'loading'})
         this.props.editNews(values).then(
             res => {
@@ -53,11 +50,9 @@ class NewsEdit extends React.Component {
                     <Form initialValues={{
                         name: this.props.news.name,
                         text: this.props.news.text,
-                        date: this.props.news.date,
                     }}
                         onFinish={this.onFinish}
                     >
-                    
                         <div className={'fontSizeXs'}>
                             News-name:
                         </div>
